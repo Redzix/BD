@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E009940A-7C9E-46A6-B509-B3CB807F2C0D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BD</RootNamespace>
+    <AssemblyName>BD</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Kierowca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kierowca.Designer.cs">
+      <DependentUpon>Kierowca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kierownik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kierownik.Designer.cs">
+      <DependentUpon>Kierownik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Klient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Klient.Designer.cs">
+      <DependentUpon>Klient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Opinia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Opinia.Designer.cs">
+      <DependentUpon>Opinia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panel_pracowniczy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panel_pracowniczy.Designer.cs">
+      <DependentUpon>Panel_pracowniczy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pilot.Designer.cs">
+      <DependentUpon>Pilot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reklamacja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reklamacja.Designer.cs">
+      <DependentUpon>Reklamacja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rezerwacja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rezerwacja.Designer.cs">
+      <DependentUpon>Rezerwacja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rezygnacja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rezygnacja.Designer.cs">
+      <DependentUpon>Rezygnacja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rozpatrzreklamacje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rozpatrzreklamacje.Designer.cs">
+      <DependentUpon>Rozpatrzreklamacje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zarzadzajwycieczkami.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zarzadzajwycieczkami.Designer.cs">
+      <DependentUpon>Zarzadzajwycieczkami.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Kierowca.resx">
+      <DependentUpon>Kierowca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kierownik.resx">
+      <DependentUpon>Kierownik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Klient.resx">
+      <DependentUpon>Klient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Opinia.resx">
+      <DependentUpon>Opinia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel_pracowniczy.resx">
+      <DependentUpon>Panel_pracowniczy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot.resx">
+      <DependentUpon>Pilot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Reklamacja.resx">
+      <DependentUpon>Reklamacja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rezerwacja.resx">
+      <DependentUpon>Rezerwacja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rezygnacja.resx">
+      <DependentUpon>Rezygnacja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rozpatrzreklamacje.resx">
+      <DependentUpon>Rozpatrzreklamacje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zarzadzajwycieczkami.resx">
+      <DependentUpon>Zarzadzajwycieczkami.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
