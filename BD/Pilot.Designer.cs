@@ -30,15 +30,24 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
+            this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Data_odjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Data_wyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nr_pojazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Nazwa_wycieczki,
+            this.Data_odjazdu,
+            this.Data_wyjazdu,
+            this.Nr_pojazdu});
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(443, 150);
             this.dataGridView1.TabIndex = 0;
             // 
             // label1
@@ -49,6 +58,26 @@
             this.label1.Size = new System.Drawing.Size(88, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Zalogowany jako";
+            // 
+            // Nazwa_wycieczki
+            // 
+            this.Nazwa_wycieczki.HeaderText = "Nazwa_wycieczki";
+            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
+            // 
+            // Data_odjazdu
+            // 
+            this.Data_odjazdu.HeaderText = "Data_odjazdu";
+            this.Data_odjazdu.Name = "Data_odjazdu";
+            // 
+            // Data_wyjazdu
+            // 
+            this.Data_wyjazdu.HeaderText = "Data_wyjazdu";
+            this.Data_wyjazdu.Name = "Data_wyjazdu";
+            // 
+            // Nr_pojazdu
+            // 
+            this.Nr_pojazdu.HeaderText = "Nr_pojazdu";
+            this.Nr_pojazdu.Name = "Nr_pojazdu";
             // 
             // Pilot
             // 
@@ -69,5 +98,9 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nazwa_wycieczki;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Data_odjazdu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Data_wyjazdu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nr_pojazdu;
     }
 }

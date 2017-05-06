@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.rb_sprawny = new System.Windows.Forms.RadioButton();
@@ -36,17 +35,10 @@
             this.gb_stan_pojazdu = new System.Windows.Forms.GroupBox();
             this.b_kierowca_zapisz = new System.Windows.Forms.Button();
             this.b_kierowca_wyjdz = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.lb_pojazdy = new System.Windows.Forms.ListBox();
+            this.l_aktualny_stan = new System.Windows.Forms.Label();
             this.gb_stan_pojazdu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 25);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(262, 150);
-            this.dataGridView1.TabIndex = 0;
             // 
             // label1
             // 
@@ -60,7 +52,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(108, 9);
+            this.label2.Location = new System.Drawing.Point(44, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 2;
@@ -92,7 +84,7 @@
             // 
             this.gb_stan_pojazdu.Controls.Add(this.rb_awaria);
             this.gb_stan_pojazdu.Controls.Add(this.rb_sprawny);
-            this.gb_stan_pojazdu.Location = new System.Drawing.Point(327, 50);
+            this.gb_stan_pojazdu.Location = new System.Drawing.Point(320, 25);
             this.gb_stan_pojazdu.Name = "gb_stan_pojazdu";
             this.gb_stan_pojazdu.Size = new System.Drawing.Size(200, 100);
             this.gb_stan_pojazdu.TabIndex = 5;
@@ -101,7 +93,7 @@
             // 
             // b_kierowca_zapisz
             // 
-            this.b_kierowca_zapisz.Location = new System.Drawing.Point(327, 186);
+            this.b_kierowca_zapisz.Location = new System.Drawing.Point(320, 161);
             this.b_kierowca_zapisz.Name = "b_kierowca_zapisz";
             this.b_kierowca_zapisz.Size = new System.Drawing.Size(75, 23);
             this.b_kierowca_zapisz.TabIndex = 6;
@@ -110,27 +102,44 @@
             // 
             // b_kierowca_wyjdz
             // 
-            this.b_kierowca_wyjdz.Location = new System.Drawing.Point(452, 186);
+            this.b_kierowca_wyjdz.Location = new System.Drawing.Point(445, 161);
             this.b_kierowca_wyjdz.Name = "b_kierowca_wyjdz";
             this.b_kierowca_wyjdz.Size = new System.Drawing.Size(75, 23);
             this.b_kierowca_wyjdz.TabIndex = 7;
             this.b_kierowca_wyjdz.Text = "Wyjdź";
             this.b_kierowca_wyjdz.UseVisualStyleBackColor = true;
             // 
+            // lb_pojazdy
+            // 
+            this.lb_pojazdy.FormattingEnabled = true;
+            this.lb_pojazdy.Location = new System.Drawing.Point(15, 25);
+            this.lb_pojazdy.Name = "lb_pojazdy";
+            this.lb_pojazdy.Size = new System.Drawing.Size(120, 199);
+            this.lb_pojazdy.TabIndex = 8;
+            // 
+            // l_aktualny_stan
+            // 
+            this.l_aktualny_stan.AutoSize = true;
+            this.l_aktualny_stan.Location = new System.Drawing.Point(141, 25);
+            this.l_aktualny_stan.Name = "l_aktualny_stan";
+            this.l_aktualny_stan.Size = new System.Drawing.Size(83, 13);
+            this.l_aktualny_stan.TabIndex = 9;
+            this.l_aktualny_stan.Text = "Aktualny stan ...";
+            // 
             // Kierowca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(585, 261);
+            this.ClientSize = new System.Drawing.Size(540, 261);
+            this.Controls.Add(this.l_aktualny_stan);
+            this.Controls.Add(this.lb_pojazdy);
             this.Controls.Add(this.b_kierowca_wyjdz);
             this.Controls.Add(this.b_kierowca_zapisz);
             this.Controls.Add(this.gb_stan_pojazdu);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
             this.Name = "Kierowca";
             this.Text = "Kierowca";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.gb_stan_pojazdu.ResumeLayout(false);
             this.gb_stan_pojazdu.PerformLayout();
             this.ResumeLayout(false);
@@ -140,7 +149,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton rb_sprawny;
@@ -148,5 +156,7 @@
         private System.Windows.Forms.GroupBox gb_stan_pojazdu;
         private System.Windows.Forms.Button b_kierowca_zapisz;
         private System.Windows.Forms.Button b_kierowca_wyjdz;
+        private System.Windows.Forms.ListBox lb_pojazdy;
+        private System.Windows.Forms.Label l_aktualny_stan;
     }
 }
