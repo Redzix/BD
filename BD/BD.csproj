@@ -100,23 +100,11 @@
     <Compile Include="Rezygnacja.Designer.cs">
       <DependentUpon>Rezygnacja.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rozpatrzreklamacje.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Rozpatrzreklamacje.Designer.cs">
-      <DependentUpon>Rozpatrzreklamacje.cs</DependentUpon>
-    </Compile>
     <Compile Include="Wycieczka.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Wycieczka.Designer.cs">
       <DependentUpon>Wycieczka.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Zarzadzajwycieczkami.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Zarzadzajwycieczkami.Designer.cs">
-      <DependentUpon>Zarzadzajwycieczkami.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Kierowca.resx">
       <DependentUpon>Kierowca.cs</DependentUpon>
@@ -154,14 +142,8 @@
     <EmbeddedResource Include="Rezygnacja.resx">
       <DependentUpon>Rezygnacja.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Rozpatrzreklamacje.resx">
-      <DependentUpon>Rozpatrzreklamacje.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Wycieczka.resx">
       <DependentUpon>Wycieczka.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Zarzadzajwycieczkami.resx">
-      <DependentUpon>Zarzadzajwycieczkami.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
