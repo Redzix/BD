@@ -32,8 +32,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Data_odjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Data_wyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nr_pojazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Data_przyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pojazd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kierowca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Drugi_pilot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,11 +45,13 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Nazwa_wycieczki,
             this.Data_odjazdu,
-            this.Data_wyjazdu,
-            this.Nr_pojazdu});
+            this.Data_przyjazdu,
+            this.Pojazd,
+            this.Kierowca,
+            this.Drugi_pilot});
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(443, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(651, 150);
             this.dataGridView1.TabIndex = 0;
             // 
             // label1
@@ -61,29 +65,39 @@
             // 
             // Nazwa_wycieczki
             // 
-            this.Nazwa_wycieczki.HeaderText = "Nazwa_wycieczki";
+            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
             this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
             // 
             // Data_odjazdu
             // 
-            this.Data_odjazdu.HeaderText = "Data_odjazdu";
+            this.Data_odjazdu.HeaderText = "Data odjazdu";
             this.Data_odjazdu.Name = "Data_odjazdu";
             // 
-            // Data_wyjazdu
+            // Data_przyjazdu
             // 
-            this.Data_wyjazdu.HeaderText = "Data_wyjazdu";
-            this.Data_wyjazdu.Name = "Data_wyjazdu";
+            this.Data_przyjazdu.HeaderText = "Data przyjazdu";
+            this.Data_przyjazdu.Name = "Data_przyjazdu";
             // 
-            // Nr_pojazdu
+            // Pojazd
             // 
-            this.Nr_pojazdu.HeaderText = "Nr_pojazdu";
-            this.Nr_pojazdu.Name = "Nr_pojazdu";
+            this.Pojazd.HeaderText = "Pojazd";
+            this.Pojazd.Name = "Pojazd";
+            // 
+            // Kierowca
+            // 
+            this.Kierowca.HeaderText = "Kierowca";
+            this.Kierowca.Name = "Kierowca";
+            // 
+            // Drugi_pilot
+            // 
+            this.Drugi_pilot.HeaderText = "Drugi pilot";
+            this.Drugi_pilot.Name = "Drugi_pilot";
             // 
             // Pilot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(487, 219);
+            this.ClientSize = new System.Drawing.Size(675, 219);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Pilot";
@@ -100,7 +114,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nazwa_wycieczki;
         private System.Windows.Forms.DataGridViewTextBoxColumn Data_odjazdu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Data_wyjazdu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nr_pojazdu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Data_przyjazdu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pojazd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Kierowca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Drugi_pilot;
     }
 }

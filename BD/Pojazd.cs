@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace BD
 {
-    public partial class Kierownik : Form
+    public partial class Pojazd : Form
     {
-        public Kierownik()
+        public Pojazd()
         {
             InitializeComponent();
-        }
-
-        private void Kierownik_Load(object sender, EventArgs e)
-        {
-
-            this.reportViewer1.RefreshReport();
         }
     }
 }
