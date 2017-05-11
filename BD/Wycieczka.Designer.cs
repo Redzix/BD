@@ -89,9 +89,9 @@
             // 
             // tb_nazwa
             // 
-            this.tb_nazwa.Location = new System.Drawing.Point(58, 23);
+            this.tb_nazwa.Location = new System.Drawing.Point(96, 23);
             this.tb_nazwa.Name = "tb_nazwa";
-            this.tb_nazwa.Size = new System.Drawing.Size(197, 20);
+            this.tb_nazwa.Size = new System.Drawing.Size(159, 20);
             this.tb_nazwa.TabIndex = 5;
             // 
             // tb_data_przyjazdu
