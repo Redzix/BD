@@ -45,7 +45,7 @@
             // l_nazwa
             // 
             this.l_nazwa.AutoSize = true;
-            this.l_nazwa.Location = new System.Drawing.Point(12, 26);
+            this.l_nazwa.Location = new System.Drawing.Point(12, 9);
             this.l_nazwa.Name = "l_nazwa";
             this.l_nazwa.Size = new System.Drawing.Size(40, 13);
             this.l_nazwa.TabIndex = 0;
@@ -54,7 +54,7 @@
             // l_data_przyjazdu
             // 
             this.l_data_przyjazdu.AutoSize = true;
-            this.l_data_przyjazdu.Location = new System.Drawing.Point(11, 52);
+            this.l_data_przyjazdu.Location = new System.Drawing.Point(11, 35);
             this.l_data_przyjazdu.Name = "l_data_przyjazdu";
             this.l_data_przyjazdu.Size = new System.Drawing.Size(77, 13);
             this.l_data_przyjazdu.TabIndex = 1;
@@ -63,7 +63,7 @@
             // l_data_odjazdu
             // 
             this.l_data_odjazdu.AutoSize = true;
-            this.l_data_odjazdu.Location = new System.Drawing.Point(11, 82);
+            this.l_data_odjazdu.Location = new System.Drawing.Point(11, 61);
             this.l_data_odjazdu.Name = "l_data_odjazdu";
             this.l_data_odjazdu.Size = new System.Drawing.Size(70, 13);
             this.l_data_odjazdu.TabIndex = 2;
@@ -72,7 +72,7 @@
             // l_opis
             // 
             this.l_opis.AutoSize = true;
-            this.l_opis.Location = new System.Drawing.Point(50, 108);
+            this.l_opis.Location = new System.Drawing.Point(50, 87);
             this.l_opis.Name = "l_opis";
             this.l_opis.Size = new System.Drawing.Size(28, 13);
             this.l_opis.TabIndex = 3;
@@ -81,7 +81,7 @@
             // l_cena
             // 
             this.l_cena.AutoSize = true;
-            this.l_cena.Location = new System.Drawing.Point(58, 187);
+            this.l_cena.Location = new System.Drawing.Point(58, 166);
             this.l_cena.Name = "l_cena";
             this.l_cena.Size = new System.Drawing.Size(32, 13);
             this.l_cena.TabIndex = 4;
@@ -89,28 +89,28 @@
             // 
             // tb_nazwa
             // 
-            this.tb_nazwa.Location = new System.Drawing.Point(96, 23);
+            this.tb_nazwa.Location = new System.Drawing.Point(96, 6);
             this.tb_nazwa.Name = "tb_nazwa";
             this.tb_nazwa.Size = new System.Drawing.Size(159, 20);
             this.tb_nazwa.TabIndex = 5;
             // 
             // tb_data_przyjazdu
             // 
-            this.tb_data_przyjazdu.Location = new System.Drawing.Point(96, 49);
+            this.tb_data_przyjazdu.Location = new System.Drawing.Point(96, 32);
             this.tb_data_przyjazdu.Name = "tb_data_przyjazdu";
-            this.tb_data_przyjazdu.Size = new System.Drawing.Size(158, 20);
+            this.tb_data_przyjazdu.Size = new System.Drawing.Size(159, 20);
             this.tb_data_przyjazdu.TabIndex = 6;
             // 
             // tb_data_odjazdu
             // 
-            this.tb_data_odjazdu.Location = new System.Drawing.Point(96, 79);
+            this.tb_data_odjazdu.Location = new System.Drawing.Point(96, 58);
             this.tb_data_odjazdu.Name = "tb_data_odjazdu";
-            this.tb_data_odjazdu.Size = new System.Drawing.Size(158, 20);
+            this.tb_data_odjazdu.Size = new System.Drawing.Size(159, 20);
             this.tb_data_odjazdu.TabIndex = 7;
             // 
             // tb_opis
             // 
-            this.tb_opis.Location = new System.Drawing.Point(96, 105);
+            this.tb_opis.Location = new System.Drawing.Point(96, 84);
             this.tb_opis.Multiline = true;
             this.tb_opis.Name = "tb_opis";
             this.tb_opis.Size = new System.Drawing.Size(159, 73);
@@ -118,14 +118,14 @@
             // 
             // tb_cena
             // 
-            this.tb_cena.Location = new System.Drawing.Point(96, 184);
+            this.tb_cena.Location = new System.Drawing.Point(96, 163);
             this.tb_cena.Name = "tb_cena";
             this.tb_cena.Size = new System.Drawing.Size(100, 20);
             this.tb_cena.TabIndex = 9;
             // 
             // b_zapisz
             // 
-            this.b_zapisz.Location = new System.Drawing.Point(15, 227);
+            this.b_zapisz.Location = new System.Drawing.Point(15, 207);
             this.b_zapisz.Name = "b_zapisz";
             this.b_zapisz.Size = new System.Drawing.Size(75, 23);
             this.b_zapisz.TabIndex = 10;
@@ -134,7 +134,7 @@
             // 
             // b_anuluj
             // 
-            this.b_anuluj.Location = new System.Drawing.Point(180, 227);
+            this.b_anuluj.Location = new System.Drawing.Point(179, 207);
             this.b_anuluj.Name = "b_anuluj";
             this.b_anuluj.Size = new System.Drawing.Size(75, 23);
             this.b_anuluj.TabIndex = 11;
@@ -145,7 +145,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(267, 259);
+            this.ClientSize = new System.Drawing.Size(267, 239);
             this.Controls.Add(this.b_anuluj);
             this.Controls.Add(this.b_zapisz);
             this.Controls.Add(this.tb_cena);
