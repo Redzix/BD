@@ -55,6 +55,7 @@
             this.b_anuluj.TabIndex = 20;
             this.b_anuluj.Text = "Anuluj";
             this.b_anuluj.UseVisualStyleBackColor = true;
+            this.b_anuluj.Click += new System.EventHandler(this.b_anuluj_Click);
             // 
             // l_uwagi
             // 
@@ -129,6 +130,7 @@
             this.Controls.Add(this.tb_opinia);
             this.Name = "Opinia";
             this.Text = "Opinia";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Opinia_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

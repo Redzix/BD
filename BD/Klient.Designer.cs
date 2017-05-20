@@ -93,6 +93,7 @@
             this.b_katalog_rezerwuj.TabIndex = 2;
             this.b_katalog_rezerwuj.Text = "Rezerwuj";
             this.b_katalog_rezerwuj.UseVisualStyleBackColor = true;
+            this.b_katalog_rezerwuj.Click += new System.EventHandler(this.b_katalog_rezerwuj_Click);
             // 
             // b_katalog_wyjdz
             // 
@@ -102,6 +103,7 @@
             this.b_katalog_wyjdz.TabIndex = 3;
             this.b_katalog_wyjdz.Text = "Wyjdź";
             this.b_katalog_wyjdz.UseVisualStyleBackColor = true;
+            this.b_katalog_wyjdz.Click += new System.EventHandler(this.b_katalog_wyjdz_Click);
             // 
             // menuStrip1
             // 
@@ -120,18 +122,21 @@
             this.wystawOpinięToolStripMenuItem.Name = "wystawOpinięToolStripMenuItem";
             this.wystawOpinięToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
             this.wystawOpinięToolStripMenuItem.Text = "Wystaw opinię";
+            this.wystawOpinięToolStripMenuItem.Click += new System.EventHandler(this.wystawOpinięToolStripMenuItem_Click);
             // 
             // reklamujWycieczkęToolStripMenuItem
             // 
             this.reklamujWycieczkęToolStripMenuItem.Name = "reklamujWycieczkęToolStripMenuItem";
             this.reklamujWycieczkęToolStripMenuItem.Size = new System.Drawing.Size(124, 20);
             this.reklamujWycieczkęToolStripMenuItem.Text = "Reklamuj wycieczkę";
+            this.reklamujWycieczkęToolStripMenuItem.Click += new System.EventHandler(this.reklamujWycieczkęToolStripMenuItem_Click);
             // 
             // rezygnacjaZWycieczkiToolStripMenuItem
             // 
             this.rezygnacjaZWycieczkiToolStripMenuItem.Name = "rezygnacjaZWycieczkiToolStripMenuItem";
             this.rezygnacjaZWycieczkiToolStripMenuItem.Size = new System.Drawing.Size(139, 20);
             this.rezygnacjaZWycieczkiToolStripMenuItem.Text = "Rezygnacja z wycieczki";
+            this.rezygnacjaZWycieczkiToolStripMenuItem.Click += new System.EventHandler(this.rezygnacjaZWycieczkiToolStripMenuItem_Click);
             // 
             // Klient
             // 
@@ -146,6 +151,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Klient";
             this.Text = "Klient";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Klient_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_katalog)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
