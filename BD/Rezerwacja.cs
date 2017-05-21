@@ -12,16 +12,30 @@ namespace BD
 {
     public partial class Rezerwacja : Form
     {
+        /// <summary>
+        /// Główny bezparametrowy konstruktor okna
+        /// </summary>
         public Rezerwacja()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
+        /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_rezerwacja_anuluj_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
 
+        /// <summary>
+        /// Zdarzenie obsługujące wyłączenie okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void Rezerwacja_FormClosing(object sender, FormClosingEventArgs e)
         {
             //najpierw sprawdza, czy user kliknał "X" czy po prostu kliknał sobie jakis przycisk wyłączający okno typu "anuluj"

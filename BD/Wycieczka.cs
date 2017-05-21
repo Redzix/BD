@@ -12,6 +12,9 @@ namespace BD
 {
     public partial class Wycieczka : Form
     {
+        /// <summary>
+        /// Główny bezparametrowy konstruktor okna
+        /// </summary>
         public Wycieczka()
         {
             InitializeComponent();
@@ -22,6 +25,11 @@ namespace BD
             this.Dispose();
         }
 
+        /// <summary>
+        /// Zdarzenie obsługujące wyłączenie okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void Wycieczka_FormClosing(object sender, FormClosingEventArgs e)
         {
             //najpierw sprawdza, czy user kliknał "X" czy po prostu kliknał sobie jakis przycisk wyłączający okno typu "anuluj"

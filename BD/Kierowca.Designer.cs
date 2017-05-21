@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.l_zalgowany_jako = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.rb_sprawny = new System.Windows.Forms.RadioButton();
             this.rb_awaria = new System.Windows.Forms.RadioButton();
@@ -41,17 +41,18 @@
             this.Marka = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pojemność = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Stan = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.l_uzytkownik = new System.Windows.Forms.Label();
             this.gb_stan_pojazdu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // l_zalgowany_jako
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 239);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Zalogowany jako";
+            this.l_zalgowany_jako.AutoSize = true;
+            this.l_zalgowany_jako.Location = new System.Drawing.Point(12, 239);
+            this.l_zalgowany_jako.Name = "l_zalgowany_jako";
+            this.l_zalgowany_jako.Size = new System.Drawing.Size(88, 13);
+            this.l_zalgowany_jako.TabIndex = 1;
+            this.l_zalgowany_jako.Text = "Zalogowany jako";
             // 
             // label2
             // 
@@ -128,17 +129,27 @@
             this.lv_pojazdy.TabIndex = 10;
             this.lv_pojazdy.UseCompatibleStateImageBehavior = false;
             // 
+            // l_uzytkownik
+            // 
+            this.l_uzytkownik.AutoSize = true;
+            this.l_uzytkownik.Location = new System.Drawing.Point(100, 239);
+            this.l_uzytkownik.Name = "l_uzytkownik";
+            this.l_uzytkownik.Size = new System.Drawing.Size(10, 13);
+            this.l_uzytkownik.TabIndex = 11;
+            this.l_uzytkownik.Text = " ";
+            // 
             // Kierowca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(540, 261);
+            this.Controls.Add(this.l_uzytkownik);
             this.Controls.Add(this.lv_pojazdy);
             this.Controls.Add(this.b_kierowca_wyjdz);
             this.Controls.Add(this.b_kierowca_zapisz);
             this.Controls.Add(this.gb_stan_pojazdu);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.l_zalgowany_jako);
             this.Name = "Kierowca";
             this.Text = "Kierowca";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kierowca_FormClosing);
@@ -151,7 +162,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label l_zalgowany_jako;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton rb_sprawny;
         private System.Windows.Forms.RadioButton rb_awaria;
@@ -164,5 +175,6 @@
         private System.Windows.Forms.ColumnHeader Marka;
         private System.Windows.Forms.ColumnHeader Pojemność;
         private System.Windows.Forms.ColumnHeader Stan;
+        private System.Windows.Forms.Label l_uzytkownik;
     }
 }

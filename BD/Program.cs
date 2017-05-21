@@ -16,7 +16,7 @@ namespace BD
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Klient());
+            Application.Run(new Panel_pracowniczy());
         }
     }
 }
