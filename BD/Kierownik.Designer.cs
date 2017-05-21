@@ -40,12 +40,9 @@
             this.l_opis_reklamacji = new System.Windows.Forms.Label();
             this.tb_opis_reklamacji = new System.Windows.Forms.TextBox();
             this.l_okres_wycieczki = new System.Windows.Forms.Label();
-            this.tb_okres_wycieczki = new System.Windows.Forms.TextBox();
             this.l_nazwa_wycieczki = new System.Windows.Forms.Label();
             this.b_rozpatrz_pozytywnie = new System.Windows.Forms.Button();
-            this.tb_nazwa_wycieczki = new System.Windows.Forms.TextBox();
             this.l_reklamacje = new System.Windows.Forms.Label();
-            this.lb_reklamacje = new System.Windows.Forms.ListBox();
             this.tp_zarzadzaj_flota = new System.Windows.Forms.TabPage();
             this.b_edytuj_pojazd = new System.Windows.Forms.Button();
             this.b_usun_pojazd = new System.Windows.Forms.Button();
@@ -61,8 +58,11 @@
             this.b_raport_reklamacje = new System.Windows.Forms.Button();
             this.b_raport_pojazdy = new System.Windows.Forms.Button();
             this.b_raport_wycieczki = new System.Windows.Forms.Button();
-            this.b_wyjdz = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lv_reklamacje = new System.Windows.Forms.ListView();
+            this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
+            this.cb_okres_wycieczki = new System.Windows.Forms.ComboBox();
+            this.nazwa_wycieczki = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.okres_wycieczki = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tc_kierownik.SuspendLayout();
             this.tp_zarzadzaj_wycieczkami.SuspendLayout();
             this.tp_rozpatrz_reklamacje.SuspendLayout();
@@ -123,7 +123,6 @@
             this.b_dodaj_wycieczke.TabIndex = 2;
             this.b_dodaj_wycieczke.Text = "Dodaj wycieczkę";
             this.b_dodaj_wycieczke.UseVisualStyleBackColor = true;
-            this.b_dodaj_wycieczke.Click += new System.EventHandler(this.b_dodaj_wycieczke_Click);
             // 
             // l_wycieczki
             // 
@@ -144,16 +143,16 @@
             // 
             // tp_rozpatrz_reklamacje
             // 
+            this.tp_rozpatrz_reklamacje.Controls.Add(this.cb_okres_wycieczki);
+            this.tp_rozpatrz_reklamacje.Controls.Add(this.cb_nazwa_wycieczki);
+            this.tp_rozpatrz_reklamacje.Controls.Add(this.lv_reklamacje);
             this.tp_rozpatrz_reklamacje.Controls.Add(this.b_rozpatrz_negatywnie);
             this.tp_rozpatrz_reklamacje.Controls.Add(this.l_opis_reklamacji);
             this.tp_rozpatrz_reklamacje.Controls.Add(this.tb_opis_reklamacji);
             this.tp_rozpatrz_reklamacje.Controls.Add(this.l_okres_wycieczki);
-            this.tp_rozpatrz_reklamacje.Controls.Add(this.tb_okres_wycieczki);
             this.tp_rozpatrz_reklamacje.Controls.Add(this.l_nazwa_wycieczki);
             this.tp_rozpatrz_reklamacje.Controls.Add(this.b_rozpatrz_pozytywnie);
-            this.tp_rozpatrz_reklamacje.Controls.Add(this.tb_nazwa_wycieczki);
             this.tp_rozpatrz_reklamacje.Controls.Add(this.l_reklamacje);
-            this.tp_rozpatrz_reklamacje.Controls.Add(this.lb_reklamacje);
             this.tp_rozpatrz_reklamacje.Location = new System.Drawing.Point(4, 22);
             this.tp_rozpatrz_reklamacje.Name = "tp_rozpatrz_reklamacje";
             this.tp_rozpatrz_reklamacje.Padding = new System.Windows.Forms.Padding(3);
@@ -174,7 +173,7 @@
             // l_opis_reklamacji
             // 
             this.l_opis_reklamacji.AutoSize = true;
-            this.l_opis_reklamacji.Location = new System.Drawing.Point(153, 97);
+            this.l_opis_reklamacji.Location = new System.Drawing.Point(153, 94);
             this.l_opis_reklamacji.Name = "l_opis_reklamacji";
             this.l_opis_reklamacji.Size = new System.Drawing.Size(78, 13);
             this.l_opis_reklamacji.TabIndex = 8;
@@ -197,13 +196,6 @@
             this.l_okres_wycieczki.TabIndex = 6;
             this.l_okres_wycieczki.Text = "Okres wycieczki";
             // 
-            // tb_okres_wycieczki
-            // 
-            this.tb_okres_wycieczki.Location = new System.Drawing.Point(236, 63);
-            this.tb_okres_wycieczki.Name = "tb_okres_wycieczki";
-            this.tb_okres_wycieczki.Size = new System.Drawing.Size(140, 20);
-            this.tb_okres_wycieczki.TabIndex = 5;
-            // 
             // l_nazwa_wycieczki
             // 
             this.l_nazwa_wycieczki.AutoSize = true;
@@ -222,29 +214,14 @@
             this.b_rozpatrz_pozytywnie.Text = "Rozpatrz pozytywnie";
             this.b_rozpatrz_pozytywnie.UseVisualStyleBackColor = true;
             // 
-            // tb_nazwa_wycieczki
-            // 
-            this.tb_nazwa_wycieczki.Location = new System.Drawing.Point(236, 34);
-            this.tb_nazwa_wycieczki.Name = "tb_nazwa_wycieczki";
-            this.tb_nazwa_wycieczki.Size = new System.Drawing.Size(140, 20);
-            this.tb_nazwa_wycieczki.TabIndex = 2;
-            // 
             // l_reklamacje
             // 
             this.l_reklamacje.AutoSize = true;
-            this.l_reklamacje.Location = new System.Drawing.Point(30, 18);
+            this.l_reklamacje.Location = new System.Drawing.Point(39, 21);
             this.l_reklamacje.Name = "l_reklamacje";
             this.l_reklamacje.Size = new System.Drawing.Size(63, 13);
             this.l_reklamacje.TabIndex = 1;
             this.l_reklamacje.Text = "Reklamacje";
-            // 
-            // lb_reklamacje
-            // 
-            this.lb_reklamacje.FormattingEnabled = true;
-            this.lb_reklamacje.Location = new System.Drawing.Point(6, 34);
-            this.lb_reklamacje.Name = "lb_reklamacje";
-            this.lb_reklamacje.Size = new System.Drawing.Size(120, 173);
-            this.lb_reklamacje.TabIndex = 0;
             // 
             // tp_zarzadzaj_flota
             // 
@@ -296,7 +273,6 @@
             this.b_dodaj_pojazd.TabIndex = 1;
             this.b_dodaj_pojazd.Text = "Dodaj pojazd";
             this.b_dodaj_pojazd.UseVisualStyleBackColor = true;
-            this.b_dodaj_pojazd.Click += new System.EventHandler(this.b_dodaj_pojazd_Click);
             // 
             // lv_pojazdy
             // 
@@ -352,36 +328,45 @@
             this.b_raport_wycieczki.Text = "Drukuj raport wycieczek";
             this.b_raport_wycieczki.UseVisualStyleBackColor = true;
             // 
-            // b_wyjdz
+            // lv_reklamacje
             // 
-            this.b_wyjdz.Location = new System.Drawing.Point(354, 257);
-            this.b_wyjdz.Name = "b_wyjdz";
-            this.b_wyjdz.Size = new System.Drawing.Size(75, 23);
-            this.b_wyjdz.TabIndex = 3;
-            this.b_wyjdz.Text = "Wyjdź";
-            this.b_wyjdz.UseVisualStyleBackColor = true;
-            this.b_wyjdz.Click += new System.EventHandler(this.b_wyjdz_Click);
+            this.lv_reklamacje.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nazwa_wycieczki,
+            this.okres_wycieczki});
+            this.lv_reklamacje.Location = new System.Drawing.Point(6, 37);
+            this.lv_reklamacje.Name = "lv_reklamacje";
+            this.lv_reklamacje.Size = new System.Drawing.Size(134, 182);
+            this.lv_reklamacje.TabIndex = 10;
+            this.lv_reklamacje.UseCompatibleStateImageBehavior = false;
             // 
-            // label1
+            // cb_nazwa_wycieczki
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 262);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Zalogowany jako";
+            this.cb_nazwa_wycieczki.FormattingEnabled = true;
+            this.cb_nazwa_wycieczki.Location = new System.Drawing.Point(236, 34);
+            this.cb_nazwa_wycieczki.Name = "cb_nazwa_wycieczki";
+            this.cb_nazwa_wycieczki.Size = new System.Drawing.Size(162, 21);
+            this.cb_nazwa_wycieczki.TabIndex = 11;
+            // 
+            // cb_okres_wycieczki
+            // 
+            this.cb_okres_wycieczki.FormattingEnabled = true;
+            this.cb_okres_wycieczki.Location = new System.Drawing.Point(236, 63);
+            this.cb_okres_wycieczki.Name = "cb_okres_wycieczki";
+            this.cb_okres_wycieczki.Size = new System.Drawing.Size(162, 21);
+            this.cb_okres_wycieczki.TabIndex = 12;
+            // 
+            // nazwa_wycieczki
+            // 
+            this.nazwa_wycieczki.Tag = "";
             // 
             // Kierownik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 285);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.b_wyjdz);
+            this.ClientSize = new System.Drawing.Size(441, 253);
             this.Controls.Add(this.tc_kierownik);
             this.Name = "Kierownik";
             this.Text = "Kierownik";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kierownik_FormClosing);
             this.Load += new System.EventHandler(this.Kierownik_Load);
             this.tc_kierownik.ResumeLayout(false);
             this.tp_zarzadzaj_wycieczkami.ResumeLayout(false);
@@ -392,7 +377,6 @@
             this.tp_zarzadzaj_flota.PerformLayout();
             this.tp_raporty.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -410,12 +394,9 @@
         private System.Windows.Forms.Label l_opis_reklamacji;
         private System.Windows.Forms.TextBox tb_opis_reklamacji;
         private System.Windows.Forms.Label l_okres_wycieczki;
-        private System.Windows.Forms.TextBox tb_okres_wycieczki;
         private System.Windows.Forms.Label l_nazwa_wycieczki;
         private System.Windows.Forms.Button b_rozpatrz_pozytywnie;
-        private System.Windows.Forms.TextBox tb_nazwa_wycieczki;
         private System.Windows.Forms.Label l_reklamacje;
-        private System.Windows.Forms.ListBox lb_reklamacje;
         private System.Windows.Forms.TabPage tp_zarzadzaj_flota;
         private System.Windows.Forms.Button b_dodaj_pojazd;
         private System.Windows.Forms.ListView lv_pojazdy;
@@ -431,7 +412,10 @@
         private System.Windows.Forms.Button b_raport_reklamacje;
         private System.Windows.Forms.Button b_raport_pojazdy;
         private System.Windows.Forms.Button b_raport_wycieczki;
-        private System.Windows.Forms.Button b_wyjdz;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cb_okres_wycieczki;
+        private System.Windows.Forms.ComboBox cb_nazwa_wycieczki;
+        private System.Windows.Forms.ListView lv_reklamacje;
+        private System.Windows.Forms.ColumnHeader nazwa_wycieczki;
+        private System.Windows.Forms.ColumnHeader okres_wycieczki;
     }
 }
