@@ -73,6 +73,7 @@
             this.b_anuluj.TabIndex = 20;
             this.b_anuluj.Text = "Anuluj";
             this.b_anuluj.UseVisualStyleBackColor = true;
+            this.b_anuluj.Click += new System.EventHandler(this.b_anuluj_Click);
             // 
             // l_powod_rezygnacji
             // 
@@ -141,6 +142,7 @@
             this.Controls.Add(this.tb_opis_reklamacji);
             this.Name = "Rezygnacja";
             this.Text = "Rezygnacja";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Rezygnacja_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

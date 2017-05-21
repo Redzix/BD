@@ -112,6 +112,7 @@
             this.b_kierowca_wyjdz.TabIndex = 7;
             this.b_kierowca_wyjdz.Text = "Wyjdź";
             this.b_kierowca_wyjdz.UseVisualStyleBackColor = true;
+            this.b_kierowca_wyjdz.Click += new System.EventHandler(this.b_kierowca_wyjdz_Click);
             // 
             // lv_pojazdy
             // 
@@ -140,6 +141,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Kierowca";
             this.Text = "Kierowca";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kierowca_FormClosing);
             this.gb_stan_pojazdu.ResumeLayout(false);
             this.gb_stan_pojazdu.PerformLayout();
             this.ResumeLayout(false);

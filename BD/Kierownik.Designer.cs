@@ -47,20 +47,22 @@
             this.l_reklamacje = new System.Windows.Forms.Label();
             this.lb_reklamacje = new System.Windows.Forms.ListBox();
             this.tp_zarzadzaj_flota = new System.Windows.Forms.TabPage();
-            this.lv_pojazdy = new System.Windows.Forms.ListView();
-            this.b_dodaj_pojazd = new System.Windows.Forms.Button();
-            this.l_pojazdy = new System.Windows.Forms.Label();
+            this.b_edytuj_pojazd = new System.Windows.Forms.Button();
             this.b_usun_pojazd = new System.Windows.Forms.Button();
+            this.l_pojazdy = new System.Windows.Forms.Label();
+            this.b_dodaj_pojazd = new System.Windows.Forms.Button();
+            this.lv_pojazdy = new System.Windows.Forms.ListView();
             this.Nr_rejestracyjny = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Dostępność = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Marka = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pojemność = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Stan = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.b_edytuj_pojazd = new System.Windows.Forms.Button();
             this.tp_raporty = new System.Windows.Forms.TabPage();
-            this.b_raport_wycieczki = new System.Windows.Forms.Button();
-            this.b_raport_pojazdy = new System.Windows.Forms.Button();
             this.b_raport_reklamacje = new System.Windows.Forms.Button();
+            this.b_raport_pojazdy = new System.Windows.Forms.Button();
+            this.b_raport_wycieczki = new System.Windows.Forms.Button();
+            this.b_wyjdz = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.tc_kierownik.SuspendLayout();
             this.tp_zarzadzaj_wycieczkami.SuspendLayout();
             this.tp_rozpatrz_reklamacje.SuspendLayout();
@@ -121,6 +123,7 @@
             this.b_dodaj_wycieczke.TabIndex = 2;
             this.b_dodaj_wycieczke.Text = "Dodaj wycieczkę";
             this.b_dodaj_wycieczke.UseVisualStyleBackColor = true;
+            this.b_dodaj_wycieczke.Click += new System.EventHandler(this.b_dodaj_wycieczke_Click);
             // 
             // l_wycieczki
             // 
@@ -258,6 +261,43 @@
             this.tp_zarzadzaj_flota.Text = "Zarządzaj flotą";
             this.tp_zarzadzaj_flota.UseVisualStyleBackColor = true;
             // 
+            // b_edytuj_pojazd
+            // 
+            this.b_edytuj_pojazd.Location = new System.Drawing.Point(321, 115);
+            this.b_edytuj_pojazd.Name = "b_edytuj_pojazd";
+            this.b_edytuj_pojazd.Size = new System.Drawing.Size(104, 23);
+            this.b_edytuj_pojazd.TabIndex = 4;
+            this.b_edytuj_pojazd.Text = "Edytuj pojazd";
+            this.b_edytuj_pojazd.UseVisualStyleBackColor = true;
+            // 
+            // b_usun_pojazd
+            // 
+            this.b_usun_pojazd.Location = new System.Drawing.Point(321, 196);
+            this.b_usun_pojazd.Name = "b_usun_pojazd";
+            this.b_usun_pojazd.Size = new System.Drawing.Size(104, 23);
+            this.b_usun_pojazd.TabIndex = 3;
+            this.b_usun_pojazd.Text = "Usuń pojazd";
+            this.b_usun_pojazd.UseVisualStyleBackColor = true;
+            // 
+            // l_pojazdy
+            // 
+            this.l_pojazdy.AutoSize = true;
+            this.l_pojazdy.Location = new System.Drawing.Point(127, 17);
+            this.l_pojazdy.Name = "l_pojazdy";
+            this.l_pojazdy.Size = new System.Drawing.Size(44, 13);
+            this.l_pojazdy.TabIndex = 2;
+            this.l_pojazdy.Text = "Pojazdy";
+            // 
+            // b_dodaj_pojazd
+            // 
+            this.b_dodaj_pojazd.Location = new System.Drawing.Point(321, 33);
+            this.b_dodaj_pojazd.Name = "b_dodaj_pojazd";
+            this.b_dodaj_pojazd.Size = new System.Drawing.Size(104, 23);
+            this.b_dodaj_pojazd.TabIndex = 1;
+            this.b_dodaj_pojazd.Text = "Dodaj pojazd";
+            this.b_dodaj_pojazd.UseVisualStyleBackColor = true;
+            this.b_dodaj_pojazd.Click += new System.EventHandler(this.b_dodaj_pojazd_Click);
+            // 
             // lv_pojazdy
             // 
             this.lv_pojazdy.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -272,42 +312,6 @@
             this.lv_pojazdy.TabIndex = 0;
             this.lv_pojazdy.UseCompatibleStateImageBehavior = false;
             // 
-            // b_dodaj_pojazd
-            // 
-            this.b_dodaj_pojazd.Location = new System.Drawing.Point(321, 33);
-            this.b_dodaj_pojazd.Name = "b_dodaj_pojazd";
-            this.b_dodaj_pojazd.Size = new System.Drawing.Size(104, 23);
-            this.b_dodaj_pojazd.TabIndex = 1;
-            this.b_dodaj_pojazd.Text = "Dodaj pojazd";
-            this.b_dodaj_pojazd.UseVisualStyleBackColor = true;
-            // 
-            // l_pojazdy
-            // 
-            this.l_pojazdy.AutoSize = true;
-            this.l_pojazdy.Location = new System.Drawing.Point(127, 17);
-            this.l_pojazdy.Name = "l_pojazdy";
-            this.l_pojazdy.Size = new System.Drawing.Size(44, 13);
-            this.l_pojazdy.TabIndex = 2;
-            this.l_pojazdy.Text = "Pojazdy";
-            // 
-            // b_usun_pojazd
-            // 
-            this.b_usun_pojazd.Location = new System.Drawing.Point(321, 196);
-            this.b_usun_pojazd.Name = "b_usun_pojazd";
-            this.b_usun_pojazd.Size = new System.Drawing.Size(104, 23);
-            this.b_usun_pojazd.TabIndex = 3;
-            this.b_usun_pojazd.Text = "Usuń pojazd";
-            this.b_usun_pojazd.UseVisualStyleBackColor = true;
-            // 
-            // b_edytuj_pojazd
-            // 
-            this.b_edytuj_pojazd.Location = new System.Drawing.Point(321, 115);
-            this.b_edytuj_pojazd.Name = "b_edytuj_pojazd";
-            this.b_edytuj_pojazd.Size = new System.Drawing.Size(104, 23);
-            this.b_edytuj_pojazd.TabIndex = 4;
-            this.b_edytuj_pojazd.Text = "Edytuj pojazd";
-            this.b_edytuj_pojazd.UseVisualStyleBackColor = true;
-            // 
             // tp_raporty
             // 
             this.tp_raporty.Controls.Add(this.b_raport_reklamacje);
@@ -321,14 +325,14 @@
             this.tp_raporty.Text = "Raporty";
             this.tp_raporty.UseVisualStyleBackColor = true;
             // 
-            // b_raport_wycieczki
+            // b_raport_reklamacje
             // 
-            this.b_raport_wycieczki.Location = new System.Drawing.Point(62, 22);
-            this.b_raport_wycieczki.Name = "b_raport_wycieczki";
-            this.b_raport_wycieczki.Size = new System.Drawing.Size(302, 48);
-            this.b_raport_wycieczki.TabIndex = 0;
-            this.b_raport_wycieczki.Text = "Drukuj raport wycieczek";
-            this.b_raport_wycieczki.UseVisualStyleBackColor = true;
+            this.b_raport_reklamacje.Location = new System.Drawing.Point(62, 161);
+            this.b_raport_reklamacje.Name = "b_raport_reklamacje";
+            this.b_raport_reklamacje.Size = new System.Drawing.Size(302, 48);
+            this.b_raport_reklamacje.TabIndex = 2;
+            this.b_raport_reklamacje.Text = "Drukuj raport reklamacji";
+            this.b_raport_reklamacje.UseVisualStyleBackColor = true;
             // 
             // b_raport_pojazdy
             // 
@@ -339,23 +343,45 @@
             this.b_raport_pojazdy.Text = "Drukuj raport pojazdów";
             this.b_raport_pojazdy.UseVisualStyleBackColor = true;
             // 
-            // b_raport_reklamacje
+            // b_raport_wycieczki
             // 
-            this.b_raport_reklamacje.Location = new System.Drawing.Point(62, 161);
-            this.b_raport_reklamacje.Name = "b_raport_reklamacje";
-            this.b_raport_reklamacje.Size = new System.Drawing.Size(302, 48);
-            this.b_raport_reklamacje.TabIndex = 2;
-            this.b_raport_reklamacje.Text = "Drukuj raport reklamacji";
-            this.b_raport_reklamacje.UseVisualStyleBackColor = true;
+            this.b_raport_wycieczki.Location = new System.Drawing.Point(62, 22);
+            this.b_raport_wycieczki.Name = "b_raport_wycieczki";
+            this.b_raport_wycieczki.Size = new System.Drawing.Size(302, 48);
+            this.b_raport_wycieczki.TabIndex = 0;
+            this.b_raport_wycieczki.Text = "Drukuj raport wycieczek";
+            this.b_raport_wycieczki.UseVisualStyleBackColor = true;
+            // 
+            // b_wyjdz
+            // 
+            this.b_wyjdz.Location = new System.Drawing.Point(354, 257);
+            this.b_wyjdz.Name = "b_wyjdz";
+            this.b_wyjdz.Size = new System.Drawing.Size(75, 23);
+            this.b_wyjdz.TabIndex = 3;
+            this.b_wyjdz.Text = "Wyjdź";
+            this.b_wyjdz.UseVisualStyleBackColor = true;
+            this.b_wyjdz.Click += new System.EventHandler(this.b_wyjdz_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 262);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Zalogowany jako";
             // 
             // Kierownik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 253);
+            this.ClientSize = new System.Drawing.Size(441, 285);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.b_wyjdz);
             this.Controls.Add(this.tc_kierownik);
             this.Name = "Kierownik";
             this.Text = "Kierownik";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kierownik_FormClosing);
             this.Load += new System.EventHandler(this.Kierownik_Load);
             this.tc_kierownik.ResumeLayout(false);
             this.tp_zarzadzaj_wycieczkami.ResumeLayout(false);
@@ -366,6 +392,7 @@
             this.tp_zarzadzaj_flota.PerformLayout();
             this.tp_raporty.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -404,5 +431,7 @@
         private System.Windows.Forms.Button b_raport_reklamacje;
         private System.Windows.Forms.Button b_raport_pojazdy;
         private System.Windows.Forms.Button b_raport_wycieczki;
+        private System.Windows.Forms.Button b_wyjdz;
+        private System.Windows.Forms.Label label1;
     }
 }

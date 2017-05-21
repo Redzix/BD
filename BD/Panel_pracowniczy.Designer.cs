@@ -85,6 +85,7 @@
             this.b_anuluj.TabIndex = 8;
             this.b_anuluj.Text = "Anuluj";
             this.b_anuluj.UseVisualStyleBackColor = true;
+            this.b_anuluj.Click += new System.EventHandler(this.b_anuluj_Click);
             // 
             // Panel_pracowniczy
             // 
@@ -99,6 +100,7 @@
             this.Controls.Add(this.tb_nazwa_uzytkownika);
             this.Name = "Panel_pracowniczy";
             this.Text = "Panel pracowniczy";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Panel_pracowniczy_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

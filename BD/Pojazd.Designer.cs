@@ -103,6 +103,7 @@
             this.b_anuluj.TabIndex = 8;
             this.b_anuluj.Text = "Anuluj";
             this.b_anuluj.UseVisualStyleBackColor = true;
+            this.b_anuluj.Click += new System.EventHandler(this.b_anuluj_Click);
             // 
             // Pojazd
             // 
@@ -119,6 +120,7 @@
             this.Controls.Add(this.l_nr_rejestracyjny);
             this.Name = "Pojazd";
             this.Text = "Pojazd";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Pojazd_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

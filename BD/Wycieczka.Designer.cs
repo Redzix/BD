@@ -140,6 +140,7 @@
             this.b_anuluj.TabIndex = 11;
             this.b_anuluj.Text = "Anuluj";
             this.b_anuluj.UseVisualStyleBackColor = true;
+            this.b_anuluj.Click += new System.EventHandler(this.b_anuluj_Click);
             // 
             // Wycieczka
             // 
@@ -160,6 +161,7 @@
             this.Controls.Add(this.l_nazwa);
             this.Name = "Wycieczka";
             this.Text = "Wycieczka";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Wycieczka_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

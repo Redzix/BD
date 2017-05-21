@@ -22,13 +22,14 @@ namespace BD
             //najpierw sprawdza, czy user kliknał "X" czy po prostu kliknał sobie jakis przycisk wyłączający okno typu "anuluj"
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                DialogResult czyZakonczyc = MessageBox.Show("Czy na pewno chcesz wyjść?", "Zamknięcie aplikacji", MessageBoxButtons.YesNo,
+                DialogResult czyZakonczyc = MessageBox.Show("Czy na pewno chcesz zamknąć to okno?", "Zamknięcie okna", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
                 if (czyZakonczyc == DialogResult.Yes)
                 {
                     this.Dispose();
-                }else
+                }
+                else
                 {
                     e.Cancel = true;
                 }
@@ -37,7 +38,6 @@ namespace BD
             {
                 e.Cancel = true;
             }
-
         }
 
         private void b_anuluj_Click(object sender, EventArgs e)

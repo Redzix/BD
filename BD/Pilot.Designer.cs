@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Data_odjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Data_przyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pojazd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Kierowca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Drugi_pilot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.b_wyjdz = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,15 +54,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(651, 150);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 197);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Zalogowany jako";
             // 
             // Nazwa_wycieczki
             // 
@@ -93,15 +85,36 @@
             this.Drugi_pilot.HeaderText = "Drugi pilot";
             this.Drugi_pilot.Name = "Drugi_pilot";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 197);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Zalogowany jako";
+            // 
+            // b_wyjdz
+            // 
+            this.b_wyjdz.Location = new System.Drawing.Point(588, 184);
+            this.b_wyjdz.Name = "b_wyjdz";
+            this.b_wyjdz.Size = new System.Drawing.Size(75, 23);
+            this.b_wyjdz.TabIndex = 2;
+            this.b_wyjdz.Text = "Wyjdź";
+            this.b_wyjdz.UseVisualStyleBackColor = true;
+            this.b_wyjdz.Click += new System.EventHandler(this.b_wyjdz_Click);
+            // 
             // Pilot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(675, 219);
+            this.Controls.Add(this.b_wyjdz);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Pilot";
             this.Text = "Pilot";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Pilot_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -118,5 +131,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Pojazd;
         private System.Windows.Forms.DataGridViewTextBoxColumn Kierowca;
         private System.Windows.Forms.DataGridViewTextBoxColumn Drugi_pilot;
+        private System.Windows.Forms.Button b_wyjdz;
     }
 }

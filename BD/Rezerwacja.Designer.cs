@@ -151,6 +151,7 @@
             this.b_rezerwacja_anuluj.TabIndex = 12;
             this.b_rezerwacja_anuluj.Text = "Anuluj";
             this.b_rezerwacja_anuluj.UseVisualStyleBackColor = true;
+            this.b_rezerwacja_anuluj.Click += new System.EventHandler(this.b_rezerwacja_anuluj_Click);
             // 
             // Rezerwacja
             // 
@@ -172,6 +173,7 @@
             this.Controls.Add(this.tb_imie);
             this.Name = "Rezerwacja";
             this.Text = "Rezerwacja";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Rezerwacja_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

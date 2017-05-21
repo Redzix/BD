@@ -30,6 +30,7 @@
         {
             this.tc_reklamacje = new System.Windows.Forms.TabControl();
             this.tp_dodaj_reklamacje = new System.Windows.Forms.TabPage();
+            this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
             this.l_data_odbytej_wycieczki = new System.Windows.Forms.Label();
             this.tb_data_odbytej_wycieczki = new System.Windows.Forms.TextBox();
             this.b_zapisz = new System.Windows.Forms.Button();
@@ -40,7 +41,6 @@
             this.tp_stan_reklamacji = new System.Windows.Forms.TabPage();
             this.l_stan_reklamacji = new System.Windows.Forms.Label();
             this.lb_reklamacje = new System.Windows.Forms.ListBox();
-            this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
             this.tc_reklamacje.SuspendLayout();
             this.tp_dodaj_reklamacje.SuspendLayout();
             this.tp_stan_reklamacji.SuspendLayout();
@@ -73,6 +73,14 @@
             this.tp_dodaj_reklamacje.TabIndex = 0;
             this.tp_dodaj_reklamacje.Text = "Dodaj reklamację";
             this.tp_dodaj_reklamacje.UseVisualStyleBackColor = true;
+            // 
+            // cb_nazwa_wycieczki
+            // 
+            this.cb_nazwa_wycieczki.FormattingEnabled = true;
+            this.cb_nazwa_wycieczki.Location = new System.Drawing.Point(125, 8);
+            this.cb_nazwa_wycieczki.Name = "cb_nazwa_wycieczki";
+            this.cb_nazwa_wycieczki.Size = new System.Drawing.Size(121, 21);
+            this.cb_nazwa_wycieczki.TabIndex = 20;
             // 
             // l_data_odbytej_wycieczki
             // 
@@ -107,6 +115,7 @@
             this.b_anuluj.TabIndex = 16;
             this.b_anuluj.Text = "Anuluj";
             this.b_anuluj.UseVisualStyleBackColor = true;
+            this.b_anuluj.Click += new System.EventHandler(this.b_anuluj_Click);
             // 
             // l_opis_reklamacji
             // 
@@ -163,14 +172,6 @@
             this.lb_reklamacje.Size = new System.Drawing.Size(120, 199);
             this.lb_reklamacje.TabIndex = 0;
             // 
-            // cb_nazwa_wycieczki
-            // 
-            this.cb_nazwa_wycieczki.FormattingEnabled = true;
-            this.cb_nazwa_wycieczki.Location = new System.Drawing.Point(125, 8);
-            this.cb_nazwa_wycieczki.Name = "cb_nazwa_wycieczki";
-            this.cb_nazwa_wycieczki.Size = new System.Drawing.Size(121, 21);
-            this.cb_nazwa_wycieczki.TabIndex = 20;
-            // 
             // Reklamacja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,6 +180,7 @@
             this.Controls.Add(this.tc_reklamacje);
             this.Name = "Reklamacja";
             this.Text = "Reklamacja";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reklamacja_FormClosing);
             this.tc_reklamacje.ResumeLayout(false);
             this.tp_dodaj_reklamacje.ResumeLayout(false);
             this.tp_dodaj_reklamacje.PerformLayout();
