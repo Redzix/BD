@@ -41,6 +41,7 @@
             this.reklamujWycieczkęToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rezygnacjaZWycieczkiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_katalog)).BeginInit();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 

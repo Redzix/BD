@@ -43,6 +43,7 @@
             this.Stan = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.l_uzytkownik = new System.Windows.Forms.Label();
             this.gb_stan_pojazdu.SuspendLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // l_zalgowany_jako

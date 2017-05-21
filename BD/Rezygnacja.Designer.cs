@@ -38,6 +38,7 @@
             this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
             this.l_liczba_rezygnujacych_osob = new System.Windows.Forms.Label();
             this.tb_liczba_rezygnujacych_osob = new System.Windows.Forms.TextBox();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // l_okres_wycieczki

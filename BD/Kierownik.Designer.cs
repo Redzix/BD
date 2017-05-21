@@ -71,6 +71,7 @@
             this.tp_rozpatrz_reklamacje.SuspendLayout();
             this.tp_zarzadzaj_flota.SuspendLayout();
             this.tp_raporty.SuspendLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // tc_kierownik

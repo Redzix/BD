@@ -39,6 +39,7 @@
             this.b_wyjdz = new System.Windows.Forms.Button();
             this.l_uzytkownik = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // dataGridView1

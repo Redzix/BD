@@ -34,6 +34,7 @@
             this.l_haslo = new System.Windows.Forms.Label();
             this.b_zaloguj = new System.Windows.Forms.Button();
             this.b_zakończ = new System.Windows.Forms.Button();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.SuspendLayout();
             // 
             // tb_nazwa_uzytkownika

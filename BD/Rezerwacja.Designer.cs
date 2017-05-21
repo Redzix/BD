@@ -41,6 +41,7 @@
             this.l_zaliczka = new System.Windows.Forms.Label();
             this.b_rezerwacja_zapisz = new System.Windows.Forms.Button();
             this.b_rezerwacja_anuluj = new System.Windows.Forms.Button();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // tb_imie

@@ -36,6 +36,7 @@
             this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
             this.l_ocena = new System.Windows.Forms.Label();
             this.cb_ocena = new System.Windows.Forms.ComboBox();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // b_zapisz

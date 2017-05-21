@@ -40,6 +40,7 @@
             this.tb_cena = new System.Windows.Forms.TextBox();
             this.b_zapisz = new System.Windows.Forms.Button();
             this.b_anuluj = new System.Windows.Forms.Button();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // l_nazwa

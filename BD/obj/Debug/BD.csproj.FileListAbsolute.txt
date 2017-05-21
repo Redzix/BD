@@ -70,3 +70,4 @@ D:\Visual_projekty\_BD\BD\obj\Debug\BD.Rezerwacja.resources
 D:\Visual_projekty\_BD\BD\obj\Debug\BD.Rezygnacja.resources
 D:\Visual_projekty\_BD\BD\obj\Debug\BD.Wycieczka.resources
 D:\Visual_projekty\_BD\BD\obj\Debug\BD.csproj.GenerateResource.Cache
+C:\Users\karol\Source\Repos\BD\BD\obj\Debug\BD.csprojResolveAssemblyReference.cache

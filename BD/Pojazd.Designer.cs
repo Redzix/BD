@@ -36,6 +36,7 @@
             this.tb_pojemnosc = new System.Windows.Forms.TextBox();
             this.l_pojemnosc = new System.Windows.Forms.Label();
             this.b_anuluj = new System.Windows.Forms.Button();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // l_nr_rejestracyjny
