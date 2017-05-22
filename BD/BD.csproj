@@ -47,49 +47,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cennik_model.cs" />
+    <Compile Include="Katalog_model.cs" />
     <Compile Include="Kierowca.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Kierowca.Designer.cs">
       <DependentUpon>Kierowca.cs</DependentUpon>
     </Compile>
+    <Compile Include="Kierowca_model.cs" />
     <Compile Include="Kierownik.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Kierownik.Designer.cs">
       <DependentUpon>Kierownik.cs</DependentUpon>
     </Compile>
+    <Compile Include="Kierownik_model.cs" />
     <Compile Include="Klient.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Klient.Designer.cs">
       <DependentUpon>Klient.cs</DependentUpon>
     </Compile>
+    <Compile Include="Klient_model.cs" />
+    <Compile Include="Miejsce_model.cs" />
     <Compile Include="Opinia.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Opinia.Designer.cs">
       <DependentUpon>Opinia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Opinia_model.cs" />
     <Compile Include="Panel_pracowniczy.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Panel_pracowniczy.Designer.cs">
       <DependentUpon>Panel_pracowniczy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Panel_pracowniczy_model.cs" />
     <Compile Include="Pilot.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Pilot.Designer.cs">
       <DependentUpon>Pilot.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pilot_model.cs" />
     <Compile Include="Pojazd.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Pojazd.Designer.cs">
       <DependentUpon>Pojazd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pojazd_model.cs" />
+    <Compile Include="Pracownik_model.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Promocja_model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reklamacja.cs">
       <SubType>Form</SubType>
@@ -97,24 +109,29 @@
     <Compile Include="Reklamacja.Designer.cs">
       <DependentUpon>Reklamacja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reklamacja_model.cs" />
     <Compile Include="Rezerwacja.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Rezerwacja.Designer.cs">
       <DependentUpon>Rezerwacja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rezerwacja_model.cs" />
     <Compile Include="Rezygnacja.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Rezygnacja.Designer.cs">
       <DependentUpon>Rezygnacja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rezygnacja_model.cs" />
+    <Compile Include="Uczestnictwo_model.cs" />
     <Compile Include="Wycieczka.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Wycieczka.Designer.cs">
       <DependentUpon>Wycieczka.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wycieczka_model.cs" />
     <EmbeddedResource Include="Kierowca.resx">
       <DependentUpon>Kierowca.cs</DependentUpon>
     </EmbeddedResource>

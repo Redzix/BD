@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace BD
 {
@@ -47,8 +48,23 @@ namespace BD
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_pojazd_Click(object sender, EventArgs e)
         {
-            Pojazd pojazd = new Pojazd();
-            pojazd.ShowDialog();
+
+            SqlConnection polaczenie = new SqlConnection();
+            polaczenie.ConnectionString = "Server=bditake.database.windows.net; Database=baza; User Id=bdsql; password=Chuj123123";
+            polaczenie.Open();
+            SqlCommand zapytanie = new SqlCommand();
+            zapytanie.Connection = polaczenie;
+            zapytanie.CommandText = "SELECT opis FROM Opinia WHERE id_opini = 1";
+
+            string wartosc = null;
+            SqlDataReader reader = zapytanie.ExecuteReader();
+            if (reader.Read())
+                wartosc = reader.GetString(0);
+            reader.Close();
+            polaczenie.Close();
+            MessageBox.Show(wartosc,"pobranie danych",MessageBoxButtons.OK);
+            // Pojazd pojazd = new Pojazd();
+            //pojazd.ShowDialog();
         }
 
         /// <summary>
