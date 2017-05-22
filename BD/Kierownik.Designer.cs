@@ -71,7 +71,6 @@
             this.tp_rozpatrz_reklamacje.SuspendLayout();
             this.tp_zarzadzaj_flota.SuspendLayout();
             this.tp_raporty.SuspendLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // tc_kierownik
@@ -85,6 +84,7 @@
             this.tc_kierownik.SelectedIndex = 0;
             this.tc_kierownik.Size = new System.Drawing.Size(443, 255);
             this.tc_kierownik.TabIndex = 2;
+            this.tc_kierownik.SelectedIndexChanged += new System.EventHandler(this.tc_kierownik_SelectedIndexChanged);
             // 
             // tp_zarzadzaj_wycieczkami
             // 
@@ -403,6 +403,7 @@
             this.Controls.Add(this.b_wyjdz);
             this.Controls.Add(this.tc_kierownik);
             this.Name = "Kierownik";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kierownik";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kierownik_FormClosing);
             this.Load += new System.EventHandler(this.Kierownik_Load);

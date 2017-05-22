@@ -13,6 +13,8 @@ namespace BD
 {
     public partial class Kierownik : Form
     {
+        SqlConnection _polaczenie;
+        SqlCommand _zapytanie;
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
@@ -48,23 +50,8 @@ namespace BD
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_pojazd_Click(object sender, EventArgs e)
         {
-
-            SqlConnection polaczenie = new SqlConnection();
-            polaczenie.ConnectionString = "Server=bditake.database.windows.net; Database=baza; User Id=bdsql; password=Chuj123123";
-            polaczenie.Open();
-            SqlCommand zapytanie = new SqlCommand();
-            zapytanie.Connection = polaczenie;
-            zapytanie.CommandText = "SELECT opis FROM Opinia WHERE id_opini = 1";
-
-            string wartosc = null;
-            SqlDataReader reader = zapytanie.ExecuteReader();
-            if (reader.Read())
-                wartosc = reader.GetString(0);
-            reader.Close();
-            polaczenie.Close();
-            MessageBox.Show(wartosc,"pobranie danych",MessageBoxButtons.OK);
-            // Pojazd pojazd = new Pojazd();
-            //pojazd.ShowDialog();
+            Pojazd pojazd = new Pojazd();
+            pojazd.ShowDialog();
         }
 
         /// <summary>
@@ -130,6 +117,30 @@ namespace BD
             Wycieczka wycieczka = new Wycieczka();
             wycieczka.ShowDialog();
         }
+        private void PolaczZBaza()
+        {
+            _polaczenie = new SqlConnection();
+            _polaczenie.ConnectionString = "Server=bditake.database.windows.net; Database=baza; User Id=bdsql; password=Chuj123123";
+            _polaczenie.Open();
+            _zapytanie = new SqlCommand();
+            _zapytanie.Connection = _polaczenie;
+             MessageBox.Show("Połączono poprawnie", "Połączono", MessageBoxButtons.OK);
+        }
 
-     }
+        private void tc_kierownik_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(tc_kierownik.SelectedIndex == 2)
+            {
+                PolaczZBaza();
+                _zapytanie.CommandText = "SELECT opis FROM Opinia WHERE id_opini = 1";
+                string wartosc = null;
+                SqlDataReader reader = _zapytanie.ExecuteReader();
+                if (reader.Read())
+                    wartosc = reader.GetString(0);
+                reader.Close();
+                _polaczenie.Close();
+                MessageBox.Show(wartosc, "pobranie danych", MessageBoxButtons.OK);
+            }
+        }
+    }
 }
