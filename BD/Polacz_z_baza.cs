@@ -55,5 +55,50 @@ namespace BD
             }
             
         }
+
+        /// <summary>
+        /// Metoda, która umozliwia pobranie z bazy danych wyszukanej wartosci string
+        /// </summary>
+        /// <param name="zapytanie">Wykonywane zapytanie w języku SQL</param>
+        /// <returns>Zwaca wyszukaną wartosć string</returns>
+        public string PobierzDaneString(SqlCommand zapytanie)
+        {
+            string wartosc = null;
+            SqlDataReader reader = zapytanie.ExecuteReader();
+            if (reader.Read())
+                wartosc = reader.GetString(0);
+            reader.Close();
+            return wartosc;
+        }
+
+        /// <summary>
+        /// Metoda, która umozliwia pobranie z bazy danych wyszukanej wartosci DateTime
+        /// </summary>
+        /// <param name="zapytanie">Wykonywane zapytanie w języku SQL</param>
+        /// <returns>Zwaca wyszukaną wartosć DateTime</returns>
+        public DateTime PobierzDaneDate(SqlCommand zapytanie)
+        {
+            DateTime wartosc = new DateTime(2013, 6, 1, 12, 32, 30);
+            SqlDataReader reader = zapytanie.ExecuteReader();
+            if (reader.Read())
+                wartosc = reader.GetDateTime(0);
+            reader.Close();
+            return wartosc;
+        }
+
+        /// <summary>
+        /// Metoda, która umozliwia pobranie z bazy danych wyszukanej wartosci int
+        /// </summary>
+        /// <param name="zapytanie">Wykonywane zapytanie w języku SQL</param>
+        /// <returns>Zwaca wyszukaną wartosć int</returns>
+        public int PobierzDaneInt(SqlCommand zapytanie)
+        {
+            int wartosc = 0;
+            SqlDataReader reader = zapytanie.ExecuteReader();
+            if (reader.Read())
+                wartosc = reader.GetInt32(0);
+            reader.Close();
+            return wartosc;
+        }        
     }
 }

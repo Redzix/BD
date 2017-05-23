@@ -154,12 +154,7 @@ namespace BD
                 _zapytanie = _polacz.UtworzZapytanie("SELECT opis FROM Opinia WHERE id_opini = 1");
 
                 string wartosc = null;
-                SqlDataReader reader = _zapytanie.ExecuteReader();
-                if (reader.Read())
-                    wartosc = reader.GetString(0);
-                reader.Close();
-                _polaczenie.Close();
-                MessageBox.Show(wartosc, "pobranie danych", MessageBoxButtons.OK);
+                wartosc = _polacz.PobierzDaneString(_zapytanie);
             }
         }
     }

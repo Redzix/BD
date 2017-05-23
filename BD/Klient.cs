@@ -7,17 +7,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace BD
 {
     public partial class Klient : Form
     {
         /// <summary>
+        /// Zmienna odpowiada za utworzenie połączenia z bazą danych.
+        /// </summary>
+        SqlConnection _polaczenie = null;
+
+        /// <summary>
+        /// Zmienna przechowuje zapytanie do bazy danych.
+        /// </summary>
+        SqlCommand _zapytanie = null;
+
+        /// <summary>
+        /// Zmienna przechowujeobiekt klasy Polacz_z_baza.
+        /// </summary>
+        Polacz_z_baza _polacz = null;
+
+        string _nazwa;
+
+        DateTime _dataWyjazdu;
+
+        DateTime _dataPowrotu;
+
+        string _opis;
+
+        string _adresMiejsca;
+
+        string _miejscowosc;
+
+        /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
         public Klient()
         {
             InitializeComponent();
+            _polacz = new Polacz_z_baza();
+            _polaczenie = _polacz.PolaczZBaza();
+            if (_polaczenie != null)
+            {
+                l_polaczenie.Text = "Połączony";
+                l_polaczenie.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                l_polaczenie.Text = "Rozłączony";
+                l_polaczenie.ForeColor = System.Drawing.Color.Red;
+            }
         }
 
         /// <summary>
@@ -51,7 +91,12 @@ namespace BD
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_katalog_rezerwuj_Click(object sender, EventArgs e)
         {
-            Rezerwacja rezerwacja = new Rezerwacja();
+            Wycieczka_model wycieczka = new Wycieczka_model();
+            wycieczka.Nazwa = _nazwa;
+            wycieczka.DataWyjazdu = _dataWyjazdu;
+            wycieczka.DataPowrotu = _dataPowrotu
+                ;
+            Rezerwacja rezerwacja = new Rezerwacja(wycieczka);
             rezerwacja.ShowDialog();
         }
 
@@ -114,6 +159,99 @@ namespace BD
             {
                 e.Cancel = true;
             }
+        }
+
+        private void Klient_Shown(object sender, EventArgs e)
+        {
+            /*
+             Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
+            dgv_katalog.Columns["Nazwa_wycieczki"].DataPropertyName = "nazwa" ;
+            dgv_katalog.Columns["Okres"].DataPropertyName = "okres_trwania_wycieczki";
+            dgv_katalog.Columns["Data_wyjazdu"].DataPropertyName = "data_wyjazdu";
+            dgv_katalog.Columns["Promocja"].DataPropertyName = ;
+            dgv_katalog.Columns["Koszt"].DataPropertyName = "koszt";
+
+             Utworzenie zapytania do bazy danych w celu pobrania potrzebnych informacji o wycieczce.
+            _zapytanie = _polacz.UtworzZapytanie("SELECT nazwa," +
+                "okres_trwania_wycieczki," +
+                "data_wyjazdu," +
+                "Promocja.cena as promocja," +
+                "(Cennik.cena-Promocja.cena) as koszt " +
+                "FROM Katalog " +
+                "INNER JOIN Cennik ON Katalog.id_cennika = Cennik.id_cennika " +
+                "INNER JOIN Wycieczka ON Katalog.id_wycieczki = Wycieczka.id_wycieczki " +
+                "INNER JOIN Promocja ON Wycieczka.id_wycieczki = Promocja.id_wycieczki");
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(_zapytanie);
+
+            Utworzenie i wypełnienie tabeli jako DataSource
+            DataTable tabela = new DataTable();
+            sqlDataAdapter.Fill(tabela);
+            dgv_katalog.DataSource = tabela;*/
+
+            dgv_katalog.AutoGenerateColumns = false;
+            // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
+            dgv_katalog.Columns["Nazwa_wycieczki"].DataPropertyName = "nazwa";
+            dgv_katalog.Columns["Okres"].DataPropertyName = "okres_trwania_wycieczki";
+            dgv_katalog.Columns["Data_wyjazdu"].DataPropertyName = "data_wyjazdu";
+            //dgv_katalog.Columns["Promocja"].DataPropertyName = ;
+            dgv_katalog.Columns["Koszt"].DataPropertyName = "koszt";
+            
+            // Utworzenie zapytania do bazy danych w celu pobrania potrzebnych informacji o wycieczce.
+            _zapytanie = _polacz.UtworzZapytanie("SELECT nazwa," +
+                "okres_trwania_wycieczki," +
+                "data_wyjazdu," +
+                "Cennik.cena as koszt " +
+                "FROM Katalog " +
+                "INNER JOIN Cennik ON Katalog.id_cennika = Cennik.id_cennika " +
+                "INNER JOIN Wycieczka ON Katalog.id_wycieczki = Wycieczka.id_wycieczki");
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(_zapytanie);
+
+            // Utworzenie i wypełnienie tabeli jako DataSource
+            DataTable tabela = new DataTable();
+            sqlDataAdapter.Fill(tabela);
+            dgv_katalog.DataSource = tabela;
+        }
+
+        private void dgv_katalog_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Podświetlenie wybranego wiersza
+            dgv_katalog.Rows[dgv_katalog.CurrentCell.RowIndex].Selected = true;
+
+            //Pobranie z tabeli oraz z bazy danych odpowiednich wartości do wyświetlenia.
+            _nazwa = dgv_katalog.Rows[dgv_katalog.CurrentCell.RowIndex].Cells["Nazwa_wycieczki"].Value.ToString();
+
+            _dataWyjazdu = _polacz.PobierzDaneDate(_polacz.UtworzZapytanie("SELECT data_wyjazdu FROM Wycieczka WHERE nazwa= "
+                + "'" + _nazwa + "'"));
+
+            _dataPowrotu = _polacz.PobierzDaneDate(_polacz.UtworzZapytanie("SELECT data_powrotu FROM Wycieczka WHERE nazwa= "
+                + "'" + _nazwa +"'")); 
+
+            _opis = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT opis FROM Wycieczka WHERE nazwa= "
+                + "'" + _nazwa +"'")).ToString();
+
+            _adresMiejsca = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT adres " +
+                "FROM Miejsce, Katalog, Wycieczka WHERE " +
+                "Miejsce.id_miejsca = Katalog.id_miejsca_odjazdu AND " +
+                "Wycieczka.id_wycieczki = Katalog.id_wycieczki AND " +
+                "Wycieczka.nazwa = " +"'" + _nazwa + "'"));
+
+            _miejscowosc = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT miejscowosc " +
+                "FROM Miejsce, Katalog, Wycieczka WHERE " +
+                "Miejsce.id_miejsca = Katalog.id_miejsca_odjazdu AND " +
+                "Wycieczka.id_wycieczki = Katalog.id_wycieczki AND " +
+                "Wycieczka.nazwa = " + "'" + _nazwa + "'"));
+          
+
+            // Dodanie wartości parametrów do opisu znajdującego się w texboxie
+            rtb_wycieczka.Text = 
+                "Nazwa: " + _nazwa + 
+                "\nData wyjazdu: "+ _dataWyjazdu +
+                "\nData powrotu: " + _dataPowrotu + 
+                "\nOpis: " + _opis +
+                "\n\nAdres miejsca: " + _adresMiejsca + 
+                "\nMiejscowość: " + _miejscowosc;
         }
     }
 }

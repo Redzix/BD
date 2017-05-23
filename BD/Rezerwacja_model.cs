@@ -12,6 +12,7 @@ namespace BD
         private int _liczbaOsob;
         private bool _stan;
         private decimal _zaliczka;
+       
 
         public Rezerwacja_model(){}
 
@@ -64,5 +65,6 @@ namespace BD
                 this._zaliczka = value;
             }
         }
+        
     }
 }

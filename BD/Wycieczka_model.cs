@@ -8,7 +8,8 @@ namespace BD
 {
     public class Wycieczka_model
     {
-        private DateTime _dataOdjazdu;
+        private string _nazwa;
+        private DateTime _dataWyjazdu;
         private DateTime _dataPowrotu;
         private string _opis;
 
@@ -16,15 +17,27 @@ namespace BD
 
         ~Wycieczka_model(){}
 
-        public DateTime DataOdjazdu
+        public string Nazwa
         {
             get
             {
-                return this._dataOdjazdu;
+                return this._nazwa;
             }
             set
             {
-                this._dataOdjazdu = value;
+                this._nazwa = value;
+            }
+        }
+
+        public DateTime DataWyjazdu
+        {
+            get
+            {
+                return this._dataWyjazdu;
+            }
+            set
+            {
+                this._dataWyjazdu = value;
             }
         }
 
