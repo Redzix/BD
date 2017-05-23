@@ -13,24 +13,52 @@ namespace BD
 {
     public partial class Kierownik : Form
     {
-        SqlConnection _polaczenie;
-        SqlCommand _zapytanie;
+        SqlConnection _polaczenie = null;
+        SqlCommand _zapytanie = null;
+        Polacz_z_baza _polacz = null;
+
         /// <summary>
-        /// Główny bezparametrowy konstruktor okna
+        /// Główny bezparametrowy konstruktor okna, tworzący okno oraz połączenie z bazą danych.
         /// </summary>
         public Kierownik()
         {
             InitializeComponent();
+            l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
+            _polacz = new Polacz_z_baza();
+            _polaczenie = _polacz.PolaczZBaza();
+            if (_polaczenie != null)
+            {
+                l_polaczenie.Text = "Połączony";
+                l_polaczenie.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                l_polaczenie.Text = "Rozłączony";
+                l_polaczenie.ForeColor = System.Drawing.Color.Red;
+            }
         }
 
         /// <summary>
-        /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu.
+        /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu 
+        /// oraz tworzący połączenie z bazą danych.
         /// </summary>
         /// <param name="uzytkownik">Nazwa użytkownika</param>
         public Kierownik(string uzytkownik)
         {
             InitializeComponent();
             l_uzytkownik.Text = uzytkownik;
+            _polacz = new Polacz_z_baza();
+            _polaczenie = _polacz.PolaczZBaza();
+            if (_polaczenie != null)
+            {
+                l_polaczenie.Text = "Połączony";
+                l_polaczenie.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                l_polaczenie.Text = "Rozłączony";
+                l_polaczenie.ForeColor = System.Drawing.Color.Red;
+            }
         }
 
         /// <summary>
@@ -117,22 +145,14 @@ namespace BD
             Wycieczka wycieczka = new Wycieczka();
             wycieczka.ShowDialog();
         }
-        private void PolaczZBaza()
-        {
-            _polaczenie = new SqlConnection();
-            _polaczenie.ConnectionString = "Server=bditake.database.windows.net; Database=baza; User Id=bdsql; password=Chuj123123";
-            _polaczenie.Open();
-            _zapytanie = new SqlCommand();
-            _zapytanie.Connection = _polaczenie;
-             MessageBox.Show("Połączono poprawnie", "Połączono", MessageBoxButtons.OK);
-        }
 
         private void tc_kierownik_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(tc_kierownik.SelectedIndex == 2)
             {
-                PolaczZBaza();
-                _zapytanie.CommandText = "SELECT opis FROM Opinia WHERE id_opini = 1";
+                _polaczenie = _polacz.PolaczZBaza();
+                _zapytanie = _polacz.UtworzZapytanie("SELECT opis FROM Opinia WHERE id_opini = 1");
+
                 string wartosc = null;
                 SqlDataReader reader = _zapytanie.ExecuteReader();
                 if (reader.Read())

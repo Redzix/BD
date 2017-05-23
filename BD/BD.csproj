@@ -99,6 +99,7 @@
       <DependentUpon>Pojazd.cs</DependentUpon>
     </Compile>
     <Compile Include="Pojazd_model.cs" />
+    <Compile Include="Polacz_z_baza.cs" />
     <Compile Include="Pracownik_model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Promocja_model.cs" />

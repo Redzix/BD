@@ -66,6 +66,7 @@
             this.b_wyjdz = new System.Windows.Forms.Button();
             this.l_zalogowany_jako = new System.Windows.Forms.Label();
             this.l_uzytkownik = new System.Windows.Forms.Label();
+            this.l_polaczenie = new System.Windows.Forms.Label();
             this.tc_kierownik.SuspendLayout();
             this.tp_zarzadzaj_wycieczkami.SuspendLayout();
             this.tp_rozpatrz_reklamacje.SuspendLayout();
@@ -378,7 +379,7 @@
             // l_zalogowany_jako
             // 
             this.l_zalogowany_jako.AutoSize = true;
-            this.l_zalogowany_jako.Location = new System.Drawing.Point(7, 262);
+            this.l_zalogowany_jako.Location = new System.Drawing.Point(76, 267);
             this.l_zalogowany_jako.Name = "l_zalogowany_jako";
             this.l_zalogowany_jako.Size = new System.Drawing.Size(88, 13);
             this.l_zalogowany_jako.TabIndex = 4;
@@ -387,17 +388,27 @@
             // l_uzytkownik
             // 
             this.l_uzytkownik.AutoSize = true;
-            this.l_uzytkownik.Location = new System.Drawing.Point(93, 262);
+            this.l_uzytkownik.Location = new System.Drawing.Point(163, 267);
             this.l_uzytkownik.Name = "l_uzytkownik";
             this.l_uzytkownik.Size = new System.Drawing.Size(10, 13);
             this.l_uzytkownik.TabIndex = 5;
             this.l_uzytkownik.Text = " ";
+            // 
+            // l_polaczenie
+            // 
+            this.l_polaczenie.AutoSize = true;
+            this.l_polaczenie.Location = new System.Drawing.Point(3, 267);
+            this.l_polaczenie.Name = "l_polaczenie";
+            this.l_polaczenie.Size = new System.Drawing.Size(10, 13);
+            this.l_polaczenie.TabIndex = 6;
+            this.l_polaczenie.Text = " ";
             // 
             // Kierownik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(441, 287);
+            this.Controls.Add(this.l_polaczenie);
             this.Controls.Add(this.l_uzytkownik);
             this.Controls.Add(this.l_zalogowany_jako);
             this.Controls.Add(this.b_wyjdz);
@@ -460,5 +471,6 @@
         private System.Windows.Forms.Button b_wyjdz;
         private System.Windows.Forms.Label l_zalogowany_jako;
         private System.Windows.Forms.Label l_uzytkownik;
+        private System.Windows.Forms.Label l_polaczenie;
     }
 }

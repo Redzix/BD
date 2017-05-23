@@ -28,69 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Data_odjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Data_przyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pojazd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kierowca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Drugi_pilot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_tabelaPilot = new System.Windows.Forms.DataGridView();
             this.l_zalogowany_jako = new System.Windows.Forms.Label();
             this.b_wyjdz = new System.Windows.Forms.Button();
             this.l_uzytkownik = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.l_polaczenie = new System.Windows.Forms.Label();
+            this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Data_wyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Data_powrotu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pojazd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kierowca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_tabelaPilot)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgv_tabelaPilot
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgv_tabelaPilot.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_tabelaPilot.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Nazwa_wycieczki,
-            this.Data_odjazdu,
-            this.Data_przyjazdu,
+            this.Data_wyjazdu,
+            this.Data_powrotu,
             this.Pojazd,
-            this.Kierowca,
-            this.Drugi_pilot});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(651, 150);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // Nazwa_wycieczki
-            // 
-            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
-            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
-            // 
-            // Data_odjazdu
-            // 
-            this.Data_odjazdu.HeaderText = "Data odjazdu";
-            this.Data_odjazdu.Name = "Data_odjazdu";
-            // 
-            // Data_przyjazdu
-            // 
-            this.Data_przyjazdu.HeaderText = "Data przyjazdu";
-            this.Data_przyjazdu.Name = "Data_przyjazdu";
-            // 
-            // Pojazd
-            // 
-            this.Pojazd.HeaderText = "Pojazd";
-            this.Pojazd.Name = "Pojazd";
-            // 
-            // Kierowca
-            // 
-            this.Kierowca.HeaderText = "Kierowca";
-            this.Kierowca.Name = "Kierowca";
-            // 
-            // Drugi_pilot
-            // 
-            this.Drugi_pilot.HeaderText = "Drugi pilot";
-            this.Drugi_pilot.Name = "Drugi_pilot";
+            this.Kierowca});
+            this.dgv_tabelaPilot.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_tabelaPilot.Location = new System.Drawing.Point(12, 12);
+            this.dgv_tabelaPilot.Name = "dgv_tabelaPilot";
+            this.dgv_tabelaPilot.Size = new System.Drawing.Size(651, 150);
+            this.dgv_tabelaPilot.TabIndex = 0;
             // 
             // l_zalogowany_jako
             // 
             this.l_zalogowany_jako.AutoSize = true;
-            this.l_zalogowany_jako.Location = new System.Drawing.Point(9, 197);
+            this.l_zalogowany_jako.Location = new System.Drawing.Point(154, 197);
             this.l_zalogowany_jako.Name = "l_zalogowany_jako";
             this.l_zalogowany_jako.Size = new System.Drawing.Size(88, 13);
             this.l_zalogowany_jako.TabIndex = 1;
@@ -109,25 +78,62 @@
             // l_uzytkownik
             // 
             this.l_uzytkownik.AutoSize = true;
-            this.l_uzytkownik.Location = new System.Drawing.Point(103, 197);
+            this.l_uzytkownik.Location = new System.Drawing.Point(240, 197);
             this.l_uzytkownik.Name = "l_uzytkownik";
             this.l_uzytkownik.Size = new System.Drawing.Size(10, 13);
             this.l_uzytkownik.TabIndex = 3;
             this.l_uzytkownik.Text = " ";
+            // 
+            // l_polaczenie
+            // 
+            this.l_polaczenie.AutoSize = true;
+            this.l_polaczenie.Location = new System.Drawing.Point(16, 197);
+            this.l_polaczenie.Name = "l_polaczenie";
+            this.l_polaczenie.Size = new System.Drawing.Size(10, 13);
+            this.l_polaczenie.TabIndex = 7;
+            this.l_polaczenie.Text = " ";
+            // 
+            // Nazwa_wycieczki
+            // 
+            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
+            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
+            // 
+            // Data_wyjazdu
+            // 
+            this.Data_wyjazdu.HeaderText = "Data wyjazdu";
+            this.Data_wyjazdu.Name = "Data_wyjazdu";
+            // 
+            // Data_powrotu
+            // 
+            this.Data_powrotu.HeaderText = "Data powrotu";
+            this.Data_powrotu.Name = "Data_powrotu";
+            // 
+            // Pojazd
+            // 
+            this.Pojazd.HeaderText = "Pojazd";
+            this.Pojazd.Name = "Pojazd";
+            // 
+            // Kierowca
+            // 
+            this.Kierowca.HeaderText = "Kierowca";
+            this.Kierowca.Name = "Kierowca";
             // 
             // Pilot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(675, 219);
+            this.Controls.Add(this.l_polaczenie);
             this.Controls.Add(this.l_uzytkownik);
             this.Controls.Add(this.b_wyjdz);
             this.Controls.Add(this.l_zalogowany_jako);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv_tabelaPilot);
             this.Name = "Pilot";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Pilot";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Pilot_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Shown += new System.EventHandler(this.Pilot_Shown);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_tabelaPilot)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,15 +141,15 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv_tabelaPilot;
         private System.Windows.Forms.Label l_zalogowany_jako;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nazwa_wycieczki;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Data_odjazdu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Data_przyjazdu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pojazd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Kierowca;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Drugi_pilot;
         private System.Windows.Forms.Button b_wyjdz;
         private System.Windows.Forms.Label l_uzytkownik;
+        private System.Windows.Forms.Label l_polaczenie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nazwa_wycieczki;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Data_wyjazdu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Data_powrotu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pojazd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Kierowca;
     }
 }

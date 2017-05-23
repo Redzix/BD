@@ -42,14 +42,14 @@
             this.Pojemność = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Stan = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.l_uzytkownik = new System.Windows.Forms.Label();
+            this.l_polaczenie = new System.Windows.Forms.Label();
             this.gb_stan_pojazdu.SuspendLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // l_zalgowany_jako
             // 
             this.l_zalgowany_jako.AutoSize = true;
-            this.l_zalgowany_jako.Location = new System.Drawing.Point(12, 239);
+            this.l_zalgowany_jako.Location = new System.Drawing.Point(92, 239);
             this.l_zalgowany_jako.Name = "l_zalgowany_jako";
             this.l_zalgowany_jako.Size = new System.Drawing.Size(88, 13);
             this.l_zalgowany_jako.TabIndex = 1;
@@ -133,17 +133,27 @@
             // l_uzytkownik
             // 
             this.l_uzytkownik.AutoSize = true;
-            this.l_uzytkownik.Location = new System.Drawing.Point(100, 239);
+            this.l_uzytkownik.Location = new System.Drawing.Point(178, 239);
             this.l_uzytkownik.Name = "l_uzytkownik";
             this.l_uzytkownik.Size = new System.Drawing.Size(10, 13);
             this.l_uzytkownik.TabIndex = 11;
             this.l_uzytkownik.Text = " ";
+            // 
+            // l_polaczenie
+            // 
+            this.l_polaczenie.AutoSize = true;
+            this.l_polaczenie.Location = new System.Drawing.Point(18, 239);
+            this.l_polaczenie.Name = "l_polaczenie";
+            this.l_polaczenie.Size = new System.Drawing.Size(10, 13);
+            this.l_polaczenie.TabIndex = 12;
+            this.l_polaczenie.Text = " ";
             // 
             // Kierowca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(540, 261);
+            this.Controls.Add(this.l_polaczenie);
             this.Controls.Add(this.l_uzytkownik);
             this.Controls.Add(this.lv_pojazdy);
             this.Controls.Add(this.b_kierowca_wyjdz);
@@ -152,6 +162,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.l_zalgowany_jako);
             this.Name = "Kierowca";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kierowca";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kierowca_FormClosing);
             this.gb_stan_pojazdu.ResumeLayout(false);
@@ -177,5 +188,6 @@
         private System.Windows.Forms.ColumnHeader Pojemność;
         private System.Windows.Forms.ColumnHeader Stan;
         private System.Windows.Forms.Label l_uzytkownik;
+        private System.Windows.Forms.Label l_polaczenie;
     }
 }
