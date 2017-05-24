@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
+
 namespace BD
 {
     public partial class Kierownik : Form
@@ -16,6 +17,7 @@ namespace BD
         SqlConnection _polaczenie = null;
         SqlCommand _zapytanie = null;
         Polacz_z_baza _polacz = null;
+        List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna, tworzący okno oraz połączenie z bazą danych.
@@ -78,8 +80,22 @@ namespace BD
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_pojazd_Click(object sender, EventArgs e)
         {
-            Pojazd pojazd = new Pojazd();
-            pojazd.ShowDialog();
+            Pojazd_model _pojazdy = new Pojazd_model();
+            _listaPojazdow = _pojazdy.pobierzPojazdy();
+            MessageBox.Show(_listaPojazdow[10].NumerRejestracyjny.ToString(), "hhh", MessageBoxButtons.OK);
+            for (int i=0; i < _listaPojazdow.Count; i++)
+            {
+                ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
+                pojazd.SubItems.Add(_listaPojazdow[i].Dostepnosc.ToString());
+                pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
+                pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
+                pojazd.SubItems.Add(_listaPojazdow[i].Stan.ToString());
+                lv_pojazdy.Items.Add(pojazd);
+ 
+            }                    
+
+            // Pojazd pojazd = new Pojazd();
+            //pojazd.ShowDialog();
         }
 
         /// <summary>
@@ -156,6 +172,13 @@ namespace BD
                 string wartosc = null;
                 wartosc = _polacz.PobierzDaneString(_zapytanie);
             }
+        }
+
+        private void Kierownik_Shown(object sender, EventArgs e)
+        {
+
+            
+     
         }
     }
 }

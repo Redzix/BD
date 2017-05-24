@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BD
 {
-    class Cennik_model
+    public class Cennik_model
     {
+
     }
 }

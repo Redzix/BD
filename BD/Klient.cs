@@ -163,32 +163,7 @@ namespace BD
 
         private void Klient_Shown(object sender, EventArgs e)
         {
-            /*
-             Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
-            dgv_katalog.Columns["Nazwa_wycieczki"].DataPropertyName = "nazwa" ;
-            dgv_katalog.Columns["Okres"].DataPropertyName = "okres_trwania_wycieczki";
-            dgv_katalog.Columns["Data_wyjazdu"].DataPropertyName = "data_wyjazdu";
-            dgv_katalog.Columns["Promocja"].DataPropertyName = ;
-            dgv_katalog.Columns["Koszt"].DataPropertyName = "koszt";
-
-             Utworzenie zapytania do bazy danych w celu pobrania potrzebnych informacji o wycieczce.
-            _zapytanie = _polacz.UtworzZapytanie("SELECT nazwa," +
-                "okres_trwania_wycieczki," +
-                "data_wyjazdu," +
-                "Promocja.cena as promocja," +
-                "(Cennik.cena-Promocja.cena) as koszt " +
-                "FROM Katalog " +
-                "INNER JOIN Cennik ON Katalog.id_cennika = Cennik.id_cennika " +
-                "INNER JOIN Wycieczka ON Katalog.id_wycieczki = Wycieczka.id_wycieczki " +
-                "INNER JOIN Promocja ON Wycieczka.id_wycieczki = Promocja.id_wycieczki");
-
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(_zapytanie);
-
-            Utworzenie i wypełnienie tabeli jako DataSource
-            DataTable tabela = new DataTable();
-            sqlDataAdapter.Fill(tabela);
-            dgv_katalog.DataSource = tabela;*/
-
+            //Wyłączenie generowania dodatkowych kolumn.
             dgv_katalog.AutoGenerateColumns = false;
             // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
             dgv_katalog.Columns["Nazwa_wycieczki"].DataPropertyName = "nazwa";
