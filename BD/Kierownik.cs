@@ -18,6 +18,7 @@ namespace BD
         SqlCommand _zapytanie = null;
         Polacz_z_baza _polacz = null;
         List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();
+        List<Reklamacja_model> _listaReklamacji = new List<Reklamacja_model>();
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna, tworzący okno oraz połączenie z bazą danych.
@@ -80,22 +81,8 @@ namespace BD
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_pojazd_Click(object sender, EventArgs e)
         {
-            Pojazd_model _pojazdy = new Pojazd_model();
-            _listaPojazdow = _pojazdy.pobierzPojazdy();
-            MessageBox.Show(_listaPojazdow[10].NumerRejestracyjny.ToString(), "hhh", MessageBoxButtons.OK);
-            for (int i=0; i < _listaPojazdow.Count; i++)
-            {
-                ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
-                pojazd.SubItems.Add(_listaPojazdow[i].Dostepnosc.ToString());
-                pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
-                pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
-                pojazd.SubItems.Add(_listaPojazdow[i].Stan.ToString());
-                lv_pojazdy.Items.Add(pojazd);
- 
-            }                    
-
-            // Pojazd pojazd = new Pojazd();
-            //pojazd.ShowDialog();
+            Pojazd pojazd = new Pojazd();
+            pojazd.ShowDialog();
         }
 
         /// <summary>
@@ -164,21 +151,32 @@ namespace BD
 
         private void tc_kierownik_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(tc_kierownik.SelectedIndex == 2)
+            if (tc_kierownik.SelectedIndex == 1)
             {
-                _polaczenie = _polacz.PolaczZBaza();
-                _zapytanie = _polacz.UtworzZapytanie("SELECT opis FROM Opinia WHERE id_opini = 1");
+                Reklamacja_model _reklamacja= new Reklamacja_model();
+                _listaReklamacji = _reklamacja.PobierzReklamacje();
 
-                string wartosc = null;
-                wartosc = _polacz.PobierzDaneString(_zapytanie);
+                for (int i = 0; i < _listaReklamacji.Count; i++)
+                {
+                    ListViewItem reklamacja = new ListViewItem(_listaReklamacji[i].Numer.ToString());
+                    lv_reklamacje.Items.Add(reklamacja);
+                }
             }
-        }
+            else if (tc_kierownik.SelectedIndex == 2)
+            {
+                Pojazd_model _pojazdy = new Pojazd_model();
+                _listaPojazdow = _pojazdy.PobierzPojazdy();
 
-        private void Kierownik_Shown(object sender, EventArgs e)
-        {
-
-            
-     
+                for (int i = 0; i < _listaPojazdow.Count; i++)
+                {
+                    ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
+                    pojazd.SubItems.Add(_listaPojazdow[i].Dostepnosc.ToString());
+                    pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
+                    pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
+                    pojazd.SubItems.Add(_listaPojazdow[i].Stan.ToString());
+                    lv_pojazdy.Items.Add(pojazd);
+                }
+            }
         }
     }
 }

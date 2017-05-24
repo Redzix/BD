@@ -39,8 +39,7 @@
             this.cb_okres_wycieczki = new System.Windows.Forms.ComboBox();
             this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
             this.lv_reklamacje = new System.Windows.Forms.ListView();
-            this.nazwa_wycieczki = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.okres_wycieczki = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.numer_reklamacji = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.b_rozpatrz_negatywnie = new System.Windows.Forms.Button();
             this.l_opis_reklamacji = new System.Windows.Forms.Label();
             this.tb_opis_reklamacji = new System.Windows.Forms.TextBox();
@@ -186,17 +185,22 @@
             // lv_reklamacje
             // 
             this.lv_reklamacje.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.nazwa_wycieczki,
-            this.okres_wycieczki});
+            this.numer_reklamacji,
+            });
             this.lv_reklamacje.Location = new System.Drawing.Point(6, 37);
             this.lv_reklamacje.Name = "lv_reklamacje";
             this.lv_reklamacje.Size = new System.Drawing.Size(134, 182);
             this.lv_reklamacje.TabIndex = 10;
             this.lv_reklamacje.UseCompatibleStateImageBehavior = false;
+            this.lv_reklamacje.GridLines = true;
+            this.lv_reklamacje.MultiSelect = false;
+            this.lv_reklamacje.TabIndex = 1;
+            this.lv_reklamacje.View = System.Windows.Forms.View.Details;
             // 
             // nazwa_wycieczki
             // 
-            this.nazwa_wycieczki.Tag = "";
+            this.numer_reklamacji.Text = "Numer reklamacji";
+            this.numer_reklamacji.Width = 110;
             // 
             // b_rozpatrz_negatywnie
             // 
@@ -494,8 +498,7 @@
         private System.Windows.Forms.ComboBox cb_okres_wycieczki;
         private System.Windows.Forms.ComboBox cb_nazwa_wycieczki;
         private System.Windows.Forms.ListView lv_reklamacje;
-        private System.Windows.Forms.ColumnHeader nazwa_wycieczki;
-        private System.Windows.Forms.ColumnHeader okres_wycieczki;
+        private System.Windows.Forms.ColumnHeader numer_reklamacji;
         private System.Windows.Forms.Button b_wyjdz;
         private System.Windows.Forms.Label l_zalogowany_jako;
         private System.Windows.Forms.Label l_uzytkownik;

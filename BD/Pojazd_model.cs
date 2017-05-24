@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Windows.Forms;
+
 namespace BD
 {
     public class Pojazd_model
@@ -78,10 +78,9 @@ namespace BD
             }
         }
 
-        public List<Pojazd_model> pobierzPojazdy()
+        public List<Pojazd_model> PobierzPojazdy()
         {
-            List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();
-            Pojazd_model pojazd = new Pojazd_model();
+            List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();          
             Polacz_z_baza _polacz= new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
             SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Pojazd");
@@ -89,17 +88,18 @@ namespace BD
             SqlDataReader reader = _zapytanie.ExecuteReader();
             while (reader.Read())
             {
+                Pojazd_model pojazd = new Pojazd_model();
+
                 pojazd.NumerRejestracyjny = reader["numer_rejestracyjny"].ToString();
                 pojazd.Dostepnosc = Convert.ToBoolean(reader["dostepny"]);
                 pojazd.Pojemnosc = Convert.ToInt32(reader["pojemnosc"]);
                 pojazd.Marka = reader["marka"].ToString();
                 pojazd.Stan = Convert.ToBoolean(reader["stan"]);
-               
-                _listaPojazdow.Add(pojazd);
+                
+                _listaPojazdow.Add(pojazd);             
             }
-            MessageBox.Show(_listaPojazdow[10].NumerRejestracyjny.ToString(), "hhh", MessageBoxButtons.OK);
+            _polacz.ZakonczPolaczenie();
             return _listaPojazdow;
         }
-
         }
 }
