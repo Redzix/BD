@@ -162,7 +162,7 @@ namespace BD
         }
 
         private void Klient_Shown(object sender, EventArgs e)
-        {
+        {            
             //Wyłączenie generowania dodatkowych kolumn.
             dgv_katalog.AutoGenerateColumns = false;
             // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
@@ -187,6 +187,7 @@ namespace BD
             DataTable tabela = new DataTable();
             sqlDataAdapter.Fill(tabela);
             dgv_katalog.DataSource = tabela;
+
         }
 
         private void dgv_katalog_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -228,5 +229,6 @@ namespace BD
                 "\n\nAdres miejsca: " + _adresMiejsca + 
                 "\nMiejscowość: " + _miejscowosc;
         }
+
     }
 }

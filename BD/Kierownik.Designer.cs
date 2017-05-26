@@ -30,11 +30,21 @@
         {
             this.tc_kierownik = new System.Windows.Forms.TabControl();
             this.tp_zarzadzaj_wycieczkami = new System.Windows.Forms.TabPage();
+            this.lv_wycieczki = new System.Windows.Forms.ListView();
+            this.Nazwa = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DataWyjazdu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DataPrzyjazdu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Opis = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Promocja = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Cena = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Kierowca = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Pilot = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MiejsceOdjazdu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MiejsceDocelowe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.b_usun_wycieczke = new System.Windows.Forms.Button();
             this.b_edytuj = new System.Windows.Forms.Button();
             this.b_dodaj_wycieczke = new System.Windows.Forms.Button();
             this.l_wycieczki = new System.Windows.Forms.Label();
-            this.lb_wycieczki = new System.Windows.Forms.ListBox();
             this.tp_rozpatrz_reklamacje = new System.Windows.Forms.TabPage();
             this.cb_okres_wycieczki = new System.Windows.Forms.ComboBox();
             this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
@@ -88,11 +98,11 @@
             // 
             // tp_zarzadzaj_wycieczkami
             // 
+            this.tp_zarzadzaj_wycieczkami.Controls.Add(this.lv_wycieczki);
             this.tp_zarzadzaj_wycieczkami.Controls.Add(this.b_usun_wycieczke);
             this.tp_zarzadzaj_wycieczkami.Controls.Add(this.b_edytuj);
             this.tp_zarzadzaj_wycieczkami.Controls.Add(this.b_dodaj_wycieczke);
             this.tp_zarzadzaj_wycieczkami.Controls.Add(this.l_wycieczki);
-            this.tp_zarzadzaj_wycieczkami.Controls.Add(this.lb_wycieczki);
             this.tp_zarzadzaj_wycieczkami.Location = new System.Drawing.Point(4, 22);
             this.tp_zarzadzaj_wycieczkami.Name = "tp_zarzadzaj_wycieczkami";
             this.tp_zarzadzaj_wycieczkami.Padding = new System.Windows.Forms.Padding(3);
@@ -100,6 +110,78 @@
             this.tp_zarzadzaj_wycieczkami.TabIndex = 0;
             this.tp_zarzadzaj_wycieczkami.Text = "Zarządzaj wycieczkami";
             this.tp_zarzadzaj_wycieczkami.UseVisualStyleBackColor = true;
+            // 
+            // lv_wycieczki
+            // 
+            this.lv_wycieczki.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Nazwa,
+            this.DataWyjazdu,
+            this.DataPrzyjazdu,
+            this.Opis,
+            this.Promocja,
+            this.Cena,
+            this.Kierowca,
+            this.Pilot,
+            this.MiejsceOdjazdu,
+            this.MiejsceDocelowe});
+            this.lv_wycieczki.GridLines = true;
+            this.lv_wycieczki.Location = new System.Drawing.Point(3, 32);
+            this.lv_wycieczki.MultiSelect = false;
+            this.lv_wycieczki.Name = "lv_wycieczki";
+            this.lv_wycieczki.Size = new System.Drawing.Size(360, 191);
+            this.lv_wycieczki.TabIndex = 1;
+            this.lv_wycieczki.UseCompatibleStateImageBehavior = false;
+            this.lv_wycieczki.View = System.Windows.Forms.View.Details;
+            // 
+            // Nazwa
+            // 
+            this.Nazwa.Text = "Nazwa wycieczki";
+            this.Nazwa.Width = 110;
+            // 
+            // DataWyjazdu
+            // 
+            this.DataWyjazdu.Text = "Data wyjazdu";
+            this.DataWyjazdu.Width = 110;
+            // 
+            // DataPrzyjazdu
+            // 
+            this.DataPrzyjazdu.Text = "Data powrotu";
+            this.DataPrzyjazdu.Width = 110;
+            // 
+            // Opis
+            // 
+            this.Opis.Text = "Opis";
+            this.Opis.Width = 110;
+            // 
+            // Promocja
+            // 
+            this.Promocja.Text = "Promocja";
+            this.Promocja.Width = 80;
+            // 
+            // Cena
+            // 
+            this.Cena.Text = "Cena całkowita";
+            this.Cena.Width = 80;
+            // 
+            // Kierowca
+            // 
+            this.Kierowca.Text = "Kierowca";
+            this.Kierowca.Width = 110;
+            // 
+            // Pilot
+            // 
+            this.Pilot.Text = "Pilot";
+            this.Pilot.Width = 110;
+            // 
+            // MiejsceOdjazdu
+            // 
+            this.MiejsceOdjazdu.Text = "Miejsce odjazdu";
+            this.MiejsceOdjazdu.Width = 110;
+            // 
+            // MiejsceDocelowe
+            // 
+            this.MiejsceDocelowe.Text = "Miejsce docelowe";
+            this.MiejsceDocelowe.Width = 110;
             // 
             // b_usun_wycieczke
             // 
@@ -132,19 +214,11 @@
             // l_wycieczki
             // 
             this.l_wycieczki.AutoSize = true;
-            this.l_wycieczki.Location = new System.Drawing.Point(121, 15);
+            this.l_wycieczki.Location = new System.Drawing.Point(140, 16);
             this.l_wycieczki.Name = "l_wycieczki";
             this.l_wycieczki.Size = new System.Drawing.Size(56, 13);
             this.l_wycieczki.TabIndex = 1;
             this.l_wycieczki.Text = "Wycieczki";
-            // 
-            // lb_wycieczki
-            // 
-            this.lb_wycieczki.FormattingEnabled = true;
-            this.lb_wycieczki.Location = new System.Drawing.Point(6, 31);
-            this.lb_wycieczki.Name = "lb_wycieczki";
-            this.lb_wycieczki.Size = new System.Drawing.Size(345, 186);
-            this.lb_wycieczki.TabIndex = 0;
             // 
             // tp_rozpatrz_reklamacje
             // 
@@ -185,19 +259,17 @@
             // lv_reklamacje
             // 
             this.lv_reklamacje.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.numer_reklamacji,
-            });
+            this.numer_reklamacji});
+            this.lv_reklamacje.GridLines = true;
             this.lv_reklamacje.Location = new System.Drawing.Point(6, 37);
+            this.lv_reklamacje.MultiSelect = false;
             this.lv_reklamacje.Name = "lv_reklamacje";
             this.lv_reklamacje.Size = new System.Drawing.Size(134, 182);
-            this.lv_reklamacje.TabIndex = 10;
-            this.lv_reklamacje.UseCompatibleStateImageBehavior = false;
-            this.lv_reklamacje.GridLines = true;
-            this.lv_reklamacje.MultiSelect = false;
             this.lv_reklamacje.TabIndex = 1;
+            this.lv_reklamacje.UseCompatibleStateImageBehavior = false;
             this.lv_reklamacje.View = System.Windows.Forms.View.Details;
             // 
-            // nazwa_wycieczki
+            // numer_reklamacji
             // 
             this.numer_reklamacji.Text = "Numer reklamacji";
             this.numer_reklamacji.Width = 110;
@@ -472,7 +544,6 @@
         private System.Windows.Forms.Button b_edytuj;
         private System.Windows.Forms.Button b_dodaj_wycieczke;
         private System.Windows.Forms.Label l_wycieczki;
-        private System.Windows.Forms.ListBox lb_wycieczki;
         private System.Windows.Forms.Button b_rozpatrz_negatywnie;
         private System.Windows.Forms.Label l_opis_reklamacji;
         private System.Windows.Forms.TextBox tb_opis_reklamacji;
@@ -503,5 +574,16 @@
         private System.Windows.Forms.Label l_zalogowany_jako;
         private System.Windows.Forms.Label l_uzytkownik;
         private System.Windows.Forms.Label l_polaczenie;
+        private System.Windows.Forms.ListView lv_wycieczki;
+        private System.Windows.Forms.ColumnHeader Nazwa;
+        private System.Windows.Forms.ColumnHeader DataWyjazdu;
+        private System.Windows.Forms.ColumnHeader DataPrzyjazdu;
+        private System.Windows.Forms.ColumnHeader Opis;
+        private System.Windows.Forms.ColumnHeader Promocja;
+        private System.Windows.Forms.ColumnHeader Cena;
+        private System.Windows.Forms.ColumnHeader Kierowca;
+        private System.Windows.Forms.ColumnHeader Pilot;
+        private System.Windows.Forms.ColumnHeader MiejsceOdjazdu;
+        private System.Windows.Forms.ColumnHeader MiejsceDocelowe;
     }
 }

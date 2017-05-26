@@ -37,9 +37,9 @@
             this.b_kierowca_wyjdz = new System.Windows.Forms.Button();
             this.lv_pojazdy = new System.Windows.Forms.ListView();
             this.Nr_rejestracyjny = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Dostępność = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Dostępnosc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Marka = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Pojemność = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Pojemnosc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Stan = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.l_uzytkownik = new System.Windows.Forms.Label();
             this.l_polaczenie = new System.Windows.Forms.Label();
@@ -58,7 +58,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(136, 9);
+            this.label2.Location = new System.Drawing.Point(165, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 2;
@@ -90,7 +90,7 @@
             // 
             this.gb_stan_pojazdu.Controls.Add(this.rb_awaria);
             this.gb_stan_pojazdu.Controls.Add(this.rb_sprawny);
-            this.gb_stan_pojazdu.Location = new System.Drawing.Point(320, 25);
+            this.gb_stan_pojazdu.Location = new System.Drawing.Point(389, 33);
             this.gb_stan_pojazdu.Name = "gb_stan_pojazdu";
             this.gb_stan_pojazdu.Size = new System.Drawing.Size(200, 100);
             this.gb_stan_pojazdu.TabIndex = 5;
@@ -99,7 +99,7 @@
             // 
             // b_kierowca_zapisz
             // 
-            this.b_kierowca_zapisz.Location = new System.Drawing.Point(320, 161);
+            this.b_kierowca_zapisz.Location = new System.Drawing.Point(389, 161);
             this.b_kierowca_zapisz.Name = "b_kierowca_zapisz";
             this.b_kierowca_zapisz.Size = new System.Drawing.Size(75, 23);
             this.b_kierowca_zapisz.TabIndex = 6;
@@ -108,7 +108,7 @@
             // 
             // b_kierowca_wyjdz
             // 
-            this.b_kierowca_wyjdz.Location = new System.Drawing.Point(445, 161);
+            this.b_kierowca_wyjdz.Location = new System.Drawing.Point(514, 161);
             this.b_kierowca_wyjdz.Name = "b_kierowca_wyjdz";
             this.b_kierowca_wyjdz.Size = new System.Drawing.Size(75, 23);
             this.b_kierowca_wyjdz.TabIndex = 7;
@@ -120,15 +120,43 @@
             // 
             this.lv_pojazdy.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Nr_rejestracyjny,
-            this.Dostępność,
+            this.Dostępnosc,
             this.Marka,
-            this.Pojemność,
+            this.Pojemnosc,
             this.Stan});
-            this.lv_pojazdy.Location = new System.Drawing.Point(15, 25);
+            this.lv_pojazdy.GridLines = true;
+            this.lv_pojazdy.Location = new System.Drawing.Point(8, 33);
+            this.lv_pojazdy.MultiSelect = false;
             this.lv_pojazdy.Name = "lv_pojazdy";
-            this.lv_pojazdy.Size = new System.Drawing.Size(299, 211);
-            this.lv_pojazdy.TabIndex = 10;
+            this.lv_pojazdy.Size = new System.Drawing.Size(364, 203);
+            this.lv_pojazdy.TabIndex = 1;
             this.lv_pojazdy.UseCompatibleStateImageBehavior = false;
+            this.lv_pojazdy.View = System.Windows.Forms.View.Details;
+            // 
+            // Nr_rejestracyjny
+            // 
+            this.Nr_rejestracyjny.Text = "Numer rejestracyjny";
+            this.Nr_rejestracyjny.Width = 110;
+            // 
+            // Dostępnosc
+            // 
+            this.Dostępnosc.Text = "Dostępność";
+            this.Dostępnosc.Width = 70;
+            // 
+            // Marka
+            // 
+            this.Marka.Text = "Marka";
+            this.Marka.Width = 50;
+            // 
+            // Pojemnosc
+            // 
+            this.Pojemnosc.Text = "Pojemnosc";
+            this.Pojemnosc.Width = 70;
+            // 
+            // Stan
+            // 
+            this.Stan.Text = "Stan";
+            this.Stan.Width = 40;
             // 
             // l_uzytkownik
             // 
@@ -152,7 +180,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 261);
+            this.ClientSize = new System.Drawing.Size(601, 261);
             this.Controls.Add(this.l_polaczenie);
             this.Controls.Add(this.l_uzytkownik);
             this.Controls.Add(this.lv_pojazdy);
@@ -165,6 +193,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kierowca";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kierowca_FormClosing);
+            this.Shown += new System.EventHandler(this.Kierowca_Shown);
             this.gb_stan_pojazdu.ResumeLayout(false);
             this.gb_stan_pojazdu.PerformLayout();
             this.ResumeLayout(false);
@@ -183,9 +212,9 @@
         private System.Windows.Forms.Button b_kierowca_wyjdz;
         private System.Windows.Forms.ListView lv_pojazdy;
         private System.Windows.Forms.ColumnHeader Nr_rejestracyjny;
-        private System.Windows.Forms.ColumnHeader Dostępność;
+        private System.Windows.Forms.ColumnHeader Dostępnosc;
         private System.Windows.Forms.ColumnHeader Marka;
-        private System.Windows.Forms.ColumnHeader Pojemność;
+        private System.Windows.Forms.ColumnHeader Pojemnosc;
         private System.Windows.Forms.ColumnHeader Stan;
         private System.Windows.Forms.Label l_uzytkownik;
         private System.Windows.Forms.Label l_polaczenie;

@@ -12,6 +12,8 @@ namespace BD
         private int _numer;
         private bool _stan;
         private string _opis;
+        private string _kierownikPesel;
+        private int _idUczestnictwo;
 
         public Reklamacja_model(){}
         ~Reklamacja_model(){}
@@ -52,6 +54,32 @@ namespace BD
             }
         }
 
+        public string KierownikPesel
+        {
+            get
+            {
+                return this._kierownikPesel;
+            }
+            set
+            {
+                this._kierownikPesel = value;
+            }
+        }
+
+        public int IdUczestnictwo
+        {
+            get
+            {
+                return this._idUczestnictwo;
+            }
+            set
+            {
+                this._idUczestnictwo = value;
+            }
+        }
+
+
+
         public List<Reklamacja_model> PobierzReklamacje()
         {
             List<Reklamacja_model> _listaReklamacji = new List<Reklamacja_model>();
@@ -66,6 +94,8 @@ namespace BD
                 reklamacja.Numer = Convert.ToInt32(reader["numer_reklamacji"]);
                 reklamacja.Opis = reader["opis"].ToString();
                 reklamacja.Stan = Convert.ToBoolean(reader["stan"]);
+                reklamacja.KierownikPesel = reader["Kierownik_pesel"].ToString();
+                reklamacja.IdUczestnictwo = Convert.ToInt32(reader["id_uczestnictwo"]);
 
                 _listaReklamacji.Add(reklamacja);
             }

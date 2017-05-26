@@ -7,11 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace BD
 {
     public partial class Kierowca : Form
     {
+        SqlConnection _polaczenie = null;
+        SqlCommand _zapytanie = null;
+        Polacz_z_baza _polacz = null;
+        List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();
+
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
@@ -79,6 +85,22 @@ namespace BD
             else
             {
                 e.Cancel = true;
+            }
+        }
+
+        private void Kierowca_Shown(object sender, EventArgs e)
+        {
+            Pojazd_model _pojazdy = new Pojazd_model();
+            _listaPojazdow = _pojazdy.PobierzPojazdy();
+
+            for (int i = 0; i < _listaPojazdow.Count; i++)
+            {
+                ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
+                pojazd.SubItems.Add(_listaPojazdow[i].Dostepnosc.ToString());
+                pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
+                pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
+                pojazd.SubItems.Add(_listaPojazdow[i].Stan.ToString());
+                lv_pojazdy.Items.Add(pojazd);
             }
         }
     }
