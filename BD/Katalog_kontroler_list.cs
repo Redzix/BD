@@ -150,20 +150,21 @@ namespace BD
             List<Cennik_model> _listaCennikow = new Cennik_model().PobierzCennik();
 
             Katalog_kontroler_list katalog = new Katalog_kontroler_list();
-            int i = 1;
-            katalog.NazwaWycieczki = _listaWycieczek[_listaKatalogu[i].IdWycieczki -1].Nazwa;
-            katalog.DataWyjazdu = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataWyjazdu;
-            katalog.DataPrzyjazdu = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataPowrotu;
-            katalog.Opis = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Opis;
-            //promocja
-            int j = 0;
-            while(_listaPromocji[j].IdWycieczki != _listaKatalogu[i].IdWycieczki)
+            for (int i = 0; i < _listaKatalogu.Count; i++)
             {
-                j++;
+                katalog.NazwaWycieczki = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Nazwa;
+                katalog.DataWyjazdu = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataWyjazdu;
+                katalog.DataPrzyjazdu = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataPowrotu;
+                katalog.Opis = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Opis;
+                //promocja
+                int j = 0;
+                while (_listaPromocji[j].IdWycieczki != _listaKatalogu[i].IdWycieczki)
+                {
+                    j++;
+                }
+                katalog.Promocja = _listaPromocji[j].Cena;
+                katalog.Cena = _listaCennikow[_listaKatalogu[i].IdCennika - 1].Cena - _listaPromocji[j].Cena;
             }
-            katalog.Promocja = _listaPromocji[j].Cena;
-            katalog.Cena = _listaCennikow[_listaKatalogu[i].IdCennika - 1].Cena - _listaPromocji[j].Cena;
-
             return _lista;
         }
 
