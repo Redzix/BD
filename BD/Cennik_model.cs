@@ -64,7 +64,7 @@ namespace BD
 
         public List<Cennik_model> PobierzCennik()
         {
-            List<Cennik_model> _listaPojazdow = new List<Cennik_model>();
+            List<Cennik_model> _listaCen = new List<Cennik_model>();
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
             SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Cennik");
@@ -77,13 +77,13 @@ namespace BD
                 cennik.IdCennika = Convert.ToInt32(reader["id_cennika"]);
                 cennik.Cena = Convert.ToInt32(reader["cena"]);
                 cennik.OkresOd = Convert.ToDateTime(reader["okres_od"]);
-                cennik.OkresDo = Convert.ToDateTime(reader["okred_do"]);
+                cennik.OkresDo = Convert.ToDateTime(reader["okres_do"]);
 
 
-                _listaPojazdow.Add(cennik);
+                _listaCen.Add(cennik);
             }
             _polacz.ZakonczPolaczenie();
-            return _listaPojazdow;
+            return _listaCen;
         }
     }
 }

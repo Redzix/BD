@@ -50,9 +50,9 @@ namespace BD
             }
         }
 
-        public List<Miejsce_model> PobierzPojazdy()
+        public List<Miejsce_model> PobierzMiejsaca()
         {
-            List<Miejsce_model> _listaPojazdow = new List<Miejsce_model>();
+            List<Miejsce_model> _listaMiejsc= new List<Miejsce_model>();
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
             SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Miejsce");
@@ -66,10 +66,10 @@ namespace BD
                 miejsce.Adres = reader["adres"].ToString();
                 miejsce.Miejscowosc = reader["miejscowosc"].ToString();
 
-                _listaPojazdow.Add(miejsce);
+                _listaMiejsc.Add(miejsce);
             }
             _polacz.ZakonczPolaczenie();
-            return _listaPojazdow;
+            return _listaMiejsc;
         }
 
     }

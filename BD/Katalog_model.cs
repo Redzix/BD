@@ -11,10 +11,11 @@ namespace BD
     {
         private int _idKatalogu;
         private int _okres;
+        private int _idCennika;
         private int _idMiejscaOdjazdu;
         private int _idMiejscaPrzyjazdu;
         private int _idWycieczki;
-
+        
         public int IdKatalogu
         {
             get
@@ -36,6 +37,18 @@ namespace BD
             set
             {
                 this._okres = value;
+            }
+        }
+
+        public int IdCennika
+        {
+            get
+            {
+                return this._idCennika;
+            }
+            set
+            {
+                this._idCennika = value;
             }
         }
 
@@ -75,9 +88,9 @@ namespace BD
             }
         }
 
-        public List<Katalog_model> PobierzPojazdy()
+        public List<Katalog_model> PobierzKatalog()
         {
-            List<Katalog_model> _listaPojazdow = new List<Katalog_model>();
+            List<Katalog_model> _listaKatalogu = new List<Katalog_model>();
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
             SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Katalog");
@@ -89,14 +102,15 @@ namespace BD
 
                 katalog.IdKatalogu = Convert.ToInt32(reader["id_katalogu"]);
                 katalog.Okres = Convert.ToInt32(reader["okres_trwania_wycieczki"]);
+                katalog.IdCennika = Convert.ToInt32(reader["id_cennika"]);
                 katalog.IdMiejscaOdjazdu = Convert.ToInt32(reader["id_miejsca_odjazdu"]);
                 katalog.IdMiejscaPrzyjazdu = Convert.ToInt32(reader["id_miejsca_przyjazdu"]);
                 katalog.IdWycieczki = Convert.ToInt32(reader["id_wycieczki"]);
 
-                _listaPojazdow.Add(katalog);
+                _listaKatalogu.Add(katalog);
             }
             _polacz.ZakonczPolaczenie();
-            return _listaPojazdow;
+            return _listaKatalogu;
         }
 
     }

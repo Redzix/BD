@@ -95,7 +95,7 @@ namespace BD
 
         public List<Rezerwacja_model> PobierzRezerwacje()
         {
-            List<Rezerwacja_model> _listaPojazdow = new List<Rezerwacja_model>();
+            List<Rezerwacja_model> _listaRezerwacji = new List<Rezerwacja_model>();
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
             SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Rezerwacja");
@@ -112,10 +112,10 @@ namespace BD
                 rezerwacja.IdWycieczki = Convert.ToInt32(reader["id_wycieczki"]);
                 rezerwacja.KlientPesel = reader["Klient_pesel"].ToString();
 
-                _listaPojazdow.Add(rezerwacja);
+                _listaRezerwacji.Add(rezerwacja);
             }
             _polacz.ZakonczPolaczenie();
-            return _listaPojazdow;
+            return _listaRezerwacji;
         }
 
     }

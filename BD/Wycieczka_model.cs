@@ -81,7 +81,7 @@ namespace BD
 
         public List<Wycieczka_model> PobierzWycieczki()
         {
-            List<Wycieczka_model> _listaPojazdow = new List<Wycieczka_model>();
+            List<Wycieczka_model> _listaWycieczek = new List<Wycieczka_model>();
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
             SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Wycieczka");
@@ -97,10 +97,10 @@ namespace BD
                 wycieczka.DataWyjazdu = Convert.ToDateTime(reader["data_wyjazdu"]);
                 wycieczka.Opis = reader["opis"].ToString();
 
-                _listaPojazdow.Add(wycieczka);
+                _listaWycieczek.Add(wycieczka);
             }
             _polacz.ZakonczPolaczenie();
-            return _listaPojazdow;
+            return _listaWycieczek;
         }
 
     }

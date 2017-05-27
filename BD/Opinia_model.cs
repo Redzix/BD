@@ -66,9 +66,9 @@ namespace BD
         }
 
 
-        public List<Opinia_model> PobierzPojazdy()
+        public List<Opinia_model> PobierzOpinie()
         {
-            List<Opinia_model> _listaPojazdow = new List<Opinia_model>();
+            List<Opinia_model> _listaOpini = new List<Opinia_model>();
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
             SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Pojazd");
@@ -84,10 +84,10 @@ namespace BD
                 opinia.IdUczestnictwa = Convert.ToInt32(reader["id_uczestnictwa"]);
 
 
-                _listaPojazdow.Add(opinia);
+                _listaOpini.Add(opinia);
             }
             _polacz.ZakonczPolaczenie();
-            return _listaPojazdow;
+            return _listaOpini;
         }
     }
 }

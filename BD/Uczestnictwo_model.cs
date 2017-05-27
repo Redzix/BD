@@ -50,7 +50,7 @@ namespace BD
 
         public List<Uczestnictwo_model> PobierzUczestnictwo()
         {
-            List<Uczestnictwo_model> _listaPojazdow = new List<Uczestnictwo_model>();
+            List<Uczestnictwo_model> _listaUczestnictw= new List<Uczestnictwo_model>();
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
             SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Uczestnictwo");
@@ -65,10 +65,10 @@ namespace BD
                 uczestnictwo.NumerRezerwacji = Convert.ToInt32(reader["numer_rezerwacji"]);
 
 
-                _listaPojazdow.Add(uczestnictwo);
+                _listaUczestnictw.Add(uczestnictwo);
             }
             _polacz.ZakonczPolaczenie();
-            return _listaPojazdow;
+            return _listaUczestnictw;
         }
     }
 }

@@ -145,6 +145,23 @@ namespace BD
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_wycieczke_Click(object sender, EventArgs e)
         {
+            Katalog_kontroler_list katalog = new Katalog_kontroler_list();
+
+            List<Katalog_kontroler_list> lista = katalog.PobierzListe();
+
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                ListViewItem awycieczka = new ListViewItem(lista[i].NazwaWycieczki.ToString());
+                awycieczka.SubItems.Add(lista[i].DataWyjazdu.ToString());
+                awycieczka.SubItems.Add(lista[i].DataPrzyjazdu.ToString());
+                awycieczka.SubItems.Add(lista[i].Promocja.ToString());
+                awycieczka.SubItems.Add(lista[i].Cena.ToString());
+
+                lv_wycieczki.Items.Add(awycieczka);
+            }
+
+
             Wycieczka wycieczka = new Wycieczka();
             wycieczka.ShowDialog();
         }

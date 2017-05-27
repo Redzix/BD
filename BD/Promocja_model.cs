@@ -49,9 +49,9 @@ namespace BD
             }
         }
 
-        public List<Promocja_model> PobierzPojazdy()
+        public List<Promocja_model> PobierzPromocje()
         {
-            List<Promocja_model> _listaPojazdow = new List<Promocja_model>();
+            List<Promocja_model> _listaPromocji = new List<Promocja_model>();
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
             SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Promocja");
@@ -66,10 +66,10 @@ namespace BD
                 promocja.IdWycieczki = Convert.ToInt32(reader["id_wycieczki"]);
 
 
-                _listaPojazdow.Add(promocja);
+                _listaPromocji.Add(promocja);
             }
             _polacz.ZakonczPolaczenie();
-            return _listaPojazdow;
+            return _listaPromocji;
         }
     }
 }
