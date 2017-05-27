@@ -143,8 +143,6 @@ namespace BD
         {
             List<Katalog_kontroler_list> _lista = new List<Katalog_kontroler_list>();
             List<Katalog_model> _listaKatalogu = new Katalog_model().PobierzKatalog();
-            List<Pilot_model> _listaPilotow = new Pilot_model().pobierzPilotow();
-            List<Kierowca_model> _listaKierowcow = new Kierowca_model().pobierzKierowcow();
             List<Wycieczka_model> _listaWycieczek = new Wycieczka_model().PobierzWycieczki();
             List<Promocja_model> _listaPromocji = new Promocja_model().PobierzPromocje();
             List<Cennik_model> _listaCennikow = new Cennik_model().PobierzCennik();
@@ -156,7 +154,6 @@ namespace BD
                 katalog.DataWyjazdu = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataWyjazdu;
                 katalog.DataPrzyjazdu = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataPowrotu;
                 katalog.Opis = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Opis;
-                //promocja
                 int j = 0;
                 while (_listaPromocji[j].IdWycieczki != _listaKatalogu[i].IdWycieczki)
                 {
@@ -164,6 +161,10 @@ namespace BD
                 }
                 katalog.Promocja = _listaPromocji[j].Cena;
                 katalog.Cena = _listaCennikow[_listaKatalogu[i].IdCennika - 1].Cena - _listaPromocji[j].Cena;
+                katalog.Kierowca = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Kierowca;
+                katalog.Pilot = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Pilot;
+                katalog.MiejsceOdjazdu = _listaKatalogu[i].MiejsceWyjazdu;
+                katalog.MiejsceDocelowe = _listaKatalogu[i].MiejsceDocelowe;
             }
             return _lista;
         }

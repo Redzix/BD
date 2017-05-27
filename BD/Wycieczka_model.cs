@@ -15,6 +15,11 @@ namespace BD
         private DateTime _dataPowrotu;
         private string _opis;
 
+        //nie tak ma byc, ale jest najprosciej
+        private string _kierowca;
+        private string _pilot;
+
+
         public Wycieczka_model(){}
 
         ~Wycieczka_model(){}
@@ -79,12 +84,39 @@ namespace BD
             }
         }
 
+        public string Kierowca
+        {
+            get
+            {
+                return this._kierowca;
+            }
+            set
+            {
+                this._kierowca = value;
+            }
+        }
+
+        public string Pilot
+        {
+            get
+            {
+                return this._pilot;
+            }
+            set
+            {
+                this._pilot = value;
+            }
+        }
+
         public List<Wycieczka_model> PobierzWycieczki()
         {
             List<Wycieczka_model> _listaWycieczek = new List<Wycieczka_model>();
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
-            SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Wycieczka");
+            SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT id_wycieczki,nazwa,data_wyjazdu," +
+                "data_powrotu,opis,p.imie + ' '+ p.nazwisko as pil,k.imie + ' '+ k.nazwisko as kiero " +
+                "from wycieczka inner join pilot as p on wycieczka.pilot_pesel = p.pesel " +
+                "inner join kierowca as k on wycieczka.kierowca_pesel = k.pesel ");
 
             SqlDataReader reader = _zapytanie.ExecuteReader();
             while (reader.Read())
@@ -96,6 +128,8 @@ namespace BD
                 wycieczka.DataPowrotu = Convert.ToDateTime(reader["data_powrotu"]);
                 wycieczka.DataWyjazdu = Convert.ToDateTime(reader["data_wyjazdu"]);
                 wycieczka.Opis = reader["opis"].ToString();
+                wycieczka.Kierowca = reader["kiero"].ToString();
+                wycieczka.Pilot = reader["pilo"].ToString();
 
                 _listaWycieczek.Add(wycieczka);
             }

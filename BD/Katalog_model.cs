@@ -12,8 +12,8 @@ namespace BD
         private int _idKatalogu;
         private int _okres;
         private int _idCennika;
-        private int _idMiejscaOdjazdu;
-        private int _idMiejscaPrzyjazdu;
+        private string _miejsceWyjazdu;
+        private string _miejsceDocelowe;
         private int _idWycieczki;
         
         public int IdKatalogu
@@ -52,27 +52,27 @@ namespace BD
             }
         }
 
-        public int IdMiejscaOdjazdu
+        public string MiejsceWyjazdu
         {
             get
             {
-                return this._idMiejscaOdjazdu;
+                return this._miejsceWyjazdu;
             }
             set
             {
-                this._idMiejscaOdjazdu = value;
+                this._miejsceWyjazdu = value;
             }
         }
 
-        public int IdMiejscaPrzyjazdu
+        public string MiejsceDocelowe
         {
             get
             {
-                return this._idMiejscaPrzyjazdu;
+                return this._miejsceDocelowe;
             }
             set
             {
-                this._idMiejscaPrzyjazdu = value;
+                this._miejsceDocelowe = value;
             }
         }
 
@@ -93,7 +93,11 @@ namespace BD
             List<Katalog_model> _listaKatalogu = new List<Katalog_model>();
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
-            SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Katalog");
+            SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT id_katalogu,okres_trwania_wycieczki,id_cennika, " +
+                "o.adres + ' ' + o.miejscowosc as odjazd, p.adres + ' ' + p.miejscowosc as przyjazd " +
+                "FROM katalog " +
+                "inner join miejsce as o on katalog.id_miejsca_odjazdu = o.id_miejsca " +
+                "inner join miejsce as p on katalog.id_miejsca_przyjazdu = p.id_miejsca");
 
             SqlDataReader reader = _zapytanie.ExecuteReader();
             while (reader.Read())
@@ -103,8 +107,8 @@ namespace BD
                 katalog.IdKatalogu = Convert.ToInt32(reader["id_katalogu"]);
                 katalog.Okres = Convert.ToInt32(reader["okres_trwania_wycieczki"]);
                 katalog.IdCennika = Convert.ToInt32(reader["id_cennika"]);
-                katalog.IdMiejscaOdjazdu = Convert.ToInt32(reader["id_miejsca_odjazdu"]);
-                katalog.IdMiejscaPrzyjazdu = Convert.ToInt32(reader["id_miejsca_przyjazdu"]);
+                katalog.MiejsceWyjazdu = reader["odjazd"].ToString();
+                katalog.MiejsceDocelowe = reader["przyjazd"].ToString();
                 katalog.IdWycieczki = Convert.ToInt32(reader["id_wycieczki"]);
 
                 _listaKatalogu.Add(katalog);
