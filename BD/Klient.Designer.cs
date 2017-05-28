@@ -154,7 +154,7 @@
             // 
             // Koszt
             // 
-            this.Koszt.HeaderText = "Koszt";
+            this.Koszt.HeaderText = "Cena całkowita";
             this.Koszt.Name = "Koszt";
             // 
             // Klient

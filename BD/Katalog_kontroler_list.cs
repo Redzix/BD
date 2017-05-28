@@ -139,7 +139,7 @@ namespace BD
             }
         }
 
-        public List<Katalog_kontroler_list> PobierzListe()
+        public List<Katalog_kontroler_list> PobierzListeDlaKierownika()
         {
             List<Katalog_kontroler_list> _lista = new List<Katalog_kontroler_list>();
             List<Katalog_model> _listaKatalogu = new Katalog_model().PobierzKatalog();
@@ -160,15 +160,13 @@ namespace BD
                     j++;
                 }
                 katalog.Promocja = _listaPromocji[j].Cena;
-                katalog.Cena = _listaCennikow[_listaKatalogu[i].IdCennika - 1].Cena - _listaPromocji[j].Cena;
+                katalog.Cena = _listaCennikow[_listaKatalogu[i].IdCennika - 1].Cena;
                 katalog.Kierowca = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Kierowca;
                 katalog.Pilot = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Pilot;
                 katalog.MiejsceOdjazdu = _listaKatalogu[i].MiejsceWyjazdu;
                 katalog.MiejsceDocelowe = _listaKatalogu[i].MiejsceDocelowe;
             }
             return _lista;
-        }
-
-
+        }    
     }
 }

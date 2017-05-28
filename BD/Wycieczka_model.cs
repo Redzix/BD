@@ -129,7 +129,7 @@ namespace BD
                 wycieczka.DataWyjazdu = Convert.ToDateTime(reader["data_wyjazdu"]);
                 wycieczka.Opis = reader["opis"].ToString();
                 wycieczka.Kierowca = reader["kiero"].ToString();
-                wycieczka.Pilot = reader["pilo"].ToString();
+                wycieczka.Pilot = reader["pil"].ToString();
 
                 _listaWycieczek.Add(wycieczka);
             }

@@ -93,7 +93,7 @@ namespace BD
             List<Katalog_model> _listaKatalogu = new List<Katalog_model>();
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
-            SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT id_katalogu,okres_trwania_wycieczki,id_cennika, " +
+            SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT katalog.id_wycieczki as id,id_katalogu,okres_trwania_wycieczki,id_cennika, " +
                 "o.adres + ' ' + o.miejscowosc as odjazd, p.adres + ' ' + p.miejscowosc as przyjazd " +
                 "FROM katalog " +
                 "inner join miejsce as o on katalog.id_miejsca_odjazdu = o.id_miejsca " +
@@ -109,7 +109,7 @@ namespace BD
                 katalog.IdCennika = Convert.ToInt32(reader["id_cennika"]);
                 katalog.MiejsceWyjazdu = reader["odjazd"].ToString();
                 katalog.MiejsceDocelowe = reader["przyjazd"].ToString();
-                katalog.IdWycieczki = Convert.ToInt32(reader["id_wycieczki"]);
+                katalog.IdWycieczki = Convert.ToInt32(reader["id"]);
 
                 _listaKatalogu.Add(katalog);
             }

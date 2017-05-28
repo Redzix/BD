@@ -160,7 +160,7 @@
             // 
             // Cena
             // 
-            this.Cena.Text = "Cena całkowita";
+            this.Cena.Text = "Cena bez promocji";
             this.Cena.Width = 80;
             // 
             // Kierowca

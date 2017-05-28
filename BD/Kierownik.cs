@@ -147,7 +147,7 @@ namespace BD
         {
             Katalog_kontroler_list katalog = new Katalog_kontroler_list();
 
-            List<Katalog_kontroler_list> lista = katalog.PobierzListe();
+            List<Katalog_kontroler_list> lista = katalog.PobierzListeDlaKierownika();
 
 
             for (int i = 0; i < lista.Count; i++)
@@ -155,8 +155,13 @@ namespace BD
                 ListViewItem awycieczka = new ListViewItem(lista[i].NazwaWycieczki.ToString());
                 awycieczka.SubItems.Add(lista[i].DataWyjazdu.ToString());
                 awycieczka.SubItems.Add(lista[i].DataPrzyjazdu.ToString());
+                awycieczka.SubItems.Add(lista[i].Opis.ToString());
                 awycieczka.SubItems.Add(lista[i].Promocja.ToString());
                 awycieczka.SubItems.Add(lista[i].Cena.ToString());
+                awycieczka.SubItems.Add(lista[i].Kierowca.ToString());
+                awycieczka.SubItems.Add(lista[i].Pilot.ToString());
+                awycieczka.SubItems.Add(lista[i].MiejsceOdjazdu.ToString());
+                awycieczka.SubItems.Add(lista[i].MiejsceDocelowe.ToString());
 
                 lv_wycieczki.Items.Add(awycieczka);
             }

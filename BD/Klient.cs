@@ -162,24 +162,28 @@ namespace BD
         }
 
         private void Klient_Shown(object sender, EventArgs e)
-        {            
+        {
+            List<Promocja_model> listaPromocji = new List<Promocja_model>();
+
             //Wyłączenie generowania dodatkowych kolumn.
             dgv_katalog.AutoGenerateColumns = false;
             // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
             dgv_katalog.Columns["Nazwa_wycieczki"].DataPropertyName = "nazwa";
             dgv_katalog.Columns["Okres"].DataPropertyName = "okres_trwania_wycieczki";
             dgv_katalog.Columns["Data_wyjazdu"].DataPropertyName = "data_wyjazdu";
-            //dgv_katalog.Columns["Promocja"].DataPropertyName = ;
-            dgv_katalog.Columns["Koszt"].DataPropertyName = "koszt";
-            
+            dgv_katalog.Columns["Promocja"].DataPropertyName = "wartosc_promocji";
+            dgv_katalog.Columns["Koszt"].DataPropertyName = "cena_calkowita";
+
             // Utworzenie zapytania do bazy danych w celu pobrania potrzebnych informacji o wycieczce.
             _zapytanie = _polacz.UtworzZapytanie("SELECT nazwa," +
                 "okres_trwania_wycieczki," +
                 "data_wyjazdu," +
-                "Cennik.cena as koszt " +
-                "FROM Katalog " +
-                "INNER JOIN Cennik ON Katalog.id_cennika = Cennik.id_cennika " +
-                "INNER JOIN Wycieczka ON Katalog.id_wycieczki = Wycieczka.id_wycieczki");
+                "Promocja.cena as wartosc_promocji," +
+                "Cennik.cena - Promocja.cena as cena_calkowita" +
+                " FROM Katalog " +
+                "inner join Wycieczka on Katalog.id_wycieczki = Wycieczka.id_wycieczki " +
+                "inner join Promocja on Wycieczka.id_wycieczki = Promocja.id_wycieczki " +
+                "inner join Cennik on Katalog.id_cennika = Cennik.id_cennika");
 
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(_zapytanie);
 
