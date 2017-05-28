@@ -136,12 +136,18 @@ namespace BD
             dgv_tabelaPilot.Columns["Nazwa_wycieczki"].DataPropertyName = "nazwa";
             dgv_tabelaPilot.Columns["Data_wyjazdu"].DataPropertyName = "data_wyjazdu";
             dgv_tabelaPilot.Columns["Data_powrotu"].DataPropertyName = "data_powrotu";
-            dgv_tabelaPilot.Columns["Pojazd"].DataPropertyName = "Pojazd_numer_rejestracyjny";
+            dgv_tabelaPilot.Columns["Pojazd"].DataPropertyName = "numer_rejestracyjny";
             dgv_tabelaPilot.Columns["Kierowca"].DataPropertyName = "kierowca";
 
             // Utworzenie zapytania do bazy danych w celu pobrania potrzebnych informacji o wycieczce.
-            _zapytanie = _polacz.UtworzZapytanie("Select nazwa,data_wyjazdu,data_powrotu,Pojazd_numer_rejestracyjny," +
-                "imie + ' ' + nazwisko as kierowca FROM Wycieczka INNER JOIN Kierowca ON Wycieczka.Kierowca_pesel = Kierowca.pesel;");
+            _zapytanie = _polacz.UtworzZapytanie("SELECT " +
+                "nazwa," +
+                "data_wyjazdu," +
+                "data_powrotu," +
+                "Pojazd_numer_rejestracyjny as numer_rejestracyjny," +
+                "imie + ' ' + nazwisko as kierowca " +
+                "FROM Wycieczka " +
+                "INNER JOIN Kierowca ON Wycieczka.Kierowca_pesel = Kierowca.pesel;");
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(_zapytanie);
 
             // Utworzenie i wypełnienie tabeli jako DataSource
