@@ -19,6 +19,7 @@ namespace BD
         Polacz_z_baza _polacz = null;
         List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();
         List<Reklamacja_model> _listaReklamacji = new List<Reklamacja_model>();
+        List<Katalog_kontroler_list> _listaWycieczek = new List<Katalog_kontroler_list>();
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna, tworzący okno oraz połączenie z bazą danych.
@@ -71,7 +72,8 @@ namespace BD
         /// <param name="e"></param>
         private void Kierownik_Load(object sender, EventArgs e)
         {
-           // this.reportViewer1.RefreshReport();
+            this.ZaladujWycieczki();
+            // this.reportViewer1.RefreshReport();
         }
 
         /// <summary>
@@ -145,38 +147,20 @@ namespace BD
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_wycieczke_Click(object sender, EventArgs e)
         {
-            Katalog_kontroler_list katalog = new Katalog_kontroler_list();
-
-            List<Katalog_kontroler_list> lista = katalog.PobierzListeDlaKierownika();
-
-
-            for (int i = 0; i < lista.Count; i++)
-            {
-                ListViewItem awycieczka = new ListViewItem(lista[i].NazwaWycieczki.ToString());
-                awycieczka.SubItems.Add(lista[i].DataWyjazdu.ToString());
-                awycieczka.SubItems.Add(lista[i].DataPrzyjazdu.ToString());
-                awycieczka.SubItems.Add(lista[i].Opis.ToString());
-                awycieczka.SubItems.Add(lista[i].Promocja.ToString());
-                awycieczka.SubItems.Add(lista[i].Cena.ToString());
-                awycieczka.SubItems.Add(lista[i].Kierowca.ToString());
-                awycieczka.SubItems.Add(lista[i].Pilot.ToString());
-                awycieczka.SubItems.Add(lista[i].MiejsceOdjazdu.ToString());
-                awycieczka.SubItems.Add(lista[i].MiejsceDocelowe.ToString());
-
-                lv_wycieczki.Items.Add(awycieczka);
-            }
-
-
             Wycieczka wycieczka = new Wycieczka();
             wycieczka.ShowDialog();
         }
 
         private void tc_kierownik_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tc_kierownik.SelectedIndex == 1)
+        {   
+            // Tutaj pobiera liste od nowa, ponieważ ma się przeładować i uaktualnić.
+            if(tc_kierownik.SelectedIndex == 0)
             {
-                Reklamacja_model _reklamacja= new Reklamacja_model();
-                _listaReklamacji = _reklamacja.PobierzReklamacje();
+                this.ZaladujWycieczki();
+            }
+            else if (tc_kierownik.SelectedIndex == 1)
+            {
+                _listaReklamacji = (new Reklamacja_model()).PobierzReklamacje();
 
                 for (int i = 0; i < _listaReklamacji.Count; i++)
                 {
@@ -186,8 +170,7 @@ namespace BD
             }
             else if (tc_kierownik.SelectedIndex == 2)
             {
-                Pojazd_model _pojazdy = new Pojazd_model();
-                _listaPojazdow = _pojazdy.PobierzPojazdy();
+                _listaPojazdow = (new Pojazd_model()).PobierzPojazdy();
 
                 for (int i = 0; i < _listaPojazdow.Count; i++)
                 {
@@ -198,6 +181,26 @@ namespace BD
                     pojazd.SubItems.Add(_listaPojazdow[i].Stan.ToString());
                     lv_pojazdy.Items.Add(pojazd);
                 }
+            }
+        }
+        public void ZaladujWycieczki()
+        {
+            _listaWycieczek = (new Katalog_kontroler_list()).PobierzListeDlaKierownika();
+
+            for (int i = 0; i < _listaWycieczek.Count; i++)
+            {
+                ListViewItem wycieczka = new ListViewItem(_listaWycieczek[i].NazwaWycieczki.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[i].DataWyjazdu.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[i].DataPrzyjazdu.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[i].Opis.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[i].Promocja.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[i].Cena.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[i].Kierowca.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[i].Pilot.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[i].MiejsceOdjazdu.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[i].MiejsceDocelowe.ToString());
+
+                lv_wycieczki.Items.Add(wycieczka);
             }
         }
 

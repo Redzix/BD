@@ -193,7 +193,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kierowca";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kierowca_FormClosing);
-            this.Shown += new System.EventHandler(this.Kierowca_Shown);
+            this.Load += new System.EventHandler(this.Kierowca_Load);
             this.gb_stan_pojazdu.ResumeLayout(false);
             this.gb_stan_pojazdu.PerformLayout();
             this.ResumeLayout(false);

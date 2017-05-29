@@ -12,6 +12,8 @@ namespace BD
 {
     public partial class Opinia : Form
     {
+        List<Wycieczka_model> _listaWycieczek = new List<Wycieczka_model>();
+
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
@@ -60,5 +62,26 @@ namespace BD
             //dodac wycofanie wprowadzonych danych , czyli wyjebanie w kosmos obiektu
         }
 
+        private void Opinia_Load(object sender, EventArgs e)
+        {
+            _listaWycieczek = (new Wycieczka_model()).PobierzWycieczki();
+
+            for (int i = 0; i < _listaWycieczek.Count; i++)
+            {
+                cb_nazwa_wycieczki.Items.Add(_listaWycieczek[i].Nazwa.ToString());
+            }
+            cb_nazwa_wycieczki.SelectedIndex = 0;
+        }
+
+        private void b_zapisz_Click(object sender, EventArgs e)
+        {
+           /* Opinia_model opinia = new Opinia_model();
+            opinia.IdOpini = _listaWycieczek.Count + 1;
+            opinia.Ocena = cb_ocena.SelectedIndex + 1;
+            opinia.Opis = tb_opinia.Text;
+            opinia.IdUczestnictwa = ?
+
+             opinia.DodajOpinie(opinia);*/
+        }
     }
 }

@@ -38,7 +38,6 @@
             this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
             this.l_liczba_rezygnujacych_osob = new System.Windows.Forms.Label();
             this.tb_liczba_rezygnujacych_osob = new System.Windows.Forms.TextBox();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // l_okres_wycieczki
@@ -141,7 +140,9 @@
             this.Controls.Add(this.l_powod_rezygnacji);
             this.Controls.Add(this.l_nazwa_wycieczki);
             this.Controls.Add(this.tb_opis_reklamacji);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Rezygnacja";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Rezygnacja";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Rezygnacja_FormClosing);
             this.ResumeLayout(false);

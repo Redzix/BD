@@ -36,7 +36,6 @@
             this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
             this.l_ocena = new System.Windows.Forms.Label();
             this.cb_ocena = new System.Windows.Forms.ComboBox();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // b_zapisz
@@ -47,6 +46,7 @@
             this.b_zapisz.TabIndex = 21;
             this.b_zapisz.Text = "Zapisz";
             this.b_zapisz.UseVisualStyleBackColor = true;
+            this.b_zapisz.Click += new System.EventHandler(this.b_zapisz_Click);
             // 
             // b_anuluj
             // 
@@ -115,6 +115,7 @@
             this.cb_ocena.Name = "cb_ocena";
             this.cb_ocena.Size = new System.Drawing.Size(37, 21);
             this.cb_ocena.TabIndex = 24;
+            this.cb_ocena.SelectedIndex = 0;
             // 
             // Opinia
             // 
@@ -129,9 +130,12 @@
             this.Controls.Add(this.l_uwagi);
             this.Controls.Add(this.l_nazwa_wycieczki);
             this.Controls.Add(this.tb_opinia);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Opinia";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Opinia";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Opinia_FormClosing);
+            this.Load += new System.EventHandler(this.Opinia_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

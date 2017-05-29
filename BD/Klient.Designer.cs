@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.dgv_katalog = new System.Windows.Forms.DataGridView();
+            this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Okres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Data_wyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Promocja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Koszt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rtb_wycieczka = new System.Windows.Forms.RichTextBox();
             this.b_katalog_rezerwuj = new System.Windows.Forms.Button();
             this.b_katalog_wyjdz = new System.Windows.Forms.Button();
@@ -37,11 +42,6 @@
             this.reklamujWycieczkęToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rezygnacjaZWycieczkiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.l_polaczenie = new System.Windows.Forms.Label();
-            this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Okres = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Data_wyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Promocja = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Koszt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_katalog)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -62,17 +62,42 @@
             this.dgv_katalog.TabIndex = 0;
             this.dgv_katalog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_katalog_CellClick);
             // 
+            // Nazwa_wycieczki
+            // 
+            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
+            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
+            // 
+            // Okres
+            // 
+            this.Okres.HeaderText = "Okres";
+            this.Okres.Name = "Okres";
+            // 
+            // Data_wyjazdu
+            // 
+            this.Data_wyjazdu.HeaderText = "Data wyjazdu";
+            this.Data_wyjazdu.Name = "Data_wyjazdu";
+            // 
+            // Promocja
+            // 
+            this.Promocja.HeaderText = "Promocja";
+            this.Promocja.Name = "Promocja";
+            // 
+            // Koszt
+            // 
+            this.Koszt.HeaderText = "Cena całkowita";
+            this.Koszt.Name = "Koszt";
+            // 
             // rtb_wycieczka
             // 
             this.rtb_wycieczka.Location = new System.Drawing.Point(613, 39);
             this.rtb_wycieczka.Name = "rtb_wycieczka";
-            this.rtb_wycieczka.Size = new System.Drawing.Size(330, 150);
+            this.rtb_wycieczka.Size = new System.Drawing.Size(330, 232);
             this.rtb_wycieczka.TabIndex = 1;
             this.rtb_wycieczka.Text = "Nazwa\nData wyjazdu\nData powrotu\nOpis\n\nAdres miejsca\nMiejscowość";
             // 
             // b_katalog_rezerwuj
             // 
-            this.b_katalog_rezerwuj.Location = new System.Drawing.Point(748, 195);
+            this.b_katalog_rezerwuj.Location = new System.Drawing.Point(750, 277);
             this.b_katalog_rezerwuj.Name = "b_katalog_rezerwuj";
             this.b_katalog_rezerwuj.Size = new System.Drawing.Size(75, 23);
             this.b_katalog_rezerwuj.TabIndex = 2;
@@ -132,31 +157,6 @@
             this.l_polaczenie.TabIndex = 10;
             this.l_polaczenie.Text = " ";
             // 
-            // Nazwa_wycieczki
-            // 
-            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
-            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
-            // 
-            // Okres
-            // 
-            this.Okres.HeaderText = "Okres";
-            this.Okres.Name = "Okres";
-            // 
-            // Data_wyjazdu
-            // 
-            this.Data_wyjazdu.HeaderText = "Data wyjazdu";
-            this.Data_wyjazdu.Name = "Data_wyjazdu";
-            // 
-            // Promocja
-            // 
-            this.Promocja.HeaderText = "Promocja";
-            this.Promocja.Name = "Promocja";
-            // 
-            // Koszt
-            // 
-            this.Koszt.HeaderText = "Cena całkowita";
-            this.Koszt.Name = "Koszt";
-            // 
             // Klient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,12 +168,13 @@
             this.Controls.Add(this.rtb_wycieczka);
             this.Controls.Add(this.dgv_katalog);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Klient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Klient";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Klient_FormClosing);
-            this.Shown += new System.EventHandler(this.Klient_Shown);
+            this.Load += new System.EventHandler(this.Klient_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_katalog)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

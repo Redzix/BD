@@ -64,8 +64,7 @@ namespace BD
                 this._idUczestnictwa = value;
             }
         }
-
-
+        
         public List<Opinia_model> PobierzOpinie()
         {
             List<Opinia_model> _listaOpini = new List<Opinia_model>();
@@ -89,5 +88,15 @@ namespace BD
             _polacz.ZakonczPolaczenie();
             return _listaOpini;
         }
+
+       /* public Boolean DodajOpinie(Opinia_model opinia)
+        {
+            Polacz_z_baza _polacz = new Polacz_z_baza();
+            SqlConnection _polaczenie = _polacz.PolaczZBaza();
+            SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Pojazd");
+
+
+            return 1;
+        }*/
     }
 }

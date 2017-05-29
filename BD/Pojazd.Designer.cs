@@ -36,7 +36,6 @@
             this.tb_pojemnosc = new System.Windows.Forms.TextBox();
             this.l_pojemnosc = new System.Windows.Forms.Label();
             this.b_anuluj = new System.Windows.Forms.Button();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // l_nr_rejestracyjny
@@ -119,7 +118,9 @@
             this.Controls.Add(this.tb_numer_rejestracyjny);
             this.Controls.Add(this.b_zapisz);
             this.Controls.Add(this.l_nr_rejestracyjny);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Pojazd";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Pojazd";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Pojazd_FormClosing);
             this.ResumeLayout(false);

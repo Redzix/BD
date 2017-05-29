@@ -147,9 +147,11 @@ namespace BD
             List<Promocja_model> _listaPromocji = new Promocja_model().PobierzPromocje();
             List<Cennik_model> _listaCennikow = new Cennik_model().PobierzCennik();
 
-            Katalog_kontroler_list katalog = new Katalog_kontroler_list();
+            
             for (int i = 0; i < _listaKatalogu.Count; i++)
             {
+
+                Katalog_kontroler_list katalog = new Katalog_kontroler_list();
                 katalog.NazwaWycieczki = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Nazwa;
                 katalog.DataWyjazdu = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataWyjazdu;
                 katalog.DataPrzyjazdu = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataPowrotu;
@@ -165,6 +167,7 @@ namespace BD
                 katalog.Pilot = _listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Pilot;
                 katalog.MiejsceOdjazdu = _listaKatalogu[i].MiejsceWyjazdu;
                 katalog.MiejsceDocelowe = _listaKatalogu[i].MiejsceDocelowe;
+                _lista.Add(katalog);
             }
             return _lista;
         }    

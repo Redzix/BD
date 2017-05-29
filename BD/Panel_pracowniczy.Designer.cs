@@ -34,7 +34,6 @@
             this.l_haslo = new System.Windows.Forms.Label();
             this.b_zaloguj = new System.Windows.Forms.Button();
             this.b_zakończ = new System.Windows.Forms.Button();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.SuspendLayout();
             // 
             // tb_nazwa_uzytkownika
@@ -100,7 +99,9 @@
             this.Controls.Add(this.l_nazwa_uzytkownika);
             this.Controls.Add(this.tb_haslo);
             this.Controls.Add(this.tb_nazwa_uzytkownika);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Panel_pracowniczy";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Panel pracowniczy";
             this.ResumeLayout(false);
             this.PerformLayout();

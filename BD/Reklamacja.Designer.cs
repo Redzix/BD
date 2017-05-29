@@ -44,7 +44,6 @@
             this.tc_reklamacje.SuspendLayout();
             this.tp_dodaj_reklamacje.SuspendLayout();
             this.tp_stan_reklamacji.SuspendLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.SuspendLayout();
             // 
             // tc_reklamacje
@@ -179,7 +178,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(380, 262);
             this.Controls.Add(this.tc_reklamacje);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Reklamacja";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Reklamacja";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reklamacja_FormClosing);
             this.tc_reklamacje.ResumeLayout(false);

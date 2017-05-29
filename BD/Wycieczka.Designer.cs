@@ -201,6 +201,7 @@
             this.Controls.Add(this.l_data_odjazdu);
             this.Controls.Add(this.l_data_przyjazdu);
             this.Controls.Add(this.l_nazwa);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Wycieczka";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Wycieczka";

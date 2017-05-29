@@ -130,7 +130,7 @@ namespace BD
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
         /// <param name="e">Zdarzenia systemowe</param>
-        private void Pilot_Shown(object sender, EventArgs e)
+        private void Pilot_Load(object sender, EventArgs e)
         {
             // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
             dgv_tabelaPilot.Columns["Nazwa_wycieczki"].DataPropertyName = "nazwa";

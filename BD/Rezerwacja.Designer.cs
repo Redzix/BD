@@ -43,11 +43,13 @@
             this.b_rezerwacja_anuluj = new System.Windows.Forms.Button();
             this.l_miejscowosc = new System.Windows.Forms.Label();
             this.tb_miejscowosc = new System.Windows.Forms.TextBox();
+            this.tb_pesel = new System.Windows.Forms.TextBox();
+            this.l_pesel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tb_imie
             // 
-            this.tb_imie.Location = new System.Drawing.Point(82, 31);
+            this.tb_imie.Location = new System.Drawing.Point(107, 52);
             this.tb_imie.Name = "tb_imie";
             this.tb_imie.Size = new System.Drawing.Size(100, 20);
             this.tb_imie.TabIndex = 0;
@@ -63,28 +65,28 @@
             // 
             // tb_nazwisko
             // 
-            this.tb_nazwisko.Location = new System.Drawing.Point(82, 57);
+            this.tb_nazwisko.Location = new System.Drawing.Point(107, 78);
             this.tb_nazwisko.Name = "tb_nazwisko";
             this.tb_nazwisko.Size = new System.Drawing.Size(100, 20);
             this.tb_nazwisko.TabIndex = 2;
             // 
             // tb_liczba_osob
             // 
-            this.tb_liczba_osob.Location = new System.Drawing.Point(82, 135);
+            this.tb_liczba_osob.Location = new System.Drawing.Point(107, 156);
             this.tb_liczba_osob.Name = "tb_liczba_osob";
             this.tb_liczba_osob.Size = new System.Drawing.Size(100, 20);
             this.tb_liczba_osob.TabIndex = 3;
             // 
             // tb_zaliczka
             // 
-            this.tb_zaliczka.Location = new System.Drawing.Point(82, 161);
+            this.tb_zaliczka.Location = new System.Drawing.Point(107, 182);
             this.tb_zaliczka.Name = "tb_zaliczka";
             this.tb_zaliczka.Size = new System.Drawing.Size(100, 20);
             this.tb_zaliczka.TabIndex = 4;
             // 
             // tb_adres
             // 
-            this.tb_adres.Location = new System.Drawing.Point(82, 83);
+            this.tb_adres.Location = new System.Drawing.Point(107, 104);
             this.tb_adres.Multiline = true;
             this.tb_adres.Name = "tb_adres";
             this.tb_adres.Size = new System.Drawing.Size(100, 20);
@@ -93,7 +95,7 @@
             // l_imie
             // 
             this.l_imie.AutoSize = true;
-            this.l_imie.Location = new System.Drawing.Point(12, 34);
+            this.l_imie.Location = new System.Drawing.Point(37, 55);
             this.l_imie.Name = "l_imie";
             this.l_imie.Size = new System.Drawing.Size(26, 13);
             this.l_imie.TabIndex = 6;
@@ -102,7 +104,7 @@
             // l_nazwisko
             // 
             this.l_nazwisko.AutoSize = true;
-            this.l_nazwisko.Location = new System.Drawing.Point(12, 60);
+            this.l_nazwisko.Location = new System.Drawing.Point(37, 81);
             this.l_nazwisko.Name = "l_nazwisko";
             this.l_nazwisko.Size = new System.Drawing.Size(53, 13);
             this.l_nazwisko.TabIndex = 7;
@@ -111,7 +113,7 @@
             // l_adres
             // 
             this.l_adres.AutoSize = true;
-            this.l_adres.Location = new System.Drawing.Point(12, 86);
+            this.l_adres.Location = new System.Drawing.Point(37, 107);
             this.l_adres.Name = "l_adres";
             this.l_adres.Size = new System.Drawing.Size(34, 13);
             this.l_adres.TabIndex = 8;
@@ -120,7 +122,7 @@
             // l_liczba_osob
             // 
             this.l_liczba_osob.AutoSize = true;
-            this.l_liczba_osob.Location = new System.Drawing.Point(12, 138);
+            this.l_liczba_osob.Location = new System.Drawing.Point(37, 159);
             this.l_liczba_osob.Name = "l_liczba_osob";
             this.l_liczba_osob.Size = new System.Drawing.Size(64, 13);
             this.l_liczba_osob.TabIndex = 9;
@@ -129,7 +131,7 @@
             // l_zaliczka
             // 
             this.l_zaliczka.AutoSize = true;
-            this.l_zaliczka.Location = new System.Drawing.Point(12, 164);
+            this.l_zaliczka.Location = new System.Drawing.Point(37, 185);
             this.l_zaliczka.Name = "l_zaliczka";
             this.l_zaliczka.Size = new System.Drawing.Size(47, 13);
             this.l_zaliczka.TabIndex = 10;
@@ -158,7 +160,7 @@
             // l_miejscowosc
             // 
             this.l_miejscowosc.AutoSize = true;
-            this.l_miejscowosc.Location = new System.Drawing.Point(12, 112);
+            this.l_miejscowosc.Location = new System.Drawing.Point(37, 133);
             this.l_miejscowosc.Name = "l_miejscowosc";
             this.l_miejscowosc.Size = new System.Drawing.Size(68, 13);
             this.l_miejscowosc.TabIndex = 14;
@@ -166,17 +168,35 @@
             // 
             // tb_miejscowosc
             // 
-            this.tb_miejscowosc.Location = new System.Drawing.Point(82, 109);
+            this.tb_miejscowosc.Location = new System.Drawing.Point(107, 130);
             this.tb_miejscowosc.Multiline = true;
             this.tb_miejscowosc.Name = "tb_miejscowosc";
             this.tb_miejscowosc.Size = new System.Drawing.Size(100, 20);
             this.tb_miejscowosc.TabIndex = 13;
+            // 
+            // tb_pesel
+            // 
+            this.tb_pesel.Location = new System.Drawing.Point(107, 26);
+            this.tb_pesel.Name = "tb_pesel";
+            this.tb_pesel.Size = new System.Drawing.Size(100, 20);
+            this.tb_pesel.TabIndex = 15;
+            // 
+            // l_pesel
+            // 
+            this.l_pesel.AutoSize = true;
+            this.l_pesel.Location = new System.Drawing.Point(37, 29);
+            this.l_pesel.Name = "l_pesel";
+            this.l_pesel.Size = new System.Drawing.Size(33, 13);
+            this.l_pesel.TabIndex = 16;
+            this.l_pesel.Text = "Pesel";
             // 
             // Rezerwacja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(248, 295);
+            this.Controls.Add(this.l_pesel);
+            this.Controls.Add(this.tb_pesel);
             this.Controls.Add(this.l_miejscowosc);
             this.Controls.Add(this.tb_miejscowosc);
             this.Controls.Add(this.b_rezerwacja_anuluj);
@@ -192,6 +212,7 @@
             this.Controls.Add(this.tb_nazwisko);
             this.Controls.Add(this.l_nr_rezerwacji);
             this.Controls.Add(this.tb_imie);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Rezerwacja";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Rezerwacja";
@@ -218,5 +239,7 @@
         private System.Windows.Forms.Button b_rezerwacja_anuluj;
         private System.Windows.Forms.Label l_miejscowosc;
         private System.Windows.Forms.TextBox tb_miejscowosc;
+        private System.Windows.Forms.TextBox tb_pesel;
+        private System.Windows.Forms.Label l_pesel;
     }
 }

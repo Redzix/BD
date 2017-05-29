@@ -88,7 +88,7 @@ namespace BD
             }
         }
 
-        private void Kierowca_Shown(object sender, EventArgs e)
+        private void Kierowca_Load(object sender, EventArgs e)
         {
             Pojazd_model _pojazdy = new Pojazd_model();
             _listaPojazdow = _pojazdy.PobierzPojazdy();
