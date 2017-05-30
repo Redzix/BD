@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace BD
 {
@@ -99,16 +100,29 @@ namespace BD
             return _listaKlientow;
         }
 
-        public void DodajKlienta(Klient_model klient)
+        public bool DodajKlienta(Klient_model klient)
         {
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
+            string pesel = "brak";
 
-            SqlCommand _zapytanie = _polacz.UtworzZapytanie("INSERT INTO Klient " +
-                "VALUES('"+ klient.Pesel + "','" + klient.Imie + "','" + klient.Nazwisko + "','" +
-                klient.Adres + "','" + klient.Miejscowosc + "')");
-            _zapytanie.ExecuteNonQuery();
-            
+            pesel = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT pesel FROM Klient " +
+                "WHERE Klient.pesel = '" + klient.Pesel +"'"));
+
+            if (klient.Pesel.Equals(pesel))
+            {
+                //tu cos lepszego potem
+                MessageBox.Show("Klient o podanym numerze pesel istnieje. Nie został ponownie dodany do bazy");
+                return false;
+            }
+            else
+            {
+                SqlCommand _zapytanie = _polacz.UtworzZapytanie("INSERT INTO Klient " +
+                    "VALUES('" + klient.Pesel + "','" + klient.Imie + "','" + klient.Nazwisko + "','" +
+                    klient.Adres + "','" + klient.Miejscowosc + "')");
+                _zapytanie.ExecuteNonQuery();
+                return true;
+            }
         }
     }
 }

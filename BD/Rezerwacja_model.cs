@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace BD
 {
@@ -11,7 +12,7 @@ namespace BD
     {
         private int _numer;
         private int _liczbaOsob;
-        private bool _stan;
+        private int _stan;
         private decimal _zaliczka;
         private int _idWycieczki;
         private string _klientPesel;
@@ -45,7 +46,7 @@ namespace BD
             }
         }
 
-        public bool Stan
+        public int Stan
         {
             get
             {
@@ -107,7 +108,7 @@ namespace BD
 
                 rezerwacja.Numer = Convert.ToInt32(reader["numer_rezerwacji"]);
                 rezerwacja.LiczbaOsob = Convert.ToInt32(reader["liczba_osob"]);
-                rezerwacja.Stan = Convert.ToBoolean(reader["stan"]);
+                rezerwacja.Stan = Convert.ToInt32(reader["stan"]);
                 rezerwacja.Zaliczka = Convert.ToInt32(reader["zaliczka"]);
                 rezerwacja.IdWycieczki = Convert.ToInt32(reader["id_wycieczki"]);
                 rezerwacja.KlientPesel = reader["Klient_pesel"].ToString();
@@ -116,6 +117,33 @@ namespace BD
             }
             _polacz.ZakonczPolaczenie();
             return _listaRezerwacji;
+        }
+
+        public bool DodajRezerwacje(Rezerwacja_model rezerwacja)
+        {
+            Polacz_z_baza _polacz = new Polacz_z_baza();
+            SqlConnection _polaczenie = _polacz.PolaczZBaza();
+
+            int numerRezerwacji = 0;
+
+            numerRezerwacji = _polacz.PobierzDaneInt(_polacz.UtworzZapytanie("SELECT numer_rezerwacji FROM Rezerwacja " +
+                "WHERE numer_rezerwacji= " + rezerwacja.Numer + ""));
+
+
+            if (rezerwacja.Numer == numerRezerwacji)
+            {
+                //tu cos lepszego potem
+                MessageBox.Show("Rezerwacja o podanym numerze istnieje. Nie została ponownie dodana do bazy");
+                return false;
+            }
+            else
+            {
+                SqlCommand _zapytanie = _polacz.UtworzZapytanie("INSERT INTO Rezerwacja " +
+                "VALUES(" + rezerwacja.Numer + "," + rezerwacja.LiczbaOsob + "," + rezerwacja.Stan + "," +
+                rezerwacja.Zaliczka + "," + rezerwacja.IdWycieczki + ",'" + rezerwacja.KlientPesel +"')");
+                  _zapytanie.ExecuteNonQuery();
+                return true;
+            }
         }
 
     }

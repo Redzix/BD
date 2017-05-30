@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-
+using System.Windows.Forms;
 namespace BD
 {
     public class Uczestnictwo_model
@@ -69,6 +69,31 @@ namespace BD
             }
             _polacz.ZakonczPolaczenie();
             return _listaUczestnictw;
+        }
+
+        public bool DodajUczestnictwo(Uczestnictwo_model uczestnictwo)
+        {
+            Polacz_z_baza _polacz = new Polacz_z_baza();
+            SqlConnection _polaczenie = _polacz.PolaczZBaza();
+            int idUczestnictwa = 0;
+
+            idUczestnictwa = _polacz.PobierzDaneInt(_polacz.UtworzZapytanie("SELECT id_uczestnictwo FROM Uczestnictwo " +
+                     "WHERE id_uczestnictwo = " + uczestnictwo.IdUczestnictwa + ""));
+
+            if (uczestnictwo.IdUczestnictwa == idUczestnictwa)
+            {
+                //tu cos lepszego potem
+                MessageBox.Show("Rezerwacja o podanym numerze istnieje. Nie została ponownie dodana do bazy");
+                return false;
+            }
+            else
+            {
+                SqlCommand _zapytanie = _polacz.UtworzZapytanie("INSERT INTO Uczestnictwo " +
+                "VALUES(" + uczestnictwo.IdUczestnictwa + "," + uczestnictwo.LiczbaOsob + "," + uczestnictwo.NumerRezerwacji + ")");
+                _zapytanie.ExecuteNonQuery();
+                return true;
+            }
+          
         }
     }
 }

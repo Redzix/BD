@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace BD
 {
@@ -89,14 +90,34 @@ namespace BD
             return _listaOpini;
         }
 
-       /* public Boolean DodajOpinie(Opinia_model opinia)
+        public bool DodajOpinie(Opinia_model opinia)
         {
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
-            SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Pojazd");
+            
+            int numerRezerwacji = 0;
 
+            numerRezerwacji = _polacz.PobierzDaneInt(_polacz.UtworzZapytanie("SELECT Uczestnictwo.numer_rezerwacji " +
+                "FROM Opinia " +
+                "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = Opinia.id_uczestnictwo " +
+                "WHERE id_opini = " + opinia.IdOpini));
 
-            return 1;
-        }*/
+            if (numerRezerwacji != 0)
+            {
+                //tu cos lepszego potem
+                MessageBox.Show("Opinia do danej rezerwacji już istnieje. Nowa nie została dodana do bazy.");
+                return false;
+            }
+            else
+            {
+                SqlCommand _zapytanie = _polacz.UtworzZapytanie("INSERT INTO Opinia " +
+                    "VALUES(" + opinia.IdOpini + "," + opinia.Ocena + ",'" + opinia.Opis + "'," + opinia.IdUczestnictwa+ ")");
+                _zapytanie.ExecuteNonQuery();
+                return true;
+            }
+        }
     }
+
+
+
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace BD
 {
@@ -75,23 +76,41 @@ namespace BD
             Klient_model klient = new Klient_model();
             Rezerwacja_model rezerwacja = new Rezerwacja_model();
             Uczestnictwo_model uczestnictwo = new Uczestnictwo_model();
+            Polacz_z_baza polacz = new Polacz_z_baza();
+            SqlConnection polaczenie = polacz.PolaczZBaza();
 
             klient.Pesel = tb_pesel.Text;
             klient.Imie = tb_imie.Text;
             klient.Nazwisko = tb_nazwisko.Text;
             klient.Adres = tb_adres.Text;
-            klient.Miejscowosc = l_miejscowosc.Text;
+            klient.Miejscowosc = tb_miejscowosc.Text;
 
-            rezerwacja.Numer = 1;
+            rezerwacja.Numer = polacz.PobierzDaneInt(polacz.UtworzZapytanie("select MAX(numer_rezerwacji) FROM rezerwacja")) +1;
             rezerwacja.LiczbaOsob = Int32.Parse(tb_liczba_osob.Text);
-            rezerwacja.Stan = false;
-            rezerwacja.Zaliczka = decimal.Parse(tb_zaliczka.Text);
+            rezerwacja.Stan = 0;
+            rezerwacja.Zaliczka = Convert.ToDecimal(tb_zaliczka.Text);
+            rezerwacja.IdWycieczki = _idWycieczki;
+            rezerwacja.KlientPesel = klient.Pesel;
+
+            uczestnictwo.IdUczestnictwa = polacz.PobierzDaneInt(polacz.UtworzZapytanie("select MAX(id_uczestnictwo) FROM Uczestnictwo")) + 1;
+            uczestnictwo.LiczbaOsob = rezerwacja.LiczbaOsob;
+            uczestnictwo.NumerRezerwacji = rezerwacja.Numer;
+            
 
             klient.DodajKlienta(klient);
-           // rezerwacja.DodajRezerwacje(rezerwacja);
-            //uczestnictwo.DodajUczestnictwo(uczestnictwo);
+            if(rezerwacja.DodajRezerwacje(rezerwacja))
+            {
+                if (uczestnictwo.DodajUczestnictwo(uczestnictwo))
+                {
+                    MessageBox.Show("Rezerwację dodano poprawnie.", "Potwierdzenie rezerwacji.", MessageBoxButtons.OK);
+                    this.Dispose();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wystąpił problem z dodanie rezerwacji. Prawdopodobnie złożona rezerwacja o danym numerze już istnieje.", "Bład rezerwacji",MessageBoxButtons.OK);
+            }
         }
-  
-
+      
     }
 }

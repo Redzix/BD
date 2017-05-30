@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace BD
 {
@@ -75,13 +76,28 @@ namespace BD
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-           /* Opinia_model opinia = new Opinia_model();
-            opinia.IdOpini = _listaWycieczek.Count + 1;
+            Polacz_z_baza polacz = new Polacz_z_baza();
+            SqlConnection polaczenie = polacz.PolaczZBaza();
+
+            Opinia_model opinia = new Opinia_model();
+
+            opinia.IdOpini = polacz.PobierzDaneInt(polacz.UtworzZapytanie("SELECT MAX(id_opini) FROM Opinia")) + 1;
             opinia.Ocena = cb_ocena.SelectedIndex + 1;
             opinia.Opis = tb_opinia.Text;
-            opinia.IdUczestnictwa = ?
+            opinia.IdUczestnictwa = polacz.PobierzDaneInt(polacz.UtworzZapytanie("SELECT Uczestnictwo.id_uczestnictwo " +
+                "FROM Uczestnictwo " +
+                "INNER JOIN Rezerwacja ON Uczestnictwo.numer_rezerwacji = Rezerwacja.numer_rezerwacji " +
+                "WHERE Rezerwacja.numer_rezerwacji = " + Convert.ToInt32(tb_numerRezerwacji.Text)));
 
-             opinia.DodajOpinie(opinia);*/
+            if (opinia.DodajOpinie(opinia))
+            {
+                MessageBox.Show("Opinie dodano poprawnie.", "Potwierdzenie dodania opini",MessageBoxButtons.OK);
+                this.Dispose();
+            }
+            else
+            {
+                MessageBox.Show("Opinia już istnieje", "Błąd opini", MessageBoxButtons.OK);
+            }
         }
     }
 }
