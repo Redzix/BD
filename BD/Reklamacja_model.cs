@@ -79,8 +79,6 @@ namespace BD
             }
         }
 
-
-
         public List<Reklamacja_model> PobierzReklamacje()
         {
             List<Reklamacja_model> _listaReklamacji = new List<Reklamacja_model>();
@@ -119,7 +117,7 @@ namespace BD
             if (numerRezerwacji != 0)
             {
                 //tu cos lepszego potem
-                MessageBox.Show("Opinia do danej rezerwacji już istnieje. Nowa nie została dodana do bazy.");
+                MessageBox.Show("Reklamacja do danej rezerwacji już istnieje. Nowa nie została dodana do bazy.");
                 return false;
             }
             else

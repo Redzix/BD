@@ -58,7 +58,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(165, 9);
+            this.label2.Location = new System.Drawing.Point(178, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 2;
@@ -90,7 +90,7 @@
             // 
             this.gb_stan_pojazdu.Controls.Add(this.rb_awaria);
             this.gb_stan_pojazdu.Controls.Add(this.rb_sprawny);
-            this.gb_stan_pojazdu.Location = new System.Drawing.Point(389, 33);
+            this.gb_stan_pojazdu.Location = new System.Drawing.Point(432, 33);
             this.gb_stan_pojazdu.Name = "gb_stan_pojazdu";
             this.gb_stan_pojazdu.Size = new System.Drawing.Size(200, 100);
             this.gb_stan_pojazdu.TabIndex = 5;
@@ -99,16 +99,17 @@
             // 
             // b_kierowca_zapisz
             // 
-            this.b_kierowca_zapisz.Location = new System.Drawing.Point(389, 161);
+            this.b_kierowca_zapisz.Location = new System.Drawing.Point(432, 161);
             this.b_kierowca_zapisz.Name = "b_kierowca_zapisz";
             this.b_kierowca_zapisz.Size = new System.Drawing.Size(75, 23);
             this.b_kierowca_zapisz.TabIndex = 6;
             this.b_kierowca_zapisz.Text = "Zapisz";
             this.b_kierowca_zapisz.UseVisualStyleBackColor = true;
+            this.b_kierowca_zapisz.Click += new System.EventHandler(this.b_kierowca_zapisz_Click);
             // 
             // b_kierowca_wyjdz
             // 
-            this.b_kierowca_wyjdz.Location = new System.Drawing.Point(514, 161);
+            this.b_kierowca_wyjdz.Location = new System.Drawing.Point(557, 161);
             this.b_kierowca_wyjdz.Name = "b_kierowca_wyjdz";
             this.b_kierowca_wyjdz.Size = new System.Drawing.Size(75, 23);
             this.b_kierowca_wyjdz.TabIndex = 7;
@@ -128,7 +129,7 @@
             this.lv_pojazdy.Location = new System.Drawing.Point(8, 33);
             this.lv_pojazdy.MultiSelect = false;
             this.lv_pojazdy.Name = "lv_pojazdy";
-            this.lv_pojazdy.Size = new System.Drawing.Size(364, 203);
+            this.lv_pojazdy.Size = new System.Drawing.Size(373, 203);
             this.lv_pojazdy.TabIndex = 1;
             this.lv_pojazdy.UseCompatibleStateImageBehavior = false;
             this.lv_pojazdy.View = System.Windows.Forms.View.Details;
@@ -156,7 +157,7 @@
             // Stan
             // 
             this.Stan.Text = "Stan";
-            this.Stan.Width = 40;
+            this.Stan.Width = 45;
             // 
             // l_uzytkownik
             // 
@@ -180,7 +181,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 261);
+            this.ClientSize = new System.Drawing.Size(644, 261);
             this.Controls.Add(this.l_polaczenie);
             this.Controls.Add(this.l_uzytkownik);
             this.Controls.Add(this.lv_pojazdy);

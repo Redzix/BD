@@ -175,16 +175,25 @@ namespace BD
                 for (int i = 0; i < _listaPojazdow.Count; i++)
                 {
                     ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
-                    pojazd.SubItems.Add(_listaPojazdow[i].Dostepnosc.ToString());
-                    pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
-                    pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
-                    if(_listaPojazdow[i].Stan)
+
+                    if (_listaPojazdow[i].Dostepnosc)
                     {
-                        pojazd.SubItems.Add("Dostępn");
+                        pojazd.SubItems.Add("Dostępny");
                     }
                     else
                     {
                         pojazd.SubItems.Add("Niedostępny");
+                    }
+
+                    pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
+                    pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
+                    if(_listaPojazdow[i].Stan)
+                    {
+                        pojazd.SubItems.Add("Sprawny");
+                    }
+                    else
+                    {
+                        pojazd.SubItems.Add("Awaria");
                     }
                     lv_pojazdy.Items.Add(pojazd);
                 }

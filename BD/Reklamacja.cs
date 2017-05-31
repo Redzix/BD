@@ -127,16 +127,6 @@ namespace BD
             }
         }
 
-        private void b_rozpatrzPozytywnie_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void b_rozpatrzNegatywnie_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
         {
             int numerReklamacji;

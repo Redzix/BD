@@ -96,12 +96,69 @@ namespace BD
             for (int i = 0; i < _listaPojazdow.Count; i++)
             {
                 ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
-                pojazd.SubItems.Add(_listaPojazdow[i].Dostepnosc.ToString());
+
+                if (_listaPojazdow[i].Dostepnosc)
+                {
+                    pojazd.SubItems.Add("Dostępny");
+                }
+                else
+                {
+                    pojazd.SubItems.Add("Niedostępny");
+                };
+
                 pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
                 pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
-                pojazd.SubItems.Add(_listaPojazdow[i].Stan.ToString());
+
+                if (_listaPojazdow[i].Stan)
+                {
+                    pojazd.SubItems.Add("Sprawny");
+                }
+                else
+                {
+                    pojazd.SubItems.Add("Awaria");
+                }
+
                 lv_pojazdy.Items.Add(pojazd);
             }
         }
-    }
+
+        private void b_kierowca_zapisz_Click(object sender, EventArgs e)
+        {
+            string numerRejestracyjny = lv_pojazdy.SelectedItems[0].SubItems[0].Text;
+
+            if (rb_awaria.Checked)
+            {
+                if((new Kierowca_model()).DodajZmianeStanu(0, numerRejestracyjny))
+                {
+                    MessageBox.Show("W pojezdzie o numerze rejestracyjnym " + numerRejestracyjny + 
+                        " ustawiono stan na awarię","Dodano awarię", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Awaria";
+                }
+                else
+                {
+                    MessageBox.Show("Błąd podczas wprowadzania zmian","Błąd",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                }
+                
+            }
+            else if (rb_sprawny.Checked)
+            {
+                if ((new Kierowca_model()).DodajZmianeStanu(1, numerRejestracyjny))
+                {
+                    MessageBox.Show("W pojezdzie o numerze rejestracyjnym " + numerRejestracyjny +
+                        " ustawiono stan na sprawny", "Dodano sprawność", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Sprawny";
+                }
+                else
+                {
+                    MessageBox.Show("Błąd podczas wprowadzania zmian", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nie podano żadnej zmiany stanu pojazdu.", "Brak zmian", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+
+            lv_pojazdy.Refresh();
+        }
+     }
 }

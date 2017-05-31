@@ -32,5 +32,28 @@ namespace BD
             _polacz.ZakonczPolaczenie();
             return _listaKierowcow;
         }
+
+        public bool DodajZmianeStanu(int stan, string numerRejestracyjny)
+        {
+            Polacz_z_baza _polacz = new Polacz_z_baza();
+            SqlConnection _polaczenie = _polacz.PolaczZBaza();
+
+            if (stan == 1)
+            {
+                SqlCommand _zapytanie = _polacz.UtworzZapytanie("UPDATE Pojazd SET stan = 1 WHERE numer_rejestracyjny = '" + numerRejestracyjny + "'");
+                _zapytanie.ExecuteNonQuery();
+                return true;
+            }
+            else if (stan == 0)
+            {
+                SqlCommand _zapytanie = _polacz.UtworzZapytanie("UPDATE Pojazd SET stan = 0 WHERE numer_rejestracyjny = '" + numerRejestracyjny +  "'");
+                _zapytanie.ExecuteNonQuery();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
