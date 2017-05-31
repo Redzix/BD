@@ -345,6 +345,7 @@
             this.b_usun_pojazd.TabIndex = 3;
             this.b_usun_pojazd.Text = "Usuń pojazd";
             this.b_usun_pojazd.UseVisualStyleBackColor = true;
+            this.b_usun_pojazd.Click += new System.EventHandler(this.b_usun_pojazd_Click);
             // 
             // b_dodaj_pojazd
             // 

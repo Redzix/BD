@@ -176,7 +176,7 @@ namespace BD
                 {
                     ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
 
-                    if (_listaPojazdow[i].Dostepnosc)
+                    if (_listaPojazdow[i].Dostepnosc == 1)
                     {
                         pojazd.SubItems.Add("Dostępny");
                     }
@@ -187,7 +187,7 @@ namespace BD
 
                     pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
                     pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
-                    if(_listaPojazdow[i].Stan)
+                    if(_listaPojazdow[i].Stan == 1)
                     {
                         pojazd.SubItems.Add("Sprawny");
                     }
@@ -220,5 +220,20 @@ namespace BD
             }
         }
 
+        private void b_usun_pojazd_Click(object sender, EventArgs e)
+        {
+            //Pobranie wybranego numeru rejestracyjnego z listview
+            string numerRejestracyjny = lv_pojazdy.SelectedItems[0].SubItems[0].Text;
+
+            if((new Kierownik_model()).UsunPojazd(numerRejestracyjny))
+            {
+                MessageBox.Show("Pojazd usunięto poprawnie.", "Usunięcie pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                lv_pojazdy.SelectedItems[0].Remove();
+            }
+            else
+            {
+                MessageBox.Show("Napotkano problem podczas usuwania pojazdu", "Usunięcie pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

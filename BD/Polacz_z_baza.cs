@@ -10,8 +10,8 @@ namespace BD
     /// </summary>
     public class Polacz_z_baza
     {
-        SqlConnection _polaczenie;
-        SqlCommand _zapytanie;
+        private SqlConnection _polaczenie;
+        private SqlCommand _zapytanie;
 
         /// <summary>
         /// Funkcja otwierająca połączenie z bazą danych.

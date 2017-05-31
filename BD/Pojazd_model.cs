@@ -10,9 +10,9 @@ namespace BD
     public class Pojazd_model
     {
         private string _numerRejestracyjny;
-        private bool _dostepnosc;
+        private int _dostepnosc;
         private string _marka;
-        private bool _stan;
+        private int _stan;
         private int _pojemnosc;
 
         public Pojazd_model(){}
@@ -31,7 +31,7 @@ namespace BD
             }
         }
 
-        public bool Dostepnosc        
+        public int Dostepnosc        
         {
             get
             {
@@ -55,7 +55,7 @@ namespace BD
             }
         }
 
-        public bool Stan
+        public int Stan
         {
             get
             {
@@ -91,10 +91,10 @@ namespace BD
                 Pojazd_model pojazd = new Pojazd_model();
 
                 pojazd.NumerRejestracyjny = reader["numer_rejestracyjny"].ToString();
-                pojazd.Dostepnosc = Convert.ToBoolean(reader["dostepny"]);
+                pojazd.Dostepnosc = Convert.ToInt32(reader["dostepny"]);
                 pojazd.Pojemnosc = Convert.ToInt32(reader["pojemnosc"]);
                 pojazd.Marka = reader["marka"].ToString();
-                pojazd.Stan = Convert.ToBoolean(reader["stan"]);
+                pojazd.Stan = Convert.ToInt32(reader["stan"]);
                 
                 _listaPojazdow.Add(pojazd);             
             }
@@ -102,5 +102,27 @@ namespace BD
             return _listaPojazdow;
         }
 
+        public bool DodajPojazd(Pojazd_model pojazd)
+        {
+            Polacz_z_baza polacz = new Polacz_z_baza();
+            SqlConnection polaczenie = polacz.PolaczZBaza();
+            string numerRejestracyjny = "";
+
+            numerRejestracyjny = polacz.PobierzDaneString(polacz.UtworzZapytanie("SELECT numer_rejestracyjny " +
+                "FROM Pojazd " +
+                "WHERE numer_rejestracyjny = '" + pojazd.NumerRejestracyjny + "'"));
+
+            if (pojazd.NumerRejestracyjny.Equals(numerRejestracyjny))
+            {                
+                return false;
+            }
+            else
+            {
+                SqlCommand zapytanie = polacz.UtworzZapytanie("INSERT INTO Pojazd " +
+                             "VALUES('" + pojazd.NumerRejestracyjny + "'," + pojazd.Dostepnosc + ",'" + pojazd.Marka +
+                             "'," + pojazd.Pojemnosc + "," + pojazd.Stan + ")");
+                return true;
+            }
         }
+    }
 }

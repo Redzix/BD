@@ -55,6 +55,7 @@
             this.b_zapisz.TabIndex = 1;
             this.b_zapisz.Text = "Zapisz";
             this.b_zapisz.UseVisualStyleBackColor = true;
+            this.b_zapisz.Click += new System.EventHandler(this.b_zapisz_Click);
             // 
             // tb_numer_rejestracyjny
             // 

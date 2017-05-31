@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace BD
 {
@@ -12,11 +13,19 @@ namespace BD
         //Dodaj wycieczke
         //edytuj wycieczke
         //usun wycieczke
-        //Dodaj pojazd
         //edytuj pojazd
         //usun pojazd
         //rozpatrz pozytywnie
         //rozpatrz negatywnie
+        public bool UsunPojazd(string numerRejestracyjny)
+        {
+            Polacz_z_baza polacz = new Polacz_z_baza();
+            SqlConnection polaczenie = polacz.PolaczZBaza();
+
+            SqlCommand zapytanie = polacz.UtworzZapytanie("DELETE FROM Pojazd WHERE numer_rejestracyjny = '" +numerRejestracyjny + "'");
+
+            return true;
+        }
 
     }
 }

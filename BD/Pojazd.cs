@@ -58,5 +58,33 @@ namespace BD
                 e.Cancel = true;
             }
         }
+
+        private void b_zapisz_Click(object sender, EventArgs e)
+        {
+            Pojazd_model pojazd = new Pojazd_model();
+
+            pojazd.NumerRejestracyjny = tb_numer_rejestracyjny.Text;
+            pojazd.Dostepnosc = 1;
+            pojazd.Marka = tb_marka.Text;
+            pojazd.Stan = 1;
+            pojazd.Pojemnosc = Convert.ToInt32(tb_pojemnosc.Text);
+
+            if (pojazd.DodajPojazd(pojazd))
+            {
+                MessageBox.Show("Pojazd dodano pomyślnie.", "Dodano pojazd", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Dispose();
+            }
+            else
+            {
+                if(MessageBox.Show("Napotkano problem podczas doawania pojazdu. Sprawdź poprawność numeru rejestracyjnego", "Błąd dodawania pojazdu", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
+                {
+                    this.Dispose();
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
     }
 }

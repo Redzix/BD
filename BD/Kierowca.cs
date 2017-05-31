@@ -97,7 +97,7 @@ namespace BD
             {
                 ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
 
-                if (_listaPojazdow[i].Dostepnosc)
+                if (_listaPojazdow[i].Dostepnosc == 1)
                 {
                     pojazd.SubItems.Add("Dostępny");
                 }
@@ -109,7 +109,7 @@ namespace BD
                 pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
                 pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
 
-                if (_listaPojazdow[i].Stan)
+                if (_listaPojazdow[i].Stan == 1)
                 {
                     pojazd.SubItems.Add("Sprawny");
                 }
