@@ -16,7 +16,8 @@ namespace BD
     {
         List<Wycieczka_model>  _listaWycieczek= new List<Wycieczka_model>();
         List<Reklamacja_model> _listaReklamacji = new List<Reklamacja_model>();
-
+        Polacz_z_baza _polacz = new Polacz_z_baza();
+        SqlConnection _polaczenie = new SqlConnection();
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -104,7 +105,17 @@ namespace BD
 
         private void tc_reklamacje_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(tc_reklamacje.SelectedIndex == 1)
+            if(tc_reklamacje.SelectedIndex == 0)
+            {
+                _listaWycieczek = (new Wycieczka_model()).PobierzWycieczki();
+
+                for (int i = 0; i < _listaWycieczek.Count; i++)
+                {
+                    cb_nazwa_wycieczki.Items.Add(_listaWycieczek[i].Nazwa.ToString());
+                }
+                cb_nazwa_wycieczki.SelectedIndex = 0;
+            }
+            else if(tc_reklamacje.SelectedIndex == 1)
             {
                 _listaReklamacji = (new Reklamacja_model()).PobierzReklamacje();
 
@@ -123,6 +134,48 @@ namespace BD
 
         private void b_rozpatrzNegatywnie_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
+        {
+            int numerReklamacji;
+            string nazwaWycieczki;
+            DateTime dataWycieczki;
+            string opis;
+
+            _polaczenie = _polacz.PolaczZBaza();
+
+            //Pobranie aktualnie wybranego numeru reklamacji
+            numerReklamacji =Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text);
+
+            //Pobranie nazwy wycieczki przypisanej do danej reklamacji
+            nazwaWycieczki = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT Wycieczka.nazwa " +
+                "FROM Wycieczka " +
+                "INNER JOIN Rezerwacja ON Rezerwacja.id_wycieczki = Wycieczka.id_wycieczki " +
+                "INNER JOIN Uczestnictwo ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji " +
+                "INNER JOIN Reklamacja ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
+                "WHERE Reklamacja.numer_reklamacji = " + numerReklamacji));
+
+            //Pobranie daty wyjazdu na wycieczke
+            dataWycieczki = _polacz.PobierzDaneDate(_polacz.UtworzZapytanie("SELECT Wycieczka.data_wyjazdu " +
+                "FROM Wycieczka " +
+                "INNER JOIN Rezerwacja ON Rezerwacja.id_wycieczki = Wycieczka.id_wycieczki " +
+                "INNER JOIN Uczestnictwo ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji " +
+                "INNER JOIN Reklamacja ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
+                "WHERE Reklamacja.numer_reklamacji = " + numerReklamacji));
+
+            //Pobranie opisu reklamacji
+            opis = _listaReklamacji[numerReklamacji - 1].Opis;
+
+            //Dodanie wartości parametrów do opisu znajdującego się w texboxie
+
+            // Dodanie wartości parametrów do opisu znajdującego się w texboxie
+            rtb_reklamacja.Text =
+                "Numer reklamacji: " + numerReklamacji +
+                "\nNazwa wycieczki: " + nazwaWycieczki +
+                "\nData wycieczki: " + dataWycieczki +
+                "\nOpis: " + opis;
 
         }
     }

@@ -39,9 +39,7 @@
             this.l_nazwa_wycieczki = new System.Windows.Forms.Label();
             this.tb_opis_reklamacji = new System.Windows.Forms.TextBox();
             this.tp_stan_reklamacji = new System.Windows.Forms.TabPage();
-            this.b_rozpatrzNegatywnie = new System.Windows.Forms.Button();
-            this.b_rozpatrzPozytywnie = new System.Windows.Forms.Button();
-            this.rb_reklamacja = new System.Windows.Forms.RichTextBox();
+            this.rtb_reklamacja = new System.Windows.Forms.RichTextBox();
             this.lv_reklamacje = new System.Windows.Forms.ListView();
             this.NumerReklamacji = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tc_reklamacje.SuspendLayout();
@@ -150,9 +148,7 @@
             // 
             // tp_stan_reklamacji
             // 
-            this.tp_stan_reklamacji.Controls.Add(this.b_rozpatrzNegatywnie);
-            this.tp_stan_reklamacji.Controls.Add(this.b_rozpatrzPozytywnie);
-            this.tp_stan_reklamacji.Controls.Add(this.rb_reklamacja);
+            this.tp_stan_reklamacji.Controls.Add(this.rtb_reklamacja);
             this.tp_stan_reklamacji.Controls.Add(this.lv_reklamacje);
             this.tp_stan_reklamacji.Location = new System.Drawing.Point(4, 22);
             this.tp_stan_reklamacji.Name = "tp_stan_reklamacji";
@@ -162,35 +158,13 @@
             this.tp_stan_reklamacji.Text = "Stan reklamacji";
             this.tp_stan_reklamacji.UseVisualStyleBackColor = true;
             // 
-            // b_rozpatrzNegatywnie
+            // rtb_reklamacja
             // 
-            this.b_rozpatrzNegatywnie.Location = new System.Drawing.Point(189, 163);
-            this.b_rozpatrzNegatywnie.Name = "b_rozpatrzNegatywnie";
-            this.b_rozpatrzNegatywnie.Size = new System.Drawing.Size(121, 26);
-            this.b_rozpatrzNegatywnie.TabIndex = 3;
-            this.b_rozpatrzNegatywnie.Tag = "";
-            this.b_rozpatrzNegatywnie.Text = "Rozpatrz negatywnie";
-            this.b_rozpatrzNegatywnie.UseVisualStyleBackColor = true;
-            this.b_rozpatrzNegatywnie.Click += new System.EventHandler(this.b_rozpatrzNegatywnie_Click);
-            // 
-            // b_rozpatrzPozytywnie
-            // 
-            this.b_rozpatrzPozytywnie.Location = new System.Drawing.Point(189, 131);
-            this.b_rozpatrzPozytywnie.Name = "b_rozpatrzPozytywnie";
-            this.b_rozpatrzPozytywnie.Size = new System.Drawing.Size(121, 26);
-            this.b_rozpatrzPozytywnie.TabIndex = 2;
-            this.b_rozpatrzPozytywnie.Tag = "";
-            this.b_rozpatrzPozytywnie.Text = "Rozpatrz pozytywnie";
-            this.b_rozpatrzPozytywnie.UseVisualStyleBackColor = true;
-            this.b_rozpatrzPozytywnie.Click += new System.EventHandler(this.b_rozpatrzPozytywnie_Click);
-            // 
-            // rb_reklamacja
-            // 
-            this.rb_reklamacja.Location = new System.Drawing.Point(133, 6);
-            this.rb_reklamacja.Name = "rb_reklamacja";
-            this.rb_reklamacja.Size = new System.Drawing.Size(223, 119);
-            this.rb_reklamacja.TabIndex = 1;
-            this.rb_reklamacja.Text = "Numer reklamacji:\nNazwa wycieczki:\nData wycieczki:\nOpis:\n\n\n\n";
+            this.rtb_reklamacja.Location = new System.Drawing.Point(133, 6);
+            this.rtb_reklamacja.Name = "rtb_reklamacja";
+            this.rtb_reklamacja.Size = new System.Drawing.Size(223, 203);
+            this.rtb_reklamacja.TabIndex = 1;
+            this.rtb_reklamacja.Text = "Numer reklamacji:\nNazwa wycieczki:\nData wycieczki:\nOpis:\n\n\n\n";
             // 
             // lv_reklamacje
             // 
@@ -202,6 +176,7 @@
             this.lv_reklamacje.TabIndex = 0;
             this.lv_reklamacje.UseCompatibleStateImageBehavior = false;
             this.lv_reklamacje.View = System.Windows.Forms.View.Details;
+            this.lv_reklamacje.ItemActivate += new System.EventHandler(this.lv_reklamacje_ItemActivate);
             // 
             // NumerReklamacji
             // 
@@ -243,8 +218,6 @@
         private System.Windows.Forms.Label l_numerRezerwacji;
         private System.Windows.Forms.ListView lv_reklamacje;
         private System.Windows.Forms.ColumnHeader NumerReklamacji;
-        private System.Windows.Forms.Button b_rozpatrzNegatywnie;
-        private System.Windows.Forms.Button b_rozpatrzPozytywnie;
-        private System.Windows.Forms.RichTextBox rb_reklamacja;
+        private System.Windows.Forms.RichTextBox rtb_reklamacja;
     }
 }

@@ -178,7 +178,14 @@ namespace BD
                     pojazd.SubItems.Add(_listaPojazdow[i].Dostepnosc.ToString());
                     pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
                     pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
-                    pojazd.SubItems.Add(_listaPojazdow[i].Stan.ToString());
+                    if(_listaPojazdow[i].Stan)
+                    {
+                        pojazd.SubItems.Add("Dostępn");
+                    }
+                    else
+                    {
+                        pojazd.SubItems.Add("Niedostępny");
+                    }
                     lv_pojazdy.Items.Add(pojazd);
                 }
             }
