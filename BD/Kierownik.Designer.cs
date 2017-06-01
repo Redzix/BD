@@ -336,6 +336,7 @@
             this.b_edytuj_pojazd.TabIndex = 4;
             this.b_edytuj_pojazd.Text = "Edytuj pojazd";
             this.b_edytuj_pojazd.UseVisualStyleBackColor = true;
+            this.b_edytuj_pojazd.Click += new System.EventHandler(this.b_edytuj_pojazd_Click);
             // 
             // b_usun_pojazd
             // 

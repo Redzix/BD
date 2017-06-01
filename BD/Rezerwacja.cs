@@ -95,7 +95,6 @@ namespace BD
             uczestnictwo.IdUczestnictwa = polacz.PobierzDaneInt(polacz.UtworzZapytanie("select MAX(id_uczestnictwo) FROM Uczestnictwo")) + 1;
             uczestnictwo.LiczbaOsob = rezerwacja.LiczbaOsob;
             uczestnictwo.NumerRezerwacji = rezerwacja.Numer;
-            
 
             klient.DodajKlienta(klient);
             if(rezerwacja.DodajRezerwacje(rezerwacja))
@@ -108,7 +107,7 @@ namespace BD
             }
             else
             {
-                MessageBox.Show("Wystąpił problem z dodanie rezerwacji. Prawdopodobnie złożona rezerwacja o danym numerze już istnieje.", "Bład rezerwacji",MessageBoxButtons.OK);
+                MessageBox.Show("Wystąpił problem z dodaniem rezerwacji. Prawdopodobnie złożona rezerwacja o danym numerze już istnieje.", "Bład rezerwacji",MessageBoxButtons.OK);
             }
         }
       

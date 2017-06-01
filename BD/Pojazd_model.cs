@@ -121,6 +121,7 @@ namespace BD
                 SqlCommand zapytanie = polacz.UtworzZapytanie("INSERT INTO Pojazd " +
                              "VALUES('" + pojazd.NumerRejestracyjny + "'," + pojazd.Dostepnosc + ",'" + pojazd.Marka +
                              "'," + pojazd.Pojemnosc + "," + pojazd.Stan + ")");
+                zapytanie.ExecuteNonQuery();
                 return true;
             }
         }

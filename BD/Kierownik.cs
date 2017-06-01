@@ -85,6 +85,7 @@ namespace BD
         {
             Pojazd pojazd = new Pojazd();
             pojazd.ShowDialog();
+            ZaladujPojazdy();
         }
 
         /// <summary>
@@ -170,37 +171,14 @@ namespace BD
             }
             else if (tc_kierownik.SelectedIndex == 2)
             {
-                _listaPojazdow = (new Pojazd_model()).PobierzPojazdy();
-
-                for (int i = 0; i < _listaPojazdow.Count; i++)
-                {
-                    ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
-
-                    if (_listaPojazdow[i].Dostepnosc == 1)
-                    {
-                        pojazd.SubItems.Add("Dostępny");
-                    }
-                    else
-                    {
-                        pojazd.SubItems.Add("Niedostępny");
-                    }
-
-                    pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
-                    pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
-                    if(_listaPojazdow[i].Stan == 1)
-                    {
-                        pojazd.SubItems.Add("Sprawny");
-                    }
-                    else
-                    {
-                        pojazd.SubItems.Add("Awaria");
-                    }
-                    lv_pojazdy.Items.Add(pojazd);
-                }
+                ZaladujPojazdy();
             }
         }
+
         public void ZaladujWycieczki()
         {
+            _listaWycieczek.Clear();
+            lv_wycieczkis.Items.Clear();
             _listaWycieczek = (new Katalog_kontroler_list()).PobierzListeDlaKierownika();
 
             for (int i = 0; i < _listaWycieczek.Count; i++)
@@ -220,6 +198,39 @@ namespace BD
             }
         }
 
+        public void ZaladujPojazdy()
+        {
+            _listaPojazdow.Clear();
+            lv_pojazdy.Items.Clear();
+            _listaPojazdow = (new Pojazd_model()).PobierzPojazdy();
+
+            for (int i = 0; i < _listaPojazdow.Count; i++)
+            {
+                ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
+
+                if (_listaPojazdow[i].Dostepnosc == 1)
+                {
+                    pojazd.SubItems.Add("Dostępny");
+                }
+                else
+                {
+                    pojazd.SubItems.Add("Niedostępny");
+                }
+
+                pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
+                pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
+                if (_listaPojazdow[i].Stan == 1)
+                {
+                    pojazd.SubItems.Add("Sprawny");
+                }
+                else
+                {
+                    pojazd.SubItems.Add("Awaria");
+                }
+                lv_pojazdy.Items.Add(pojazd);
+            }
+        }
+
         private void b_usun_pojazd_Click(object sender, EventArgs e)
         {
             //Pobranie wybranego numeru rejestracyjnego z listview
@@ -234,6 +245,83 @@ namespace BD
             {
                 MessageBox.Show("Napotkano problem podczas usuwania pojazdu", "Usunięcie pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void b_edytuj_pojazd_Click(object sender, EventArgs e)
+        {
+            //Pobranie wybranego numeru rejestracyjnego z listview
+            string numerRejestracyjny = lv_pojazdy.SelectedItems[0].SubItems[0].Text;
+
+            DialogResult dialogResult = MessageBox.Show("Jesli chcesz ustawić dostępność pojazdu na 'Dostepny', kliknij 'Tak', w przeciwnym razie kliknij 'Nie'.", "Zmiana dostępnosci", MessageBoxButtons.YesNoCancel);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                if((new Kierownik_model()).EdytujDostepnoscPojazdu(numerRejestracyjny, 1))
+                {
+                    MessageBox.Show("Poprawnie zmieniono dostępność pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[1].Text = "Dostępny";
+                }
+                else
+                {
+                    MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                if((new Kierownik_model()).EdytujDostepnoscPojazdu(numerRejestracyjny, 0))
+                {
+                    MessageBox.Show("Poprawnie zmieniono dostępność pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[1].Text = "Niedostępny";
+                }
+                else
+                {
+                    MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            else if (dialogResult == DialogResult.Cancel)
+            {
+                MessageBox.Show("Nie zmieniono dostepnośći w pojeździe o numerze rejestracyjnym: " + numerRejestracyjny,"Brak zmian", MessageBoxButtons.OK);
+                return;
+            }
+
+
+            dialogResult = MessageBox.Show("Jesli chcesz ustawić stan pojazdu na 'Sprawny', kliknij 'Tak', w przeciwnym razie kliknij 'Nie'.", "Zmiana stanu", MessageBoxButtons.YesNoCancel);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                if((new Kierownik_model()).EdytujStanPojazdu(numerRejestracyjny, 1))
+                {
+                    MessageBox.Show("Poprawnie zmieniono stan pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Sprawny";
+                }
+                else
+                {
+                    MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                if((new Kierownik_model()).EdytujStanPojazdu(numerRejestracyjny, 0))
+                {
+                    MessageBox.Show("Poprawnie zmieniono stan pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Awaria";
+                }
+                else
+                {
+                    MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            else if (dialogResult == DialogResult.Cancel)
+            {
+                MessageBox.Show("Nie zmieniono stanu w pojeździe o numerze rejestracyjnym: " + numerRejestracyjny,"Brak zmian",MessageBoxButtons.OK);
+                return;
+            }
+
+            lv_pojazdy.Refresh();
         }
     }
 }
