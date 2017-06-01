@@ -178,7 +178,7 @@ namespace BD
         public void ZaladujWycieczki()
         {
             _listaWycieczek.Clear();
-            lv_wycieczkis.Items.Clear();
+            lv_wycieczki.Items.Clear();
             _listaWycieczek = (new Katalog_kontroler_list()).PobierzListeDlaKierownika();
 
             for (int i = 0; i < _listaWycieczek.Count; i++)
