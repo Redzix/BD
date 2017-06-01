@@ -397,7 +397,7 @@
             // Stan
             // 
             this.Stan.Text = "Stan";
-            this.Stan.Width = 40;
+            this.Stan.Width = 57;
             // 
             // tp_raporty
             // 

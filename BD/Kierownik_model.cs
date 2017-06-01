@@ -22,8 +22,8 @@ namespace BD
             Polacz_z_baza polacz = new Polacz_z_baza();
             SqlConnection polaczenie = polacz.PolaczZBaza();
 
-            SqlCommand zapytanie = polacz.UtworzZapytanie("DELETE FROM Pojazd WHERE numer_rejestracyjny = '" +numerRejestracyjny + "'");
-
+            SqlCommand zapytanie = polacz.UtworzZapytanie("DELETE FROM Pojazd WHERE numer_rejestracyjny = '" + numerRejestracyjny + "'");
+            zapytanie.ExecuteNonQuery();
             return true;
         }
 
