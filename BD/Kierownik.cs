@@ -19,7 +19,9 @@ namespace BD
         Polacz_z_baza _polacz = null;
         List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();
         List<Reklamacja_model> _listaReklamacji = new List<Reklamacja_model>();
-        List<Katalog_kontroler_list> _listaWycieczek = new List<Katalog_kontroler_list>();
+        List<Wycieczka_model> _listaWycieczek = new List<Wycieczka_model>();
+        List<Katalog_model> _listaKatalogu = new List<Katalog_model>();
+        private int _idReklamacji = 0;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna, tworzący okno oraz połączenie z bazą danych.
@@ -161,13 +163,13 @@ namespace BD
             }
             else if (tc_kierownik.SelectedIndex == 1)
             {
-                _listaReklamacji = (new Reklamacja_model()).PobierzReklamacje();
+                _listaWycieczek = new Wycieczka_model().PobierzWycieczki();
 
-                for (int i = 0; i < _listaReklamacji.Count; i++)
+                for(int i = 0; i < _listaWycieczek.Count; i++)
                 {
-                    ListViewItem reklamacja = new ListViewItem(_listaReklamacji[i].Numer.ToString());
-                    lv_reklamacje.Items.Add(reklamacja);
+                    cb_nazwa_wycieczki.Items.Add(_listaWycieczek[i].Nazwa);
                 }
+
             }
             else if (tc_kierownik.SelectedIndex == 2)
             {
@@ -177,7 +179,40 @@ namespace BD
 
         public void ZaladujWycieczki()
         {
-            _listaWycieczek.Clear();
+            List<Wycieczka_model> _listaWycieczek = new Wycieczka_model().PobierzWycieczki();
+            _listaKatalogu = new Katalog_model().PobierzKatalog();          
+            List<Promocja_model> _listaPromocji = new Promocja_model().PobierzPromocje();
+            List<Cennik_model> _listaCennikow = new Cennik_model().PobierzCennik();
+
+            _listaWycieczek = new Wycieczka_model().PobierzWycieczki();
+
+
+            for (int i = 0; i < _listaKatalogu.Count; i++)
+            {
+
+                ListViewItem wycieczka = new ListViewItem(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Nazwa);
+                wycieczka.SubItems.Add(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataWyjazdu.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataPowrotu.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Opis);
+
+                int j = 0;
+                while (_listaPromocji[j].IdWycieczki != _listaKatalogu[i].IdWycieczki)
+                {
+                    j++;
+                }
+ 
+                wycieczka.SubItems.Add(_listaPromocji[j].Cena.ToString());
+                wycieczka.SubItems.Add(_listaCennikow[_listaKatalogu[i].IdCennika - 1].Cena.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Kierowca.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Pilot.ToString());
+                wycieczka.SubItems.Add(_listaKatalogu[i].MiejsceWyjazdu);
+                wycieczka.SubItems.Add(_listaKatalogu[i].MiejsceDocelowe);
+
+                lv_wycieczki.Items.Add(wycieczka);
+            }
+
+
+            /*_listaWycieczek.Clear();
             lv_wycieczki.Items.Clear();
             _listaWycieczek = (new Katalog_kontroler_list()).PobierzListeDlaKierownika();
 
@@ -194,8 +229,8 @@ namespace BD
                 wycieczka.SubItems.Add(_listaWycieczek[i].MiejsceOdjazdu.ToString());
                 wycieczka.SubItems.Add(_listaWycieczek[i].MiejsceDocelowe.ToString());
 
-                lv_wycieczki.Items.Add(wycieczka);
-            }
+                lv_wycieczki.Items.Add(wycieczka);*/
+       
         }
 
         public void ZaladujPojazdy()
@@ -322,6 +357,87 @@ namespace BD
             }
 
             lv_pojazdy.Refresh();
+        }
+
+        private void cb_nazwa_wycieczki_SelectedIndexChanged(object sender, EventArgs e)
+        {          
+            List<int> listaNumerowReklamacji = new List<int>();
+
+            lv_reklamacje.Items.Clear();
+
+            listaNumerowReklamacji = _polacz.PobierzListInt(_polacz.UtworzZapytanie("SELECT numer_reklamacji " +
+                "FROM Reklamacja " +
+                "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
+                "INNER JOIN Rezerwacja ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji I" +
+                "NNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Rezerwacja.id_wycieczki " +
+                "WHERE Wycieczka.nazwa = '" + cb_nazwa_wycieczki.Text + "'"));
+
+            if (listaNumerowReklamacji.Count == 0)
+            {
+                lv_reklamacje.Items.Add("brak reklamacji");
+            }
+            else
+            {
+                for (int i = 0; i < listaNumerowReklamacji.Count; i++)
+                {
+                    lv_reklamacje.Items.Add(listaNumerowReklamacji[i].ToString());
+                }
+            }
+            lv_reklamacje.Refresh();
+        }
+
+        private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
+        {
+            _listaReklamacji = new Reklamacja_model().PobierzReklamacje();
+            string opis = "";
+            int okres = 0;
+
+            _idReklamacji = Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text);
+            opis = _listaReklamacji[_idReklamacji + 1].Opis;
+
+            /* opis = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT opis " +
+                 "FROM Reklamacja " +
+                 "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
+                 "INNER JOIN Rezerwacja ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji I" +
+                 "NNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Rezerwacja.id_wycieczki " +
+                 "WHERE Reklamacja.numer_reklamacji = " + Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text)));
+             */
+
+            okres = _polacz.PobierzDaneInt(_polacz.UtworzZapytanie("SELECT DATEDIFF(day,data_wyjazdu,data_powrotu) " +
+               "FROM Reklamacja " +
+               "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
+               "INNER JOIN Rezerwacja ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji " +
+               "INNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Rezerwacja.id_wycieczki " +
+               "WHERE Reklamacja.numer_reklamacji = " + _idReklamacji));
+
+            rtb_opisReklamacji.Text = opis;
+            tb_okresTrwaniaWycieczki.Text = okres.ToString();
+        }
+
+        private void b_rozpatrz_pozytywnie_Click(object sender, EventArgs e)
+        {
+            if((new Kierownik_model()).RozpatrzReklamacje(_idReklamacji, 1))
+            {
+                MessageBox.Show("Reklamacja została rozpatrzona pozytywnie.","Rozpatrzenie reklamacji", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Bład podczas rozpatrywania reklamacji.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void b_rozpatrz_negatywnie_Click(object sender, EventArgs e)
+        {
+            if((new Kierownik_model()).RozpatrzReklamacje(_idReklamacji, 0))
+            {
+                    MessageBox.Show("Reklamacja została rozpatrzona negatywnie.", "Rozpatrzenie reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                    MessageBox.Show("Bład podczas rozpatrywania reklamacji.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }       
         }
     }
 }

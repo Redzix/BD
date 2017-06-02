@@ -218,7 +218,7 @@ namespace BD
                 "WHERE Wycieczka.nazwa = " + "'" + _nazwa + "'"));
 
             _miejscowoscDocelowa = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT miejscowosc " +
-                "FROM Miejsce" +
+                "FROM Miejsce " +
                 "INNER JOIN Katalog ON Miejsce.id_miejsca = Katalog.id_miejsca_przyjazdu " +
                 "INNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Katalog.id_wycieczki " +
                 "WHERE Wycieczka.nazwa = " + "'" + _nazwa + "'"));

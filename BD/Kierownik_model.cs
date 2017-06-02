@@ -13,8 +13,6 @@ namespace BD
         //Dodaj wycieczke
         //edytuj wycieczke
         //usun wycieczke
-        //rozpatrz pozytywnie
-        //rozpatrz negatywnie
 
         public bool UsunPojazd(string numerRejestracyjny)
         {
@@ -65,5 +63,28 @@ namespace BD
                 return false;
             }
         }
+
+        public bool RozpatrzReklamacje(int numerReklamacji, int stan)
+        {
+            Polacz_z_baza polacz = new Polacz_z_baza();
+            SqlConnection polaczenie = polacz.PolaczZBaza();
+            SqlCommand zapytanie = polacz.UtworzZapytanie("UPDATE Reklamacja " +
+                    "SET " +
+                    "stan = " + stan + " " +
+                    "WHERE Reklamacja.numer_reklamacji= " + numerReklamacji);
+
+            try
+            {
+                zapytanie.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+
+            return true;
+        }
+ 
     }
 }

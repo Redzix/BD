@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.l_nazwa = new System.Windows.Forms.Label();
-            this.l_data_przyjazdu = new System.Windows.Forms.Label();
-            this.l_data_odjazdu = new System.Windows.Forms.Label();
+            this.l_data_wyjazdu = new System.Windows.Forms.Label();
+            this.l_data_powrotu = new System.Windows.Forms.Label();
             this.l_opis = new System.Windows.Forms.Label();
             this.l_cena = new System.Windows.Forms.Label();
             this.tb_nazwa = new System.Windows.Forms.TextBox();
@@ -55,23 +55,23 @@
             this.l_nazwa.TabIndex = 0;
             this.l_nazwa.Text = "Nazwa";
             // 
-            // l_data_przyjazdu
+            // l_data_wyjazdu
             // 
-            this.l_data_przyjazdu.AutoSize = true;
-            this.l_data_przyjazdu.Location = new System.Drawing.Point(11, 35);
-            this.l_data_przyjazdu.Name = "l_data_przyjazdu";
-            this.l_data_przyjazdu.Size = new System.Drawing.Size(77, 13);
-            this.l_data_przyjazdu.TabIndex = 1;
-            this.l_data_przyjazdu.Text = "Data przyjazdu";
+            this.l_data_wyjazdu.AutoSize = true;
+            this.l_data_wyjazdu.Location = new System.Drawing.Point(11, 35);
+            this.l_data_wyjazdu.Name = "l_data_wyjazdu";
+            this.l_data_wyjazdu.Size = new System.Drawing.Size(71, 13);
+            this.l_data_wyjazdu.TabIndex = 1;
+            this.l_data_wyjazdu.Text = "Data wyjazdu";
             // 
-            // l_data_odjazdu
+            // l_data_powrotu
             // 
-            this.l_data_odjazdu.AutoSize = true;
-            this.l_data_odjazdu.Location = new System.Drawing.Point(11, 61);
-            this.l_data_odjazdu.Name = "l_data_odjazdu";
-            this.l_data_odjazdu.Size = new System.Drawing.Size(70, 13);
-            this.l_data_odjazdu.TabIndex = 2;
-            this.l_data_odjazdu.Text = "Data odjazdu";
+            this.l_data_powrotu.AutoSize = true;
+            this.l_data_powrotu.Location = new System.Drawing.Point(11, 61);
+            this.l_data_powrotu.Name = "l_data_powrotu";
+            this.l_data_powrotu.Size = new System.Drawing.Size(71, 13);
+            this.l_data_powrotu.TabIndex = 2;
+            this.l_data_powrotu.Text = "Data powrotu";
             // 
             // l_opis
             // 
@@ -198,8 +198,8 @@
             this.Controls.Add(this.tb_nazwa);
             this.Controls.Add(this.l_cena);
             this.Controls.Add(this.l_opis);
-            this.Controls.Add(this.l_data_odjazdu);
-            this.Controls.Add(this.l_data_przyjazdu);
+            this.Controls.Add(this.l_data_powrotu);
+            this.Controls.Add(this.l_data_wyjazdu);
             this.Controls.Add(this.l_nazwa);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Wycieczka";
@@ -214,8 +214,8 @@
         #endregion
 
         private System.Windows.Forms.Label l_nazwa;
-        private System.Windows.Forms.Label l_data_przyjazdu;
-        private System.Windows.Forms.Label l_data_odjazdu;
+        private System.Windows.Forms.Label l_data_wyjazdu;
+        private System.Windows.Forms.Label l_data_powrotu;
         private System.Windows.Forms.Label l_opis;
         private System.Windows.Forms.Label l_cena;
         private System.Windows.Forms.TextBox tb_nazwa;

@@ -99,6 +99,21 @@ namespace BD
                 wartosc = reader.GetInt32(0);
             reader.Close();
             return wartosc;
-        }        
+        }  
+        
+        public List<int> PobierzListInt(SqlCommand zapytanie)
+        {
+            List<int> lista = new List<int>();
+            int wartosc = 0;
+
+            SqlDataReader reader = zapytanie.ExecuteReader();
+            while (reader.Read())
+            {
+                wartosc = reader.GetInt32(0);
+                lista.Add(wartosc);
+            }
+            reader.Close();
+            return lista;
+        }
     }
 }
