@@ -97,6 +97,7 @@ namespace BD
             uczestnictwo.NumerRezerwacji = rezerwacja.Numer;
 
             klient.DodajKlienta(klient);
+
             if(rezerwacja.DodajRezerwacje(rezerwacja))
             {
                 if (uczestnictwo.DodajUczestnictwo(uczestnictwo))
@@ -104,6 +105,11 @@ namespace BD
                     MessageBox.Show("Rezerwację dodano poprawnie.", "Potwierdzenie rezerwacji.", MessageBoxButtons.OK);
                     this.Dispose();
                 }
+                else
+                {
+                    (new Rezerwacja_model()).UsunRezerwacje(rezerwacja.Numer);
+                }
+
             }
             else
             {

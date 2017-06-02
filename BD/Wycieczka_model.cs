@@ -136,6 +136,18 @@ namespace BD
             _polacz.ZakonczPolaczenie();
             return _listaWycieczek;
         }
+        //Dodaj wycieczke
+        //edytuj wycieczke
+
+        public bool DodajWycieczke(Wycieczka_model wycieczka, decimal cena)
+        {
+            return true;
+        }
+
+        public bool EdytujWycieczke(Wycieczka_model wycieczka, decimal cena)
+        {
+            return true;
+        }
 
     }
 }

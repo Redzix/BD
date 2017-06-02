@@ -150,7 +150,7 @@ namespace BD
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_wycieczke_Click(object sender, EventArgs e)
         {
-            Wycieczka wycieczka = new Wycieczka();
+            Wycieczka wycieczka = new Wycieczka(1);
             wycieczka.ShowDialog();
         }
 
@@ -438,6 +438,33 @@ namespace BD
                     MessageBox.Show("Bład podczas rozpatrywania reklamacji.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }       
+        }
+
+        private void b_edytuj_Click(object sender, EventArgs e)
+        {
+            Wycieczka wycieczka = new Wycieczka(0);
+            wycieczka.ShowDialog();
+        }
+
+        private void b_usun_wycieczke_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz usunąc wycieczke o indeksie: " + (lv_wycieczki.SelectedItems[0].Index + 1).ToString() + " ?","Usunięcie wycieczki.",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            if(dialogResult == DialogResult.Yes)
+            {
+                if ((new Kierownik_model()).UsunWycieczke(lv_wycieczki.SelectedItems[0].Index + 1))
+                {
+                    MessageBox.Show("Usunięto wybraną wycieczkę.", "Usuwanie wycieczki", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Wystąpił błąd podczas usuwania wycieczki.", "Błąd usuwania wycieczki.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nie usunięto żadnej wycieczki.", "Usuwanie wycieczki",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                return;
+            }
         }
     }
 }

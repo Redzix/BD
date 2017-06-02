@@ -9,11 +9,6 @@ namespace BD
 {
     public class Kierownik_model : Pracownik_model
     {
-
-        //Dodaj wycieczke
-        //edytuj wycieczke
-        //usun wycieczke
-
         public bool UsunPojazd(string numerRejestracyjny)
         {
             Polacz_z_baza polacz = new Polacz_z_baza();
@@ -82,9 +77,25 @@ namespace BD
             {
                 return false;
             }
-
-            return true;
         }
- 
+
+        public bool UsunWycieczke(int idWycieczki)
+        {
+            Polacz_z_baza polacz = new Polacz_z_baza();
+            SqlConnection polaczenie = polacz.PolaczZBaza();
+            SqlCommand zapytanie = polacz.UtworzZapytanie("DELETE FROM Wycieczka " +
+                    "WHERE Wycieczka.id_wycieczki = " + idWycieczki);
+
+            try
+            {
+                zapytanie.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+        }
+
     }
 }

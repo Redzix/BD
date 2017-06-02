@@ -1,4 +1,6 @@
-﻿using System;
+﻿//zrobic try catche
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -144,6 +146,19 @@ namespace BD
                   _zapytanie.ExecuteNonQuery();
                 return true;
             }
+        }
+
+
+        public bool UsunRezerwacje(int numerRezerwacji)
+        {
+            Polacz_z_baza _polacz = new Polacz_z_baza();
+            SqlConnection _polaczenie = _polacz.PolaczZBaza();
+
+            SqlCommand _zapytanie = _polacz.UtworzZapytanie("DELETE FROM Rezerwacja " +
+                "WHERE Rezerwacja.numer_rezerwacji = " + numerRezerwacji);
+                _zapytanie.ExecuteNonQuery();
+            return true;
+
         }
 
     }

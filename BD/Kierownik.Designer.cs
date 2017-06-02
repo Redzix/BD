@@ -188,6 +188,7 @@
             this.b_usun_wycieczke.TabIndex = 4;
             this.b_usun_wycieczke.Text = "Usuń wycieczkę";
             this.b_usun_wycieczke.UseVisualStyleBackColor = true;
+            this.b_usun_wycieczke.Click += new System.EventHandler(this.b_usun_wycieczke_Click);
             // 
             // b_edytuj
             // 
@@ -197,6 +198,7 @@
             this.b_edytuj.TabIndex = 3;
             this.b_edytuj.Text = "Edytuj";
             this.b_edytuj.UseVisualStyleBackColor = true;
+            this.b_edytuj.Click += new System.EventHandler(this.b_edytuj_Click);
             // 
             // b_dodaj_wycieczke
             // 

@@ -44,6 +44,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cb_odjazd = new System.Windows.Forms.ComboBox();
             this.cb_docelowa = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.l_pilot = new System.Windows.Forms.Label();
+            this.l_kierowca = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.l_pojazd = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // l_nazwa
@@ -76,7 +82,7 @@
             // l_opis
             // 
             this.l_opis.AutoSize = true;
-            this.l_opis.Location = new System.Drawing.Point(92, 142);
+            this.l_opis.Location = new System.Drawing.Point(92, 222);
             this.l_opis.Name = "l_opis";
             this.l_opis.Size = new System.Drawing.Size(28, 13);
             this.l_opis.TabIndex = 3;
@@ -85,7 +91,7 @@
             // l_cena
             // 
             this.l_cena.AutoSize = true;
-            this.l_cena.Location = new System.Drawing.Point(92, 221);
+            this.l_cena.Location = new System.Drawing.Point(92, 301);
             this.l_cena.Name = "l_cena";
             this.l_cena.Size = new System.Drawing.Size(32, 13);
             this.l_cena.TabIndex = 4;
@@ -114,7 +120,7 @@
             // 
             // tb_opis
             // 
-            this.tb_opis.Location = new System.Drawing.Point(136, 139);
+            this.tb_opis.Location = new System.Drawing.Point(136, 222);
             this.tb_opis.Multiline = true;
             this.tb_opis.Name = "tb_opis";
             this.tb_opis.Size = new System.Drawing.Size(159, 73);
@@ -122,23 +128,24 @@
             // 
             // tb_cena
             // 
-            this.tb_cena.Location = new System.Drawing.Point(136, 218);
+            this.tb_cena.Location = new System.Drawing.Point(136, 301);
             this.tb_cena.Name = "tb_cena";
             this.tb_cena.Size = new System.Drawing.Size(100, 20);
             this.tb_cena.TabIndex = 9;
             // 
             // b_zapisz
             // 
-            this.b_zapisz.Location = new System.Drawing.Point(136, 262);
+            this.b_zapisz.Location = new System.Drawing.Point(136, 342);
             this.b_zapisz.Name = "b_zapisz";
             this.b_zapisz.Size = new System.Drawing.Size(75, 23);
             this.b_zapisz.TabIndex = 10;
             this.b_zapisz.Text = "Zapisz";
             this.b_zapisz.UseVisualStyleBackColor = true;
+            this.b_zapisz.Click += new System.EventHandler(this.b_zapisz_Click);
             // 
             // b_anuluj
             // 
-            this.b_anuluj.Location = new System.Drawing.Point(219, 262);
+            this.b_anuluj.Location = new System.Drawing.Point(219, 342);
             this.b_anuluj.Name = "b_anuluj";
             this.b_anuluj.Size = new System.Drawing.Size(75, 23);
             this.b_anuluj.TabIndex = 11;
@@ -180,11 +187,68 @@
             this.cb_docelowa.Size = new System.Drawing.Size(158, 21);
             this.cb_docelowa.TabIndex = 16;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(137, 168);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(158, 21);
+            this.comboBox1.TabIndex = 20;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(136, 141);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(158, 21);
+            this.comboBox2.TabIndex = 19;
+            // 
+            // l_pilot
+            // 
+            this.l_pilot.AutoSize = true;
+            this.l_pilot.Location = new System.Drawing.Point(11, 167);
+            this.l_pilot.Name = "l_pilot";
+            this.l_pilot.Size = new System.Drawing.Size(76, 13);
+            this.l_pilot.TabIndex = 18;
+            this.l_pilot.Text = "Pilot wycieczki";
+            // 
+            // l_kierowca
+            // 
+            this.l_kierowca.AutoSize = true;
+            this.l_kierowca.Location = new System.Drawing.Point(11, 141);
+            this.l_kierowca.Name = "l_kierowca";
+            this.l_kierowca.Size = new System.Drawing.Size(100, 13);
+            this.l_kierowca.TabIndex = 17;
+            this.l_kierowca.Text = "Kierowca wycieczki";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(136, 195);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(158, 21);
+            this.comboBox3.TabIndex = 22;
+            // 
+            // l_pojazd
+            // 
+            this.l_pojazd.AutoSize = true;
+            this.l_pojazd.Location = new System.Drawing.Point(10, 194);
+            this.l_pojazd.Name = "l_pojazd";
+            this.l_pojazd.Size = new System.Drawing.Size(39, 13);
+            this.l_pojazd.TabIndex = 21;
+            this.l_pojazd.Text = "Pojazd";
+            // 
             // Wycieczka
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 302);
+            this.ClientSize = new System.Drawing.Size(311, 379);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.l_pojazd);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.l_pilot);
+            this.Controls.Add(this.l_kierowca);
             this.Controls.Add(this.cb_docelowa);
             this.Controls.Add(this.cb_odjazd);
             this.Controls.Add(this.label2);
@@ -206,6 +270,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Wycieczka";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Wycieczka_FormClosing);
+            this.Load += new System.EventHandler(this.Wycieczka_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,5 +294,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cb_odjazd;
         private System.Windows.Forms.ComboBox cb_docelowa;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label l_pilot;
+        private System.Windows.Forms.Label l_kierowca;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label l_pojazd;
     }
 }
