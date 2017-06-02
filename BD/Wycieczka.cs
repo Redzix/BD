@@ -29,6 +29,8 @@ namespace BD
         public Wycieczka(int opcja)
         {
             InitializeComponent();
+            //Data odjazdu nie moze byc taka sama jak data przyjazdu
+            tb_data_odjazdu.Value = tb_data_odjazdu.Value.AddDays(1);
             if (opcja == 0)
             {
                 tb_nazwa.Enabled = false;
@@ -97,9 +99,8 @@ namespace BD
             wycieczka.Nazwa = tb_nazwa.Text;
             try
             {
-                //wycieczka.DataWyjazdu = Convert.ToDateTime(tb_data_odjazdu.ToString());
-                DateTime myDate = DateTime.ParseExact(tb_data_odjazdu.ToString(), "yyyy-MM-dd HH:mm:ss,fff",null);
 
+                DateTime myDate = tb_data_odjazdu.Value; //Obiekt, po Value mozesz wybrać co konkretnie
                 return;
             }
              catch (FormatException exc)
@@ -126,6 +127,13 @@ namespace BD
                 }
             }
 
+        }
+
+
+        //Za każdym razem jeśli zmieni się data w polu odjazdu, data w polu odjazdu zinkrementuje się o jeden
+        private void tb_data_przyjazdu_ValueChanged(object sender, EventArgs e)
+        {
+            tb_data_odjazdu.Value = ((DateTimePicker)sender).Value.AddDays(1);
         }
     }
 }

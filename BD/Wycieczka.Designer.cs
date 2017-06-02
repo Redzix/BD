@@ -34,8 +34,6 @@
             this.l_opis = new System.Windows.Forms.Label();
             this.l_cena = new System.Windows.Forms.Label();
             this.tb_nazwa = new System.Windows.Forms.TextBox();
-            this.tb_data_przyjazdu = new System.Windows.Forms.TextBox();
-            this.tb_data_odjazdu = new System.Windows.Forms.TextBox();
             this.tb_opis = new System.Windows.Forms.TextBox();
             this.tb_cena = new System.Windows.Forms.TextBox();
             this.b_zapisz = new System.Windows.Forms.Button();
@@ -50,6 +48,8 @@
             this.l_kierowca = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.l_pojazd = new System.Windows.Forms.Label();
+            this.tb_data_przyjazdu = new System.Windows.Forms.DateTimePicker();
+            this.tb_data_odjazdu = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // l_nazwa
@@ -103,20 +103,6 @@
             this.tb_nazwa.Name = "tb_nazwa";
             this.tb_nazwa.Size = new System.Drawing.Size(159, 20);
             this.tb_nazwa.TabIndex = 5;
-            // 
-            // tb_data_przyjazdu
-            // 
-            this.tb_data_przyjazdu.Location = new System.Drawing.Point(136, 35);
-            this.tb_data_przyjazdu.Name = "tb_data_przyjazdu";
-            this.tb_data_przyjazdu.Size = new System.Drawing.Size(159, 20);
-            this.tb_data_przyjazdu.TabIndex = 6;
-            // 
-            // tb_data_odjazdu
-            // 
-            this.tb_data_odjazdu.Location = new System.Drawing.Point(136, 61);
-            this.tb_data_odjazdu.Name = "tb_data_odjazdu";
-            this.tb_data_odjazdu.Size = new System.Drawing.Size(159, 20);
-            this.tb_data_odjazdu.TabIndex = 7;
             // 
             // tb_opis
             // 
@@ -238,11 +224,32 @@
             this.l_pojazd.TabIndex = 21;
             this.l_pojazd.Text = "Pojazd";
             // 
+            // tb_data_przyjazdu
+            // 
+            this.tb_data_przyjazdu.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.tb_data_przyjazdu.Location = new System.Drawing.Point(136, 35);
+            this.tb_data_przyjazdu.Name = "tb_data_przyjazdu";
+            this.tb_data_przyjazdu.Size = new System.Drawing.Size(159, 20);
+            this.tb_data_przyjazdu.TabIndex = 23;
+            this.tb_data_przyjazdu.Value = new System.DateTime(2017, 6, 2, 21, 4, 17, 0);
+            this.tb_data_przyjazdu.ValueChanged += new System.EventHandler(this.tb_data_przyjazdu_ValueChanged);
+            // 
+            // tb_data_odjazdu
+            // 
+            this.tb_data_odjazdu.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.tb_data_odjazdu.Location = new System.Drawing.Point(136, 61);
+            this.tb_data_odjazdu.Name = "tb_data_odjazdu";
+            this.tb_data_odjazdu.Size = new System.Drawing.Size(159, 20);
+            this.tb_data_odjazdu.TabIndex = 24;
+            this.tb_data_odjazdu.Value = new System.DateTime(2017, 6, 2, 21, 4, 17, 0);
+            // 
             // Wycieczka
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(311, 379);
+            this.Controls.Add(this.tb_data_odjazdu);
+            this.Controls.Add(this.tb_data_przyjazdu);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.l_pojazd);
             this.Controls.Add(this.comboBox1);
@@ -257,8 +264,6 @@
             this.Controls.Add(this.b_zapisz);
             this.Controls.Add(this.tb_cena);
             this.Controls.Add(this.tb_opis);
-            this.Controls.Add(this.tb_data_odjazdu);
-            this.Controls.Add(this.tb_data_przyjazdu);
             this.Controls.Add(this.tb_nazwa);
             this.Controls.Add(this.l_cena);
             this.Controls.Add(this.l_opis);
@@ -284,8 +289,6 @@
         private System.Windows.Forms.Label l_opis;
         private System.Windows.Forms.Label l_cena;
         private System.Windows.Forms.TextBox tb_nazwa;
-        private System.Windows.Forms.TextBox tb_data_przyjazdu;
-        private System.Windows.Forms.TextBox tb_data_odjazdu;
         private System.Windows.Forms.TextBox tb_opis;
         private System.Windows.Forms.TextBox tb_cena;
         private System.Windows.Forms.Button b_zapisz;
@@ -300,5 +303,7 @@
         private System.Windows.Forms.Label l_kierowca;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label l_pojazd;
+        private System.Windows.Forms.DateTimePicker tb_data_przyjazdu;
+        private System.Windows.Forms.DateTimePicker tb_data_odjazdu;
     }
 }
