@@ -443,7 +443,8 @@ namespace BD
 
         private void b_edytuj_Click(object sender, EventArgs e)
         {
-            Wycieczka wycieczka = new Wycieczka(0,lv_wycieczki.SelectedItems[0].Index + 1);
+            int idWycieczki = _listaKatalogu[lv_wycieczki.SelectedItems[0].Index].IdWycieczki;
+            Wycieczka wycieczka = new Wycieczka(0,idWycieczki);
             wycieczka.ShowDialog();
             ZaladujWycieczki();
         }

@@ -203,7 +203,7 @@ namespace BD
                 "WHERE id_wycieczki = " + IdWycieczki);
 
             SqlCommand zapytanieCennik = polacz.UtworzZapytanie("UPDATE Cennik " +
-                "SET cena = " + cena +
+                "SET cena = " + cena + " " +
                 "FROM Cennik " +
                 "INNER JOIN Katalog ON Katalog.id_cennika = Cennik.id_cennika " +
                 "WHERE Katalog.id_wycieczki = " + IdWycieczki);

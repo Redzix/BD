@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cennik_model.cs" />
-    <Compile Include="Katalog_kontroler_list.cs" />
     <Compile Include="Katalog_model.cs" />
     <Compile Include="Kierowca.cs">
       <SubType>Form</SubType>
