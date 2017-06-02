@@ -18,7 +18,7 @@ namespace BD
         //nie tak ma byc, ale jest najprosciej
         private string _kierowca;
         private string _pilot;
-
+        private string _pojazd;
 
         public Wycieczka_model(){}
 
@@ -108,6 +108,18 @@ namespace BD
             }
         }
 
+        public string Pojazd
+        {
+            get
+            {
+                return this._pojazd;
+            }
+            set
+            {
+                this._pojazd = value;
+            }
+        }
+
         public List<Wycieczka_model> PobierzWycieczki()
         {
             List<Wycieczka_model> _listaWycieczek = new List<Wycieczka_model>();
@@ -139,14 +151,82 @@ namespace BD
         //Dodaj wycieczke
         //edytuj wycieczke
 
-        public bool DodajWycieczke(Wycieczka_model wycieczka, decimal cena)
+        public bool DodajWycieczke(Wycieczka_model wycieczka, string miejsceWyjazdu, string miejsceDocelowe, decimal cena)
         {
-            return true;
+            Polacz_z_baza polacz = new Polacz_z_baza();
+            SqlConnection polaczenie = polacz.PolaczZBaza();
+
+            SqlCommand zapytanieWycieczka = polacz.UtworzZapytanie("INSERT INTO Wycieczka " +
+                "(id_wycieczki,nazwa,data_wyjazdu,data_powrotu,opis,Pilot_pesel,Pojazd_numer_rejestracyjny," +
+                "Kierowca_pesel) " +
+                "VALUES("+ wycieczka.IdWycieczki + ",'" + wycieczka.Nazwa + "','" + wycieczka.DataWyjazdu + "','" +
+                 wycieczka.DataPowrotu + "','" + wycieczka.Opis + "'," +
+                "(SELECT Pilot.pesel FROM Pilot WHERE (Pilot.imie + ' ' + Pilot.nazwisko) LIKE '" + wycieczka.Pilot + "')," +
+                "'" + wycieczka.Pojazd + "'," +
+                "(SELECT Kierowca.pesel FROM Kierowca WHERE (Kierowca.imie + ' ' + Kierowca.nazwisko) LIKE '" + wycieczka.Kierowca + "'))");
+
+            SqlCommand zapytanieCennik = polacz.UtworzZapytanie("INSERT INTO Cennik " +
+                "VALUES((SELECT COUNT(*) + 1 FROM Cennik)," + cena + ",'0001-01-01','0001-01-01')");
+
+            SqlCommand zapytanieKatalog = polacz.UtworzZapytanie("INSERT INTO Katalog " +
+                "VALUES((SELECT COUNT(*) + 1 FROM Katalog)," +
+                "(SELECT datediff(day,data_wyjazdu,data_powrotu) FROM Wycieczka WHERE Wycieczka.id_wycieczki = " + wycieczka.IdWycieczki + ")," +
+                "(SELECT MAX(id_cennika) FROM Cennik), " +
+                "(SELECT id_miejsca FROM Miejsce WHERE adres + ' ' + miejscowosc = '" + miejsceWyjazdu + "')," +
+                "(SELECT id_miejsca FROM Miejsce WHERE adres + ' ' + miejscowosc = '" + miejsceDocelowe + "')," + wycieczka.IdWycieczki + ")");
+
+            try
+            {
+                zapytanieWycieczka.ExecuteNonQuery();
+                zapytanieCennik.ExecuteNonQuery();
+                zapytanieKatalog.ExecuteNonQuery();
+                return true;
+            }catch(SqlException e)
+            {
+                return false;
+            }
+             
         }
 
-        public bool EdytujWycieczke(Wycieczka_model wycieczka, decimal cena)
+        public bool EdytujWycieczke(Wycieczka_model wycieczka, string miejsceWyjazdu, decimal cena)
         {
-            return true;
+            Polacz_z_baza polacz = new Polacz_z_baza();
+            SqlConnection polaczenie = polacz.PolaczZBaza();
+
+            SqlCommand zapytanieWycieczka = polacz.UtworzZapytanie("UPDATE Wycieczka " +
+                "SET " +
+                "opis = '" + wycieczka.Opis + "', " +
+                "Pilot_pesel = (SELECT Pilot.pesel FROM Pilot WHERE (Pilot.imie + ' ' + Pilot.nazwisko) LIKE '" + wycieczka.Pilot + "'), " +
+                "Kierowca_pesel = (SELECT Kierowca.pesel FROM Kierowca WHERE (Kierowca.imie + ' ' + Kierowca.nazwisko) LIKE '" + wycieczka.Kierowca + "'), " +
+                "Pojazd_numer_rejestracyjny = '" + wycieczka.Pojazd + "' " +
+                "FROM Wycieczka " +
+                "WHERE id_wycieczki = " + IdWycieczki);
+
+            SqlCommand zapytanieCennik = polacz.UtworzZapytanie("UPDATE Cennik " +
+                "SET cena = " + cena +
+                "FROM Cennik " +
+                "INNER JOIN Katalog ON Katalog.id_cennika = Cennik.id_cennika " +
+                "WHERE Katalog.id_wycieczki = " + IdWycieczki);
+
+            SqlCommand zapytanieKatalog = polacz.UtworzZapytanie("UPDATE Katalog " +
+                "SET " +
+                "id_miejsca_odjazdu = (SELECT id_miejsca FROM Miejsce WHERE adres + ' ' + miejscowosc = '" + miejsceWyjazdu + "'), " +
+                "okres_trwania_wycieczki = datediff(day,data_wyjazdu,data_powrotu) " +
+                "FROM Katalog " +
+                "INNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Katalog.id_wycieczki " +
+                "WHERE Katalog.id_wycieczki = " + IdWycieczki);
+
+            try
+            {
+                zapytanieWycieczka.ExecuteNonQuery();
+                zapytanieCennik.ExecuteNonQuery();
+                zapytanieKatalog.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
         }
 
     }

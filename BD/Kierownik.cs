@@ -150,8 +150,9 @@ namespace BD
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_wycieczke_Click(object sender, EventArgs e)
         {
-            Wycieczka wycieczka = new Wycieczka(1);
+            Wycieczka wycieczka = new Wycieczka(1, 0);
             wycieczka.ShowDialog();
+            ZaladujWycieczki();
         }
 
         private void tc_kierownik_SelectedIndexChanged(object sender, EventArgs e)
@@ -442,8 +443,9 @@ namespace BD
 
         private void b_edytuj_Click(object sender, EventArgs e)
         {
-            Wycieczka wycieczka = new Wycieczka(0);
+            Wycieczka wycieczka = new Wycieczka(0,lv_wycieczki.SelectedItems[0].Index + 1);
             wycieczka.ShowDialog();
+            ZaladujWycieczki();
         }
 
         private void b_usun_wycieczke_Click(object sender, EventArgs e)

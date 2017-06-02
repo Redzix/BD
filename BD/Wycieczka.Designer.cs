@@ -42,11 +42,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cb_odjazd = new System.Windows.Forms.ComboBox();
             this.cb_docelowa = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cb_pilot = new System.Windows.Forms.ComboBox();
+            this.cb_kierowca = new System.Windows.Forms.ComboBox();
             this.l_pilot = new System.Windows.Forms.Label();
             this.l_kierowca = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cb_pojazd = new System.Windows.Forms.ComboBox();
             this.l_pojazd = new System.Windows.Forms.Label();
             this.tb_data_przyjazdu = new System.Windows.Forms.DateTimePicker();
             this.tb_data_odjazdu = new System.Windows.Forms.DateTimePicker();
@@ -173,21 +173,21 @@
             this.cb_docelowa.Size = new System.Drawing.Size(158, 21);
             this.cb_docelowa.TabIndex = 16;
             // 
-            // comboBox1
+            // cb_pilot
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(137, 168);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(158, 21);
-            this.comboBox1.TabIndex = 20;
+            this.cb_pilot.FormattingEnabled = true;
+            this.cb_pilot.Location = new System.Drawing.Point(137, 168);
+            this.cb_pilot.Name = "cb_pilot";
+            this.cb_pilot.Size = new System.Drawing.Size(158, 21);
+            this.cb_pilot.TabIndex = 20;
             // 
-            // comboBox2
+            // cb_kierowca
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(136, 141);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(158, 21);
-            this.comboBox2.TabIndex = 19;
+            this.cb_kierowca.FormattingEnabled = true;
+            this.cb_kierowca.Location = new System.Drawing.Point(136, 141);
+            this.cb_kierowca.Name = "cb_kierowca";
+            this.cb_kierowca.Size = new System.Drawing.Size(158, 21);
+            this.cb_kierowca.TabIndex = 19;
             // 
             // l_pilot
             // 
@@ -207,13 +207,13 @@
             this.l_kierowca.TabIndex = 17;
             this.l_kierowca.Text = "Kierowca wycieczki";
             // 
-            // comboBox3
+            // cb_pojazd
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(136, 195);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(158, 21);
-            this.comboBox3.TabIndex = 22;
+            this.cb_pojazd.FormattingEnabled = true;
+            this.cb_pojazd.Location = new System.Drawing.Point(136, 195);
+            this.cb_pojazd.Name = "cb_pojazd";
+            this.cb_pojazd.Size = new System.Drawing.Size(158, 21);
+            this.cb_pojazd.TabIndex = 22;
             // 
             // l_pojazd
             // 
@@ -250,10 +250,10 @@
             this.ClientSize = new System.Drawing.Size(311, 379);
             this.Controls.Add(this.tb_data_odjazdu);
             this.Controls.Add(this.tb_data_przyjazdu);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.cb_pojazd);
             this.Controls.Add(this.l_pojazd);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.cb_pilot);
+            this.Controls.Add(this.cb_kierowca);
             this.Controls.Add(this.l_pilot);
             this.Controls.Add(this.l_kierowca);
             this.Controls.Add(this.cb_docelowa);
@@ -297,11 +297,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cb_odjazd;
         private System.Windows.Forms.ComboBox cb_docelowa;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cb_pilot;
+        private System.Windows.Forms.ComboBox cb_kierowca;
         private System.Windows.Forms.Label l_pilot;
         private System.Windows.Forms.Label l_kierowca;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cb_pojazd;
         private System.Windows.Forms.Label l_pojazd;
         private System.Windows.Forms.DateTimePicker tb_data_przyjazdu;
         private System.Windows.Forms.DateTimePicker tb_data_odjazdu;
