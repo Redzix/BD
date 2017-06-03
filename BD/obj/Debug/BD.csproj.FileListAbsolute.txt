@@ -90,3 +90,9 @@ C:\Users\preze\Source\Repos\BD\BD\obj\Debug\BD.Wycieczka.resources
 C:\Users\preze\Source\Repos\BD\BD\obj\Debug\BD.csproj.GenerateResource.Cache
 C:\Users\preze\Source\Repos\BD\BD\obj\Debug\BD.exe
 C:\Users\preze\Source\Repos\BD\BD\obj\Debug\BD.pdb
+C:\Users\preze\Source\Repos\BD\BD\bin\Debug\EntityFramework.dll
+C:\Users\preze\Source\Repos\BD\BD\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\preze\Source\Repos\BD\BD\bin\Debug\itextsharp.dll
+C:\Users\preze\Source\Repos\BD\BD\bin\Debug\EntityFramework.xml
+C:\Users\preze\Source\Repos\BD\BD\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\preze\Source\Repos\BD\BD\bin\Debug\itextsharp.xml

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using BD.Controller;
 
 namespace BD
 {
@@ -468,6 +468,31 @@ namespace BD
                 MessageBox.Show("Nie usunięto żadnej wycieczki.", "Usuwanie wycieczki",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 return;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PdfCreator pdf = new PdfCreator();
+            pdf.createPDF(lv_pojazdy);
+        }
+
+
+        /*
+         * Używana do sortowania po kolumnach dla obiektów typu ListView.
+         */
+        private void sortListViewByColumn(object sender, ColumnClickEventArgs e)
+        {
+            if (((ListView)sender).Sorting == System.Windows.Forms.SortOrder.Ascending)
+                ((ListView)sender).Sorting = System.Windows.Forms.SortOrder.Descending;
+            else
+                ((ListView)sender).Sorting = System.Windows.Forms.SortOrder.Ascending;
+            ((ListView)sender).Sort();
+            ((ListView)sender).ListViewItemSorter = new ListViewItemComparer(e.Column, ((ListView)sender).Sorting);
+        }
+        
+        private void lv_pojazdy_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            sortListViewByColumn(sender, e);
         }
     }
 }

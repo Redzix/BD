@@ -56,6 +56,7 @@
             this.l_nazwa_wycieczki = new System.Windows.Forms.Label();
             this.b_rozpatrz_pozytywnie = new System.Windows.Forms.Button();
             this.tp_zarzadzaj_flota = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.b_edytuj_pojazd = new System.Windows.Forms.Button();
             this.b_usun_pojazd = new System.Windows.Forms.Button();
             this.b_dodaj_pojazd = new System.Windows.Forms.Button();
@@ -322,6 +323,7 @@
             // 
             // tp_zarzadzaj_flota
             // 
+            this.tp_zarzadzaj_flota.Controls.Add(this.button1);
             this.tp_zarzadzaj_flota.Controls.Add(this.b_edytuj_pojazd);
             this.tp_zarzadzaj_flota.Controls.Add(this.b_usun_pojazd);
             this.tp_zarzadzaj_flota.Controls.Add(this.b_dodaj_pojazd);
@@ -333,6 +335,16 @@
             this.tp_zarzadzaj_flota.TabIndex = 2;
             this.tp_zarzadzaj_flota.Text = "Zarządzaj flotą";
             this.tp_zarzadzaj_flota.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(476, 237);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // b_edytuj_pojazd
             // 
@@ -380,6 +392,7 @@
             this.lv_pojazdy.TabIndex = 1;
             this.lv_pojazdy.UseCompatibleStateImageBehavior = false;
             this.lv_pojazdy.View = System.Windows.Forms.View.Details;
+            this.lv_pojazdy.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lv_pojazdy_ColumnClick);
             // 
             // Nr_rejestracyjny
             // 
@@ -558,5 +571,6 @@
         private System.Windows.Forms.Button b_rozpatrz_pozytywnie;
         private System.Windows.Forms.RichTextBox rtb_opisReklamacji;
         private System.Windows.Forms.TextBox tb_okresTrwaniaWycieczki;
+        private System.Windows.Forms.Button button1;
     }
 }
