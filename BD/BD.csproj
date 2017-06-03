@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aktualizacja.cs" />
     <Compile Include="Cennik_model.cs" />
     <Compile Include="Controller\ListViewItemComparer.cs" />
     <Compile Include="Katalog_model.cs" />

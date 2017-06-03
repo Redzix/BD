@@ -96,3 +96,9 @@ C:\Users\preze\Source\Repos\BD\BD\bin\Debug\itextsharp.dll
 C:\Users\preze\Source\Repos\BD\BD\bin\Debug\EntityFramework.xml
 C:\Users\preze\Source\Repos\BD\BD\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\preze\Source\Repos\BD\BD\bin\Debug\itextsharp.xml
+D:\Visual_projekty\_BD\BD\bin\Debug\EntityFramework.dll
+D:\Visual_projekty\_BD\BD\bin\Debug\EntityFramework.SqlServer.dll
+D:\Visual_projekty\_BD\BD\bin\Debug\itextsharp.dll
+D:\Visual_projekty\_BD\BD\bin\Debug\EntityFramework.xml
+D:\Visual_projekty\_BD\BD\bin\Debug\EntityFramework.SqlServer.xml
+D:\Visual_projekty\_BD\BD\bin\Debug\itextsharp.xml
