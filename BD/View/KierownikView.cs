@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using BD.Controller;
+using System.Data.Entity;
 
 namespace BD.View
 {
@@ -298,6 +299,13 @@ namespace BD.View
 
         private void b_edytuj_pojazd_Click(object sender, EventArgs e)
         {
+            /////Trzeba to zrobic jeszcze zmiane tego pojazdu w bazie
+
+
+
+
+
+
             //Pobranie wybranego numeru rejestracyjnego z listview
             string numerRejestracyjny = lv_pojazdy.SelectedItems[0].SubItems[0].Text;
 
@@ -376,25 +384,35 @@ namespace BD.View
         private void cb_nazwa_wycieczki_SelectedIndexChanged(object sender, EventArgs e)
         {          
             List<int> listaNumerowReklamacji = new List<int>();
-
             lv_reklamacje.Items.Clear();
 
-            listaNumerowReklamacji = _polacz.PobierzListInt(_polacz.UtworzZapytanie("SELECT numer_reklamacji " +
+            bazaEntities db = new bazaEntities();
+            lv_pojazdy.Items.Clear();
+            var query = from reklamacja in db.Reklamacja
+                                 join uczestnictwo in db.Uczestnictwo on reklamacja.id_uczestnictwo equals uczestnictwo.id_uczestnictwo
+                                 join rezerwacja in db.Rezerwacja on uczestnictwo.numer_rezerwacji equals rezerwacja.numer_rezerwacji
+                                 join wycieczka in db.Wycieczka on rezerwacja.id_wycieczki equals wycieczka.id_wycieczki
+                                 where wycieczka.nazwa == cb_nazwa_wycieczki.Text
+                                 select reklamacja.numer_reklamacji;
+               
+
+            /*listaNumerowReklamacji = _polacz.PobierzListInt(_polacz.UtworzZapytanie("SELECT numer_reklamacji " +
                 "FROM Reklamacja " +
                 "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
                 "INNER JOIN Rezerwacja ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji I" +
                 "NNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Rezerwacja.id_wycieczki " +
-                "WHERE Wycieczka.nazwa = '" + cb_nazwa_wycieczki.Text + "'"));
+                "WHERE Wycieczka.nazwa = '" + cb_nazwa_wycieczki.Text + "'"));*/
 
-            if (listaNumerowReklamacji.Count == 0)
+            if (query.Count() == 0)
             {
                 lv_reklamacje.Items.Add("brak reklamacji");
             }
             else
             {
-                for (int i = 0; i < listaNumerowReklamacji.Count; i++)
+                foreach (int rek in query)
                 {
-                    lv_reklamacje.Items.Add(listaNumerowReklamacji[i].ToString());
+                    ListViewItem reklamacjaItem = new ListViewItem(rek.ToString());
+                    lv_reklamacje.Items.Add(reklamacjaItem);
                 }
             }
             lv_reklamacje.Refresh();
@@ -402,12 +420,24 @@ namespace BD.View
 
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
         {
-            _listaReklamacji = new Reklamacja_model().PobierzReklamacje();
-            string opis = "";
-            int okres = 0;
+            bazaEntities db = new bazaEntities();
+            lv_pojazdy.Items.Clear();
+            var okres = from reklamacja in db.Reklamacja
+                        join uczestnictwo in db.Uczestnictwo on reklamacja.id_uczestnictwo equals uczestnictwo.id_uczestnictwo
+                        join rezerwacja in db.Rezerwacja on uczestnictwo.numer_rezerwacji equals rezerwacja.numer_rezerwacji
+                        join wycieczka in db.Wycieczka on rezerwacja.id_wycieczki equals wycieczka.id_wycieczki
+                        where reklamacja.numer_reklamacji == Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text)
+                        select DbFunctions.DiffDays(wycieczka.data_wyjazdu, wycieczka.data_powrotu);
 
-            _idReklamacji = Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text);
-            opis = _listaReklamacji[_idReklamacji + 1].Opis;
+
+            /*  var opis = from reklamacja in db.Reklamacja
+                          join uczestnictwo in db.Uczestnictwo on reklamacja.id_uczestnictwo equals uczestnictwo.id_uczestnictwo
+                          join rezerwacja in db.Rezerwacja on uczestnictwo.numer_rezerwacji equals rezerwacja.numer_rezerwacji
+                          join wycieczka in db.Wycieczka on rezerwacja.id_wycieczki equals wycieczka.id_wycieczki
+                          where reklamacja.numer_reklamacji == Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text)
+                          select (wycieczka.data_powrotu - wycieczka.data_wyjazdu);*/
+
+
 
             /* opis = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT opis " +
                  "FROM ReklamacjaView " +
@@ -417,14 +447,14 @@ namespace BD.View
                  "WHERE ReklamacjaView.numer_reklamacji = " + Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text)));
              */
 
-            okres = _polacz.PobierzDaneInt(_polacz.UtworzZapytanie("SELECT DATEDIFF(day,data_wyjazdu,data_powrotu) " +
-               "FROM Reklamacja " +
-               "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
-               "INNER JOIN Rezerwacja ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji " +
-               "INNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Rezerwacja.id_wycieczki " +
-               "WHERE Reklamacja.numer_reklamacji = " + _idReklamacji));
+            /* okres = _polacz.PobierzDaneInt(_polacz.UtworzZapytanie("SELECT DATEDIFF(day,data_wyjazdu,data_powrotu) " +
+                "FROM Reklamacja " +
+                "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
+                "INNER JOIN Rezerwacja ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji " +
+                "INNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Rezerwacja.id_wycieczki " +
+                "WHERE Reklamacja.numer_reklamacji = " + _idReklamacji));*/
 
-            rtb_opisReklamacji.Text = opis;
+            // rtb_opisReklamacji.Text = opis;
             tb_okresTrwaniaWycieczki.Text = okres.ToString();
         }
 
