@@ -60,9 +60,66 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aktualizacja.cs" />
+    <Compile Include="BazaEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BazaEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BazaEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BazaEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BazaEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Cennik.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Cennik_model.cs" />
     <Compile Include="Controller\ListViewItemComparer.cs" />
+    <Compile Include="Katalog.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Katalog_model.cs" />
+    <Compile Include="Kierowca.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Kierownik.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Klient.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Miejsce.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Opinia.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Panel_pracowniczy.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pojazd.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Promocja.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reklamacja.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rezerwacja.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Uczestnictwo.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="View\KierowcaView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +204,9 @@
     <Compile Include="View\WycieczkaView.Designer.cs">
       <DependentUpon>WycieczkaView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wycieczka.cs">
+      <DependentUpon>BazaEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Wycieczka_model.cs" />
     <EmbeddedResource Include="View\KierowcaView.resx">
       <DependentUpon>KierowcaView.cs</DependentUpon>
@@ -190,6 +250,13 @@
     <EmbeddedResource Include="View\WycieczkaView.resx">
       <DependentUpon>WycieczkaView.cs</DependentUpon>
     </EmbeddedResource>
+    <EntityDeploy Include="BazaEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BazaEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="BazaEntity.edmx.diagram">
+      <DependentUpon>BazaEntity.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -206,6 +273,18 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BazaEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BazaEntity.edmx</DependentUpon>
+      <LastGenOutput>BazaEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="BazaEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BazaEntity.edmx</DependentUpon>
+      <LastGenOutput>BazaEntity.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

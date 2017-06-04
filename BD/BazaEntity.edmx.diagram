@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dc75a589123640cc86b8e3df344931c7" Name="Diagram1">
+        <EntityTypeShape EntityType="bazaModel.Cennik" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Katalog" Width="1.5" PointX="8.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Kierowca" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Kierownik" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Klient" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Miejsce" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Opinia" Width="1.5" PointX="15.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Panel_pracowniczy" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Pilot" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Pojazd" Width="1.5" PointX="3.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Promocja" Width="1.5" PointX="8.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Reklamacja" Width="1.5" PointX="15.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Rezerwacja" Width="1.5" PointX="11.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Uczestnictwo" Width="1.5" PointX="13.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Wycieczka" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="bazaModel.Katalog_Cennik_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Katalog_Miejsce_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Katalog_Miejsce_FKv2" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Katalog_Wycieczka_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Panel_pracowniczy_Kierowca_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Wycieczka_Kierowca_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Panel_pracowniczy_Kierownik_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Reklamacja_Kierownik_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Panel_pracowniczy_Klient_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Rezerwacja_Klient_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Opinia_Uczestnictwo_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Panel_pracowniczy_Pilot_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Wycieczka_Pilot_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Wycieczka_Pojazd_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Promocja_Wycieczka_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Reklamacja_Uczestnictwo_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Rezerwacja_Wycieczka_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bazaModel.Uczestnictwo_Rezerwacja_FK" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

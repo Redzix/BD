@@ -236,7 +236,20 @@ namespace BD.View
 
         public void ZaladujPojazdy()
         {
-            _listaPojazdow.Clear();
+            bazaEntities db = new bazaEntities();
+            lv_pojazdy.Items.Clear();
+            var query = from p in db.Pojazd select p;
+
+            foreach(Pojazd poj in query)
+            {
+                ListViewItem pojazd = new ListViewItem(poj.numer_rejestracyjny);
+                pojazd.SubItems.Add((bool)poj.dostepny ? "Dostępny" : "Niedostępny");
+                pojazd.SubItems.Add(poj.marka);
+                pojazd.SubItems.Add(poj.pojemnosc.ToString());
+                pojazd.SubItems.Add((bool)poj.stan ? "Sprawny" : "Awaria");
+                lv_pojazdy.Items.Add(pojazd);
+            }
+           /* _listaPojazdow.Clear();
             lv_pojazdy.Items.Clear();
             _listaPojazdow = (new Pojazd_model()).PobierzPojazdy();
 
@@ -264,7 +277,7 @@ namespace BD.View
                     pojazd.SubItems.Add("Awaria");
                 }
                 lv_pojazdy.Items.Add(pojazd);
-            }
+            }*/
         }
 
         private void b_usun_pojazd_Click(object sender, EventArgs e)
