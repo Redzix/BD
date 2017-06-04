@@ -11,14 +11,14 @@ using System.Data.SqlClient;
 
 namespace BD.View
 {
-    public partial class Opinia : Form
+    public partial class OpiniaView : Form
     {
         List<Wycieczka_model> _listaWycieczek = new List<Wycieczka_model>();
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
-        public Opinia()
+        public OpiniaView()
         {
             InitializeComponent();
         }

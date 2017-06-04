@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace BD.View
 {
-    public partial class Reklamacja : Form
+    public partial class ReklamacjaView : Form
     {
         List<Wycieczka_model>  _listaWycieczek= new List<Wycieczka_model>();
         List<Reklamacja_model> _listaReklamacji = new List<Reklamacja_model>();
@@ -21,7 +21,7 @@ namespace BD.View
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
-        public Reklamacja()
+        public ReklamacjaView()
         {
             InitializeComponent();
         }

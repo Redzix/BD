@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace BD.View
 {
-    public partial class Panel_pracowniczy : Form
+    public partial class PanelPracowniczyView : Form
     {
         /// <summary>
         /// Główny konstruktor okna.
         /// </summary>
-        public Panel_pracowniczy()
+        public PanelPracowniczyView()
         {
             InitializeComponent();
         }
@@ -82,7 +82,7 @@ namespace BD.View
                 if (uprawnienia.Equals("kierownik"))
                  {
                     this.Hide();
-                    Kierownik kierownik = new Kierownik(login);
+                    KierownikView kierownik = new KierownikView(login);
                     kierownik.Closed += (s, args) => this.Close();
                     kierownik.ShowDialog();
 
@@ -98,7 +98,7 @@ namespace BD.View
                  else if (uprawnienia.Equals("kierowca"))
                  {
                     this.Hide();
-                    Kierowca kierowca = new Kierowca(login);
+                    KierowcaView kierowca = new KierowcaView(login);
                     kierowca.Closed += (s, args) => this.Close();
                     kierowca.ShowDialog();
 
@@ -106,7 +106,7 @@ namespace BD.View
                  else if (uprawnienia.Equals("pilot"))
                  {
                     this.Hide();
-                    Pilot pilot = new Pilot(login);
+                    PilotView pilot = new PilotView(login);
                     pilot.Closed += (s, args) => this.Close();
                     pilot.ShowDialog();
                 }

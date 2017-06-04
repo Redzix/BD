@@ -1,6 +1,6 @@
 ﻿namespace BD.View
 {
-    partial class Rezygnacja
+    partial class RezygnacjaView
     {
         /// <summary>
         /// Required designer variable.
@@ -125,7 +125,7 @@
             this.tb_liczba_rezygnujacych_osob.Size = new System.Drawing.Size(75, 20);
             this.tb_liczba_rezygnujacych_osob.TabIndex = 25;
             // 
-            // Rezygnacja
+            // RezygnacjaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

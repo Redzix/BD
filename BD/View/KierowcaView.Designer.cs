@@ -1,6 +1,6 @@
 ﻿namespace BD.View
 {
-    partial class Kierowca
+    partial class KierowcaView
     {
         /// <summary>
         /// Required designer variable.

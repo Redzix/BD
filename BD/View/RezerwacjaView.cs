@@ -11,14 +11,14 @@ using System.Data.SqlClient;
 
 namespace BD.View
 {
-    public partial class Rezerwacja : Form
+    public partial class RezerwacjaView : Form
     {
         private int _idWycieczki;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
-        public Rezerwacja()
+        public RezerwacjaView()
         {
             InitializeComponent();
         }
@@ -27,7 +27,7 @@ namespace BD.View
         /// Konstruktor z parametrem, otrzymuje jako parametr obiekt typu wyieczka, aby potem zapisac go do bazy
         /// </summary>
         /// <param name="wycieczka"></param>
-        public Rezerwacja(int idWycieczki)
+        public RezerwacjaView(int idWycieczki)
         {
             _idWycieczki = idWycieczki;
             InitializeComponent();

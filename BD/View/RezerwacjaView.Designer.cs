@@ -1,6 +1,6 @@
 ﻿namespace BD.View
 {
-    partial class Rezerwacja
+    partial class RezerwacjaView
     {
         /// <summary>
         /// Required designer variable.
@@ -190,7 +190,7 @@
             this.l_pesel.TabIndex = 16;
             this.l_pesel.Text = "Pesel";
             // 
-            // Rezerwacja
+            // RezerwacjaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

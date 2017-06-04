@@ -1,6 +1,6 @@
 ﻿namespace BD.View
 {
-    partial class Pojazd
+    partial class PojazdView
     {
         /// <summary>
         /// Required designer variable.
@@ -106,7 +106,7 @@
             this.b_anuluj.UseVisualStyleBackColor = true;
             this.b_anuluj.Click += new System.EventHandler(this.b_anuluj_Click);
             // 
-            // Pojazd
+            // PojazdView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

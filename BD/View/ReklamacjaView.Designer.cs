@@ -1,6 +1,6 @@
 ﻿namespace BD.View
 {
-    partial class Reklamacja
+    partial class ReklamacjaView
     {
         /// <summary>
         /// Required designer variable.
@@ -183,7 +183,7 @@
             this.NumerReklamacji.Text = "Numer reklamacji";
             this.NumerReklamacji.Width = 110;
             // 
-            // Reklamacja
+            // ReklamacjaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

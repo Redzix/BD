@@ -1,6 +1,6 @@
 ﻿namespace BD.View
 {
-    partial class Panel_pracowniczy
+    partial class PanelPracowniczyView
     {
         /// <summary>
         /// Required designer variable.
@@ -88,7 +88,7 @@
             this.b_zakończ.UseVisualStyleBackColor = true;
             this.b_zakończ.Click += new System.EventHandler(this.b_zakoncz_Click);
             // 
-            // Panel_pracowniczy
+            // PanelPracowniczyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace BD.View
 {
-    public partial class Pojazd : Form
+    public partial class PojazdView : Form
     {
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
-        public Pojazd()
+        public PojazdView()
         {
             InitializeComponent();
         }

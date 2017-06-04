@@ -82,7 +82,7 @@ namespace BD
                 List<Pracownik_model> _listaPracownikow = new List<Pracownik_model>();
                 Polacz_z_baza _polacz = new Polacz_z_baza();
                 SqlConnection _polaczenie = _polacz.PolaczZBaza();
-                SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM Pojazd");
+                SqlCommand _zapytanie = _polacz.UtworzZapytanie("SELECT * FROM PojazdView");
 
                 SqlDataReader reader = _zapytanie.ExecuteReader();
                 while (reader.Read())

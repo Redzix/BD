@@ -12,7 +12,7 @@ using BD.Controller;
 
 namespace BD.View
 {
-    public partial class Kierownik : Form
+    public partial class KierownikView : Form
     {
         SqlConnection _polaczenie = null;
         SqlCommand _zapytanie = null;
@@ -26,7 +26,7 @@ namespace BD.View
         /// <summary>
         /// Główny bezparametrowy konstruktor okna, tworzący okno oraz połączenie z bazą danych.
         /// </summary>
-        public Kierownik()
+        public KierownikView()
         {
             InitializeComponent();
             l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
@@ -49,7 +49,7 @@ namespace BD.View
         /// oraz tworzący połączenie z bazą danych.
         /// </summary>
         /// <param name="uzytkownik">Nazwa użytkownika</param>
-        public Kierownik(string uzytkownik)
+        public KierownikView(string uzytkownik)
         {
             InitializeComponent();
             l_uzytkownik.Text = uzytkownik;
@@ -85,7 +85,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_pojazd_Click(object sender, EventArgs e)
         {
-            Pojazd pojazd = new Pojazd();
+            PojazdView pojazd = new PojazdView();
             pojazd.ShowDialog();
             ZaladujPojazdy();
         }
@@ -132,7 +132,7 @@ namespace BD.View
             if (czyZakonczyc == DialogResult.Yes)
             {
                 this.Hide();
-                Panel_pracowniczy panel_pracowniczy = new Panel_pracowniczy();
+                PanelPracowniczyView panel_pracowniczy = new PanelPracowniczyView();
                 panel_pracowniczy.Closed += (s, args) => this.Close();
                 panel_pracowniczy.Show();
 
@@ -150,7 +150,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_wycieczke_Click(object sender, EventArgs e)
         {
-            Wycieczka wycieczka = new Wycieczka(1, 0);
+            WycieczkaView wycieczka = new WycieczkaView(1, 0);
             wycieczka.ShowDialog();
             ZaladujWycieczki();
         }
@@ -226,7 +226,7 @@ namespace BD.View
                 wycieczka.SubItems.Add(_listaWycieczek[i].Promocja.ToString());
                 wycieczka.SubItems.Add(_listaWycieczek[i].Cena.ToString());
                 wycieczka.SubItems.Add(_listaWycieczek[i].Kierowca.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[i].Pilot.ToString());
+                wycieczka.SubItems.Add(_listaWycieczek[i].PilotView.ToString());
                 wycieczka.SubItems.Add(_listaWycieczek[i].MiejsceOdjazdu.ToString());
                 wycieczka.SubItems.Add(_listaWycieczek[i].MiejsceDocelowe.ToString());
 
@@ -397,11 +397,11 @@ namespace BD.View
             opis = _listaReklamacji[_idReklamacji + 1].Opis;
 
             /* opis = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT opis " +
-                 "FROM Reklamacja " +
-                 "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
-                 "INNER JOIN Rezerwacja ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji I" +
-                 "NNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Rezerwacja.id_wycieczki " +
-                 "WHERE Reklamacja.numer_reklamacji = " + Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text)));
+                 "FROM ReklamacjaView " +
+                 "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = ReklamacjaView.id_uczestnictwo " +
+                 "INNER JOIN RezerwacjaView ON RezerwacjaView.numer_rezerwacji = Uczestnictwo.numer_rezerwacji I" +
+                 "NNER JOIN WycieczkaView ON WycieczkaView.id_wycieczki = RezerwacjaView.id_wycieczki " +
+                 "WHERE ReklamacjaView.numer_reklamacji = " + Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text)));
              */
 
             okres = _polacz.PobierzDaneInt(_polacz.UtworzZapytanie("SELECT DATEDIFF(day,data_wyjazdu,data_powrotu) " +
@@ -444,7 +444,7 @@ namespace BD.View
         private void b_edytuj_Click(object sender, EventArgs e)
         {
             int idWycieczki = _listaKatalogu[lv_wycieczki.SelectedItems[0].Index].IdWycieczki;
-            Wycieczka wycieczka = new Wycieczka(0,idWycieczki);
+            WycieczkaView wycieczka = new WycieczkaView(0,idWycieczki);
             wycieczka.ShowDialog();
             ZaladujWycieczki();
         }

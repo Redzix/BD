@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace BD.View
 {
-    public partial class Kierowca : Form
+    public partial class KierowcaView : Form
     {
         SqlConnection _polaczenie = null;
         SqlCommand _zapytanie = null;
@@ -21,7 +21,7 @@ namespace BD.View
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
-        public Kierowca()
+        public KierowcaView()
         {
             InitializeComponent();
         }
@@ -30,7 +30,7 @@ namespace BD.View
         /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu.
         /// </summary>
         /// <param name="uzytkownik">Nazwa użytkownika</param>
-        public Kierowca(string uzytkownik)
+        public KierowcaView(string uzytkownik)
         {
             InitializeComponent();
             l_uzytkownik.Text = uzytkownik;
@@ -50,7 +50,7 @@ namespace BD.View
             if (czyZakonczyc == DialogResult.Yes)
             {
                 this.Hide();
-                Panel_pracowniczy panel_pracowniczy = new Panel_pracowniczy();
+                PanelPracowniczyView panel_pracowniczy = new PanelPracowniczyView();
                 panel_pracowniczy.Closed += (s, args) => this.Close();
                 panel_pracowniczy.Show();
             }

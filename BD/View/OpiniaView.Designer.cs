@@ -1,6 +1,6 @@
 ﻿namespace BD.View
 {
-    partial class Opinia
+    partial class OpiniaView
     {
         /// <summary>
         /// Required designer variable.
@@ -134,7 +134,7 @@
             this.tb_numerRezerwacji.Size = new System.Drawing.Size(130, 20);
             this.tb_numerRezerwacji.TabIndex = 26;
             // 
-            // Opinia
+            // OpiniaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

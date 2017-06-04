@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace BD.View
 {
-    public partial class Rezygnacja : Form
+    public partial class RezygnacjaView : Form
     {
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
-        public Rezygnacja()
+        public RezygnacjaView()
         {
             InitializeComponent();
         }

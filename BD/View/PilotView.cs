@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace BD.View
 {
-    public partial class Pilot : Form
+    public partial class PilotView : Form
     {   
         /// <summary>
         /// Zmienna odpowiada za utworzenie połączenia z bazą danych.
@@ -32,7 +32,7 @@ namespace BD.View
         /// <summary>
         /// Główny bezparametrowy konstruktor okna,, tworzący okno oraz połączenie z bazą danych.
         /// </summary>
-        public Pilot()
+        public PilotView()
         {
             InitializeComponent();
             l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
@@ -55,7 +55,7 @@ namespace BD.View
         /// oraz tworzący połączenie z bazą danych.
         /// </summary>
         /// <param name="uzytkownik">Nazwa użytkownika</param>
-        public Pilot(string uzytkownik)
+        public PilotView(string uzytkownik)
         {
             InitializeComponent();
             l_uzytkownik.Text = uzytkownik;
@@ -87,7 +87,7 @@ namespace BD.View
             if (czyZakonczyc == DialogResult.Yes)
             {
                 this.Hide();
-                Panel_pracowniczy panel_pracowniczy = new Panel_pracowniczy();
+                PanelPracowniczyView panel_pracowniczy = new PanelPracowniczyView();
                 panel_pracowniczy.Closed += (s, args) => this.Close();
                 panel_pracowniczy.Show();              
             }

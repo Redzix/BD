@@ -76,7 +76,7 @@ namespace BD.View
             if (czyZakonczyc == DialogResult.Yes)
             {
                 this.Hide();
-                Panel_pracowniczy panel_pracowniczy = new Panel_pracowniczy();
+                PanelPracowniczyView panel_pracowniczy = new PanelPracowniczyView();
                 panel_pracowniczy.Closed += (s, args) => this.Close();
                 panel_pracowniczy.Show();
             }
@@ -94,7 +94,7 @@ namespace BD.View
         private void b_katalog_rezerwuj_Click(object sender, EventArgs e)
         {
 
-            Rezerwacja rezerwacja = new Rezerwacja(_idWycieczki);
+            RezerwacjaView rezerwacja = new RezerwacjaView(_idWycieczki);
             rezerwacja.ShowDialog();
         }
 
@@ -105,7 +105,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void wystawOpinięToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opinia opinia = new Opinia();
+            OpiniaView opinia = new OpiniaView();
             opinia.ShowDialog();
         }
 
@@ -116,7 +116,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void reklamujWycieczkęToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Reklamacja reklamancja = new Reklamacja();
+            ReklamacjaView reklamancja = new ReklamacjaView();
             reklamancja.ShowDialog();
         }
 
@@ -127,7 +127,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void rezygnacjaZWycieczkiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Rezygnacja rezygnacja = new Rezygnacja();
+            RezygnacjaView rezygnacja = new RezygnacjaView();
             rezygnacja.ShowDialog();
         }
 

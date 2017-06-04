@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace BD.View
 {
-    public partial class Wycieczka : Form
+    public partial class WycieczkaView : Form
     {
         private List<Miejsce_model> _listaMiejsc = new List<Miejsce_model>();
         private List<Pilot_model> _listaPilotow = new List<Pilot_model>();
@@ -25,7 +25,7 @@ namespace BD.View
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
-        public Wycieczka()
+        public WycieczkaView()
         {
             InitializeComponent();
         }
@@ -34,7 +34,7 @@ namespace BD.View
         /// Konstruktor, który tworzy formę wyciećzki dostosowaną do wybranej opcji edycji bądź dodawania wycieczki
         /// </summary>
         /// <param name="opcja">Kiedy jeden dodaje wycieczke, kiedy zero usuwa.</param>
-        public Wycieczka(int opcja,int idWycieczki)
+        public WycieczkaView(int opcja,int idWycieczki)
         {
             InitializeComponent();
             _idWycieczki = idWycieczki;

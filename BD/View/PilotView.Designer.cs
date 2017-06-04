@@ -1,6 +1,6 @@
 ﻿namespace BD.View
 {
-    partial class Pilot
+    partial class PilotView
     {
         /// <summary>
         /// Required designer variable.
@@ -71,7 +71,7 @@
             this.Data_powrotu.HeaderText = "Data powrotu";
             this.Data_powrotu.Name = "Data_powrotu";
             // 
-            // Pojazd
+            // PojazdView
             // 
             this.Pojazd.HeaderText = "Pojazd";
             this.Pojazd.Name = "Pojazd";
@@ -118,7 +118,7 @@
             this.l_polaczenie.TabIndex = 7;
             this.l_polaczenie.Text = " ";
             // 
-            // Pilot
+            // PilotView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

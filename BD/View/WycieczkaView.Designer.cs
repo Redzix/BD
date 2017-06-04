@@ -1,6 +1,6 @@
 ﻿namespace BD.View
 {
-    partial class Wycieczka
+    partial class WycieczkaView
     {
         /// <summary>
         /// Required designer variable.
@@ -243,7 +243,7 @@
             this.tb_data_odjazdu.TabIndex = 24;
             this.tb_data_odjazdu.Value = new System.DateTime(2017, 6, 2, 21, 4, 17, 0);
             // 
-            // Wycieczka
+            // WycieczkaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
