@@ -22,3 +22,4 @@ C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.WycieczkaView.resources
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.csproj.GenerateResource.Cache
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.exe
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.pdb
+C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.csprojResolveAssemblyReference.cache

@@ -34,7 +34,7 @@ namespace BD.View
         /// Konstruktor, który tworzy formę wyciećzki dostosowaną do wybranej opcji edycji bądź dodawania wycieczki
         /// </summary>
         /// <param name="opcja">Kiedy jeden dodaje wycieczke, kiedy zero usuwa.</param>
-        public WycieczkaView(int opcja,int idWycieczki)
+        public WycieczkaView(int opcja, int idWycieczki)
         {
             InitializeComponent();
             _idWycieczki = idWycieczki;
@@ -57,6 +57,21 @@ namespace BD.View
                 cb_docelowa.Enabled = true;
                 _opcja = 1;
             }
+        }
+
+        private void wypelnijDoEdycji(int id)
+        {
+            bazaEntities db = new bazaEntities();
+            var query = from katalog in db.Katalog
+                        where katalog.id_wycieczki == id
+                        select new
+                        {
+                            katalog,
+                            wycieczka = katalog.Wycieczka,
+                            cennik = katalog.Cennik,
+                            miejsce_z = katalog.Miejsce,
+                            miejsce_do = katalog.Miejsce1
+                        };
         }
 
         private void b_anuluj_Click(object sender, EventArgs e)
@@ -94,19 +109,57 @@ namespace BD.View
 
         private void Wycieczka_Load(object sender, EventArgs e)
         {
-            _listaMiejsc = (new Miejsce_model()).PobierzMiejsaca();
-            _listaPilotow = (new Pilot_model()).pobierzPilotow();
-            _listaKierowcow = (new Kierowca_model()).pobierzKierowcow();
-            _listaPojazdow = (new Pojazd_model()).PobierzPojazdy();
-            
-            for (int i = 0; i < _listaMiejsc.Count; i++)
+            bazaEntities db = new bazaEntities();
+            var miejscowosci = from m in db.Miejsce orderby m.miejscowosc select m;
+            var piloci = from m in db.Pilot orderby m.nazwisko select m;
+            var kierowcy = from m in db.Kierowca orderby m.nazwisko select m;
+            var pojazdy = from m in db.Pojazd orderby m.pojemnosc where m.stan==true select m;
+            Dictionary<string, string> values = new Dictionary<string, string>();
+            foreach(var row in miejscowosci)
             {
-                cb_docelowa.Items.Add(_listaMiejsc[i].Adres + " " + _listaMiejsc[i].Miejscowosc);
-                cb_odjazd.Items.Add(_listaMiejsc[i].Adres + " " + _listaMiejsc[i].Miejscowosc);
-                cb_pilot.Items.Add(_listaPilotow[i].Imie + " " + _listaPilotow[i].Nazwisko);
-                cb_kierowca.Items.Add(_listaKierowcow[i].Imie + " " + _listaKierowcow[i].Nazwisko);
-                cb_pojazd.Items.Add(_listaPojazdow[i].NumerRejestracyjny);
+                values.Add(row.id_miejsca.ToString(), row.miejscowosc + ", " + row.adres);
             }
+            cb_docelowa.DataSource = new BindingSource(values, null);
+            cb_docelowa.DisplayMember = "Value";
+            cb_docelowa.ValueMember = "Key";
+
+            cb_odjazd.DataSource = new BindingSource(values, null);
+            cb_odjazd.DisplayMember = "Value";
+            cb_odjazd.ValueMember = "Key";
+
+            values.Clear();
+            foreach (var row in piloci)
+            {
+                values.Add(row.pesel, row.nazwisko + " " + row.imie);
+            }
+
+            cb_pilot.DataSource = new BindingSource(values, null);
+            cb_pilot.DisplayMember = "Value";
+            cb_pilot.ValueMember = "Key";
+            values.Clear();
+
+            foreach (var row in kierowcy)
+            {
+                values.Add(row.pesel, row.nazwisko + " " + row.imie);
+            }
+
+            cb_kierowca.DataSource = new BindingSource(values, null);
+            cb_kierowca.DisplayMember = "Value";
+            cb_kierowca.ValueMember = "Key";
+            values.Clear();
+
+            foreach (var row in pojazdy)
+            {
+                values.Add(row.numer_rejestracyjny, row.numer_rejestracyjny + " [poj: " + row.pojemnosc + "]");
+            }
+
+            cb_pojazd.DataSource = new BindingSource(values, null);
+            cb_pojazd.DisplayMember = "Value";
+            cb_pojazd.ValueMember = "Key";
+            values.Clear();
+
+            //Do odczytu primary key trzeba użyć czegoś takiego:
+            //string value = ((KeyValuePair<string, string>)comboBox1.SelectedItem).Value;
         }
 
         private void b_zapisz_Click(object sender, EventArgs e)

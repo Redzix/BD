@@ -180,7 +180,8 @@ namespace BD.View
             //All hail LINQ kurwa
             var query = from katalog in db.Katalog
                         select new {
-                            katalog, wycieczka = katalog.Wycieczka,
+                            katalog,
+                            wycieczka = katalog.Wycieczka,
                             cennik = katalog.Cennik,
                             miejsce_z = katalog.Miejsce,
                             miejsce_do = katalog.Miejsce1
@@ -190,8 +191,8 @@ namespace BD.View
             {
                 ListViewItem wycieczka = new ListViewItem(wyc.wycieczka.nazwa); //Miejsce
                 wycieczka.Tag = wyc.katalog.id_wycieczki; //Ukryte ID
-                wycieczka.SubItems.Add(String.Format("{0:dd/MM/yyyy}",(DateTime)wyc.wycieczka.data_wyjazdu)); //Data z
-                wycieczka.SubItems.Add(String.Format("{0:dd/MM/yyyy}", (DateTime)wyc.wycieczka.data_powrotu)); //data do
+                wycieczka.SubItems.Add(String.Format("{0:dd.MM.yyyy}",(DateTime)wyc.wycieczka.data_wyjazdu)); //Data z
+                wycieczka.SubItems.Add(String.Format("{0:dd.MM.yyyy}", (DateTime)wyc.wycieczka.data_powrotu)); //data do
                 wycieczka.SubItems.Add(wyc.miejsce_z.miejscowosc); //miejsce od
                 wycieczka.SubItems.Add(wyc.miejsce_do.miejscowosc); //miejsce do
                 wycieczka.SubItems.Add(wyc.cennik.cena.ToString()); //cena
@@ -397,11 +398,16 @@ namespace BD.View
 
         private void b_edytuj_Click(object sender, EventArgs e)
         {
-            //int idWycieczki = _listaKatalogu[lv_wycieczki.SelectedItems[0].Index].IdWycieczki;
-            var id = lv_wycieczki.SelectedItems[0].Tag;
-            WycieczkaView wycieczka = new WycieczkaView(0,(int)id);
-            wycieczka.ShowDialog();
-            ZaladujWycieczki();
+            try
+            {
+                var id = lv_wycieczki.SelectedItems[0].Tag;
+                WycieczkaView wycieczka = new WycieczkaView(0, (int)id);
+                wycieczka.ShowDialog();
+                ZaladujWycieczki();
+            } catch
+            {
+                MessageBox.Show("Musisz najpierw wybrać wycieczkę do edycji");
+            }
         }
 
         private void b_usun_wycieczke_Click(object sender, EventArgs e)
