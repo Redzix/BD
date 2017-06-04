@@ -1,4 +1,4 @@
-﻿namespace BD
+﻿namespace BD.View
 {
     partial class Rezerwacja
     {

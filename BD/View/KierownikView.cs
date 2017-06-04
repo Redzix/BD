@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using BD.Controller;
 
-namespace BD
+namespace BD.View
 {
     public partial class Kierownik : Form
     {

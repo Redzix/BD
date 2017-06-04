@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Threading;
 
-namespace BD
+namespace BD.View
 {
     public partial class Pilot : Form
     {   

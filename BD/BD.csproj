@@ -61,55 +61,55 @@
     <Compile Include="Cennik_model.cs" />
     <Compile Include="Controller\ListViewItemComparer.cs" />
     <Compile Include="Katalog_model.cs" />
-    <Compile Include="Kierowca.cs">
+    <Compile Include="View\KierowcaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kierowca.Designer.cs">
-      <DependentUpon>Kierowca.cs</DependentUpon>
+    <Compile Include="View\KierowcaView.Designer.cs">
+      <DependentUpon>KierowcaView.cs</DependentUpon>
     </Compile>
     <Compile Include="Kierowca_model.cs" />
-    <Compile Include="Kierownik.cs">
+    <Compile Include="View\KierownikView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Kierownik.Designer.cs">
-      <DependentUpon>Kierownik.cs</DependentUpon>
+    <Compile Include="View\KierownikView.Designer.cs">
+      <DependentUpon>KierownikView.cs</DependentUpon>
     </Compile>
     <Compile Include="Kierownik_model.cs" />
-    <Compile Include="Klient.cs">
+    <Compile Include="View\KlientView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Klient.Designer.cs">
-      <DependentUpon>Klient.cs</DependentUpon>
+    <Compile Include="View\KlientView.Designer.cs">
+      <DependentUpon>KlientView.cs</DependentUpon>
     </Compile>
     <Compile Include="Klient_model.cs" />
     <Compile Include="Miejsce_model.cs" />
-    <Compile Include="Opinia.cs">
+    <Compile Include="View\OpiniaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Opinia.Designer.cs">
-      <DependentUpon>Opinia.cs</DependentUpon>
+    <Compile Include="View\OpiniaView.Designer.cs">
+      <DependentUpon>OpiniaView.cs</DependentUpon>
     </Compile>
     <Compile Include="Opinia_model.cs" />
-    <Compile Include="Panel_pracowniczy.cs">
+    <Compile Include="View\PanelPracowniczyView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Panel_pracowniczy.Designer.cs">
-      <DependentUpon>Panel_pracowniczy.cs</DependentUpon>
+    <Compile Include="View\PanelPracowniczyView.Designer.cs">
+      <DependentUpon>PanelPracowniczyView.cs</DependentUpon>
     </Compile>
     <Compile Include="Panel_pracowniczy_model.cs" />
     <Compile Include="Controller\PdfCreator.cs" />
-    <Compile Include="Pilot.cs">
+    <Compile Include="View\PilotView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pilot.Designer.cs">
-      <DependentUpon>Pilot.cs</DependentUpon>
+    <Compile Include="View\PilotView.Designer.cs">
+      <DependentUpon>PilotView.cs</DependentUpon>
     </Compile>
     <Compile Include="Pilot_model.cs" />
-    <Compile Include="Pojazd.cs">
+    <Compile Include="View\PojazdView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pojazd.Designer.cs">
-      <DependentUpon>Pojazd.cs</DependentUpon>
+    <Compile Include="View\PojazdView.Designer.cs">
+      <DependentUpon>PojazdView.cs</DependentUpon>
     </Compile>
     <Compile Include="Pojazd_model.cs" />
     <Compile Include="Polacz_z_baza.cs" />
@@ -117,55 +117,55 @@
     <Compile Include="Program.cs" />
     <Compile Include="Promocja_model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reklamacja.cs">
+    <Compile Include="View\ReklamacjaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reklamacja.Designer.cs">
-      <DependentUpon>Reklamacja.cs</DependentUpon>
+    <Compile Include="View\ReklamacjaView.Designer.cs">
+      <DependentUpon>ReklamacjaView.cs</DependentUpon>
     </Compile>
     <Compile Include="Reklamacja_model.cs" />
-    <Compile Include="Rezerwacja.cs">
+    <Compile Include="View\RezerwacjaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Rezerwacja.Designer.cs">
-      <DependentUpon>Rezerwacja.cs</DependentUpon>
+    <Compile Include="View\RezerwacjaView.Designer.cs">
+      <DependentUpon>RezerwacjaView.cs</DependentUpon>
     </Compile>
     <Compile Include="Rezerwacja_model.cs" />
-    <Compile Include="Rezygnacja.cs">
+    <Compile Include="View\RezygnacjaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Rezygnacja.Designer.cs">
-      <DependentUpon>Rezygnacja.cs</DependentUpon>
+    <Compile Include="View\RezygnacjaView.Designer.cs">
+      <DependentUpon>RezygnacjaView.cs</DependentUpon>
     </Compile>
     <Compile Include="Rezygnacja_model.cs" />
     <Compile Include="Uczestnictwo_model.cs" />
-    <Compile Include="Wycieczka.cs">
+    <Compile Include="View\WycieczkaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Wycieczka.Designer.cs">
-      <DependentUpon>Wycieczka.cs</DependentUpon>
+    <Compile Include="View\WycieczkaView.Designer.cs">
+      <DependentUpon>WycieczkaView.cs</DependentUpon>
     </Compile>
     <Compile Include="Wycieczka_model.cs" />
-    <EmbeddedResource Include="Kierowca.resx">
-      <DependentUpon>Kierowca.cs</DependentUpon>
+    <EmbeddedResource Include="View\KierowcaView.resx">
+      <DependentUpon>KierowcaView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Kierownik.resx">
-      <DependentUpon>Kierownik.cs</DependentUpon>
+    <EmbeddedResource Include="View\KierownikView.resx">
+      <DependentUpon>KierownikView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Klient.resx">
-      <DependentUpon>Klient.cs</DependentUpon>
+    <EmbeddedResource Include="View\KlientView.resx">
+      <DependentUpon>KlientView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Opinia.resx">
-      <DependentUpon>Opinia.cs</DependentUpon>
+    <EmbeddedResource Include="View\OpiniaView.resx">
+      <DependentUpon>OpiniaView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Panel_pracowniczy.resx">
-      <DependentUpon>Panel_pracowniczy.cs</DependentUpon>
+    <EmbeddedResource Include="View\PanelPracowniczyView.resx">
+      <DependentUpon>PanelPracowniczyView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pilot.resx">
-      <DependentUpon>Pilot.cs</DependentUpon>
+    <EmbeddedResource Include="View\PilotView.resx">
+      <DependentUpon>PilotView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pojazd.resx">
-      <DependentUpon>Pojazd.cs</DependentUpon>
+    <EmbeddedResource Include="View\PojazdView.resx">
+      <DependentUpon>PojazdView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -176,17 +176,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Reklamacja.resx">
-      <DependentUpon>Reklamacja.cs</DependentUpon>
+    <EmbeddedResource Include="View\ReklamacjaView.resx">
+      <DependentUpon>ReklamacjaView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Rezerwacja.resx">
-      <DependentUpon>Rezerwacja.cs</DependentUpon>
+    <EmbeddedResource Include="View\RezerwacjaView.resx">
+      <DependentUpon>RezerwacjaView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Rezygnacja.resx">
-      <DependentUpon>Rezygnacja.cs</DependentUpon>
+    <EmbeddedResource Include="View\RezygnacjaView.resx">
+      <DependentUpon>RezygnacjaView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Wycieczka.resx">
-      <DependentUpon>Wycieczka.cs</DependentUpon>
+    <EmbeddedResource Include="View\WycieczkaView.resx">
+      <DependentUpon>WycieczkaView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -202,9 +202,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
