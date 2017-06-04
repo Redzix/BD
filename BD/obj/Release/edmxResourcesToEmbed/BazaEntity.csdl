@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bazaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cennik">
+    <Key>
+      <PropertyRef Name="id_cennika" />
+    </Key>
+    <Property Name="id_cennika" Type="Int32" Nullable="false" />
+    <Property Name="cena" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="okres_od" Type="DateTime" Precision="0" />
+    <Property Name="okres_do" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Katalog" Relationship="Self.Katalog_Cennik_FK" FromRole="Cennik" ToRole="Katalog" />
+  </EntityType>
+  <EntityType Name="Katalog">
+    <Key>
+      <PropertyRef Name="id_katalogu" />
+    </Key>
+    <Property Name="id_katalogu" Type="Int32" Nullable="false" />
+    <Property Name="okres_trwania_wycieczki" Type="Int32" />
+    <Property Name="id_cennika" Type="Int32" />
+    <Property Name="id_miejsca_odjazdu" Type="Int32" />
+    <Property Name="id_miejsca_przyjazdu" Type="Int32" />
+    <Property Name="id_wycieczki" Type="Int32" />
+    <NavigationProperty Name="Cennik" Relationship="Self.Katalog_Cennik_FK" FromRole="Katalog" ToRole="Cennik" />
+    <NavigationProperty Name="Miejsce" Relationship="Self.Katalog_Miejsce_FK" FromRole="Katalog" ToRole="Miejsce" />
+    <NavigationProperty Name="Miejsce1" Relationship="Self.Katalog_Miejsce_FKv2" FromRole="Katalog" ToRole="Miejsce" />
+    <NavigationProperty Name="Wycieczka" Relationship="Self.Katalog_Wycieczka_FK" FromRole="Katalog" ToRole="Wycieczka" />
+  </EntityType>
+  <EntityType Name="Kierowca">
+    <Key>
+      <PropertyRef Name="pesel" />
+    </Key>
+    <Property Name="pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="imie" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="nazwisko" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="ulica" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="miejscowosc" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Panel_pracowniczy" Relationship="Self.Panel_pracowniczy_Kierowca_FK" FromRole="Kierowca" ToRole="Panel_pracowniczy" />
+    <NavigationProperty Name="Wycieczka" Relationship="Self.Wycieczka_Kierowca_FK" FromRole="Kierowca" ToRole="Wycieczka" />
+  </EntityType>
+  <EntityType Name="Kierownik">
+    <Key>
+      <PropertyRef Name="pesel" />
+    </Key>
+    <Property Name="pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="imie" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="nazwisko" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="ulica" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="miejscowosc" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Panel_pracowniczy" Relationship="Self.Panel_pracowniczy_Kierownik_FK" FromRole="Kierownik" ToRole="Panel_pracowniczy" />
+    <NavigationProperty Name="Reklamacja" Relationship="Self.Reklamacja_Kierownik_FK" FromRole="Kierownik" ToRole="Reklamacja" />
+  </EntityType>
+  <EntityType Name="Klient">
+    <Key>
+      <PropertyRef Name="pesel" />
+    </Key>
+    <Property Name="pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="imie" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="nazwisko" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="ulica" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="miejscowosc" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Panel_pracowniczy" Relationship="Self.Panel_pracowniczy_Klient_FK" FromRole="Klient" ToRole="Panel_pracowniczy" />
+    <NavigationProperty Name="Rezerwacja" Relationship="Self.Rezerwacja_Klient_FK" FromRole="Klient" ToRole="Rezerwacja" />
+  </EntityType>
+  <EntityType Name="Miejsce">
+    <Key>
+      <PropertyRef Name="id_miejsca" />
+    </Key>
+    <Property Name="id_miejsca" Type="Int32" Nullable="false" />
+    <Property Name="adres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="miejscowosc" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Katalog" Relationship="Self.Katalog_Miejsce_FK" FromRole="Miejsce" ToRole="Katalog" />
+    <NavigationProperty Name="Katalog1" Relationship="Self.Katalog_Miejsce_FKv2" FromRole="Miejsce" ToRole="Katalog" />
+  </EntityType>
+  <EntityType Name="Opinia">
+    <Key>
+      <PropertyRef Name="id_opini" />
+    </Key>
+    <Property Name="id_opini" Type="Int32" Nullable="false" />
+    <Property Name="ocena" Type="Int32" />
+    <Property Name="opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="id_uczestnictwo" Type="Int32" />
+    <NavigationProperty Name="Uczestnictwo" Relationship="Self.Opinia_Uczestnictwo_FK" FromRole="Opinia" ToRole="Uczestnictwo" />
+  </EntityType>
+  <EntityType Name="Panel_pracowniczy">
+    <Key>
+      <PropertyRef Name="id_panel" />
+    </Key>
+    <Property Name="id_panel" Type="Int32" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="haslo" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="stopien" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="Kierownik_pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Pilot_pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Kierowca_pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Klient_pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Kierowca" Relationship="Self.Panel_pracowniczy_Kierowca_FK" FromRole="Panel_pracowniczy" ToRole="Kierowca" />
+    <NavigationProperty Name="Kierownik" Relationship="Self.Panel_pracowniczy_Kierownik_FK" FromRole="Panel_pracowniczy" ToRole="Kierownik" />
+    <NavigationProperty Name="Klient" Relationship="Self.Panel_pracowniczy_Klient_FK" FromRole="Panel_pracowniczy" ToRole="Klient" />
+    <NavigationProperty Name="Pilot" Relationship="Self.Panel_pracowniczy_Pilot_FK" FromRole="Panel_pracowniczy" ToRole="Pilot" />
+  </EntityType>
+  <EntityType Name="Pilot">
+    <Key>
+      <PropertyRef Name="pesel" />
+    </Key>
+    <Property Name="pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="imie" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="nazwisko" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="ulica" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="miejscowosc" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Panel_pracowniczy" Relationship="Self.Panel_pracowniczy_Pilot_FK" FromRole="Pilot" ToRole="Panel_pracowniczy" />
+    <NavigationProperty Name="Wycieczka" Relationship="Self.Wycieczka_Pilot_FK" FromRole="Pilot" ToRole="Wycieczka" />
+  </EntityType>
+  <EntityType Name="Pojazd">
+    <Key>
+      <PropertyRef Name="numer_rejestracyjny" />
+    </Key>
+    <Property Name="numer_rejestracyjny" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dostepny" Type="Boolean" />
+    <Property Name="marka" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="pojemnosc" Type="Int32" />
+    <Property Name="stan" Type="Boolean" />
+    <NavigationProperty Name="Wycieczka" Relationship="Self.Wycieczka_Pojazd_FK" FromRole="Pojazd" ToRole="Wycieczka" />
+  </EntityType>
+  <EntityType Name="Promocja">
+    <Key>
+      <PropertyRef Name="id_promocji" />
+    </Key>
+    <Property Name="id_promocji" Type="Int32" Nullable="false" />
+    <Property Name="cena" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="id_wycieczki" Type="Int32" />
+    <NavigationProperty Name="Wycieczka" Relationship="Self.Promocja_Wycieczka_FK" FromRole="Promocja" ToRole="Wycieczka" />
+  </EntityType>
+  <EntityType Name="Reklamacja">
+    <Key>
+      <PropertyRef Name="numer_reklamacji" />
+    </Key>
+    <Property Name="numer_reklamacji" Type="Int32" Nullable="false" />
+    <Property Name="opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="stan" Type="Boolean" />
+    <Property Name="Kierownik_pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="id_uczestnictwo" Type="Int32" />
+    <NavigationProperty Name="Kierownik" Relationship="Self.Reklamacja_Kierownik_FK" FromRole="Reklamacja" ToRole="Kierownik" />
+    <NavigationProperty Name="Uczestnictwo" Relationship="Self.Reklamacja_Uczestnictwo_FK" FromRole="Reklamacja" ToRole="Uczestnictwo" />
+  </EntityType>
+  <EntityType Name="Rezerwacja">
+    <Key>
+      <PropertyRef Name="numer_rezerwacji" />
+    </Key>
+    <Property Name="numer_rezerwacji" Type="Int32" Nullable="false" />
+    <Property Name="liczba_osob" Type="Int32" />
+    <Property Name="stan" Type="Boolean" />
+    <Property Name="zaliczka" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="id_wycieczki" Type="Int32" />
+    <Property Name="Klient_pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Klient" Relationship="Self.Rezerwacja_Klient_FK" FromRole="Rezerwacja" ToRole="Klient" />
+    <NavigationProperty Name="Wycieczka" Relationship="Self.Rezerwacja_Wycieczka_FK" FromRole="Rezerwacja" ToRole="Wycieczka" />
+    <NavigationProperty Name="Uczestnictwo" Relationship="Self.Uczestnictwo_Rezerwacja_FK" FromRole="Rezerwacja" ToRole="Uczestnictwo" />
+  </EntityType>
+  <EntityType Name="Uczestnictwo">
+    <Key>
+      <PropertyRef Name="id_uczestnictwo" />
+    </Key>
+    <Property Name="id_uczestnictwo" Type="Int32" Nullable="false" />
+    <Property Name="liczba_osob" Type="Int32" />
+    <Property Name="numer_rezerwacji" Type="Int32" />
+    <NavigationProperty Name="Opinia" Relationship="Self.Opinia_Uczestnictwo_FK" FromRole="Uczestnictwo" ToRole="Opinia" />
+    <NavigationProperty Name="Reklamacja" Relationship="Self.Reklamacja_Uczestnictwo_FK" FromRole="Uczestnictwo" ToRole="Reklamacja" />
+    <NavigationProperty Name="Rezerwacja" Relationship="Self.Uczestnictwo_Rezerwacja_FK" FromRole="Uczestnictwo" ToRole="Rezerwacja" />
+  </EntityType>
+  <EntityType Name="Wycieczka">
+    <Key>
+      <PropertyRef Name="id_wycieczki" />
+    </Key>
+    <Property Name="id_wycieczki" Type="Int32" Nullable="false" />
+    <Property Name="nazwa" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="data_wyjazdu" Type="DateTime" Precision="0" />
+    <Property Name="data_powrotu" Type="DateTime" Precision="0" />
+    <Property Name="opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Pilot_pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Pojazd_numer_rejestracyjny" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="Kierowca_pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Katalog" Relationship="Self.Katalog_Wycieczka_FK" FromRole="Wycieczka" ToRole="Katalog" />
+    <NavigationProperty Name="Kierowca" Relationship="Self.Wycieczka_Kierowca_FK" FromRole="Wycieczka" ToRole="Kierowca" />
+    <NavigationProperty Name="Pilot" Relationship="Self.Wycieczka_Pilot_FK" FromRole="Wycieczka" ToRole="Pilot" />
+    <NavigationProperty Name="Pojazd" Relationship="Self.Wycieczka_Pojazd_FK" FromRole="Wycieczka" ToRole="Pojazd" />
+    <NavigationProperty Name="Promocja" Relationship="Self.Promocja_Wycieczka_FK" FromRole="Wycieczka" ToRole="Promocja" />
+    <NavigationProperty Name="Rezerwacja" Relationship="Self.Rezerwacja_Wycieczka_FK" FromRole="Wycieczka" ToRole="Rezerwacja" />
+  </EntityType>
+  <Association Name="Katalog_Cennik_FK">
+    <End Role="Cennik" Type="Self.Cennik" Multiplicity="0..1" />
+    <End Role="Katalog" Type="Self.Katalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cennik">
+        <PropertyRef Name="id_cennika" />
+      </Principal>
+      <Dependent Role="Katalog">
+        <PropertyRef Name="id_cennika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Katalog_Miejsce_FK">
+    <End Role="Miejsce" Type="Self.Miejsce" Multiplicity="0..1" />
+    <End Role="Katalog" Type="Self.Katalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Miejsce">
+        <PropertyRef Name="id_miejsca" />
+      </Principal>
+      <Dependent Role="Katalog">
+        <PropertyRef Name="id_miejsca_przyjazdu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Katalog_Miejsce_FKv2">
+    <End Role="Miejsce" Type="Self.Miejsce" Multiplicity="0..1" />
+    <End Role="Katalog" Type="Self.Katalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Miejsce">
+        <PropertyRef Name="id_miejsca" />
+      </Principal>
+      <Dependent Role="Katalog">
+        <PropertyRef Name="id_miejsca_odjazdu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Katalog_Wycieczka_FK">
+    <End Role="Wycieczka" Type="Self.Wycieczka" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Katalog" Type="Self.Katalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wycieczka">
+        <PropertyRef Name="id_wycieczki" />
+      </Principal>
+      <Dependent Role="Katalog">
+        <PropertyRef Name="id_wycieczki" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Panel_pracowniczy_Kierowca_FK">
+    <End Role="Kierowca" Type="Self.Kierowca" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Panel_pracowniczy" Type="Self.Panel_pracowniczy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kierowca">
+        <PropertyRef Name="pesel" />
+      </Principal>
+      <Dependent Role="Panel_pracowniczy">
+        <PropertyRef Name="Kierowca_pesel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Wycieczka_Kierowca_FK">
+    <End Role="Kierowca" Type="Self.Kierowca" Multiplicity="0..1" />
+    <End Role="Wycieczka" Type="Self.Wycieczka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kierowca">
+        <PropertyRef Name="pesel" />
+      </Principal>
+      <Dependent Role="Wycieczka">
+        <PropertyRef Name="Kierowca_pesel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Panel_pracowniczy_Kierownik_FK">
+    <End Role="Kierownik" Type="Self.Kierownik" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Panel_pracowniczy" Type="Self.Panel_pracowniczy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kierownik">
+        <PropertyRef Name="pesel" />
+      </Principal>
+      <Dependent Role="Panel_pracowniczy">
+        <PropertyRef Name="Kierownik_pesel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reklamacja_Kierownik_FK">
+    <End Role="Kierownik" Type="Self.Kierownik" Multiplicity="0..1" />
+    <End Role="Reklamacja" Type="Self.Reklamacja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kierownik">
+        <PropertyRef Name="pesel" />
+      </Principal>
+      <Dependent Role="Reklamacja">
+        <PropertyRef Name="Kierownik_pesel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Panel_pracowniczy_Klient_FK">
+    <End Role="Klient" Type="Self.Klient" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Panel_pracowniczy" Type="Self.Panel_pracowniczy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klient">
+        <PropertyRef Name="pesel" />
+      </Principal>
+      <Dependent Role="Panel_pracowniczy">
+        <PropertyRef Name="Klient_pesel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Rezerwacja_Klient_FK">
+    <End Role="Klient" Type="Self.Klient" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Rezerwacja" Type="Self.Rezerwacja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klient">
+        <PropertyRef Name="pesel" />
+      </Principal>
+      <Dependent Role="Rezerwacja">
+        <PropertyRef Name="Klient_pesel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Opinia_Uczestnictwo_FK">
+    <End Role="Uczestnictwo" Type="Self.Uczestnictwo" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Opinia" Type="Self.Opinia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uczestnictwo">
+        <PropertyRef Name="id_uczestnictwo" />
+      </Principal>
+      <Dependent Role="Opinia">
+        <PropertyRef Name="id_uczestnictwo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Panel_pracowniczy_Pilot_FK">
+    <End Role="Pilot" Type="Self.Pilot" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Panel_pracowniczy" Type="Self.Panel_pracowniczy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pilot">
+        <PropertyRef Name="pesel" />
+      </Principal>
+      <Dependent Role="Panel_pracowniczy">
+        <PropertyRef Name="Pilot_pesel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Wycieczka_Pilot_FK">
+    <End Role="Pilot" Type="Self.Pilot" Multiplicity="0..1" />
+    <End Role="Wycieczka" Type="Self.Wycieczka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pilot">
+        <PropertyRef Name="pesel" />
+      </Principal>
+      <Dependent Role="Wycieczka">
+        <PropertyRef Name="Pilot_pesel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Wycieczka_Pojazd_FK">
+    <End Role="Pojazd" Type="Self.Pojazd" Multiplicity="0..1" />
+    <End Role="Wycieczka" Type="Self.Wycieczka" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pojazd">
+        <PropertyRef Name="numer_rejestracyjny" />
+      </Principal>
+      <Dependent Role="Wycieczka">
+        <PropertyRef Name="Pojazd_numer_rejestracyjny" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Promocja_Wycieczka_FK">
+    <End Role="Wycieczka" Type="Self.Wycieczka" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Promocja" Type="Self.Promocja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wycieczka">
+        <PropertyRef Name="id_wycieczki" />
+      </Principal>
+      <Dependent Role="Promocja">
+        <PropertyRef Name="id_wycieczki" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Reklamacja_Uczestnictwo_FK">
+    <End Role="Uczestnictwo" Type="Self.Uczestnictwo" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Reklamacja" Type="Self.Reklamacja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uczestnictwo">
+        <PropertyRef Name="id_uczestnictwo" />
+      </Principal>
+      <Dependent Role="Reklamacja">
+        <PropertyRef Name="id_uczestnictwo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Rezerwacja_Wycieczka_FK">
+    <End Role="Wycieczka" Type="Self.Wycieczka" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Rezerwacja" Type="Self.Rezerwacja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wycieczka">
+        <PropertyRef Name="id_wycieczki" />
+      </Principal>
+      <Dependent Role="Rezerwacja">
+        <PropertyRef Name="id_wycieczki" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Uczestnictwo_Rezerwacja_FK">
+    <End Role="Rezerwacja" Type="Self.Rezerwacja" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Uczestnictwo" Type="Self.Uczestnictwo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rezerwacja">
+        <PropertyRef Name="numer_rezerwacji" />
+      </Principal>
+      <Dependent Role="Uczestnictwo">
+        <PropertyRef Name="numer_rezerwacji" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="bazaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cennik" EntityType="Self.Cennik" />
+    <EntitySet Name="Katalog" EntityType="Self.Katalog" />
+    <EntitySet Name="Kierowca" EntityType="Self.Kierowca" />
+    <EntitySet Name="Kierownik" EntityType="Self.Kierownik" />
+    <EntitySet Name="Klient" EntityType="Self.Klient" />
+    <EntitySet Name="Miejsce" EntityType="Self.Miejsce" />
+    <EntitySet Name="Opinia" EntityType="Self.Opinia" />
+    <EntitySet Name="Panel_pracowniczy" EntityType="Self.Panel_pracowniczy" />
+    <EntitySet Name="Pilot" EntityType="Self.Pilot" />
+    <EntitySet Name="Pojazd" EntityType="Self.Pojazd" />
+    <EntitySet Name="Promocja" EntityType="Self.Promocja" />
+    <EntitySet Name="Reklamacja" EntityType="Self.Reklamacja" />
+    <EntitySet Name="Rezerwacja" EntityType="Self.Rezerwacja" />
+    <EntitySet Name="Uczestnictwo" EntityType="Self.Uczestnictwo" />
+    <EntitySet Name="Wycieczka" EntityType="Self.Wycieczka" />
+    <AssociationSet Name="Katalog_Cennik_FK" Association="Self.Katalog_Cennik_FK">
+      <End Role="Cennik" EntitySet="Cennik" />
+      <End Role="Katalog" EntitySet="Katalog" />
+    </AssociationSet>
+    <AssociationSet Name="Katalog_Miejsce_FK" Association="Self.Katalog_Miejsce_FK">
+      <End Role="Miejsce" EntitySet="Miejsce" />
+      <End Role="Katalog" EntitySet="Katalog" />
+    </AssociationSet>
+    <AssociationSet Name="Katalog_Miejsce_FKv2" Association="Self.Katalog_Miejsce_FKv2">
+      <End Role="Miejsce" EntitySet="Miejsce" />
+      <End Role="Katalog" EntitySet="Katalog" />
+    </AssociationSet>
+    <AssociationSet Name="Katalog_Wycieczka_FK" Association="Self.Katalog_Wycieczka_FK">
+      <End Role="Wycieczka" EntitySet="Wycieczka" />
+      <End Role="Katalog" EntitySet="Katalog" />
+    </AssociationSet>
+    <AssociationSet Name="Panel_pracowniczy_Kierowca_FK" Association="Self.Panel_pracowniczy_Kierowca_FK">
+      <End Role="Kierowca" EntitySet="Kierowca" />
+      <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
+    </AssociationSet>
+    <AssociationSet Name="Wycieczka_Kierowca_FK" Association="Self.Wycieczka_Kierowca_FK">
+      <End Role="Kierowca" EntitySet="Kierowca" />
+      <End Role="Wycieczka" EntitySet="Wycieczka" />
+    </AssociationSet>
+    <AssociationSet Name="Panel_pracowniczy_Kierownik_FK" Association="Self.Panel_pracowniczy_Kierownik_FK">
+      <End Role="Kierownik" EntitySet="Kierownik" />
+      <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
+    </AssociationSet>
+    <AssociationSet Name="Reklamacja_Kierownik_FK" Association="Self.Reklamacja_Kierownik_FK">
+      <End Role="Kierownik" EntitySet="Kierownik" />
+      <End Role="Reklamacja" EntitySet="Reklamacja" />
+    </AssociationSet>
+    <AssociationSet Name="Panel_pracowniczy_Klient_FK" Association="Self.Panel_pracowniczy_Klient_FK">
+      <End Role="Klient" EntitySet="Klient" />
+      <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
+    </AssociationSet>
+    <AssociationSet Name="Rezerwacja_Klient_FK" Association="Self.Rezerwacja_Klient_FK">
+      <End Role="Klient" EntitySet="Klient" />
+      <End Role="Rezerwacja" EntitySet="Rezerwacja" />
+    </AssociationSet>
+    <AssociationSet Name="Opinia_Uczestnictwo_FK" Association="Self.Opinia_Uczestnictwo_FK">
+      <End Role="Uczestnictwo" EntitySet="Uczestnictwo" />
+      <End Role="Opinia" EntitySet="Opinia" />
+    </AssociationSet>
+    <AssociationSet Name="Panel_pracowniczy_Pilot_FK" Association="Self.Panel_pracowniczy_Pilot_FK">
+      <End Role="Pilot" EntitySet="Pilot" />
+      <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
+    </AssociationSet>
+    <AssociationSet Name="Wycieczka_Pilot_FK" Association="Self.Wycieczka_Pilot_FK">
+      <End Role="Pilot" EntitySet="Pilot" />
+      <End Role="Wycieczka" EntitySet="Wycieczka" />
+    </AssociationSet>
+    <AssociationSet Name="Wycieczka_Pojazd_FK" Association="Self.Wycieczka_Pojazd_FK">
+      <End Role="Pojazd" EntitySet="Pojazd" />
+      <End Role="Wycieczka" EntitySet="Wycieczka" />
+    </AssociationSet>
+    <AssociationSet Name="Promocja_Wycieczka_FK" Association="Self.Promocja_Wycieczka_FK">
+      <End Role="Wycieczka" EntitySet="Wycieczka" />
+      <End Role="Promocja" EntitySet="Promocja" />
+    </AssociationSet>
+    <AssociationSet Name="Reklamacja_Uczestnictwo_FK" Association="Self.Reklamacja_Uczestnictwo_FK">
+      <End Role="Uczestnictwo" EntitySet="Uczestnictwo" />
+      <End Role="Reklamacja" EntitySet="Reklamacja" />
+    </AssociationSet>
+    <AssociationSet Name="Rezerwacja_Wycieczka_FK" Association="Self.Rezerwacja_Wycieczka_FK">
+      <End Role="Wycieczka" EntitySet="Wycieczka" />
+      <End Role="Rezerwacja" EntitySet="Rezerwacja" />
+    </AssociationSet>
+    <AssociationSet Name="Uczestnictwo_Rezerwacja_FK" Association="Self.Uczestnictwo_Rezerwacja_FK">
+      <End Role="Rezerwacja" EntitySet="Rezerwacja" />
+      <End Role="Uczestnictwo" EntitySet="Uczestnictwo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

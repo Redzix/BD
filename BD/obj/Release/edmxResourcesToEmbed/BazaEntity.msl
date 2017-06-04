@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bazaModelStoreContainer" CdmEntityContainer="bazaEntities">
+    <EntitySetMapping Name="Cennik">
+      <EntityTypeMapping TypeName="bazaModel.Cennik">
+        <MappingFragment StoreEntitySet="Cennik">
+          <ScalarProperty Name="id_cennika" ColumnName="id_cennika" />
+          <ScalarProperty Name="cena" ColumnName="cena" />
+          <ScalarProperty Name="okres_od" ColumnName="okres_od" />
+          <ScalarProperty Name="okres_do" ColumnName="okres_do" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Katalog">
+      <EntityTypeMapping TypeName="bazaModel.Katalog">
+        <MappingFragment StoreEntitySet="Katalog">
+          <ScalarProperty Name="id_katalogu" ColumnName="id_katalogu" />
+          <ScalarProperty Name="okres_trwania_wycieczki" ColumnName="okres_trwania_wycieczki" />
+          <ScalarProperty Name="id_cennika" ColumnName="id_cennika" />
+          <ScalarProperty Name="id_miejsca_odjazdu" ColumnName="id_miejsca_odjazdu" />
+          <ScalarProperty Name="id_miejsca_przyjazdu" ColumnName="id_miejsca_przyjazdu" />
+          <ScalarProperty Name="id_wycieczki" ColumnName="id_wycieczki" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kierowca">
+      <EntityTypeMapping TypeName="bazaModel.Kierowca">
+        <MappingFragment StoreEntitySet="Kierowca">
+          <ScalarProperty Name="pesel" ColumnName="pesel" />
+          <ScalarProperty Name="imie" ColumnName="imie" />
+          <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+          <ScalarProperty Name="ulica" ColumnName="ulica" />
+          <ScalarProperty Name="miejscowosc" ColumnName="miejscowosc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kierownik">
+      <EntityTypeMapping TypeName="bazaModel.Kierownik">
+        <MappingFragment StoreEntitySet="Kierownik">
+          <ScalarProperty Name="pesel" ColumnName="pesel" />
+          <ScalarProperty Name="imie" ColumnName="imie" />
+          <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+          <ScalarProperty Name="ulica" ColumnName="ulica" />
+          <ScalarProperty Name="miejscowosc" ColumnName="miejscowosc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Klient">
+      <EntityTypeMapping TypeName="bazaModel.Klient">
+        <MappingFragment StoreEntitySet="Klient">
+          <ScalarProperty Name="pesel" ColumnName="pesel" />
+          <ScalarProperty Name="imie" ColumnName="imie" />
+          <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+          <ScalarProperty Name="ulica" ColumnName="ulica" />
+          <ScalarProperty Name="miejscowosc" ColumnName="miejscowosc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Miejsce">
+      <EntityTypeMapping TypeName="bazaModel.Miejsce">
+        <MappingFragment StoreEntitySet="Miejsce">
+          <ScalarProperty Name="id_miejsca" ColumnName="id_miejsca" />
+          <ScalarProperty Name="adres" ColumnName="adres" />
+          <ScalarProperty Name="miejscowosc" ColumnName="miejscowosc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Opinia">
+      <EntityTypeMapping TypeName="bazaModel.Opinia">
+        <MappingFragment StoreEntitySet="Opinia">
+          <ScalarProperty Name="id_opini" ColumnName="id_opini" />
+          <ScalarProperty Name="ocena" ColumnName="ocena" />
+          <ScalarProperty Name="opis" ColumnName="opis" />
+          <ScalarProperty Name="id_uczestnictwo" ColumnName="id_uczestnictwo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Panel_pracowniczy">
+      <EntityTypeMapping TypeName="bazaModel.Panel_pracowniczy">
+        <MappingFragment StoreEntitySet="Panel_pracowniczy">
+          <ScalarProperty Name="id_panel" ColumnName="id_panel" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="haslo" ColumnName="haslo" />
+          <ScalarProperty Name="stopien" ColumnName="stopien" />
+          <ScalarProperty Name="Kierownik_pesel" ColumnName="Kierownik_pesel" />
+          <ScalarProperty Name="Pilot_pesel" ColumnName="Pilot_pesel" />
+          <ScalarProperty Name="Kierowca_pesel" ColumnName="Kierowca_pesel" />
+          <ScalarProperty Name="Klient_pesel" ColumnName="Klient_pesel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pilot">
+      <EntityTypeMapping TypeName="bazaModel.Pilot">
+        <MappingFragment StoreEntitySet="Pilot">
+          <ScalarProperty Name="pesel" ColumnName="pesel" />
+          <ScalarProperty Name="imie" ColumnName="imie" />
+          <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+          <ScalarProperty Name="ulica" ColumnName="ulica" />
+          <ScalarProperty Name="miejscowosc" ColumnName="miejscowosc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pojazd">
+      <EntityTypeMapping TypeName="bazaModel.Pojazd">
+        <MappingFragment StoreEntitySet="Pojazd">
+          <ScalarProperty Name="numer_rejestracyjny" ColumnName="numer_rejestracyjny" />
+          <ScalarProperty Name="dostepny" ColumnName="dostepny" />
+          <ScalarProperty Name="marka" ColumnName="marka" />
+          <ScalarProperty Name="pojemnosc" ColumnName="pojemnosc" />
+          <ScalarProperty Name="stan" ColumnName="stan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Promocja">
+      <EntityTypeMapping TypeName="bazaModel.Promocja">
+        <MappingFragment StoreEntitySet="Promocja">
+          <ScalarProperty Name="id_promocji" ColumnName="id_promocji" />
+          <ScalarProperty Name="cena" ColumnName="cena" />
+          <ScalarProperty Name="id_wycieczki" ColumnName="id_wycieczki" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reklamacja">
+      <EntityTypeMapping TypeName="bazaModel.Reklamacja">
+        <MappingFragment StoreEntitySet="Reklamacja">
+          <ScalarProperty Name="numer_reklamacji" ColumnName="numer_reklamacji" />
+          <ScalarProperty Name="opis" ColumnName="opis" />
+          <ScalarProperty Name="stan" ColumnName="stan" />
+          <ScalarProperty Name="Kierownik_pesel" ColumnName="Kierownik_pesel" />
+          <ScalarProperty Name="id_uczestnictwo" ColumnName="id_uczestnictwo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rezerwacja">
+      <EntityTypeMapping TypeName="bazaModel.Rezerwacja">
+        <MappingFragment StoreEntitySet="Rezerwacja">
+          <ScalarProperty Name="numer_rezerwacji" ColumnName="numer_rezerwacji" />
+          <ScalarProperty Name="liczba_osob" ColumnName="liczba_osob" />
+          <ScalarProperty Name="stan" ColumnName="stan" />
+          <ScalarProperty Name="zaliczka" ColumnName="zaliczka" />
+          <ScalarProperty Name="id_wycieczki" ColumnName="id_wycieczki" />
+          <ScalarProperty Name="Klient_pesel" ColumnName="Klient_pesel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uczestnictwo">
+      <EntityTypeMapping TypeName="bazaModel.Uczestnictwo">
+        <MappingFragment StoreEntitySet="Uczestnictwo">
+          <ScalarProperty Name="id_uczestnictwo" ColumnName="id_uczestnictwo" />
+          <ScalarProperty Name="liczba_osob" ColumnName="liczba_osob" />
+          <ScalarProperty Name="numer_rezerwacji" ColumnName="numer_rezerwacji" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wycieczka">
+      <EntityTypeMapping TypeName="bazaModel.Wycieczka">
+        <MappingFragment StoreEntitySet="Wycieczka">
+          <ScalarProperty Name="id_wycieczki" ColumnName="id_wycieczki" />
+          <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+          <ScalarProperty Name="data_wyjazdu" ColumnName="data_wyjazdu" />
+          <ScalarProperty Name="data_powrotu" ColumnName="data_powrotu" />
+          <ScalarProperty Name="opis" ColumnName="opis" />
+          <ScalarProperty Name="Pilot_pesel" ColumnName="Pilot_pesel" />
+          <ScalarProperty Name="Pojazd_numer_rejestracyjny" ColumnName="Pojazd_numer_rejestracyjny" />
+          <ScalarProperty Name="Kierowca_pesel" ColumnName="Kierowca_pesel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

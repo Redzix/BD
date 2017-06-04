@@ -10,12 +10,12 @@
         <EntityTypeShape EntityType="bazaModel.Kierowca" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Kierownik" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Klient" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="bazaModel.Miejsce" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Miejsce" Width="1.5" PointX="8" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Opinia" Width="1.5" PointX="15.75" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Panel_pracowniczy" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Pilot" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Pojazd" Width="1.5" PointX="3.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="bazaModel.Promocja" Width="1.5" PointX="8.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bazaModel.Promocja" Width="1.5" PointX="5.875" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Reklamacja" Width="1.5" PointX="15.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Rezerwacja" Width="1.5" PointX="11.25" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Uczestnictwo" Width="1.5" PointX="13.5" PointY="8.25" IsExpanded="true" />

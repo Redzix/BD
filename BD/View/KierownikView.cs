@@ -157,82 +157,46 @@ namespace BD.View
         }
 
         private void tc_kierownik_SelectedIndexChanged(object sender, EventArgs e)
-        {   
-            // Tutaj pobiera liste od nowa, ponieważ ma się przeładować i uaktualnić.
-            if(tc_kierownik.SelectedIndex == 0)
+        {
+            switch (tc_kierownik.SelectedIndex)
             {
-                this.ZaladujWycieczki();
-            }
-            else if (tc_kierownik.SelectedIndex == 1)
-            {
-                _listaWycieczek = new Wycieczka_model().PobierzWycieczki();
-
-                for(int i = 0; i < _listaWycieczek.Count; i++)
-                {
-                    cb_nazwa_wycieczki.Items.Add(_listaWycieczek[i].Nazwa);
-                }
-
-            }
-            else if (tc_kierownik.SelectedIndex == 2)
-            {
-                ZaladujPojazdy();
-            }
+                case 0:
+                    this.ZaladujWycieczki();
+                    break;
+                case 1:
+                    this.ZaladujReklamacje();
+                    break;
+                case 2:
+                    this.ZaladujPojazdy();
+                    break;
+            } 
         }
 
         public void ZaladujWycieczki()
         {
-            List<Wycieczka_model> _listaWycieczek = new Wycieczka_model().PobierzWycieczki();
-            _listaKatalogu = new Katalog_model().PobierzKatalog();          
-            List<Promocja_model> _listaPromocji = new Promocja_model().PobierzPromocje();
-            List<Cennik_model> _listaCennikow = new Cennik_model().PobierzCennik();
 
-            _listaWycieczek = new Wycieczka_model().PobierzWycieczki();
-
-
-            for (int i = 0; i < _listaKatalogu.Count; i++)
+            bazaEntities db = new bazaEntities();
+            lv_wycieczki.Items.Clear();
+            //All hail LINQ kurwa
+            var query = from katalog in db.Katalog
+                        select new {
+                            katalog, wycieczka = katalog.Wycieczka,
+                            cennik = katalog.Cennik,
+                            miejsce_z = katalog.Miejsce,
+                            miejsce_do = katalog.Miejsce1
+                        };
+            
+            foreach(var wyc in query)
             {
-
-                ListViewItem wycieczka = new ListViewItem(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Nazwa);
-                wycieczka.SubItems.Add(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataWyjazdu.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].DataPowrotu.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Opis);
-
-                int j = 0;
-                while (_listaPromocji[j].IdWycieczki != _listaKatalogu[i].IdWycieczki)
-                {
-                    j++;
-                }
- 
-                wycieczka.SubItems.Add(_listaPromocji[j].Cena.ToString());
-                wycieczka.SubItems.Add(_listaCennikow[_listaKatalogu[i].IdCennika - 1].Cena.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Kierowca.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[_listaKatalogu[i].IdWycieczki - 1].Pilot.ToString());
-                wycieczka.SubItems.Add(_listaKatalogu[i].MiejsceWyjazdu);
-                wycieczka.SubItems.Add(_listaKatalogu[i].MiejsceDocelowe);
-
+                ListViewItem wycieczka = new ListViewItem(wyc.wycieczka.nazwa); //Miejsce
+                wycieczka.Tag = wyc.katalog.id_wycieczki; //Ukryte ID
+                wycieczka.SubItems.Add(String.Format("{0:dd/MM/yyyy}",(DateTime)wyc.wycieczka.data_wyjazdu)); //Data z
+                wycieczka.SubItems.Add(String.Format("{0:dd/MM/yyyy}", (DateTime)wyc.wycieczka.data_powrotu)); //data do
+                wycieczka.SubItems.Add(wyc.miejsce_z.miejscowosc); //miejsce od
+                wycieczka.SubItems.Add(wyc.miejsce_do.miejscowosc); //miejsce do
+                wycieczka.SubItems.Add(wyc.cennik.cena.ToString()); //cena
                 lv_wycieczki.Items.Add(wycieczka);
             }
-
-
-            /*_listaWycieczek.Clear();
-            lv_wycieczki.Items.Clear();
-            _listaWycieczek = (new Katalog_kontroler_list()).PobierzListeDlaKierownika();
-
-            for (int i = 0; i < _listaWycieczek.Count; i++)
-            {
-                ListViewItem wycieczka = new ListViewItem(_listaWycieczek[i].NazwaWycieczki.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[i].DataWyjazdu.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[i].DataPrzyjazdu.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[i].Opis.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[i].Promocja.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[i].Cena.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[i].Kierowca.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[i].PilotView.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[i].MiejsceOdjazdu.ToString());
-                wycieczka.SubItems.Add(_listaWycieczek[i].MiejsceDocelowe.ToString());
-
-                lv_wycieczki.Items.Add(wycieczka);*/
-       
         }
 
         public void ZaladujPojazdy()
@@ -241,7 +205,7 @@ namespace BD.View
             lv_pojazdy.Items.Clear();
             var query = from p in db.Pojazd select p;
 
-            foreach(Pojazd poj in query)
+            foreach (Pojazd poj in query)
             {
                 ListViewItem pojazd = new ListViewItem(poj.numer_rejestracyjny);
                 pojazd.SubItems.Add((bool)poj.dostepny ? "Dostępny" : "Niedostępny");
@@ -250,35 +214,21 @@ namespace BD.View
                 pojazd.SubItems.Add((bool)poj.stan ? "Sprawny" : "Awaria");
                 lv_pojazdy.Items.Add(pojazd);
             }
-           /* _listaPojazdow.Clear();
-            lv_pojazdy.Items.Clear();
-            _listaPojazdow = (new Pojazd_model()).PobierzPojazdy();
+        }
 
-            for (int i = 0; i < _listaPojazdow.Count; i++)
+        private void ZaladujReklamacje()
+        {
+            bazaEntities db = new bazaEntities();
+            var query = from r in db.Reklamacja select r;
+            lv_reklamacje.Items.Clear();
+            foreach (Reklamacja rek in query)
             {
-                ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
-
-                if (_listaPojazdow[i].Dostepnosc == 1)
-                {
-                    pojazd.SubItems.Add("Dostępny");
-                }
-                else
-                {
-                    pojazd.SubItems.Add("Niedostępny");
-                }
-
-                pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
-                pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
-                if (_listaPojazdow[i].Stan == 1)
-                {
-                    pojazd.SubItems.Add("Sprawny");
-                }
-                else
-                {
-                    pojazd.SubItems.Add("Awaria");
-                }
-                lv_pojazdy.Items.Add(pojazd);
-            }*/
+                ListViewItem reklamacjaItem = new ListViewItem(rek.numer_reklamacji.ToString());
+                reklamacjaItem.Tag = rek.numer_reklamacji;
+                reklamacjaItem.SubItems.Add(rek.opis.Substring(0, 30));
+                reklamacjaItem.SubItems.Add((bool)rek.stan ? "Rozpatrzona" : "Nierozpatrzona");
+                lv_reklamacje.Items.Add(reklamacjaItem);
+            }
         }
 
         private void b_usun_pojazd_Click(object sender, EventArgs e)
@@ -387,75 +337,36 @@ namespace BD.View
             lv_reklamacje.Items.Clear();
 
             bazaEntities db = new bazaEntities();
-            lv_pojazdy.Items.Clear();
-            var query = from reklamacja in db.Reklamacja
+            //lv_pojazdy.Items.Clear();
+            /*var query = from reklamacja in db.Reklamacja
                                  join uczestnictwo in db.Uczestnictwo on reklamacja.id_uczestnictwo equals uczestnictwo.id_uczestnictwo
                                  join rezerwacja in db.Rezerwacja on uczestnictwo.numer_rezerwacji equals rezerwacja.numer_rezerwacji
                                  join wycieczka in db.Wycieczka on rezerwacja.id_wycieczki equals wycieczka.id_wycieczki
                                  where wycieczka.nazwa == cb_nazwa_wycieczki.Text
-                                 select reklamacja.numer_reklamacji;
-               
-
-            /*listaNumerowReklamacji = _polacz.PobierzListInt(_polacz.UtworzZapytanie("SELECT numer_reklamacji " +
-                "FROM Reklamacja " +
-                "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
-                "INNER JOIN Rezerwacja ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji I" +
-                "NNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Rezerwacja.id_wycieczki " +
-                "WHERE Wycieczka.nazwa = '" + cb_nazwa_wycieczki.Text + "'"));*/
-
-            if (query.Count() == 0)
-            {
-                lv_reklamacje.Items.Add("brak reklamacji");
-            }
-            else
-            {
-                foreach (int rek in query)
+                                 select reklamacja.numer_reklamacji;*/
+            var query = from r in db.Reklamacja select r;
+                foreach (Reklamacja rek in query)
                 {
-                    ListViewItem reklamacjaItem = new ListViewItem(rek.ToString());
+                    ListViewItem reklamacjaItem = new ListViewItem(rek.numer_reklamacji.ToString());
+                    reklamacjaItem.Tag = rek.numer_reklamacji;
+                    reklamacjaItem.SubItems.Add(rek.opis.Substring(0, 30));
                     lv_reklamacje.Items.Add(reklamacjaItem);
                 }
-            }
             lv_reklamacje.Refresh();
         }
-
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
         {
             bazaEntities db = new bazaEntities();
-            lv_pojazdy.Items.Clear();
-            var okres = from reklamacja in db.Reklamacja
-                        join uczestnictwo in db.Uczestnictwo on reklamacja.id_uczestnictwo equals uczestnictwo.id_uczestnictwo
-                        join rezerwacja in db.Rezerwacja on uczestnictwo.numer_rezerwacji equals rezerwacja.numer_rezerwacji
-                        join wycieczka in db.Wycieczka on rezerwacja.id_wycieczki equals wycieczka.id_wycieczki
-                        where reklamacja.numer_reklamacji == Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text)
-                        select DbFunctions.DiffDays(wycieczka.data_wyjazdu, wycieczka.data_powrotu);
+            int numer;
+            int.TryParse(((ListView)sender).SelectedItems[0].SubItems[0].Text, out numer);
+            var reklamacja = (from r in db.Reklamacja
+                         where r.numer_reklamacji == numer
+                         select r).FirstOrDefault();
 
-
-            /*  var opis = from reklamacja in db.Reklamacja
-                          join uczestnictwo in db.Uczestnictwo on reklamacja.id_uczestnictwo equals uczestnictwo.id_uczestnictwo
-                          join rezerwacja in db.Rezerwacja on uczestnictwo.numer_rezerwacji equals rezerwacja.numer_rezerwacji
-                          join wycieczka in db.Wycieczka on rezerwacja.id_wycieczki equals wycieczka.id_wycieczki
-                          where reklamacja.numer_reklamacji == Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text)
-                          select (wycieczka.data_powrotu - wycieczka.data_wyjazdu);*/
-
-
-
-            /* opis = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT opis " +
-                 "FROM ReklamacjaView " +
-                 "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = ReklamacjaView.id_uczestnictwo " +
-                 "INNER JOIN RezerwacjaView ON RezerwacjaView.numer_rezerwacji = Uczestnictwo.numer_rezerwacji I" +
-                 "NNER JOIN WycieczkaView ON WycieczkaView.id_wycieczki = RezerwacjaView.id_wycieczki " +
-                 "WHERE ReklamacjaView.numer_reklamacji = " + Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text)));
-             */
-
-            /* okres = _polacz.PobierzDaneInt(_polacz.UtworzZapytanie("SELECT DATEDIFF(day,data_wyjazdu,data_powrotu) " +
-                "FROM Reklamacja " +
-                "INNER JOIN Uczestnictwo ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
-                "INNER JOIN Rezerwacja ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji " +
-                "INNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Rezerwacja.id_wycieczki " +
-                "WHERE Reklamacja.numer_reklamacji = " + _idReklamacji));*/
-
-            // rtb_opisReklamacji.Text = opis;
-            tb_okresTrwaniaWycieczki.Text = okres.ToString();
+            rtb_opisReklamacji.Text = reklamacja.opis;
+            tb_nazwa_wycieczki.Text = reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.nazwa;
+            TimeSpan roznica = (TimeSpan)(reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.data_powrotu - reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.data_wyjazdu);
+            tb_okresTrwaniaWycieczki.Text = String.Format("{0} dni",roznica.Days);
         }
 
         private void b_rozpatrz_pozytywnie_Click(object sender, EventArgs e)
@@ -486,8 +397,9 @@ namespace BD.View
 
         private void b_edytuj_Click(object sender, EventArgs e)
         {
-            int idWycieczki = _listaKatalogu[lv_wycieczki.SelectedItems[0].Index].IdWycieczki;
-            WycieczkaView wycieczka = new WycieczkaView(0,idWycieczki);
+            //int idWycieczki = _listaKatalogu[lv_wycieczki.SelectedItems[0].Index].IdWycieczki;
+            var id = lv_wycieczki.SelectedItems[0].Tag;
+            WycieczkaView wycieczka = new WycieczkaView(0,(int)id);
             wycieczka.ShowDialog();
             ZaladujWycieczki();
         }
