@@ -131,29 +131,28 @@ namespace BD.View
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Pilot_Load(object sender, EventArgs e)
-        {
+        {                      
             // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
-            dgv_tabelaPilot.Columns["Nazwa_wycieczki"].DataPropertyName = "nazwa";
-            dgv_tabelaPilot.Columns["Data_wyjazdu"].DataPropertyName = "data_wyjazdu";
-            dgv_tabelaPilot.Columns["Data_powrotu"].DataPropertyName = "data_powrotu";
-            dgv_tabelaPilot.Columns["Pojazd"].DataPropertyName = "numer_rejestracyjny";
+            dgv_tabelaPilot.Columns["Nazwa_wycieczki"].DataPropertyName = "wycieczka";
+            dgv_tabelaPilot.Columns["Data_wyjazdu"].DataPropertyName = "dataOdjazdu";
+            dgv_tabelaPilot.Columns["Data_powrotu"].DataPropertyName = "dataPowrotu";
+            dgv_tabelaPilot.Columns["Pojazd"].DataPropertyName = "pojazd";
             dgv_tabelaPilot.Columns["Kierowca"].DataPropertyName = "kierowca";
 
-            // Utworzenie zapytania do bazy danych w celu pobrania potrzebnych informacji o wycieczce.
-            _zapytanie = _polacz.UtworzZapytanie("SELECT " +
-                "nazwa," +
-                "data_wyjazdu," +
-                "data_powrotu," +
-                "Pojazd_numer_rejestracyjny as numer_rejestracyjny," +
-                "imie + ' ' + nazwisko as kierowca " +
-                "FROM Wycieczka " +
-                "INNER JOIN Kierowca ON Wycieczka.Kierowca_pesel = Kierowca.pesel;");
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(_zapytanie);
+            bazaEntities db = new bazaEntities();
 
-            // Utworzenie i wypełnienie tabeli jako DataSource
-            DataTable tabela = new DataTable();
-            sqlDataAdapter.Fill(tabela);
-            dgv_tabelaPilot.DataSource = tabela;
+            var query = from wycieczka in db.Wycieczka
+                        join kierowca in db.Kierowca on wycieczka.Kierowca_pesel equals kierowca.pesel
+                        select new
+                        {
+                            wycieczka = wycieczka.nazwa,
+                            dataOdjazdu = wycieczka.data_wyjazdu,
+                            dataPowrotu = wycieczka.data_powrotu,
+                            pojazd = wycieczka.Pojazd_numer_rejestracyjny,
+                            kierowca = wycieczka.Kierowca.imie + " " + wycieczka.Kierowca.nazwisko
+                        };
+            dgv_tabelaPilot.DataSource = query.ToList();
+              
         }
     }
 }
