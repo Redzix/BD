@@ -129,7 +129,7 @@
             this.lv_pojazdy.Location = new System.Drawing.Point(8, 33);
             this.lv_pojazdy.MultiSelect = false;
             this.lv_pojazdy.Name = "lv_pojazdy";
-            this.lv_pojazdy.Size = new System.Drawing.Size(373, 203);
+            this.lv_pojazdy.Size = new System.Drawing.Size(386, 203);
             this.lv_pojazdy.TabIndex = 1;
             this.lv_pojazdy.UseCompatibleStateImageBehavior = false;
             this.lv_pojazdy.View = System.Windows.Forms.View.Details;
@@ -157,7 +157,7 @@
             // Stan
             // 
             this.Stan.Text = "Stan";
-            this.Stan.Width = 45;
+            this.Stan.Width = 55;
             // 
             // l_uzytkownik
             // 
@@ -177,7 +177,7 @@
             this.l_polaczenie.TabIndex = 12;
             this.l_polaczenie.Text = " ";
             // 
-            // Kierowca
+            // KierowcaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -190,7 +190,7 @@
             this.Controls.Add(this.gb_stan_pojazdu);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.l_zalgowany_jako);
-            this.Name = "Kierowca";
+            this.Name = "KierowcaView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kierowca";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kierowca_FormClosing);

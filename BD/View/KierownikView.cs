@@ -16,7 +16,6 @@ namespace BD.View
     public partial class KierownikView : Form
     {
         SqlConnection _polaczenie = null;
-        SqlCommand _zapytanie = null;
         Polacz_z_baza _polacz = null;
         List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();
         List<Reklamacja_model> _listaReklamacji = new List<Reklamacja_model>();

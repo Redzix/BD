@@ -90,75 +90,84 @@ namespace BD.View
 
         private void Kierowca_Load(object sender, EventArgs e)
         {
-            Pojazd_model _pojazdy = new Pojazd_model();
-            _listaPojazdow = _pojazdy.PobierzPojazdy();
-
-            for (int i = 0; i < _listaPojazdow.Count; i++)
-            {
-                ListViewItem pojazd = new ListViewItem(_listaPojazdow[i].NumerRejestracyjny.ToString());
-
-                if (_listaPojazdow[i].Dostepnosc == 1)
-                {
-                    pojazd.SubItems.Add("Dostępny");
-                }
-                else
-                {
-                    pojazd.SubItems.Add("Niedostępny");
-                };
-
-                pojazd.SubItems.Add(_listaPojazdow[i].Marka.ToString());
-                pojazd.SubItems.Add(_listaPojazdow[i].Pojemnosc.ToString());
-
-                if (_listaPojazdow[i].Stan == 1)
-                {
-                    pojazd.SubItems.Add("Sprawny");
-                }
-                else
-                {
-                    pojazd.SubItems.Add("Awaria");
-                }
-
-                lv_pojazdy.Items.Add(pojazd);
-            }
+            ZaladujPojazdy();
         }
 
         private void b_kierowca_zapisz_Click(object sender, EventArgs e)
         {
-            string numerRejestracyjny = lv_pojazdy.SelectedItems[0].SubItems[0].Text;
+            string numerRejestracyjny = ((ListView)sender).SelectedItems[0].Tag.ToString();
 
+            bazaEntities db = new bazaEntities();
+            lv_pojazdy.Items.Clear();
+            
             if (rb_awaria.Checked)
-            {
-                if((new Kierowca_model()).DodajZmianeStanu(0, numerRejestracyjny))
-                {
-                    MessageBox.Show("W pojezdzie o numerze rejestracyjnym " + numerRejestracyjny + 
-                        " ustawiono stan na awarię","Dodano awarię", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Awaria";
-                }
-                else
-                {
-                    MessageBox.Show("Błąd podczas wprowadzania zmian","Błąd",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                }
-                
+            {              
+                    var query = (from pojazd in db.Pojazd
+                                where pojazd.numer_rejestracyjny == numerRejestracyjny
+                                select pojazd).FirstOrDefault();
+
+                    query.stan = false;
+
+                    try
+                    {
+                        db.SaveChanges();
+                        MessageBox.Show("W pojezdzie o numerze rejestracyjnym " + numerRejestracyjny +
+                        " ustawiono stan na awarię", "Dodano awarię", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("Błąd podczas wprowadzania zmian", "Błąd \n" + exception.Message.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Awaria";               
             }
             else if (rb_sprawny.Checked)
             {
-                if ((new Kierowca_model()).DodajZmianeStanu(1, numerRejestracyjny))
+                var query = (from pojazd in db.Pojazd
+                             where pojazd.numer_rejestracyjny == numerRejestracyjny
+                             select pojazd).FirstOrDefault();
+
+                query.stan = true;
+
+                try
                 {
+                    db.SaveChanges();
                     MessageBox.Show("W pojezdzie o numerze rejestracyjnym " + numerRejestracyjny +
-                        " ustawiono stan na sprawny", "Dodano sprawność", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Sprawny";
+                    " ustawiono stan na sprawność", "Dodano sprawność", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else
+                catch (Exception exception)
                 {
-                    MessageBox.Show("Błąd podczas wprowadzania zmian", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Błąd podczas wprowadzania zmian", "Błąd \n" + exception.Message.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Sprawny";           
             }
             else
             {
                 MessageBox.Show("Nie podano żadnej zmiany stanu pojazdu.", "Brak zmian", MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
-
             lv_pojazdy.Refresh();
         }
+        
+        private void ZaladujPojazdy()
+        {
+            bazaEntities db = new bazaEntities();
+            lv_pojazdy.Items.Clear();
+
+            var query = from pojazd in db.Pojazd
+                        select pojazd;
+
+            foreach (Pojazd poj in query)
+            {
+                ListViewItem pojazd = new ListViewItem(poj.numer_rejestracyjny);
+                pojazd.Tag = poj.numer_rejestracyjny;
+                pojazd.SubItems.Add((bool)poj.dostepny ? ("Dostępny") : ("Niedostępny"));
+                pojazd.SubItems.Add(poj.marka);
+                pojazd.SubItems.Add(poj.pojemnosc.ToString());
+                pojazd.SubItems.Add((bool)poj.stan ? ("Sprawny") : ("Awaria"));
+                lv_pojazdy.Items.Add(pojazd);
+            }
+        }
+
      }
-}
+   }
