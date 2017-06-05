@@ -30,17 +30,6 @@ namespace BD.View
 
         private int _idWycieczki;
 
-        private string _nazwa;
-
-        private DateTime _dataWyjazdu;
-
-        private DateTime _dataPowrotu;
-
-        private string _opis;
-
-        private string _adresMiejscaDocelowego;
-
-        private string _miejscowoscDocelowa;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
