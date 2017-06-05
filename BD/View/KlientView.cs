@@ -161,77 +161,60 @@ namespace BD.View
 
         private void Klient_Load(object sender, EventArgs e)
         {
-            List<Promocja_model> listaPromocji = new List<Promocja_model>();
-
-            //Wyłączenie generowania dodatkowych kolumn.
             dgv_katalog.AutoGenerateColumns = false;
             // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
-            dgv_katalog.Columns["Nazwa_wycieczki"].DataPropertyName = "nazwa";
-            dgv_katalog.Columns["Okres"].DataPropertyName = "okres_trwania_wycieczki";
-            dgv_katalog.Columns["Data_wyjazdu"].DataPropertyName = "data_wyjazdu";
-            dgv_katalog.Columns["Promocja"].DataPropertyName = "wartosc_promocji";
-            dgv_katalog.Columns["Koszt"].DataPropertyName = "cena_calkowita";
+            dgv_katalog.Columns["id_wycieczki"].DataPropertyName = "wycieczkaId";
+            dgv_katalog.Columns["Nazwa_wycieczki"].DataPropertyName = "wycieczka";
+            dgv_katalog.Columns["Okres"].DataPropertyName = "okresTrwaniaWycieczki";
+            dgv_katalog.Columns["Data_wyjazdu"].DataPropertyName = "dataOdjazdu";
+            dgv_katalog.Columns["Promocja"].DataPropertyName = "wartoscPromocji";
+            dgv_katalog.Columns["Koszt"].DataPropertyName = "cenaCalkowita";
 
-            // Utworzenie zapytania do bazy danych w celu pobrania potrzebnych informacji o wycieczce.
-            _zapytanie = _polacz.UtworzZapytanie("SELECT nazwa," +
-                "okres_trwania_wycieczki," +
-                "data_wyjazdu," +
-                "Promocja.cena as wartosc_promocji," +
-                "Cennik.cena - Promocja.cena as cena_calkowita" +
-                " FROM Katalog " +
-                "inner join Wycieczka on Katalog.id_wycieczki = Wycieczka.id_wycieczki " +
-                "inner join Promocja on Wycieczka.id_wycieczki = Promocja.id_wycieczki " +
-                "inner join Cennik on Katalog.id_cennika = Cennik.id_cennika");
+            bazaEntities db = new bazaEntities();
 
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(_zapytanie);
-
-            // Utworzenie i wypełnienie tabeli jako DataSource
-            DataTable tabela = new DataTable();
-            sqlDataAdapter.Fill(tabela);
-            dgv_katalog.DataSource = tabela;
+            var query = from katalog in db.Katalog
+                        select new {
+                            wycieczkaId = katalog.id_wycieczki,
+                            wycieczka = katalog.Wycieczka.nazwa,
+                            okresTrwaniaWycieczki = katalog.okres_trwania_wycieczki,
+                            dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
+                            wartoscPromocji = 0000,
+                            cenaCalkowita = katalog.Cennik.cena - 0000
+                        };
+            dgv_katalog.DataSource = query.ToList();
 
         }
 
         private void dgv_katalog_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Podświetlenie wybranego wiersza
-            dgv_katalog.Rows[dgv_katalog.CurrentCell.RowIndex].Selected = true;
+            ((DataGridView)sender).Rows[e.RowIndex].Selected = true;
 
             //Pobranie z tabeli oraz z bazy danych odpowiednich wartości do wyświetlenia.
-            _idWycieczki = dgv_katalog.CurrentCell.RowIndex + 1; 
+            int.TryParse(((DataGridView)sender)[0, e.RowIndex].FormattedValue.ToString(), out _idWycieczki);
 
-            _nazwa = dgv_katalog.Rows[dgv_katalog.CurrentCell.RowIndex].Cells["Nazwa_wycieczki"].Value.ToString();
+            bazaEntities db = new bazaEntities();
 
-            _dataWyjazdu = _polacz.PobierzDaneDate(_polacz.UtworzZapytanie("SELECT data_wyjazdu FROM Wycieczka WHERE nazwa= "
-                + "'" + _nazwa + "'"));
-
-            _dataPowrotu = _polacz.PobierzDaneDate(_polacz.UtworzZapytanie("SELECT data_powrotu FROM Wycieczka WHERE nazwa= "
-                + "'" + _nazwa + "'"));
-
-            _opis = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT opis FROM Wycieczka WHERE nazwa= "
-                + "'" + _nazwa + "'")).ToString();
-
-            _adresMiejscaDocelowego = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT adres " +
-                "FROM Miejsce " +
-                "INNER JOIN Katalog ON Miejsce.id_miejsca = Katalog.id_miejsca_przyjazdu " +
-                "INNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Katalog.id_wycieczki " +
-                "WHERE Wycieczka.nazwa = " + "'" + _nazwa + "'"));
-
-            _miejscowoscDocelowa = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT miejscowosc " +
-                "FROM Miejsce " +
-                "INNER JOIN Katalog ON Miejsce.id_miejsca = Katalog.id_miejsca_przyjazdu " +
-                "INNER JOIN Wycieczka ON Wycieczka.id_wycieczki = Katalog.id_wycieczki " +
-                "WHERE Wycieczka.nazwa = " + "'" + _nazwa + "'"));
-
+            var query = (from katalog in db.Katalog
+                         where katalog.id_wycieczki == _idWycieczki 
+                         select new {
+                            wycieczka = katalog.Wycieczka.nazwa,
+                            dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
+                            dataPowrotu = katalog.Wycieczka.data_wyjazdu,
+                            opisWycieczki = katalog.Wycieczka.opis,
+                            miejsceDoceloweAdres = katalog.Miejsce.adres,
+                            miejsceDoceloweMiejscowosc = katalog.Miejsce.miejscowosc
+                         }).FirstOrDefault();
 
             // Dodanie wartości parametrów do opisu znajdującego się w texboxie
+
             rtb_wycieczka.Text =
-                "Nazwa: " + _nazwa +
-                "\nData wyjazdu: " + _dataWyjazdu +
-                "\nData powrotu: " + _dataPowrotu +
-                "\nOpis: " + _opis +
-                "\n\nAdres miejsca: " + _adresMiejscaDocelowego +
-                "\nMiejscowość: " + _miejscowoscDocelowa;
+                "Nazwa: " + query.wycieczka +
+                "\nData wyjazdu: " + query.dataOdjazdu +
+                "\nData powrotu: " + query.dataPowrotu +
+                "\nOpis: " + query.opisWycieczki +
+                "\n\nAdres miejsca: " + query.miejsceDoceloweAdres +
+                "\nMiejscowość: " + query.miejsceDoceloweMiejscowosc;
         }
              
     }

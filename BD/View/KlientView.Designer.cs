@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.dgv_katalog = new System.Windows.Forms.DataGridView();
-            this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Okres = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Data_wyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Promocja = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Koszt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rtb_wycieczka = new System.Windows.Forms.RichTextBox();
             this.b_katalog_rezerwuj = new System.Windows.Forms.Button();
             this.b_katalog_wyjdz = new System.Windows.Forms.Button();
@@ -42,6 +37,12 @@
             this.reklamujWycieczkęToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rezygnacjaZWycieczkiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.l_polaczenie = new System.Windows.Forms.Label();
+            this.id_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Okres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Data_wyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Promocja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Koszt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_katalog)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -51,6 +52,7 @@
             this.dgv_katalog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_katalog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_katalog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id_wycieczki,
             this.Nazwa_wycieczki,
             this.Okres,
             this.Data_wyjazdu,
@@ -61,31 +63,6 @@
             this.dgv_katalog.Size = new System.Drawing.Size(585, 304);
             this.dgv_katalog.TabIndex = 0;
             this.dgv_katalog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_katalog_CellClick);
-            // 
-            // Nazwa_wycieczki
-            // 
-            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
-            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
-            // 
-            // Okres
-            // 
-            this.Okres.HeaderText = "Okres";
-            this.Okres.Name = "Okres";
-            // 
-            // Data_wyjazdu
-            // 
-            this.Data_wyjazdu.HeaderText = "Data wyjazdu";
-            this.Data_wyjazdu.Name = "Data_wyjazdu";
-            // 
-            // Promocja
-            // 
-            this.Promocja.HeaderText = "Promocja";
-            this.Promocja.Name = "Promocja";
-            // 
-            // Koszt
-            // 
-            this.Koszt.HeaderText = "Cena całkowita";
-            this.Koszt.Name = "Koszt";
             // 
             // rtb_wycieczka
             // 
@@ -157,6 +134,37 @@
             this.l_polaczenie.TabIndex = 10;
             this.l_polaczenie.Text = " ";
             // 
+            // id_wycieczki
+            // 
+            this.id_wycieczki.HeaderText = "Id wycieczki";
+            this.id_wycieczki.Name = "id_wycieczki";
+            this.id_wycieczki.Visible = false;
+            // 
+            // Nazwa_wycieczki
+            // 
+            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
+            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
+            // 
+            // Okres
+            // 
+            this.Okres.HeaderText = "Okres";
+            this.Okres.Name = "Okres";
+            // 
+            // Data_wyjazdu
+            // 
+            this.Data_wyjazdu.HeaderText = "Data wyjazdu";
+            this.Data_wyjazdu.Name = "Data_wyjazdu";
+            // 
+            // Promocja
+            // 
+            this.Promocja.HeaderText = "Promocja";
+            this.Promocja.Name = "Promocja";
+            // 
+            // Koszt
+            // 
+            this.Koszt.HeaderText = "Cena całkowita";
+            this.Koszt.Name = "Koszt";
+            // 
             // Klient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,6 +202,7 @@
         private System.Windows.Forms.ToolStripMenuItem reklamujWycieczkęToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rezygnacjaZWycieczkiToolStripMenuItem;
         private System.Windows.Forms.Label l_polaczenie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_wycieczki;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nazwa_wycieczki;
         private System.Windows.Forms.DataGridViewTextBoxColumn Okres;
         private System.Windows.Forms.DataGridViewTextBoxColumn Data_wyjazdu;
