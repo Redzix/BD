@@ -73,10 +73,15 @@ namespace BD.View
 
         private void b_rezerwacja_zapisz_Click(object sender, EventArgs e)
         {
+            bazaEntities db = new bazaEntities();
+
+            var cenaRezerwacji = (from katalog in db.Katalog
+                                  where katalog.id_wycieczki == _idWycieczki
+                                  select katalog.Cennik.cena).FirstOrDefault();
+
             try
             {
-                bazaEntities db = new bazaEntities();
-
+                
                 var nowyKlient = new Klient
                 {
                     pesel = tb_pesel.Text,
@@ -108,7 +113,8 @@ namespace BD.View
                 {
                     liczba_osob = nowaRezerwacja.liczba_osob,
                     numer_rezerwacji = nowaRezerwacja.numer_rezerwacji,
-                };
+                    cena_rezerwacji = cenaRezerwacji * nowaRezerwacja.liczba_osob
+               };
                 nowaRezerwacja.Klient = nowyKlient;
                 noweUczestnictwo.Rezerwacja = nowaRezerwacja;
                 db.Rezerwacja.Add(nowaRezerwacja);
@@ -116,7 +122,7 @@ namespace BD.View
                 db.SaveChanges();
 
                 MessageBox.Show("Dodano nową rezerwację .", "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                this.Dispose();
             }
             catch(Exception exception)
             {

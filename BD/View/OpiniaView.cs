@@ -63,41 +63,48 @@ namespace BD.View
             //dodac wycofanie wprowadzonych danych , czyli wyjebanie w kosmos obiektu
         }
 
-        private void Opinia_Load(object sender, EventArgs e)
-        {
-            _listaWycieczek = (new Wycieczka_model()).PobierzWycieczki();
-
-            for (int i = 0; i < _listaWycieczek.Count; i++)
-            {
-                cb_nazwa_wycieczki.Items.Add(_listaWycieczek[i].Nazwa.ToString());
-            }
-            cb_nazwa_wycieczki.SelectedIndex = 0;
-        }
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            Polacz_z_baza polacz = new Polacz_z_baza();
-            SqlConnection polaczenie = polacz.PolaczZBaza();
+            bazaEntities db = new bazaEntities();
 
-            Opinia_model opinia = new Opinia_model();
+            int numer = int.Parse(tb_numerRezerwacji.Text);
 
-            opinia.IdOpini = polacz.PobierzDaneInt(polacz.UtworzZapytanie("SELECT MAX(id_opini) FROM Opinia")) + 1;
-            opinia.Ocena = cb_ocena.SelectedIndex + 1;
-            opinia.Opis = tb_opinia.Text;
-            opinia.IdUczestnictwa = polacz.PobierzDaneInt(polacz.UtworzZapytanie("SELECT Uczestnictwo.id_uczestnictwo " +
-                "FROM Uczestnictwo " +
-                "INNER JOIN Rezerwacja ON Uczestnictwo.numer_rezerwacji = Rezerwacja.numer_rezerwacji " +
-                "WHERE Rezerwacja.numer_rezerwacji = " + Convert.ToInt32(tb_numerRezerwacji.Text)));
+            var query = (from uczestnictwo in db.Uczestnictwo
+                         where uczestnictwo.numer_rezerwacji == numer
+                         select uczestnictwo.id_uczestnictwo).FirstOrDefault();
 
-            if (opinia.DodajOpinie(opinia))
+            var opinia = new Opinia
             {
-                MessageBox.Show("Opinie dodano poprawnie.", "Potwierdzenie dodania opini",MessageBoxButtons.OK);
+                opis = tb_opinia.Text,
+                ocena = cb_ocena.SelectedIndex + 1,
+                id_uczestnictwo = query
+            };
+            db.Opinia.Add(opinia);
+            
+            try
+            {
+                db.SaveChanges();
+                MessageBox.Show("Opinia została dodana prawidłowo.", "Dodano opinię", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Dispose();
             }
-            else
+            catch(Exception exception)
             {
-                MessageBox.Show("Opinia już istnieje", "Błąd opini", MessageBoxButtons.OK);
+                MessageBox.Show("Wystąpił problem podczas dodawania opinii. Błąd:\n" + exception.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cb_ocena_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+                bazaEntities db = new bazaEntities();
+
+                int numer = int.Parse(tb_numerRezerwacji.Text);
+                var query = (from uczestnictwo in db.Uczestnictwo
+                             where uczestnictwo.numer_rezerwacji == numer
+                             select uczestnictwo.Rezerwacja.Wycieczka.nazwa).FirstOrDefault();
+
+                tb_nazwaWycieczki.Text = query;
         }
     }
 }

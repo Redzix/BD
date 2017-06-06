@@ -24,6 +24,7 @@ namespace BD
         public int id_uczestnictwo { get; set; }
         public Nullable<int> liczba_osob { get; set; }
         public Nullable<int> numer_rezerwacji { get; set; }
+        public Nullable<decimal> cena_rezerwacji { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Opinia> Opinia { get; set; }

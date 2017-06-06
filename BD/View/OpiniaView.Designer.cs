@@ -33,11 +33,11 @@
             this.l_uwagi = new System.Windows.Forms.Label();
             this.l_nazwa_wycieczki = new System.Windows.Forms.Label();
             this.tb_opinia = new System.Windows.Forms.TextBox();
-            this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
             this.l_ocena = new System.Windows.Forms.Label();
             this.cb_ocena = new System.Windows.Forms.ComboBox();
             this.l_numerRezerwacji = new System.Windows.Forms.Label();
             this.tb_numerRezerwacji = new System.Windows.Forms.TextBox();
+            this.tb_nazwaWycieczki = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // b_zapisz
@@ -86,14 +86,6 @@
             this.tb_opinia.Size = new System.Drawing.Size(260, 107);
             this.tb_opinia.TabIndex = 12;
             // 
-            // cb_nazwa_wycieczki
-            // 
-            this.cb_nazwa_wycieczki.FormattingEnabled = true;
-            this.cb_nazwa_wycieczki.Location = new System.Drawing.Point(103, 42);
-            this.cb_nazwa_wycieczki.Name = "cb_nazwa_wycieczki";
-            this.cb_nazwa_wycieczki.Size = new System.Drawing.Size(173, 21);
-            this.cb_nazwa_wycieczki.TabIndex = 22;
-            // 
             // l_ocena
             // 
             this.l_ocena.AutoSize = true;
@@ -117,6 +109,7 @@
             this.cb_ocena.Name = "cb_ocena";
             this.cb_ocena.Size = new System.Drawing.Size(37, 21);
             this.cb_ocena.TabIndex = 24;
+            this.cb_ocena.SelectedIndexChanged += new System.EventHandler(this.cb_ocena_SelectedIndexChanged);
             // 
             // l_numerRezerwacji
             // 
@@ -134,27 +127,34 @@
             this.tb_numerRezerwacji.Size = new System.Drawing.Size(130, 20);
             this.tb_numerRezerwacji.TabIndex = 26;
             // 
+            // tb_nazwaWycieczki
+            // 
+            this.tb_nazwaWycieczki.Enabled = false;
+            this.tb_nazwaWycieczki.Location = new System.Drawing.Point(103, 42);
+            this.tb_nazwaWycieczki.Name = "tb_nazwaWycieczki";
+            this.tb_nazwaWycieczki.Size = new System.Drawing.Size(130, 20);
+            this.tb_nazwaWycieczki.TabIndex = 27;
+            // 
             // OpiniaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(388, 272);
+            this.Controls.Add(this.tb_nazwaWycieczki);
             this.Controls.Add(this.tb_numerRezerwacji);
             this.Controls.Add(this.l_numerRezerwacji);
             this.Controls.Add(this.cb_ocena);
             this.Controls.Add(this.l_ocena);
-            this.Controls.Add(this.cb_nazwa_wycieczki);
             this.Controls.Add(this.b_zapisz);
             this.Controls.Add(this.b_anuluj);
             this.Controls.Add(this.l_uwagi);
             this.Controls.Add(this.l_nazwa_wycieczki);
             this.Controls.Add(this.tb_opinia);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Opinia";
+            this.Name = "OpiniaView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Opinia";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Opinia_FormClosing);
-            this.Load += new System.EventHandler(this.Opinia_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,10 +167,10 @@
         private System.Windows.Forms.Label l_uwagi;
         private System.Windows.Forms.Label l_nazwa_wycieczki;
         private System.Windows.Forms.TextBox tb_opinia;
-        private System.Windows.Forms.ComboBox cb_nazwa_wycieczki;
         private System.Windows.Forms.Label l_ocena;
         private System.Windows.Forms.ComboBox cb_ocena;
         private System.Windows.Forms.Label l_numerRezerwacji;
         private System.Windows.Forms.TextBox tb_numerRezerwacji;
+        private System.Windows.Forms.TextBox tb_nazwaWycieczki;
     }
 }

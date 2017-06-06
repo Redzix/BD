@@ -18,6 +18,9 @@ namespace BD.View
         public RezygnacjaView()
         {
             InitializeComponent();
+            tb_cenaPoRezygnacji.Enabled = false;
+            tb_liczbaOsob.Enabled = false;
+            tb_nazwaWycieczki.Enabled = false;            
         }
 
         /// <summary>
@@ -56,6 +59,57 @@ namespace BD.View
             else
             {
                 e.Cancel = true;
+            }
+        }
+
+         private void b_pobierz_Click(object sender, EventArgs e)
+         {
+            bazaEntities db = new bazaEntities();
+
+            int numer = int.Parse(tb_numerRezerwacji.Text);
+            var query = (from uczestnictwo in db.Uczestnictwo
+                         where uczestnictwo.numer_rezerwacji == numer
+                         select new {
+                            nazwa = uczestnictwo.Rezerwacja.Wycieczka.nazwa,
+                            cenaRezerwacji =  uczestnictwo.cena_rezerwacji,
+                            liczbaOsob = uczestnictwo.liczba_osob}).FirstOrDefault();
+
+            tb_nazwaWycieczki.Text = query.nazwa;
+            tb_liczbaOsob.Text = query.liczbaOsob.ToString();
+
+            var cenaPoRezygnacji = query.cenaRezerwacji - (int.Parse(tb_liczbaRezygnujacychOsob.Text) * (query.cenaRezerwacji / query.liczbaOsob));
+            tb_cenaPoRezygnacji.Text = cenaPoRezygnacji.ToString();
+             
+        }
+
+        private void b_zapisz_Click(object sender, EventArgs e)
+        {
+            bazaEntities db = new bazaEntities();
+
+            int numer = int.Parse(tb_numerRezerwacji.Text);                     
+
+            var rezerwacja = (from rezerw in db.Rezerwacja
+                              where rezerw.numer_rezerwacji == numer
+                              select rezerw).FirstOrDefault();
+
+            rezerwacja.liczba_osob = int.Parse(tb_liczbaOsob.Text) - int.Parse(tb_liczbaRezygnujacychOsob.Text);          
+
+            var uczestnictwo = (from uc in db.Uczestnictwo
+                                where uc.numer_rezerwacji == numer
+                                select uc).FirstOrDefault();
+
+            uczestnictwo.cena_rezerwacji = decimal.Parse(tb_cenaPoRezygnacji.Text);
+            uczestnictwo.liczba_osob = int.Parse(tb_liczbaOsob.Text) - int.Parse(tb_liczbaRezygnujacychOsob.Text);         
+
+            try
+            {
+                db.SaveChanges();
+                MessageBox.Show("Zmiany wprowadzono poprawnie","Zmieniono rezerwację.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Dispose();s
+
+            }catch(Exception exception)
+            {
+                MessageBox.Show("Wystąpił problem podczas wprowadzania zmian. Błąd:\n" + exception.Message,"Błąd podczas zmiany rezerwacji",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
     }

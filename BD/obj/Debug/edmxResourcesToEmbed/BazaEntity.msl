@@ -137,6 +137,7 @@
     <EntitySetMapping Name="Uczestnictwo">
       <EntityTypeMapping TypeName="bazaModel.Uczestnictwo">
         <MappingFragment StoreEntitySet="Uczestnictwo">
+          <ScalarProperty Name="cena_rezerwacji" ColumnName="cena_rezerwacji" />
           <ScalarProperty Name="id_uczestnictwo" ColumnName="id_uczestnictwo" />
           <ScalarProperty Name="liczba_osob" ColumnName="liczba_osob" />
           <ScalarProperty Name="numer_rezerwacji" ColumnName="numer_rezerwacji" />

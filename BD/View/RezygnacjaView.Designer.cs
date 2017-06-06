@@ -28,46 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.l_okres_wycieczki = new System.Windows.Forms.Label();
-            this.tb_okres_wycieczki = new System.Windows.Forms.TextBox();
             this.b_zapisz = new System.Windows.Forms.Button();
             this.b_anuluj = new System.Windows.Forms.Button();
-            this.l_powod_rezygnacji = new System.Windows.Forms.Label();
-            this.l_nazwa_wycieczki = new System.Windows.Forms.Label();
-            this.tb_opis_reklamacji = new System.Windows.Forms.TextBox();
-            this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
-            this.l_liczba_rezygnujacych_osob = new System.Windows.Forms.Label();
-            this.tb_liczba_rezygnujacych_osob = new System.Windows.Forms.TextBox();
+            this.tb_numerRezerwacji = new System.Windows.Forms.TextBox();
+            this.tb_nazwaWycieczki = new System.Windows.Forms.TextBox();
+            this.tb_liczbaOsob = new System.Windows.Forms.TextBox();
+            this.tb_liczbaRezygnujacychOsob = new System.Windows.Forms.TextBox();
+            this.tb_cenaPoRezygnacji = new System.Windows.Forms.TextBox();
+            this.l_numerRezerwacji = new System.Windows.Forms.Label();
+            this.l_nazwaWycieczki = new System.Windows.Forms.Label();
+            this.l_liczbaOsob = new System.Windows.Forms.Label();
+            this.l_liczbaRezygnującychOsob = new System.Windows.Forms.Label();
+            this.l_cenaPoRezygnacji = new System.Windows.Forms.Label();
+            this.b_oblicz = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // l_okres_wycieczki
-            // 
-            this.l_okres_wycieczki.AutoSize = true;
-            this.l_okres_wycieczki.Location = new System.Drawing.Point(12, 35);
-            this.l_okres_wycieczki.Name = "l_okres_wycieczki";
-            this.l_okres_wycieczki.Size = new System.Drawing.Size(84, 13);
-            this.l_okres_wycieczki.TabIndex = 23;
-            this.l_okres_wycieczki.Text = "Okres wycieczki";
-            // 
-            // tb_okres_wycieczki
-            // 
-            this.tb_okres_wycieczki.Location = new System.Drawing.Point(153, 32);
-            this.tb_okres_wycieczki.Name = "tb_okres_wycieczki";
-            this.tb_okres_wycieczki.Size = new System.Drawing.Size(121, 20);
-            this.tb_okres_wycieczki.TabIndex = 22;
             // 
             // b_zapisz
             // 
-            this.b_zapisz.Location = new System.Drawing.Point(153, 211);
+            this.b_zapisz.Location = new System.Drawing.Point(122, 156);
             this.b_zapisz.Name = "b_zapisz";
             this.b_zapisz.Size = new System.Drawing.Size(75, 23);
             this.b_zapisz.TabIndex = 21;
             this.b_zapisz.Text = "Zapisz";
             this.b_zapisz.UseVisualStyleBackColor = true;
+            this.b_zapisz.Click += new System.EventHandler(this.b_zapisz_Click);
             // 
             // b_anuluj
             // 
-            this.b_anuluj.Location = new System.Drawing.Point(338, 211);
+            this.b_anuluj.Location = new System.Drawing.Point(203, 156);
             this.b_anuluj.Name = "b_anuluj";
             this.b_anuluj.Size = new System.Drawing.Size(75, 23);
             this.b_anuluj.TabIndex = 20;
@@ -75,73 +63,119 @@
             this.b_anuluj.UseVisualStyleBackColor = true;
             this.b_anuluj.Click += new System.EventHandler(this.b_anuluj_Click);
             // 
-            // l_powod_rezygnacji
+            // tb_numerRezerwacji
             // 
-            this.l_powod_rezygnacji.AutoSize = true;
-            this.l_powod_rezygnacji.Location = new System.Drawing.Point(12, 89);
-            this.l_powod_rezygnacji.Name = "l_powod_rezygnacji";
-            this.l_powod_rezygnacji.Size = new System.Drawing.Size(90, 13);
-            this.l_powod_rezygnacji.TabIndex = 19;
-            this.l_powod_rezygnacji.Text = "Powod rezygnacji";
+            this.tb_numerRezerwacji.Location = new System.Drawing.Point(158, 12);
+            this.tb_numerRezerwacji.Name = "tb_numerRezerwacji";
+            this.tb_numerRezerwacji.Size = new System.Drawing.Size(120, 20);
+            this.tb_numerRezerwacji.TabIndex = 22;
             // 
-            // l_nazwa_wycieczki
+            // tb_nazwaWycieczki
             // 
-            this.l_nazwa_wycieczki.AutoSize = true;
-            this.l_nazwa_wycieczki.Location = new System.Drawing.Point(12, 9);
-            this.l_nazwa_wycieczki.Name = "l_nazwa_wycieczki";
-            this.l_nazwa_wycieczki.Size = new System.Drawing.Size(89, 13);
-            this.l_nazwa_wycieczki.TabIndex = 18;
-            this.l_nazwa_wycieczki.Text = "Nazwa wycieczki";
+            this.tb_nazwaWycieczki.Enabled = false;
+            this.tb_nazwaWycieczki.Location = new System.Drawing.Point(158, 38);
+            this.tb_nazwaWycieczki.Name = "tb_nazwaWycieczki";
+            this.tb_nazwaWycieczki.Size = new System.Drawing.Size(120, 20);
+            this.tb_nazwaWycieczki.TabIndex = 23;
             // 
-            // tb_opis_reklamacji
+            // tb_liczbaOsob
             // 
-            this.tb_opis_reklamacji.Location = new System.Drawing.Point(153, 86);
-            this.tb_opis_reklamacji.Multiline = true;
-            this.tb_opis_reklamacji.Name = "tb_opis_reklamacji";
-            this.tb_opis_reklamacji.Size = new System.Drawing.Size(260, 107);
-            this.tb_opis_reklamacji.TabIndex = 12;
+            this.tb_liczbaOsob.Enabled = false;
+            this.tb_liczbaOsob.Location = new System.Drawing.Point(158, 64);
+            this.tb_liczbaOsob.Name = "tb_liczbaOsob";
+            this.tb_liczbaOsob.Size = new System.Drawing.Size(120, 20);
+            this.tb_liczbaOsob.TabIndex = 24;
             // 
-            // cb_nazwa_wycieczki
+            // tb_liczbaRezygnujacychOsob
             // 
-            this.cb_nazwa_wycieczki.FormattingEnabled = true;
-            this.cb_nazwa_wycieczki.Location = new System.Drawing.Point(153, 5);
-            this.cb_nazwa_wycieczki.Name = "cb_nazwa_wycieczki";
-            this.cb_nazwa_wycieczki.Size = new System.Drawing.Size(121, 21);
-            this.cb_nazwa_wycieczki.TabIndex = 24;
+            this.tb_liczbaRezygnujacychOsob.Location = new System.Drawing.Point(158, 90);
+            this.tb_liczbaRezygnujacychOsob.Name = "tb_liczbaRezygnujacychOsob";
+            this.tb_liczbaRezygnujacychOsob.Size = new System.Drawing.Size(120, 20);
+            this.tb_liczbaRezygnujacychOsob.TabIndex = 25;
             // 
-            // l_liczba_rezygnujacych_osob
+            // tb_cenaPoRezygnacji
             // 
-            this.l_liczba_rezygnujacych_osob.AutoSize = true;
-            this.l_liczba_rezygnujacych_osob.Location = new System.Drawing.Point(12, 63);
-            this.l_liczba_rezygnujacych_osob.Name = "l_liczba_rezygnujacych_osob";
-            this.l_liczba_rezygnujacych_osob.Size = new System.Drawing.Size(135, 13);
-            this.l_liczba_rezygnujacych_osob.TabIndex = 26;
-            this.l_liczba_rezygnujacych_osob.Text = "Liczba rezygnujących osób";
+            this.tb_cenaPoRezygnacji.Enabled = false;
+            this.tb_cenaPoRezygnacji.Location = new System.Drawing.Point(158, 116);
+            this.tb_cenaPoRezygnacji.Name = "tb_cenaPoRezygnacji";
+            this.tb_cenaPoRezygnacji.Size = new System.Drawing.Size(120, 20);
+            this.tb_cenaPoRezygnacji.TabIndex = 26;
             // 
-            // tb_liczba_rezygnujacych_osob
+            // l_numerRezerwacji
             // 
-            this.tb_liczba_rezygnujacych_osob.Location = new System.Drawing.Point(153, 60);
-            this.tb_liczba_rezygnujacych_osob.Name = "tb_liczba_rezygnujacych_osob";
-            this.tb_liczba_rezygnujacych_osob.Size = new System.Drawing.Size(75, 20);
-            this.tb_liczba_rezygnujacych_osob.TabIndex = 25;
+            this.l_numerRezerwacji.AutoSize = true;
+            this.l_numerRezerwacji.Location = new System.Drawing.Point(12, 15);
+            this.l_numerRezerwacji.Name = "l_numerRezerwacji";
+            this.l_numerRezerwacji.Size = new System.Drawing.Size(88, 13);
+            this.l_numerRezerwacji.TabIndex = 27;
+            this.l_numerRezerwacji.Text = "Numer rezerwacji";
+            // 
+            // l_nazwaWycieczki
+            // 
+            this.l_nazwaWycieczki.AutoSize = true;
+            this.l_nazwaWycieczki.Location = new System.Drawing.Point(12, 41);
+            this.l_nazwaWycieczki.Name = "l_nazwaWycieczki";
+            this.l_nazwaWycieczki.Size = new System.Drawing.Size(89, 13);
+            this.l_nazwaWycieczki.TabIndex = 28;
+            this.l_nazwaWycieczki.Text = "Nazwa wycieczki";
+            // 
+            // l_liczbaOsob
+            // 
+            this.l_liczbaOsob.AutoSize = true;
+            this.l_liczbaOsob.Location = new System.Drawing.Point(12, 67);
+            this.l_liczbaOsob.Name = "l_liczbaOsob";
+            this.l_liczbaOsob.Size = new System.Drawing.Size(64, 13);
+            this.l_liczbaOsob.TabIndex = 29;
+            this.l_liczbaOsob.Text = "Liczba osób";
+            // 
+            // l_liczbaRezygnującychOsob
+            // 
+            this.l_liczbaRezygnującychOsob.AutoSize = true;
+            this.l_liczbaRezygnującychOsob.Location = new System.Drawing.Point(12, 93);
+            this.l_liczbaRezygnującychOsob.Name = "l_liczbaRezygnującychOsob";
+            this.l_liczbaRezygnującychOsob.Size = new System.Drawing.Size(135, 13);
+            this.l_liczbaRezygnującychOsob.TabIndex = 30;
+            this.l_liczbaRezygnującychOsob.Text = "Liczba rezygnujących osób";
+            // 
+            // l_cenaPoRezygnacji
+            // 
+            this.l_cenaPoRezygnacji.AutoSize = true;
+            this.l_cenaPoRezygnacji.Location = new System.Drawing.Point(12, 119);
+            this.l_cenaPoRezygnacji.Name = "l_cenaPoRezygnacji";
+            this.l_cenaPoRezygnacji.Size = new System.Drawing.Size(97, 13);
+            this.l_cenaPoRezygnacji.TabIndex = 31;
+            this.l_cenaPoRezygnacji.Text = "Cena po rezygnacji";
+            // 
+            // b_oblicz
+            // 
+            this.b_oblicz.Location = new System.Drawing.Point(31, 156);
+            this.b_oblicz.Name = "b_oblicz";
+            this.b_oblicz.Size = new System.Drawing.Size(85, 23);
+            this.b_oblicz.TabIndex = 32;
+            this.b_oblicz.Text = "Oblicz";
+            this.b_oblicz.UseVisualStyleBackColor = true;
+            this.b_oblicz.Click += new System.EventHandler(this.b_pobierz_Click);
             // 
             // RezygnacjaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(426, 243);
-            this.Controls.Add(this.l_liczba_rezygnujacych_osob);
-            this.Controls.Add(this.tb_liczba_rezygnujacych_osob);
-            this.Controls.Add(this.cb_nazwa_wycieczki);
-            this.Controls.Add(this.l_okres_wycieczki);
-            this.Controls.Add(this.tb_okres_wycieczki);
-            this.Controls.Add(this.b_zapisz);
+            this.ClientSize = new System.Drawing.Size(290, 243);
+            this.Controls.Add(this.b_oblicz);
+            this.Controls.Add(this.l_cenaPoRezygnacji);
+            this.Controls.Add(this.l_liczbaRezygnującychOsob);
+            this.Controls.Add(this.l_liczbaOsob);
+            this.Controls.Add(this.l_nazwaWycieczki);
+            this.Controls.Add(this.l_numerRezerwacji);
+            this.Controls.Add(this.tb_cenaPoRezygnacji);
+            this.Controls.Add(this.tb_liczbaRezygnujacychOsob);
+            this.Controls.Add(this.tb_liczbaOsob);
+            this.Controls.Add(this.tb_nazwaWycieczki);
+            this.Controls.Add(this.tb_numerRezerwacji);
             this.Controls.Add(this.b_anuluj);
-            this.Controls.Add(this.l_powod_rezygnacji);
-            this.Controls.Add(this.l_nazwa_wycieczki);
-            this.Controls.Add(this.tb_opis_reklamacji);
+            this.Controls.Add(this.b_zapisz);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Rezygnacja";
+            this.Name = "RezygnacjaView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Rezygnacja";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Rezygnacja_FormClosing);
@@ -152,15 +186,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Label l_okres_wycieczki;
-        private System.Windows.Forms.TextBox tb_okres_wycieczki;
         private System.Windows.Forms.Button b_zapisz;
         private System.Windows.Forms.Button b_anuluj;
-        private System.Windows.Forms.Label l_powod_rezygnacji;
-        private System.Windows.Forms.Label l_nazwa_wycieczki;
-        private System.Windows.Forms.TextBox tb_opis_reklamacji;
-        private System.Windows.Forms.ComboBox cb_nazwa_wycieczki;
-        private System.Windows.Forms.Label l_liczba_rezygnujacych_osob;
-        private System.Windows.Forms.TextBox tb_liczba_rezygnujacych_osob;
+        private System.Windows.Forms.TextBox tb_numerRezerwacji;
+        private System.Windows.Forms.TextBox tb_nazwaWycieczki;
+        private System.Windows.Forms.TextBox tb_liczbaOsob;
+        private System.Windows.Forms.TextBox tb_liczbaRezygnujacychOsob;
+        private System.Windows.Forms.TextBox tb_cenaPoRezygnacji;
+        private System.Windows.Forms.Label l_numerRezerwacji;
+        private System.Windows.Forms.Label l_nazwaWycieczki;
+        private System.Windows.Forms.Label l_liczbaOsob;
+        private System.Windows.Forms.Label l_liczbaRezygnującychOsob;
+        private System.Windows.Forms.Label l_cenaPoRezygnacji;
+        private System.Windows.Forms.Button b_oblicz;
     }
 }
