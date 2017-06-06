@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="bazaModel.Panel_pracowniczy" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Pilot" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Pojazd" Width="1.5" PointX="3.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="bazaModel.Promocja" Width="1.5" PointX="5.875" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Reklamacja" Width="1.5" PointX="15.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Rezerwacja" Width="1.5" PointX="11.25" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Uczestnictwo" Width="1.5" PointX="13.5" PointY="8.25" IsExpanded="true" />
@@ -34,10 +33,11 @@
         <AssociationConnector Association="bazaModel.Panel_pracowniczy_Pilot_FK" ManuallyRouted="false" />
         <AssociationConnector Association="bazaModel.Wycieczka_Pilot_FK" ManuallyRouted="false" />
         <AssociationConnector Association="bazaModel.Wycieczka_Pojazd_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="bazaModel.Promocja_Wycieczka_FK" ManuallyRouted="false" />
         <AssociationConnector Association="bazaModel.Reklamacja_Uczestnictwo_FK" ManuallyRouted="false" />
         <AssociationConnector Association="bazaModel.Rezerwacja_Wycieczka_FK" ManuallyRouted="false" />
         <AssociationConnector Association="bazaModel.Uczestnictwo_Rezerwacja_FK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="bazaModel.Promocja" Width="1.5" PointX="4.5" PointY="11.125" />
+        <AssociationConnector Association="bazaModel.Promocja_Wycieczka_FK" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

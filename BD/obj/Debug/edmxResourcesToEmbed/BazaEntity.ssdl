@@ -102,11 +102,10 @@
   </EntityType>
   <EntityType Name="Promocja">
     <Key>
-      <PropertyRef Name="id_promocji" />
+      <PropertyRef Name="id_wycieczki" />
     </Key>
-    <Property Name="id_promocji" Type="int" Nullable="false" />
     <Property Name="cena" Type="decimal" Precision="10" Scale="2" />
-    <Property Name="id_wycieczki" Type="int" />
+    <Property Name="id_wycieczki" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Reklamacja">
     <Key>
@@ -271,10 +270,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="Promocja_Wycieczka_FK">
-    <End Role="Wycieczka" Type="Self.Wycieczka" Multiplicity="0..1">
+    <End Role="Wycieczka" Type="Self.Wycieczka" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="Promocja" Type="Self.Promocja" Multiplicity="*" />
+    <End Role="Promocja" Type="Self.Promocja" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Wycieczka">
         <PropertyRef Name="id_wycieczki" />

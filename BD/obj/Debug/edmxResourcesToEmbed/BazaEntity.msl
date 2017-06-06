@@ -111,15 +111,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Promocja">
-      <EntityTypeMapping TypeName="bazaModel.Promocja">
-        <MappingFragment StoreEntitySet="Promocja">
-          <ScalarProperty Name="id_promocji" ColumnName="id_promocji" />
-          <ScalarProperty Name="cena" ColumnName="cena" />
-          <ScalarProperty Name="id_wycieczki" ColumnName="id_wycieczki" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Reklamacja">
       <EntityTypeMapping TypeName="bazaModel.Reklamacja">
         <MappingFragment StoreEntitySet="Reklamacja">
@@ -163,6 +154,14 @@
           <ScalarProperty Name="Pilot_pesel" ColumnName="Pilot_pesel" />
           <ScalarProperty Name="Pojazd_numer_rejestracyjny" ColumnName="Pojazd_numer_rejestracyjny" />
           <ScalarProperty Name="Kierowca_pesel" ColumnName="Kierowca_pesel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Promocja">
+      <EntityTypeMapping TypeName="bazaModel.Promocja">
+        <MappingFragment StoreEntitySet="Promocja">
+          <ScalarProperty Name="id_wycieczki" ColumnName="id_wycieczki" />
+          <ScalarProperty Name="cena" ColumnName="cena" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

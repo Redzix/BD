@@ -164,13 +164,6 @@ namespace BD.View
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            Wycieczka_model wycieczka = new Wycieczka_model();
-
-            string miejsceWyjazdu;
-            string miejsceDocelowe;
-            decimal cena;
-
-            _polaczenie = _polacz.PolaczZBaza();
             if (_opcja == 1)
             {
                 if (tb_data_przyjazdu.Value > tb_data_odjazdu.Value)
@@ -180,28 +173,46 @@ namespace BD.View
                 }
                 else
                 {
-                    wycieczka.IdWycieczki = (new Wycieczka_model()).PobierzWycieczki().Count + 1;
-                    wycieczka.Nazwa = tb_nazwa.Text;
-                    wycieczka.DataWyjazdu = tb_data_odjazdu.Value; //Obiekt, po Value mozesz wybrać co konkretnie
-                    wycieczka.DataPowrotu = tb_data_przyjazdu.Value;
-                    wycieczka.Opis = tb_opis.Text;
-
-                    wycieczka.Pilot = cb_pilot.SelectedItem.ToString();
-                    wycieczka.Kierowca = cb_kierowca.SelectedItem.ToString();
-                    wycieczka.Pojazd = cb_pojazd.SelectedItem.ToString();
-
-                    miejsceWyjazdu = cb_odjazd.SelectedItem.ToString();
-                    miejsceDocelowe = cb_docelowa.SelectedItem.ToString();
-
-                    cena = Convert.ToDecimal(tb_cena.Text);
-
-
-                    if (wycieczka.DodajWycieczke(wycieczka, miejsceWyjazdu, miejsceDocelowe, cena))
+                    try
                     {
+                        bazaEntities db = new bazaEntities();
+                        string pilotPesel = ((KeyValuePair<string, string>)cb_pilot.SelectedItem).Key;
+                        string kierowcaPesel = ((KeyValuePair<string, string>)cb_kierowca.SelectedItem).Key;
+                        string pojazdRejestracja = ((KeyValuePair<string, string>)cb_pojazd.SelectedItem).Key;
+                        int miejsceOdjazdu = int.Parse(((KeyValuePair<string, string>)cb_odjazd.SelectedItem).Key);
+                        int miejscePrzyjazdu = int.Parse(((KeyValuePair<string, string>)cb_docelowa.SelectedItem).Key);
+                        var nowaWycieczka = new Wycieczka
+                        {
+                            nazwa = tb_nazwa.Text,
+                            data_powrotu = tb_data_przyjazdu.Value,
+                            data_wyjazdu = tb_data_odjazdu.Value,
+                            opis = tb_opis.Text,
+                            Pilot_pesel = pilotPesel,
+                            Kierowca_pesel = kierowcaPesel,
+                            Pojazd_numer_rejestracyjny = pojazdRejestracja,
+                        };
+                        db.Wycieczka.Add(nowaWycieczka);
+                        db.SaveChanges();
+
+                        var nowyCennik = new Cennik
+                        {
+                            cena = decimal.Parse(tb_cena.Text),
+
+                        };
+                        db.Cennik.Add(nowyCennik);
+                        db.SaveChanges();
+
+                        var nowyKatalog = new Katalog
+                        {
+                            id_cennika = nowyCennik.id_cennika,
+                            id_wycieczki = nowaWycieczka.id_wycieczki,
+                            id_miejsca_odjazdu = miejsceOdjazdu,
+                            id_miejsca_przyjazdu = miejscePrzyjazdu,
+                        };
+                        db.Katalog.Add(nowyKatalog);
                         MessageBox.Show("Wycieczke dodano pomyślnie.", "Dodano wycieczkę", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Dispose();
-                    }
-                    else
+                    } catch
                     {
                         if (MessageBox.Show("Napotkano problem podczas dodawania wycieczki.", "Błąd dodawania wycieczki", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
                         {
@@ -216,24 +227,32 @@ namespace BD.View
             }
             else
             {
-                wycieczka.IdWycieczki = _idWycieczki;
-                wycieczka.Opis = tb_opis.Text;
+                bazaEntities db = new bazaEntities();
 
-                wycieczka.Pilot = cb_pilot.SelectedItem.ToString();
-                wycieczka.Kierowca = cb_kierowca.SelectedItem.ToString();
-                wycieczka.Pojazd = cb_pojazd.SelectedItem.ToString();
-
-                miejsceWyjazdu = cb_odjazd.SelectedItem.ToString();
-
-                cena = Convert.ToDecimal(tb_cena.Text);
-
-
-                if (wycieczka.EdytujWycieczke(wycieczka, miejsceWyjazdu, cena))
+                try
                 {
+                    var edit = (from k in db.Katalog where k.Wycieczka.id_wycieczki == _idWycieczki select k).SingleOrDefault();
+
+                    string pilotPesel = ((KeyValuePair<string, string>)cb_pilot.SelectedItem).Value;
+                    string kierowcaPesel = ((KeyValuePair<string, string>)cb_kierowca.SelectedItem).Value;
+                    string pojazdRejestracja = ((KeyValuePair<string, string>)cb_pojazd.SelectedItem).Value;
+                    int miejsceOdjazdu = int.Parse(((KeyValuePair<string, string>)cb_odjazd.SelectedItem).Value);
+                    int miejscePrzyjazdu = int.Parse(((KeyValuePair<string, string>)cb_docelowa.SelectedItem).Value);
+
+                    edit.Wycieczka.Pilot_pesel = pilotPesel;
+                    edit.Wycieczka.Kierowca_pesel = kierowcaPesel;
+                    edit.Wycieczka.Pojazd_numer_rejestracyjny = pojazdRejestracja;
+
+                    edit.id_miejsca_odjazdu = miejsceOdjazdu;
+                    edit.id_miejsca_przyjazdu = miejscePrzyjazdu;
+                    edit.Cennik.cena = decimal.Parse(tb_cena.Text);
+
+                    edit.Wycieczka.opis = tb_opis.Text;
+
                     MessageBox.Show("Wycieczke edytowano pomyślnie.", "Edytowano wycieczkę", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Dispose();
                 }
-                else
+                catch
                 {
                     if (MessageBox.Show("Napotkano problem podczas edycji wycieczki.", "Błąd edycji wycieczki", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
                     {
@@ -244,7 +263,6 @@ namespace BD.View
                         return;
                     }
                 }
-
             }
         }
 

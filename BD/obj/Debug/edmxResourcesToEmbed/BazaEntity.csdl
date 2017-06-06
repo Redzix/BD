@@ -121,15 +121,6 @@
     <Property Name="stan" Type="Boolean" />
     <NavigationProperty Name="Wycieczka" Relationship="Self.Wycieczka_Pojazd_FK" FromRole="Pojazd" ToRole="Wycieczka" />
   </EntityType>
-  <EntityType Name="Promocja">
-    <Key>
-      <PropertyRef Name="id_promocji" />
-    </Key>
-    <Property Name="id_promocji" Type="Int32" Nullable="false" />
-    <Property Name="cena" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="id_wycieczki" Type="Int32" />
-    <NavigationProperty Name="Wycieczka" Relationship="Self.Promocja_Wycieczka_FK" FromRole="Promocja" ToRole="Wycieczka" />
-  </EntityType>
   <EntityType Name="Reklamacja">
     <Key>
       <PropertyRef Name="numer_reklamacji" />
@@ -183,8 +174,8 @@
     <NavigationProperty Name="Kierowca" Relationship="Self.Wycieczka_Kierowca_FK" FromRole="Wycieczka" ToRole="Kierowca" />
     <NavigationProperty Name="Pilot" Relationship="Self.Wycieczka_Pilot_FK" FromRole="Wycieczka" ToRole="Pilot" />
     <NavigationProperty Name="Pojazd" Relationship="Self.Wycieczka_Pojazd_FK" FromRole="Wycieczka" ToRole="Pojazd" />
-    <NavigationProperty Name="Promocja" Relationship="Self.Promocja_Wycieczka_FK" FromRole="Wycieczka" ToRole="Promocja" />
     <NavigationProperty Name="Rezerwacja" Relationship="Self.Rezerwacja_Wycieczka_FK" FromRole="Wycieczka" ToRole="Rezerwacja" />
+    <NavigationProperty Name="Promocja" Relationship="bazaModel.Promocja_Wycieczka_FK" FromRole="Wycieczka" ToRole="Promocja" />
   </EntityType>
   <Association Name="Katalog_Cennik_FK">
     <End Role="Cennik" Type="Self.Cennik" Multiplicity="0..1" />
@@ -368,20 +359,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Promocja_Wycieczka_FK">
-    <End Role="Wycieczka" Type="Self.Wycieczka" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Promocja" Type="Self.Promocja" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Wycieczka">
-        <PropertyRef Name="id_wycieczki" />
-      </Principal>
-      <Dependent Role="Promocja">
-        <PropertyRef Name="id_wycieczki" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="Reklamacja_Uczestnictwo_FK">
     <End Role="Uczestnictwo" Type="Self.Uczestnictwo" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -435,7 +412,6 @@
     <EntitySet Name="Panel_pracowniczy" EntityType="Self.Panel_pracowniczy" />
     <EntitySet Name="Pilot" EntityType="Self.Pilot" />
     <EntitySet Name="Pojazd" EntityType="Self.Pojazd" />
-    <EntitySet Name="Promocja" EntityType="Self.Promocja" />
     <EntitySet Name="Reklamacja" EntityType="Self.Reklamacja" />
     <EntitySet Name="Rezerwacja" EntityType="Self.Rezerwacja" />
     <EntitySet Name="Uczestnictwo" EntityType="Self.Uczestnictwo" />
@@ -496,10 +472,6 @@
       <End Role="Pojazd" EntitySet="Pojazd" />
       <End Role="Wycieczka" EntitySet="Wycieczka" />
     </AssociationSet>
-    <AssociationSet Name="Promocja_Wycieczka_FK" Association="Self.Promocja_Wycieczka_FK">
-      <End Role="Wycieczka" EntitySet="Wycieczka" />
-      <End Role="Promocja" EntitySet="Promocja" />
-    </AssociationSet>
     <AssociationSet Name="Reklamacja_Uczestnictwo_FK" Association="Self.Reklamacja_Uczestnictwo_FK">
       <End Role="Uczestnictwo" EntitySet="Uczestnictwo" />
       <End Role="Reklamacja" EntitySet="Reklamacja" />
@@ -512,5 +484,32 @@
       <End Role="Rezerwacja" EntitySet="Rezerwacja" />
       <End Role="Uczestnictwo" EntitySet="Uczestnictwo" />
     </AssociationSet>
+    <EntitySet Name="Promocja" EntityType="bazaModel.Promocja" />
+    <AssociationSet Name="Promocja_Wycieczka_FK" Association="bazaModel.Promocja_Wycieczka_FK">
+      <End Role="Wycieczka" EntitySet="Wycieczka" />
+      <End Role="Promocja" EntitySet="Promocja" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Promocja">
+    <Key>
+      <PropertyRef Name="id_wycieczki" />
+    </Key>
+    <Property Name="cena" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="id_wycieczki" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Wycieczka" Relationship="bazaModel.Promocja_Wycieczka_FK" FromRole="Promocja" ToRole="Wycieczka" />
+  </EntityType>
+  <Association Name="Promocja_Wycieczka_FK">
+    <End Type="bazaModel.Wycieczka" Role="Wycieczka" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="bazaModel.Promocja" Role="Promocja" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Wycieczka">
+        <PropertyRef Name="id_wycieczki" />
+      </Principal>
+      <Dependent Role="Promocja">
+        <PropertyRef Name="id_wycieczki" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

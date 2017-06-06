@@ -18,7 +18,6 @@ namespace BD
         public Wycieczka()
         {
             this.Katalog = new HashSet<Katalog>();
-            this.Promocja = new HashSet<Promocja>();
             this.Rezerwacja = new HashSet<Rezerwacja>();
         }
     
@@ -37,8 +36,7 @@ namespace BD
         public virtual Pilot Pilot { get; set; }
         public virtual Pojazd Pojazd { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Promocja> Promocja { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rezerwacja> Rezerwacja { get; set; }
+        public virtual Promocja Promocja { get; set; }
     }
 }

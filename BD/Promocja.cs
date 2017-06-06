@@ -14,9 +14,8 @@ namespace BD
     
     public partial class Promocja
     {
-        public int id_promocji { get; set; }
         public Nullable<decimal> cena { get; set; }
-        public Nullable<int> id_wycieczki { get; set; }
+        public int id_wycieczki { get; set; }
     
         public virtual Wycieczka Wycieczka { get; set; }
     }

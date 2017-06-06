@@ -35,10 +35,10 @@ namespace BD
         public virtual DbSet<Panel_pracowniczy> Panel_pracowniczy { get; set; }
         public virtual DbSet<Pilot> Pilot { get; set; }
         public virtual DbSet<Pojazd> Pojazd { get; set; }
-        public virtual DbSet<Promocja> Promocja { get; set; }
         public virtual DbSet<Reklamacja> Reklamacja { get; set; }
         public virtual DbSet<Rezerwacja> Rezerwacja { get; set; }
         public virtual DbSet<Uczestnictwo> Uczestnictwo { get; set; }
         public virtual DbSet<Wycieczka> Wycieczka { get; set; }
+        public virtual DbSet<Promocja> Promocja { get; set; }
     }
 }
