@@ -167,8 +167,8 @@ namespace BD.View
                             wycieczka = katalog.Wycieczka.nazwa,
                             okresTrwaniaWycieczki = katalog.okres_trwania_wycieczki,
                             dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
-                            wartoscPromocji = 0000,
-                            cenaCalkowita = katalog.Cennik.cena - 0000
+                            wartoscPromocji = (katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0,
+                            cenaCalkowita = katalog.Cennik.cena - ((katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0)
                         };
             dgv_katalog.DataSource = query.ToList();
 
