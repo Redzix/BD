@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace BD.View
 {
-    public partial class Klient : Form
+    public partial class KlientView : Form
     {
         /// <summary>
         /// Zmienna odpowiada za utworzenie połączenia z bazą danych.
@@ -34,7 +34,7 @@ namespace BD.View
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
-        public Klient()
+        public KlientView()
         {
             InitializeComponent();
             _polacz = new Polacz_z_baza();

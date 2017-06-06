@@ -1,6 +1,6 @@
 ﻿namespace BD.View
 {
-    partial class Klient
+    partial class KlientView
     {
         /// <summary>
         /// Required designer variable.

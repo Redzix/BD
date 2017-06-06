@@ -73,49 +73,56 @@ namespace BD.View
 
         private void b_rezerwacja_zapisz_Click(object sender, EventArgs e)
         {
-            Klient_model klient = new Klient_model();
-            Rezerwacja_model rezerwacja = new Rezerwacja_model();
-            Uczestnictwo_model uczestnictwo = new Uczestnictwo_model();
-            Polacz_z_baza polacz = new Polacz_z_baza();
-            SqlConnection polaczenie = polacz.PolaczZBaza();
-
-            klient.Pesel = tb_pesel.Text;
-            klient.Imie = tb_imie.Text;
-            klient.Nazwisko = tb_nazwisko.Text;
-            klient.Adres = tb_adres.Text;
-            klient.Miejscowosc = tb_miejscowosc.Text;
-
-            rezerwacja.Numer = polacz.PobierzDaneInt(polacz.UtworzZapytanie("select MAX(numer_rezerwacji) FROM rezerwacja")) +1;
-            rezerwacja.LiczbaOsob = Int32.Parse(tb_liczba_osob.Text);
-            rezerwacja.Stan = 0;
-            rezerwacja.Zaliczka = Convert.ToDecimal(tb_zaliczka.Text);
-            rezerwacja.IdWycieczki = _idWycieczki;
-            rezerwacja.KlientPesel = klient.Pesel;
-
-            uczestnictwo.IdUczestnictwa = polacz.PobierzDaneInt(polacz.UtworzZapytanie("select MAX(id_uczestnictwo) FROM Uczestnictwo")) + 1;
-            uczestnictwo.LiczbaOsob = rezerwacja.LiczbaOsob;
-            uczestnictwo.NumerRezerwacji = rezerwacja.Numer;
-
-            klient.DodajKlienta(klient);
-
-            if(rezerwacja.DodajRezerwacje(rezerwacja))
+            try
             {
-                if (uczestnictwo.DodajUczestnictwo(uczestnictwo))
+                bazaEntities db = new bazaEntities();
+
+                var nowyKlient = new Klient
                 {
-                    MessageBox.Show("Rezerwację dodano poprawnie.", "Potwierdzenie rezerwacji.", MessageBoxButtons.OK);
-                    this.Dispose();
-                }
-                else
+                    pesel = tb_pesel.Text,
+                    imie = tb_imie.Text,
+                    nazwisko = tb_nazwisko.Text,
+                    ulica = tb_adres.Text,
+                    miejscowosc = tb_miejscowosc.Text,
+                };
+
+                var czyKlientIstnieje = (from czyIstnieje in db.Klient
+                                         where czyIstnieje.pesel.Equals(nowyKlient.pesel)
+                                         select czyIstnieje).FirstOrDefault();
+
+                if(czyKlientIstnieje == null)
                 {
-                    (new Rezerwacja_model()).UsunRezerwacje(rezerwacja.Numer);
-                }
+                    db.Klient.Add(nowyKlient);
+                }            
+
+                var nowaRezerwacja = new Rezerwacja
+                {
+                    liczba_osob = int.Parse(tb_liczba_osob.Text),
+                    stan = false,
+                    zaliczka = decimal.Parse(tb_zaliczka.Text),
+                    id_wycieczki = _idWycieczki,
+                    Klient_pesel = nowyKlient.pesel
+                };
+
+               var noweUczestnictwo = new Uczestnictwo
+                {
+                    liczba_osob = nowaRezerwacja.liczba_osob,
+                    numer_rezerwacji = nowaRezerwacja.numer_rezerwacji,
+                };
+                nowaRezerwacja.Klient = nowyKlient;
+                noweUczestnictwo.Rezerwacja = nowaRezerwacja;
+                db.Rezerwacja.Add(nowaRezerwacja);
+                db.Uczestnictwo.Add(noweUczestnictwo);
+                db.SaveChanges();
+
+                MessageBox.Show("Dodano nową rezerwację .", "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
-            else
+            catch(Exception exception)
             {
-                MessageBox.Show("Wystąpił problem z dodaniem rezerwacji. Prawdopodobnie złożona rezerwacja o danym numerze już istnieje.", "Bład rezerwacji",MessageBoxButtons.OK);
+                MessageBox.Show("Napotkano problem podczas dodawania nowej rezerwacji. Błąd:\n" + exception.Message.ToString() , "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-      
+
+         }    
     }
 }

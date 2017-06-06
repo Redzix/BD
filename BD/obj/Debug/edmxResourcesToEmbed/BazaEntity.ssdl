@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="id_cennika" />
     </Key>
-    <Property Name="id_cennika" Type="int" Nullable="false" />
+    <Property Name="id_cennika" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="cena" Type="decimal" Precision="10" Scale="2" />
     <Property Name="okres_od" Type="date" />
     <Property Name="okres_do" Type="date" />
@@ -13,7 +13,7 @@
     <Key>
       <PropertyRef Name="id_katalogu" />
     </Key>
-    <Property Name="id_katalogu" Type="int" Nullable="false" />
+    <Property Name="id_katalogu" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="okres_trwania_wycieczki" Type="int" />
     <Property Name="id_cennika" Type="int" />
     <Property Name="id_miejsca_odjazdu" Type="int" />
@@ -54,7 +54,7 @@
     <Key>
       <PropertyRef Name="id_miejsca" />
     </Key>
-    <Property Name="id_miejsca" Type="int" Nullable="false" />
+    <Property Name="id_miejsca" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="adres" Type="varchar" MaxLength="255" />
     <Property Name="miejscowosc" Type="varchar" MaxLength="64" />
   </EntityType>
@@ -62,7 +62,7 @@
     <Key>
       <PropertyRef Name="id_opini" />
     </Key>
-    <Property Name="id_opini" Type="int" Nullable="false" />
+    <Property Name="id_opini" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="ocena" Type="int" />
     <Property Name="opis" Type="text" />
     <Property Name="id_uczestnictwo" Type="int" />
@@ -71,7 +71,7 @@
     <Key>
       <PropertyRef Name="id_panel" />
     </Key>
-    <Property Name="id_panel" Type="int" Nullable="false" />
+    <Property Name="id_panel" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="login" Type="varchar" MaxLength="64" />
     <Property Name="haslo" Type="varchar" MaxLength="64" />
     <Property Name="stopien" Type="varchar" MaxLength="32" />
@@ -121,7 +121,7 @@
     <Key>
       <PropertyRef Name="numer_rezerwacji" />
     </Key>
-    <Property Name="numer_rezerwacji" Type="int" Nullable="false" />
+    <Property Name="numer_rezerwacji" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="liczba_osob" Type="int" />
     <Property Name="stan" Type="bit" />
     <Property Name="zaliczka" Type="decimal" Precision="10" Scale="2" />
@@ -132,7 +132,7 @@
     <Key>
       <PropertyRef Name="id_uczestnictwo" />
     </Key>
-    <Property Name="id_uczestnictwo" Type="int" Nullable="false" />
+    <Property Name="id_uczestnictwo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="liczba_osob" Type="int" />
     <Property Name="numer_rezerwacji" Type="int" />
   </EntityType>
@@ -140,7 +140,7 @@
     <Key>
       <PropertyRef Name="id_wycieczki" />
     </Key>
-    <Property Name="id_wycieczki" Type="int" Nullable="false" />
+    <Property Name="id_wycieczki" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="nazwa" Type="varchar" MaxLength="128" />
     <Property Name="data_wyjazdu" Type="date" />
     <Property Name="data_powrotu" Type="date" />

@@ -90,7 +90,7 @@ namespace BD.View
                  else if (uprawnienia.Equals("klient"))
                  {
                     this.Hide();
-                    Klient klient = new Klient();
+                    KlientView klient = new KlientView();
                     klient.Closed += (s, args) => this.Close();
                     klient.ShowDialog();
 

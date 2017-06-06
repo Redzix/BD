@@ -139,7 +139,6 @@ F:\Repos\BD\bin\Debug\itextsharp.xml
 F:\Repos\BD\obj\Debug\BD.csprojResolveAssemblyReference.cache
 F:\Repos\BD\obj\Debug\BD.View.KierowcaView.resources
 F:\Repos\BD\obj\Debug\BD.View.KierownikView.resources
-F:\Repos\BD\obj\Debug\BD.View.Klient.resources
 F:\Repos\BD\obj\Debug\BD.View.OpiniaView.resources
 F:\Repos\BD\obj\Debug\BD.View.PanelPracowniczyView.resources
 F:\Repos\BD\obj\Debug\BD.View.PilotView.resources
@@ -152,3 +151,4 @@ F:\Repos\BD\obj\Debug\BD.View.WycieczkaView.resources
 F:\Repos\BD\obj\Debug\BD.csproj.GenerateResource.Cache
 F:\Repos\BD\obj\Debug\BD.exe
 F:\Repos\BD\obj\Debug\BD.pdb
+F:\Repos\BD\obj\Debug\BD.View.KlientView.resources
