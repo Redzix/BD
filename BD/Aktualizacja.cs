@@ -9,6 +9,7 @@ namespace BD
     class Aktualizacja
     {
         private string lastupdate;
+        private string databasename;
 
         public string ostatniaAktualizacja
         {
@@ -26,15 +27,16 @@ namespace BD
         {
             Polacz_z_baza _polacz = new Polacz_z_baza();
             SqlConnection _polaczenie = _polacz.PolaczZBaza();
-            SqlCommand _zapytanie = _polacz.UtworzZapytanie("select last_user_update from sys.dm_db_index_usage_stats where database_id = DB_ID('baza') order by last_user_update desc");
+            SqlCommand _zapytanie = _polacz.UtworzZapytanie("select OBJECT_NAME(OBJECT_ID) AS DatabaseName, last_user_update from sys.dm_db_index_usage_stats where database_id = DB_ID('baza') order by last_user_update desc");
             SqlDataReader reader = _zapytanie.ExecuteReader();
             reader.Read();
             var tmpupdate = reader["last_user_update"].ToString();
+            this.databasename = reader["DatabaseName"].ToString();
             reader.Close();
             return tmpupdate;
         }
 
-        public bool czyBylaAktualizacja()
+        public bool czyBylaAktualizacja() 
         {
             if (this.lastupdate.Equals(dataOstatniejAktualizacji()))
                 return false;
