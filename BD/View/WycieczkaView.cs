@@ -37,7 +37,6 @@ namespace BD.View
         public WycieczkaView(int opcja, int idWycieczki)
         {
             InitializeComponent();
-            _idWycieczki = idWycieczki;
 
             //Data odjazdu nie moze byc taka sama jak data przyjazdu
             tb_data_odjazdu.Value = tb_data_odjazdu.Value.AddDays(1);
@@ -47,6 +46,7 @@ namespace BD.View
                 tb_data_odjazdu.Enabled = false;
                 tb_data_przyjazdu.Enabled = false;
                 cb_docelowa.Enabled = false;
+                this.wypelnijDoEdycji(idWycieczki);
                 _opcja = 0;
             }
             else
@@ -62,7 +62,7 @@ namespace BD.View
         private void wypelnijDoEdycji(int id)
         {
             bazaEntities db = new bazaEntities();
-            var query = from katalog in db.Katalog
+            var query = (from katalog in db.Katalog
                         where katalog.id_wycieczki == id
                         select new
                         {
@@ -71,7 +71,24 @@ namespace BD.View
                             cennik = katalog.Cennik,
                             miejsce_z = katalog.Miejsce,
                             miejsce_do = katalog.Miejsce1
-                        };
+                        }).FirstOrDefault();
+            var selectedItem = (from x in this.cb_odjazd.Items.OfType<KeyValuePair<string, string>>()
+                               where x.Key.Equals(query.miejsce_z.id_miejsca.ToString())
+                               select x.Key).FirstOrDefault();
+            try
+            {
+                //var index = selectedItem.Where(x => x.key == query.miejsce_z.id_miejsca).Select(x => x.key).FirstOrDefault();
+               // cb_odjazd.SelectedIndex = int.Parse(selectedItem);
+                cb_odjazd.SelectedItem = query.miejsce_z.miejscowosc + ", " + query.miejsce_z.adres;
+            } catch
+            {
+                Console.WriteLine("error");
+            }
+            tb_data_odjazdu.Value = query.wycieczka.data_wyjazdu.Value;
+            tb_data_przyjazdu.Value = query.wycieczka.data_powrotu.Value;
+            tb_nazwa.Text = query.wycieczka.nazwa;
+            tb_opis.Text = query.wycieczka.opis;
+            //var index = items.Where(x => x. x.key == query.miejsce_z.id_miejsca).Select(x => x.key);
         }
 
         private void b_anuluj_Click(object sender, EventArgs e)
@@ -113,9 +130,9 @@ namespace BD.View
             var miejscowosci = from m in db.Miejsce orderby m.miejscowosc select m;
             var piloci = from m in db.Pilot orderby m.nazwisko select m;
             var kierowcy = from m in db.Kierowca orderby m.nazwisko select m;
-            var pojazdy = from m in db.Pojazd orderby m.pojemnosc where m.stan==true select m;
+            var pojazdy = from m in db.Pojazd orderby m.pojemnosc where m.stan == true select m;
             Dictionary<string, string> values = new Dictionary<string, string>();
-            foreach(var row in miejscowosci)
+            foreach (var row in miejscowosci)
             {
                 values.Add(row.id_miejsca.ToString(), row.miejscowosc + ", " + row.adres);
             }
@@ -191,28 +208,28 @@ namespace BD.View
                             Kierowca_pesel = kierowcaPesel,
                             Pojazd_numer_rejestracyjny = pojazdRejestracja,
                         };
-                        db.Wycieczka.Add(nowaWycieczka);
-                        db.SaveChanges();
-
                         var nowyCennik = new Cennik
                         {
                             cena = decimal.Parse(tb_cena.Text),
+                            okres_od=tb_data_odjazdu.Value,
+                            okres_do=tb_data_przyjazdu.Value
 
                         };
-                        db.Cennik.Add(nowyCennik);
-                        db.SaveChanges();
-
                         var nowyKatalog = new Katalog
                         {
-                            id_cennika = nowyCennik.id_cennika,
-                            id_wycieczki = nowaWycieczka.id_wycieczki,
                             id_miejsca_odjazdu = miejsceOdjazdu,
                             id_miejsca_przyjazdu = miejscePrzyjazdu,
                         };
+                        nowyKatalog.Cennik = nowyCennik;
+                        nowyKatalog.Wycieczka = nowaWycieczka;
                         db.Katalog.Add(nowyKatalog);
-                        MessageBox.Show("Wycieczke dodano pomyślnie.", "Dodano wycieczkę", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        db.Wycieczka.Add(nowaWycieczka);
+                        db.Cennik.Add(nowyCennik);
+                        db.SaveChanges();
+                        MessageBox.Show("Wycieczka została dodana pomyślnie.", "Dodano wycieczkę", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Dispose();
-                    } catch
+                    }
+                    catch
                     {
                         if (MessageBox.Show("Napotkano problem podczas dodawania wycieczki.", "Błąd dodawania wycieczki", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
                         {
