@@ -129,6 +129,7 @@ namespace BD.View
                          {
                              numer = reklamacja.numer_reklamacji,
                              nazwa = reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.nazwa,
+                             stan = reklamacja.stan,
                              dataOdjazdu = reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.data_wyjazdu,
                              dataPowrotu = reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.data_powrotu,
                              opis = reklamacja.opis
@@ -137,6 +138,7 @@ namespace BD.View
             // Dodanie wartości parametrów do opisu znajdującego się w texboxie
             rtb_reklamacja.Text =
                 "Numer reklamacji: " + query.numer +
+                "\nStan: " + ((bool.Parse(query.stan.ToString())) ? "Rozpatrzona" : "Nierpozatrzona") +
                 "\nNazwa wycieczki: " + query.nazwa +
                 "\nData wycieczki: " + query.dataOdjazdu + "--" + query.dataPowrotu +
                 "\nOpis: " + query.opis;
