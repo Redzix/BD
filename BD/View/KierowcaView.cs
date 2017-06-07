@@ -13,10 +13,6 @@ namespace BD.View
 {
     public partial class KierowcaView : Form
     {
-        SqlConnection _polaczenie = null;
-        SqlCommand _zapytanie = null;
-        Polacz_z_baza _polacz = null;
-        List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -33,7 +29,23 @@ namespace BD.View
         public KierowcaView(string uzytkownik)
         {
             InitializeComponent();
+
             l_uzytkownik.Text = uzytkownik;
+
+            Polacz_z_baza _polacz = new Polacz_z_baza();
+            SqlConnection _polaczenie = _polacz.PolaczZBaza();
+
+            if (_polaczenie != null)
+            {
+                l_polaczenie.Text = "Połączony";
+                l_polaczenie.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                l_polaczenie.Text = "Rozłączony";
+                l_polaczenie.ForeColor = System.Drawing.Color.Red;
+            }
+
         }
 
         /// <summary>

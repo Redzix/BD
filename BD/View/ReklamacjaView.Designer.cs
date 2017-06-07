@@ -30,9 +30,9 @@
         {
             this.tc_reklamacje = new System.Windows.Forms.TabControl();
             this.tp_dodaj_reklamacje = new System.Windows.Forms.TabPage();
+            this.tb_nazwaWycieczki = new System.Windows.Forms.TextBox();
             this.tb_numerRezerwacji = new System.Windows.Forms.TextBox();
             this.l_numerRezerwacji = new System.Windows.Forms.Label();
-            this.cb_nazwa_wycieczki = new System.Windows.Forms.ComboBox();
             this.b_zapisz = new System.Windows.Forms.Button();
             this.b_anuluj = new System.Windows.Forms.Button();
             this.l_opis_reklamacji = new System.Windows.Forms.Label();
@@ -42,6 +42,7 @@
             this.rtb_reklamacja = new System.Windows.Forms.RichTextBox();
             this.lv_reklamacje = new System.Windows.Forms.ListView();
             this.NumerReklamacji = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.b_sprawdzPoprawnosc = new System.Windows.Forms.Button();
             this.tc_reklamacje.SuspendLayout();
             this.tp_dodaj_reklamacje.SuspendLayout();
             this.tp_stan_reklamacji.SuspendLayout();
@@ -60,9 +61,10 @@
             // 
             // tp_dodaj_reklamacje
             // 
+            this.tp_dodaj_reklamacje.Controls.Add(this.b_sprawdzPoprawnosc);
+            this.tp_dodaj_reklamacje.Controls.Add(this.tb_nazwaWycieczki);
             this.tp_dodaj_reklamacje.Controls.Add(this.tb_numerRezerwacji);
             this.tp_dodaj_reklamacje.Controls.Add(this.l_numerRezerwacji);
-            this.tp_dodaj_reklamacje.Controls.Add(this.cb_nazwa_wycieczki);
             this.tp_dodaj_reklamacje.Controls.Add(this.b_zapisz);
             this.tp_dodaj_reklamacje.Controls.Add(this.b_anuluj);
             this.tp_dodaj_reklamacje.Controls.Add(this.l_opis_reklamacji);
@@ -75,6 +77,14 @@
             this.tp_dodaj_reklamacje.TabIndex = 0;
             this.tp_dodaj_reklamacje.Text = "Dodaj reklamację";
             this.tp_dodaj_reklamacje.UseVisualStyleBackColor = true;
+            // 
+            // tb_nazwaWycieczki
+            // 
+            this.tb_nazwaWycieczki.Enabled = false;
+            this.tb_nazwaWycieczki.Location = new System.Drawing.Point(124, 32);
+            this.tb_nazwaWycieczki.Name = "tb_nazwaWycieczki";
+            this.tb_nazwaWycieczki.Size = new System.Drawing.Size(121, 20);
+            this.tb_nazwaWycieczki.TabIndex = 23;
             // 
             // tb_numerRezerwacji
             // 
@@ -91,14 +101,6 @@
             this.l_numerRezerwacji.Size = new System.Drawing.Size(88, 13);
             this.l_numerRezerwacji.TabIndex = 21;
             this.l_numerRezerwacji.Text = "Numer rezerwacji";
-            // 
-            // cb_nazwa_wycieczki
-            // 
-            this.cb_nazwa_wycieczki.FormattingEnabled = true;
-            this.cb_nazwa_wycieczki.Location = new System.Drawing.Point(124, 32);
-            this.cb_nazwa_wycieczki.Name = "cb_nazwa_wycieczki";
-            this.cb_nazwa_wycieczki.Size = new System.Drawing.Size(121, 21);
-            this.cb_nazwa_wycieczki.TabIndex = 20;
             // 
             // b_zapisz
             // 
@@ -183,6 +185,16 @@
             this.NumerReklamacji.Text = "Numer reklamacji";
             this.NumerReklamacji.Width = 110;
             // 
+            // b_sprawdzPoprawnosc
+            // 
+            this.b_sprawdzPoprawnosc.Location = new System.Drawing.Point(251, 6);
+            this.b_sprawdzPoprawnosc.Name = "b_sprawdzPoprawnosc";
+            this.b_sprawdzPoprawnosc.Size = new System.Drawing.Size(105, 46);
+            this.b_sprawdzPoprawnosc.TabIndex = 24;
+            this.b_sprawdzPoprawnosc.Text = "Sprawdź poprawność";
+            this.b_sprawdzPoprawnosc.UseVisualStyleBackColor = true;
+            this.b_sprawdzPoprawnosc.Click += new System.EventHandler(this.b_sprawdzPoprawnosc_Click);
+            // 
             // ReklamacjaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,11 +202,10 @@
             this.ClientSize = new System.Drawing.Size(375, 256);
             this.Controls.Add(this.tc_reklamacje);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Reklamacja";
+            this.Name = "ReklamacjaView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Reklamacja";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reklamacja_FormClosing);
-            this.Load += new System.EventHandler(this.Reklamacja_Load);
             this.tc_reklamacje.ResumeLayout(false);
             this.tp_dodaj_reklamacje.ResumeLayout(false);
             this.tp_dodaj_reklamacje.PerformLayout();
@@ -213,11 +224,12 @@
         private System.Windows.Forms.Label l_nazwa_wycieczki;
         private System.Windows.Forms.TextBox tb_opis_reklamacji;
         private System.Windows.Forms.TabPage tp_stan_reklamacji;
-        private System.Windows.Forms.ComboBox cb_nazwa_wycieczki;
         private System.Windows.Forms.TextBox tb_numerRezerwacji;
         private System.Windows.Forms.Label l_numerRezerwacji;
         private System.Windows.Forms.ListView lv_reklamacje;
         private System.Windows.Forms.ColumnHeader NumerReklamacji;
         private System.Windows.Forms.RichTextBox rtb_reklamacja;
+        private System.Windows.Forms.TextBox tb_nazwaWycieczki;
+        private System.Windows.Forms.Button b_sprawdzPoprawnosc;
     }
 }

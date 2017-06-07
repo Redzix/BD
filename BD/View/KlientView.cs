@@ -13,20 +13,6 @@ namespace BD.View
 {
     public partial class KlientView : Form
     {
-        /// <summary>
-        /// Zmienna odpowiada za utworzenie połączenia z bazą danych.
-        /// </summary>
-        SqlConnection _polaczenie = null;
-
-        /// <summary>
-        /// Zmienna przechowuje zapytanie do bazy danych.
-        /// </summary>
-        SqlCommand _zapytanie = null;
-
-        /// <summary>
-        /// Zmienna przechowujeobiekt klasy Polacz_z_baza.
-        /// </summary>
-        Polacz_z_baza _polacz = null;
 
         private int _idWycieczki;
 
@@ -37,8 +23,8 @@ namespace BD.View
         public KlientView()
         {
             InitializeComponent();
-            _polacz = new Polacz_z_baza();
-            _polaczenie = _polacz.PolaczZBaza();
+            Polacz_z_baza _polacz = new Polacz_z_baza();
+            SqlConnection _polaczenie = _polacz.PolaczZBaza();
             if (_polaczenie != null)
             {
                 l_polaczenie.Text = "Połączony";

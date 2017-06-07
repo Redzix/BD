@@ -112,7 +112,6 @@ F:\Repos\BD\bin\Debug\itextsharp.dll
 F:\Repos\BD\bin\Debug\EntityFramework.xml
 F:\Repos\BD\bin\Debug\EntityFramework.SqlServer.xml
 F:\Repos\BD\bin\Debug\itextsharp.xml
-F:\Repos\BD\obj\Debug\BD.csprojResolveAssemblyReference.cache
 F:\Repos\BD\obj\Debug\BD.View.KierowcaView.resources
 F:\Repos\BD\obj\Debug\BD.View.KierownikView.resources
 F:\Repos\BD\obj\Debug\BD.View.OpiniaView.resources
@@ -152,3 +151,4 @@ D:\Visual_projekty\_BD\BD\obj\Debug\BD.View.WycieczkaView.resources
 D:\Visual_projekty\_BD\BD\obj\Debug\BD.csproj.GenerateResource.Cache
 D:\Visual_projekty\_BD\BD\obj\Debug\BD.exe
 D:\Visual_projekty\_BD\BD\obj\Debug\BD.pdb
+F:\Repos\BD\obj\Debug\BD.csprojResolveAssemblyReference.cache

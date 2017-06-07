@@ -67,60 +67,51 @@ namespace BD.View
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            Polacz_z_baza polacz = new Polacz_z_baza();
-            SqlConnection polaczenie = polacz.PolaczZBaza();
+            bazaEntities db = new bazaEntities();
 
-            Reklamacja_model reklamacja = new Reklamacja_model();
+            int numer = int.Parse(tb_numerRezerwacji.Text);
+            var uczestnictwo = (from uc in db.Uczestnictwo
+                                where uc.numer_rezerwacji == numer
+                                select uc).FirstOrDefault();
 
-            reklamacja.Numer = polacz.PobierzDaneInt(polacz.UtworzZapytanie("SELECT MAX(numer_reklamacji) FROM Reklamacja")) + 1;
-            reklamacja.Opis = tb_opis_reklamacji.Text;
-            reklamacja.Stan = 0;
-            reklamacja.KierownikPesel = "00043446798";
-            reklamacja.IdUczestnictwo = polacz.PobierzDaneInt(polacz.UtworzZapytanie("SELECT Uczestnictwo.id_uczestnictwo " +
-                "FROM Uczestnictwo " +
-                "WHERE Uczestnictwo.numer_rezerwacji = " + Convert.ToInt32(tb_numerRezerwacji.Text)));
-
-            if (reklamacja.DodajReklamacje(reklamacja))
+            var reklamacja = new Reklamacja
             {
-                MessageBox.Show("Reklamacje dodano poprawnie.", "Potwierdzenie dodania reklamacji", MessageBoxButtons.OK);
-                this.Dispose();
-            }
-            else
-            {
-                MessageBox.Show("Reklamacja już istnieje", "Błąd reklamacji", MessageBoxButtons.OK);
-            }
-        }
+                opis = tb_opis_reklamacji.Text,
+                stan = false,
+                Kierownik_pesel = "brak",
+                id_uczestnictwo = uczestnictwo.id_uczestnictwo
+            };
+            db.Reklamacja.Add(reklamacja);
 
-        private void Reklamacja_Load(object sender, EventArgs e)
-        {
-            _listaWycieczek = (new Wycieczka_model()).PobierzWycieczki();
-
-            for (int i = 0; i < _listaWycieczek.Count; i++)
+            try
             {
-                cb_nazwa_wycieczki.Items.Add(_listaWycieczek[i].Nazwa.ToString());
+                db.SaveChanges();
+                MessageBox.Show("Prawidłowo dodano reklamację.", "Dodano reklamację.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tb_nazwaWycieczki.Text = "";
+                tb_opis_reklamacji.Text = "";
+                tb_numerRezerwacji.Text = "";
+
             }
-            cb_nazwa_wycieczki.SelectedIndex = 0;
+            catch (Exception exception)
+            {
+                MessageBox.Show("Wystąpił problem podczas dodawania reklamacji. Błąd:\n" + exception.Message, "Błąd podczas dodawania reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }             
         }
 
         private void tc_reklamacje_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(tc_reklamacje.SelectedIndex == 0)
+            if(tc_reklamacje.SelectedIndex == 1)
             {
-                _listaWycieczek = (new Wycieczka_model()).PobierzWycieczki();
+                bazaEntities db = new bazaEntities();
 
-                for (int i = 0; i < _listaWycieczek.Count; i++)
-                {
-                    cb_nazwa_wycieczki.Items.Add(_listaWycieczek[i].Nazwa.ToString());
-                }
-                cb_nazwa_wycieczki.SelectedIndex = 0;
-            }
-            else if(tc_reklamacje.SelectedIndex == 1)
-            {
-                _listaReklamacji = (new Reklamacja_model()).PobierzReklamacje();
+                var pobierz = from reklamacja in db.Reklamacja
+                              orderby reklamacja.numer_reklamacji
+                              select reklamacja.numer_reklamacji;
 
-                for (int i = 0; i < _listaReklamacji.Count; i++)
+                foreach(var rek in pobierz)
                 {
-                    ListViewItem reklamacja = new ListViewItem(_listaReklamacji[i].Numer.ToString());
+                    ListViewItem reklamacja = new ListViewItem(rek.ToString());
+                    reklamacja.Tag = rek.ToString();
                     lv_reklamacje.Items.Add(reklamacja);
                 }
             }
@@ -128,44 +119,54 @@ namespace BD.View
 
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
         {
-            int numerReklamacji;
-            string nazwaWycieczki;
-            DateTime dataWycieczki;
-            string opis;
+            int numer = int.Parse(((ListView)sender).SelectedItems[0].Tag.ToString());
 
-            _polaczenie = _polacz.PolaczZBaza();
+            bazaEntities db = new bazaEntities();
 
-            //Pobranie aktualnie wybranego numeru reklamacji
-            numerReklamacji =Convert.ToInt32(lv_reklamacje.SelectedItems[0].SubItems[0].Text);
-
-            //Pobranie nazwy wycieczki przypisanej do danej reklamacji
-            nazwaWycieczki = _polacz.PobierzDaneString(_polacz.UtworzZapytanie("SELECT Wycieczka.nazwa " +
-                "FROM Wycieczka " +
-                "INNER JOIN Rezerwacja ON Rezerwacja.id_wycieczki = Wycieczka.id_wycieczki " +
-                "INNER JOIN Uczestnictwo ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji " +
-                "INNER JOIN Reklamacja ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
-                "WHERE Reklamacja.numer_reklamacji = " + numerReklamacji));
-
-            //Pobranie daty wyjazdu na wycieczke
-            dataWycieczki = _polacz.PobierzDaneDate(_polacz.UtworzZapytanie("SELECT Wycieczka.data_wyjazdu " +
-                "FROM Wycieczka " +
-                "INNER JOIN Rezerwacja ON Rezerwacja.id_wycieczki = Wycieczka.id_wycieczki " +
-                "INNER JOIN Uczestnictwo ON Rezerwacja.numer_rezerwacji = Uczestnictwo.numer_rezerwacji " +
-                "INNER JOIN Reklamacja ON Uczestnictwo.id_uczestnictwo = Reklamacja.id_uczestnictwo " +
-                "WHERE Reklamacja.numer_reklamacji = " + numerReklamacji));
-
-            //Pobranie opisu reklamacji
-            opis = _listaReklamacji[numerReklamacji - 1].Opis;
-
-            //Dodanie wartości parametrów do opisu znajdującego się w texboxie
+            var query = (from reklamacja in db.Reklamacja
+                         where reklamacja.numer_reklamacji == numer
+                         select new
+                         {
+                             numer = reklamacja.numer_reklamacji,
+                             nazwa = reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.nazwa,
+                             dataOdjazdu = reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.data_wyjazdu,
+                             dataPowrotu = reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.data_powrotu,
+                             opis = reklamacja.opis
+                         }).FirstOrDefault();
 
             // Dodanie wartości parametrów do opisu znajdującego się w texboxie
             rtb_reklamacja.Text =
-                "Numer reklamacji: " + numerReklamacji +
-                "\nNazwa wycieczki: " + nazwaWycieczki +
-                "\nData wycieczki: " + dataWycieczki +
-                "\nOpis: " + opis;
+                "Numer reklamacji: " + query.numer +
+                "\nNazwa wycieczki: " + query.nazwa +
+                "\nData wycieczki: " + query.dataOdjazdu + "--" + query.dataPowrotu +
+                "\nOpis: " + query.opis;
 
+        }
+
+        private void b_sprawdzPoprawnosc_Click(object sender, EventArgs e)
+        {         
+            bazaEntities db = new bazaEntities();
+
+            try
+            {
+                int numer = int.Parse(tb_numerRezerwacji.Text);
+
+                var query = (from uczestnictwo in db.Uczestnictwo
+                             where uczestnictwo.numer_rezerwacji == numer
+                             select uczestnictwo.Rezerwacja.Wycieczka.nazwa).FirstOrDefault();
+
+                if (query == null)
+                {
+                    tb_nazwaWycieczki.Text = "Błędna rezerwacja";
+                }
+                else
+                {
+                    tb_nazwaWycieczki.Text = query;
+                }
+            }catch(FormatException exception)
+            {
+                MessageBox.Show("Wprowadź prawidłowy numer rezerwacji.","Błąd podczas pobierania danych",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
     }
 }

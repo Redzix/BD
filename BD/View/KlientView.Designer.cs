@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.dgv_katalog = new System.Windows.Forms.DataGridView();
+            this.id_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Okres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Data_wyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Promocja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Koszt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rtb_wycieczka = new System.Windows.Forms.RichTextBox();
             this.b_katalog_rezerwuj = new System.Windows.Forms.Button();
             this.b_katalog_wyjdz = new System.Windows.Forms.Button();
@@ -37,12 +43,7 @@
             this.reklamujWycieczkęToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rezygnacjaZWycieczkiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.l_polaczenie = new System.Windows.Forms.Label();
-            this.id_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Okres = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Data_wyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Promocja = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Koszt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.b_zaplac = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_katalog)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +65,37 @@
             this.dgv_katalog.TabIndex = 0;
             this.dgv_katalog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_katalog_CellClick);
             // 
+            // id_wycieczki
+            // 
+            this.id_wycieczki.HeaderText = "Id wycieczki";
+            this.id_wycieczki.Name = "id_wycieczki";
+            this.id_wycieczki.Visible = false;
+            // 
+            // Nazwa_wycieczki
+            // 
+            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
+            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
+            // 
+            // Okres
+            // 
+            this.Okres.HeaderText = "Okres";
+            this.Okres.Name = "Okres";
+            // 
+            // Data_wyjazdu
+            // 
+            this.Data_wyjazdu.HeaderText = "Data wyjazdu";
+            this.Data_wyjazdu.Name = "Data_wyjazdu";
+            // 
+            // Promocja
+            // 
+            this.Promocja.HeaderText = "Promocja";
+            this.Promocja.Name = "Promocja";
+            // 
+            // Koszt
+            // 
+            this.Koszt.HeaderText = "Cena całkowita";
+            this.Koszt.Name = "Koszt";
+            // 
             // rtb_wycieczka
             // 
             this.rtb_wycieczka.Location = new System.Drawing.Point(613, 39);
@@ -74,7 +106,7 @@
             // 
             // b_katalog_rezerwuj
             // 
-            this.b_katalog_rezerwuj.Location = new System.Drawing.Point(750, 277);
+            this.b_katalog_rezerwuj.Location = new System.Drawing.Point(868, 277);
             this.b_katalog_rezerwuj.Name = "b_katalog_rezerwuj";
             this.b_katalog_rezerwuj.Size = new System.Drawing.Size(75, 23);
             this.b_katalog_rezerwuj.TabIndex = 2;
@@ -134,42 +166,21 @@
             this.l_polaczenie.TabIndex = 10;
             this.l_polaczenie.Text = " ";
             // 
-            // id_wycieczki
+            // b_zaplac
             // 
-            this.id_wycieczki.HeaderText = "Id wycieczki";
-            this.id_wycieczki.Name = "id_wycieczki";
-            this.id_wycieczki.Visible = false;
+            this.b_zaplac.Location = new System.Drawing.Point(613, 277);
+            this.b_zaplac.Name = "b_zaplac";
+            this.b_zaplac.Size = new System.Drawing.Size(75, 23);
+            this.b_zaplac.TabIndex = 11;
+            this.b_zaplac.Text = "Zapłać";
+            this.b_zaplac.UseVisualStyleBackColor = true;
             // 
-            // Nazwa_wycieczki
-            // 
-            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
-            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
-            // 
-            // Okres
-            // 
-            this.Okres.HeaderText = "Okres";
-            this.Okres.Name = "Okres";
-            // 
-            // Data_wyjazdu
-            // 
-            this.Data_wyjazdu.HeaderText = "Data wyjazdu";
-            this.Data_wyjazdu.Name = "Data_wyjazdu";
-            // 
-            // Promocja
-            // 
-            this.Promocja.HeaderText = "Promocja";
-            this.Promocja.Name = "Promocja";
-            // 
-            // Koszt
-            // 
-            this.Koszt.HeaderText = "Cena całkowita";
-            this.Koszt.Name = "Koszt";
-            // 
-            // Klient
+            // KlientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 370);
+            this.Controls.Add(this.b_zaplac);
             this.Controls.Add(this.l_polaczenie);
             this.Controls.Add(this.b_katalog_wyjdz);
             this.Controls.Add(this.b_katalog_rezerwuj);
@@ -178,7 +189,7 @@
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Klient";
+            this.Name = "KlientView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Klient";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Klient_FormClosing);
@@ -208,6 +219,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Data_wyjazdu;
         private System.Windows.Forms.DataGridViewTextBoxColumn Promocja;
         private System.Windows.Forms.DataGridViewTextBoxColumn Koszt;
+        private System.Windows.Forms.Button b_zaplac;
     }
 }
 
