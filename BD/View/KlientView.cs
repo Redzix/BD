@@ -191,6 +191,11 @@ namespace BD.View
                 "\n\nAdres miejsca: " + query.miejsceDoceloweAdres +
                 "\nMiejscowość: " + query.miejsceDoceloweMiejscowosc;
         }
-             
+
+        private void b_zaplac_Click(object sender, EventArgs e)
+        {
+            RezerwacjaView rezerwacja = new RezerwacjaView();
+            rezerwacja.ShowDialog();
+        }
     }
 }

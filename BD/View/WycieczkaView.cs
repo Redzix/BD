@@ -19,8 +19,6 @@ namespace BD.View
         private List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();
         private int _idWycieczki;
 
-        Polacz_z_baza _polacz = new Polacz_z_baza();
-        SqlConnection _polaczenie = new SqlConnection();
         private int _opcja = 1;
         /// <summary>
         /// Główny bezparametrowy konstruktor okna

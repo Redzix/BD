@@ -174,6 +174,7 @@
             this.b_zaplac.TabIndex = 11;
             this.b_zaplac.Text = "Zapłać";
             this.b_zaplac.UseVisualStyleBackColor = true;
+            this.b_zaplac.Click += new System.EventHandler(this.b_zaplac_Click);
             // 
             // KlientView
             // 

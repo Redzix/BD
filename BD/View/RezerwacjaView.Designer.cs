@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.tb_imie = new System.Windows.Forms.TextBox();
-            this.l_nr_rezerwacji = new System.Windows.Forms.Label();
             this.tb_nazwisko = new System.Windows.Forms.TextBox();
             this.tb_liczba_osob = new System.Windows.Forms.TextBox();
             this.tb_zaliczka = new System.Windows.Forms.TextBox();
@@ -45,6 +44,22 @@
             this.tb_miejscowosc = new System.Windows.Forms.TextBox();
             this.tb_pesel = new System.Windows.Forms.TextBox();
             this.l_pesel = new System.Windows.Forms.Label();
+            this.p_rezerwuj = new System.Windows.Forms.Panel();
+            this.p_zaplac = new System.Windows.Forms.Panel();
+            this.l_wotaCalkowita = new System.Windows.Forms.Label();
+            this.tb_kwotaCalkowita = new System.Windows.Forms.TextBox();
+            this.b_anlujZaplate = new System.Windows.Forms.Button();
+            this.b_zapłaćRezerwacje = new System.Windows.Forms.Button();
+            this.l_kwotaZaplacona = new System.Windows.Forms.Label();
+            this.l_kwotaDoZaplaty = new System.Windows.Forms.Label();
+            this.l_nazwaWycieczkiZaplac = new System.Windows.Forms.Label();
+            this.l_numerRezerwacji = new System.Windows.Forms.Label();
+            this.tb_nazwaWycieczkiZaplac = new System.Windows.Forms.TextBox();
+            this.tb_kwotaZaplacona = new System.Windows.Forms.TextBox();
+            this.tb_kwotaDoZaplaty = new System.Windows.Forms.TextBox();
+            this.tb_numerRezerwacji = new System.Windows.Forms.TextBox();
+            this.p_rezerwuj.SuspendLayout();
+            this.p_zaplac.SuspendLayout();
             this.SuspendLayout();
             // 
             // tb_imie
@@ -53,15 +68,6 @@
             this.tb_imie.Name = "tb_imie";
             this.tb_imie.Size = new System.Drawing.Size(100, 20);
             this.tb_imie.TabIndex = 0;
-            // 
-            // l_nr_rezerwacji
-            // 
-            this.l_nr_rezerwacji.AutoSize = true;
-            this.l_nr_rezerwacji.Location = new System.Drawing.Point(4, 277);
-            this.l_nr_rezerwacji.Name = "l_nr_rezerwacji";
-            this.l_nr_rezerwacji.Size = new System.Drawing.Size(91, 13);
-            this.l_nr_rezerwacji.TabIndex = 1;
-            this.l_nr_rezerwacji.Text = "Numer rezerwacji:";
             // 
             // tb_nazwisko
             // 
@@ -139,7 +145,7 @@
             // 
             // b_rezerwacja_zapisz
             // 
-            this.b_rezerwacja_zapisz.Location = new System.Drawing.Point(161, 229);
+            this.b_rezerwacja_zapisz.Location = new System.Drawing.Point(15, 226);
             this.b_rezerwacja_zapisz.Name = "b_rezerwacja_zapisz";
             this.b_rezerwacja_zapisz.Size = new System.Drawing.Size(75, 23);
             this.b_rezerwacja_zapisz.TabIndex = 11;
@@ -149,7 +155,7 @@
             // 
             // b_rezerwacja_anuluj
             // 
-            this.b_rezerwacja_anuluj.Location = new System.Drawing.Point(12, 229);
+            this.b_rezerwacja_anuluj.Location = new System.Drawing.Point(161, 226);
             this.b_rezerwacja_anuluj.Name = "b_rezerwacja_anuluj";
             this.b_rezerwacja_anuluj.Size = new System.Drawing.Size(75, 23);
             this.b_rezerwacja_anuluj.TabIndex = 12;
@@ -190,42 +196,176 @@
             this.l_pesel.TabIndex = 16;
             this.l_pesel.Text = "Pesel";
             // 
+            // p_rezerwuj
+            // 
+            this.p_rezerwuj.Controls.Add(this.l_pesel);
+            this.p_rezerwuj.Controls.Add(this.tb_pesel);
+            this.p_rezerwuj.Controls.Add(this.l_miejscowosc);
+            this.p_rezerwuj.Controls.Add(this.tb_miejscowosc);
+            this.p_rezerwuj.Controls.Add(this.b_rezerwacja_anuluj);
+            this.p_rezerwuj.Controls.Add(this.b_rezerwacja_zapisz);
+            this.p_rezerwuj.Controls.Add(this.l_zaliczka);
+            this.p_rezerwuj.Controls.Add(this.l_liczba_osob);
+            this.p_rezerwuj.Controls.Add(this.l_adres);
+            this.p_rezerwuj.Controls.Add(this.l_nazwisko);
+            this.p_rezerwuj.Controls.Add(this.l_imie);
+            this.p_rezerwuj.Controls.Add(this.tb_adres);
+            this.p_rezerwuj.Controls.Add(this.tb_zaliczka);
+            this.p_rezerwuj.Controls.Add(this.tb_liczba_osob);
+            this.p_rezerwuj.Controls.Add(this.tb_nazwisko);
+            this.p_rezerwuj.Controls.Add(this.tb_imie);
+            this.p_rezerwuj.Location = new System.Drawing.Point(0, 0);
+            this.p_rezerwuj.Name = "p_rezerwuj";
+            this.p_rezerwuj.Size = new System.Drawing.Size(252, 297);
+            this.p_rezerwuj.TabIndex = 17;
+            // 
+            // p_zaplac
+            // 
+            this.p_zaplac.Controls.Add(this.l_wotaCalkowita);
+            this.p_zaplac.Controls.Add(this.tb_kwotaCalkowita);
+            this.p_zaplac.Controls.Add(this.b_anlujZaplate);
+            this.p_zaplac.Controls.Add(this.b_zapłaćRezerwacje);
+            this.p_zaplac.Controls.Add(this.l_kwotaZaplacona);
+            this.p_zaplac.Controls.Add(this.l_kwotaDoZaplaty);
+            this.p_zaplac.Controls.Add(this.l_nazwaWycieczkiZaplac);
+            this.p_zaplac.Controls.Add(this.l_numerRezerwacji);
+            this.p_zaplac.Controls.Add(this.tb_nazwaWycieczkiZaplac);
+            this.p_zaplac.Controls.Add(this.tb_kwotaZaplacona);
+            this.p_zaplac.Controls.Add(this.tb_kwotaDoZaplaty);
+            this.p_zaplac.Controls.Add(this.tb_numerRezerwacji);
+            this.p_zaplac.Location = new System.Drawing.Point(0, 0);
+            this.p_zaplac.Name = "p_zaplac";
+            this.p_zaplac.Size = new System.Drawing.Size(249, 296);
+            this.p_zaplac.TabIndex = 18;
+            this.p_zaplac.Visible = false;
+            // 
+            // l_wotaCalkowita
+            // 
+            this.l_wotaCalkowita.AutoSize = true;
+            this.l_wotaCalkowita.Location = new System.Drawing.Point(11, 73);
+            this.l_wotaCalkowita.Name = "l_wotaCalkowita";
+            this.l_wotaCalkowita.Size = new System.Drawing.Size(87, 13);
+            this.l_wotaCalkowita.TabIndex = 11;
+            this.l_wotaCalkowita.Text = "Kwota całkowita";
+            // 
+            // tb_kwotaCalkowita
+            // 
+            this.tb_kwotaCalkowita.Enabled = false;
+            this.tb_kwotaCalkowita.Location = new System.Drawing.Point(132, 70);
+            this.tb_kwotaCalkowita.Name = "tb_kwotaCalkowita";
+            this.tb_kwotaCalkowita.Size = new System.Drawing.Size(101, 20);
+            this.tb_kwotaCalkowita.TabIndex = 10;
+            // 
+            // b_anlujZaplate
+            // 
+            this.b_anlujZaplate.Location = new System.Drawing.Point(160, 159);
+            this.b_anlujZaplate.Name = "b_anlujZaplate";
+            this.b_anlujZaplate.Size = new System.Drawing.Size(75, 23);
+            this.b_anlujZaplate.TabIndex = 9;
+            this.b_anlujZaplate.Text = "Anuluj";
+            this.b_anlujZaplate.UseVisualStyleBackColor = true;
+            this.b_anlujZaplate.Click += new System.EventHandler(this.b_anlujZaplate_Click);
+            // 
+            // b_zapłaćRezerwacje
+            // 
+            this.b_zapłaćRezerwacje.Location = new System.Drawing.Point(14, 159);
+            this.b_zapłaćRezerwacje.Name = "b_zapłaćRezerwacje";
+            this.b_zapłaćRezerwacje.Size = new System.Drawing.Size(75, 23);
+            this.b_zapłaćRezerwacje.TabIndex = 8;
+            this.b_zapłaćRezerwacje.Text = "Zapłać";
+            this.b_zapłaćRezerwacje.UseVisualStyleBackColor = true;
+            this.b_zapłaćRezerwacje.Click += new System.EventHandler(this.b_zapłaćRezerwacje_Click);
+            // 
+            // l_kwotaZaplacona
+            // 
+            this.l_kwotaZaplacona.AutoSize = true;
+            this.l_kwotaZaplacona.Location = new System.Drawing.Point(11, 125);
+            this.l_kwotaZaplacona.Name = "l_kwotaZaplacona";
+            this.l_kwotaZaplacona.Size = new System.Drawing.Size(88, 13);
+            this.l_kwotaZaplacona.TabIndex = 7;
+            this.l_kwotaZaplacona.Text = "Kwota wpłacana";
+            // 
+            // l_kwotaDoZaplaty
+            // 
+            this.l_kwotaDoZaplaty.AutoSize = true;
+            this.l_kwotaDoZaplaty.Location = new System.Drawing.Point(11, 99);
+            this.l_kwotaDoZaplaty.Name = "l_kwotaDoZaplaty";
+            this.l_kwotaDoZaplaty.Size = new System.Drawing.Size(90, 13);
+            this.l_kwotaDoZaplaty.TabIndex = 6;
+            this.l_kwotaDoZaplaty.Text = "Kwota do zapłaty";
+            // 
+            // l_nazwaWycieczkiZaplac
+            // 
+            this.l_nazwaWycieczkiZaplac.AutoSize = true;
+            this.l_nazwaWycieczkiZaplac.Location = new System.Drawing.Point(11, 47);
+            this.l_nazwaWycieczkiZaplac.Name = "l_nazwaWycieczkiZaplac";
+            this.l_nazwaWycieczkiZaplac.Size = new System.Drawing.Size(89, 13);
+            this.l_nazwaWycieczkiZaplac.TabIndex = 5;
+            this.l_nazwaWycieczkiZaplac.Text = "Nazwa wycieczki";
+            // 
+            // l_numerRezerwacji
+            // 
+            this.l_numerRezerwacji.AutoSize = true;
+            this.l_numerRezerwacji.Location = new System.Drawing.Point(12, 21);
+            this.l_numerRezerwacji.Name = "l_numerRezerwacji";
+            this.l_numerRezerwacji.Size = new System.Drawing.Size(88, 13);
+            this.l_numerRezerwacji.TabIndex = 4;
+            this.l_numerRezerwacji.Text = "Numer rezerwacji";
+            // 
+            // tb_nazwaWycieczkiZaplac
+            // 
+            this.tb_nazwaWycieczkiZaplac.Enabled = false;
+            this.tb_nazwaWycieczkiZaplac.Location = new System.Drawing.Point(132, 44);
+            this.tb_nazwaWycieczkiZaplac.Name = "tb_nazwaWycieczkiZaplac";
+            this.tb_nazwaWycieczkiZaplac.Size = new System.Drawing.Size(101, 20);
+            this.tb_nazwaWycieczkiZaplac.TabIndex = 3;
+            // 
+            // tb_kwotaZaplacona
+            // 
+            this.tb_kwotaZaplacona.Location = new System.Drawing.Point(132, 122);
+            this.tb_kwotaZaplacona.Name = "tb_kwotaZaplacona";
+            this.tb_kwotaZaplacona.Size = new System.Drawing.Size(101, 20);
+            this.tb_kwotaZaplacona.TabIndex = 2;
+            // 
+            // tb_kwotaDoZaplaty
+            // 
+            this.tb_kwotaDoZaplaty.Enabled = false;
+            this.tb_kwotaDoZaplaty.Location = new System.Drawing.Point(132, 96);
+            this.tb_kwotaDoZaplaty.Name = "tb_kwotaDoZaplaty";
+            this.tb_kwotaDoZaplaty.Size = new System.Drawing.Size(102, 20);
+            this.tb_kwotaDoZaplaty.TabIndex = 1;
+            // 
+            // tb_numerRezerwacji
+            // 
+            this.tb_numerRezerwacji.Location = new System.Drawing.Point(132, 18);
+            this.tb_numerRezerwacji.Name = "tb_numerRezerwacji";
+            this.tb_numerRezerwacji.Size = new System.Drawing.Size(103, 20);
+            this.tb_numerRezerwacji.TabIndex = 0;
+            this.tb_numerRezerwacji.Leave += new System.EventHandler(this.tb_numerRezerwacji_Leave);
+            // 
             // RezerwacjaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(248, 295);
-            this.Controls.Add(this.l_pesel);
-            this.Controls.Add(this.tb_pesel);
-            this.Controls.Add(this.l_miejscowosc);
-            this.Controls.Add(this.tb_miejscowosc);
-            this.Controls.Add(this.b_rezerwacja_anuluj);
-            this.Controls.Add(this.b_rezerwacja_zapisz);
-            this.Controls.Add(this.l_zaliczka);
-            this.Controls.Add(this.l_liczba_osob);
-            this.Controls.Add(this.l_adres);
-            this.Controls.Add(this.l_nazwisko);
-            this.Controls.Add(this.l_imie);
-            this.Controls.Add(this.tb_adres);
-            this.Controls.Add(this.tb_zaliczka);
-            this.Controls.Add(this.tb_liczba_osob);
-            this.Controls.Add(this.tb_nazwisko);
-            this.Controls.Add(this.l_nr_rezerwacji);
-            this.Controls.Add(this.tb_imie);
+            this.Controls.Add(this.p_zaplac);
+            this.Controls.Add(this.p_rezerwuj);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Rezerwacja";
+            this.Name = "RezerwacjaView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Rezerwacja";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Rezerwacja_FormClosing);
+            this.p_rezerwuj.ResumeLayout(false);
+            this.p_rezerwuj.PerformLayout();
+            this.p_zaplac.ResumeLayout(false);
+            this.p_zaplac.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.TextBox tb_imie;
-        private System.Windows.Forms.Label l_nr_rezerwacji;
         private System.Windows.Forms.TextBox tb_nazwisko;
         private System.Windows.Forms.TextBox tb_liczba_osob;
         private System.Windows.Forms.TextBox tb_zaliczka;
@@ -241,5 +381,19 @@
         private System.Windows.Forms.TextBox tb_miejscowosc;
         private System.Windows.Forms.TextBox tb_pesel;
         private System.Windows.Forms.Label l_pesel;
+        private System.Windows.Forms.Panel p_rezerwuj;
+        private System.Windows.Forms.Panel p_zaplac;
+        private System.Windows.Forms.Button b_anlujZaplate;
+        private System.Windows.Forms.Button b_zapłaćRezerwacje;
+        private System.Windows.Forms.Label l_kwotaZaplacona;
+        private System.Windows.Forms.Label l_kwotaDoZaplaty;
+        private System.Windows.Forms.Label l_nazwaWycieczkiZaplac;
+        private System.Windows.Forms.Label l_numerRezerwacji;
+        private System.Windows.Forms.TextBox tb_nazwaWycieczkiZaplac;
+        private System.Windows.Forms.TextBox tb_kwotaZaplacona;
+        private System.Windows.Forms.TextBox tb_kwotaDoZaplaty;
+        private System.Windows.Forms.TextBox tb_numerRezerwacji;
+        private System.Windows.Forms.Label l_wotaCalkowita;
+        private System.Windows.Forms.TextBox tb_kwotaCalkowita;
     }
 }

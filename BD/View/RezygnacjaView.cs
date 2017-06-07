@@ -126,6 +126,6 @@ namespace BD.View
             {
                 MessageBox.Show("Wprowadź prawidłowy numer rezerwacji.", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }    
     }
 }

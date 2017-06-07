@@ -21,6 +21,8 @@ namespace BD.View
         public RezerwacjaView()
         {
             InitializeComponent();
+            this.p_rezerwuj.Visible = false;
+            this.p_zaplac.Visible = true;
         }
 
         /// <summary>
@@ -31,6 +33,8 @@ namespace BD.View
         {
             _idWycieczki = idWycieczki;
             InitializeComponent();
+            this.p_zaplac.Visible = false;
+            this.p_rezerwuj.Visible = true;
         }
         /// <summary>
         /// Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
@@ -129,6 +133,110 @@ namespace BD.View
                 MessageBox.Show("Napotkano problem podczas dodawania nowej rezerwacji. Błąd:\n" + exception.Message.ToString() , "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-         }    
+         }
+
+        private void b_anlujZaplate_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void b_zapłaćRezerwacje_Click(object sender, EventArgs e)
+        {
+            bazaEntities db = new bazaEntities();
+            Rezerwacja rez = new Rezerwacja();
+            Uczestnictwo uczest = new Uczestnictwo();
+
+            try
+            {
+                int numer = int.Parse(tb_numerRezerwacji.Text);
+                rez = (from rezerwacja in db.Rezerwacja
+                           where rezerwacja.numer_rezerwacji == numer
+                           select rezerwacja).FirstOrDefault();
+
+                uczest = (from uczestnictwo in db.Uczestnictwo
+                              where uczestnictwo.numer_rezerwacji == numer
+                              select uczestnictwo).FirstOrDefault();
+
+                tb_nazwaWycieczkiZaplac.Text = rez.Wycieczka.nazwa;
+                tb_kwotaCalkowita.Text = (uczest.cena_rezerwacji).ToString();
+                tb_kwotaDoZaplaty.Text = (uczest.cena_rezerwacji - rez.zaliczka).ToString();
+
+                try
+                {
+                    decimal kwota = decimal.Parse(tb_kwotaZaplacona.Text);
+                    if ((kwota + rez.zaliczka) == uczest.cena_rezerwacji)
+                    {
+                        rez.zaliczka += kwota;
+                        rez.stan = true;
+                        MessageBox.Show("Wycieczka została w całości zapłacona.", "Zapłacono", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+                    else if((kwota + rez.zaliczka) > uczest.cena_rezerwacji)
+                    {
+                        MessageBox.Show("Podano za wysoką kwotę.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if((kwota + rez.zaliczka) < uczest.cena_rezerwacji)
+                    {
+                        rez.zaliczka += kwota;
+                        rez.stan = false;
+                        MessageBox.Show("Zapłacono: " + rez.zaliczka.ToString() + 
+                            "\nDo zapłaty pozostało: " + (uczest.cena_rezerwacji - rez.zaliczka).ToString(), 
+                            "Do zapłaty", MessageBoxButtons.OK, MessageBoxIcon.Information);                        
+                    }
+
+                    db.SaveChanges();
+                    this.Dispose();
+                }
+                catch (FormatException exception)
+                {
+                    MessageBox.Show("Podano nieprawidłową kwotę.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (FormatException exception)
+            {
+                MessageBox.Show("Podano nieprawidłowy numer rezerwacji.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }         
+        }
+
+        private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
+        {
+            bazaEntities db = new bazaEntities();
+            int numer;
+ 
+            try
+            {
+                numer = int.Parse(tb_numerRezerwacji.Text);
+
+                var rez = (from rezerwacja in db.Rezerwacja
+                           where rezerwacja.numer_rezerwacji == numer
+                           select rezerwacja).FirstOrDefault();
+
+                var uczest = (from uczestnictwo in db.Uczestnictwo
+                              where uczestnictwo.numer_rezerwacji == numer
+                              select uczestnictwo).FirstOrDefault();
+
+                tb_nazwaWycieczkiZaplac.Text = rez.Wycieczka.nazwa;
+                tb_kwotaCalkowita.Text = (uczest.cena_rezerwacji).ToString();
+                tb_kwotaDoZaplaty.Text = (uczest.cena_rezerwacji - rez.zaliczka).ToString();
+
+                if((uczest.cena_rezerwacji - rez.zaliczka) <= 0)
+                {
+                    tb_kwotaZaplacona.Enabled = false;
+                }
+                else
+                {
+                    tb_kwotaZaplacona.Enabled = true;
+
+                }
+            }
+            catch(FormatException exception)
+            {
+                MessageBox.Show("Podano nieprawidłowy numer rezerwacji.","Błąd",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+
+
+
+        }
     }
 }
