@@ -21,6 +21,7 @@ namespace BD.View
         public OpiniaView()
         {
             InitializeComponent();
+            cb_ocena.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -68,43 +69,65 @@ namespace BD.View
         {
             bazaEntities db = new bazaEntities();
 
-            int numer = int.Parse(tb_numerRezerwacji.Text);
-
-            var query = (from uczestnictwo in db.Uczestnictwo
-                         where uczestnictwo.numer_rezerwacji == numer
-                         select uczestnictwo.id_uczestnictwo).FirstOrDefault();
-
-            var opinia = new Opinia
-            {
-                opis = tb_opinia.Text,
-                ocena = cb_ocena.SelectedIndex + 1,
-                id_uczestnictwo = query
-            };
-            db.Opinia.Add(opinia);
-            
             try
             {
+                int numer = int.Parse(tb_numerRezerwacji.Text);
+
+                var query = (from uczestnictwo in db.Uczestnictwo
+                             where uczestnictwo.numer_rezerwacji == numer
+                             select uczestnictwo.id_uczestnictwo).FirstOrDefault();
+
+                var opinia = new Opinia
+                {
+                    opis = tb_opinia.Text,
+                    ocena = cb_ocena.SelectedIndex + 1,
+                    id_uczestnictwo = query
+                };
+                db.Opinia.Add(opinia);
+
                 db.SaveChanges();
                 MessageBox.Show("Opinia została dodana prawidłowo.", "Dodano opinię", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Dispose();
             }
-            catch(Exception exception)
+            catch (FormatException exception)
+            {
+                MessageBox.Show("Wystąpił problem podczas dodawania opinii. Błąd:\n" + exception.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception exception)
             {
                 MessageBox.Show("Wystąpił problem podczas dodawania opinii. Błąd:\n" + exception.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void cb_ocena_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
 
-                bazaEntities db = new bazaEntities();
+            bazaEntities db = new bazaEntities();
 
+            try
+            {
                 int numer = int.Parse(tb_numerRezerwacji.Text);
                 var query = (from uczestnictwo in db.Uczestnictwo
                              where uczestnictwo.numer_rezerwacji == numer
                              select uczestnictwo.Rezerwacja.Wycieczka.nazwa).FirstOrDefault();
 
-                tb_nazwaWycieczki.Text = query;
+                if(query == null)
+                {
+                    MessageBox.Show("Podaj poprawny numer rezerwacji. Taka rezerwacja nie isntnieje.", "Błeny numer rezerwacji.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    tb_nazwaWycieczki.Text = "Brak rezerwacji";
+                    this.b_zapisz.Enabled = false;
+                }
+                else
+                {
+                    tb_nazwaWycieczki.Text = query;
+                    this.b_zapisz.Enabled = true;
+                }
+            }
+            catch (FormatException exception)
+            {
+                MessageBox.Show("Podaj poprawny numer rezerwacji.","Błeny numer rezerwacji.",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
     }
 }

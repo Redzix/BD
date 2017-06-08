@@ -30,6 +30,7 @@
         {
             this.tc_reklamacje = new System.Windows.Forms.TabControl();
             this.tp_dodaj_reklamacje = new System.Windows.Forms.TabPage();
+            this.b_sprawdzPoprawnosc = new System.Windows.Forms.Button();
             this.tb_nazwaWycieczki = new System.Windows.Forms.TextBox();
             this.tb_numerRezerwacji = new System.Windows.Forms.TextBox();
             this.l_numerRezerwacji = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@
             this.rtb_reklamacja = new System.Windows.Forms.RichTextBox();
             this.lv_reklamacje = new System.Windows.Forms.ListView();
             this.NumerReklamacji = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.b_sprawdzPoprawnosc = new System.Windows.Forms.Button();
             this.tc_reklamacje.SuspendLayout();
             this.tp_dodaj_reklamacje.SuspendLayout();
             this.tp_stan_reklamacji.SuspendLayout();
@@ -78,6 +78,16 @@
             this.tp_dodaj_reklamacje.Text = "Dodaj reklamację";
             this.tp_dodaj_reklamacje.UseVisualStyleBackColor = true;
             // 
+            // b_sprawdzPoprawnosc
+            // 
+            this.b_sprawdzPoprawnosc.Location = new System.Drawing.Point(251, 6);
+            this.b_sprawdzPoprawnosc.Name = "b_sprawdzPoprawnosc";
+            this.b_sprawdzPoprawnosc.Size = new System.Drawing.Size(105, 46);
+            this.b_sprawdzPoprawnosc.TabIndex = 24;
+            this.b_sprawdzPoprawnosc.Text = "Sprawdź poprawność";
+            this.b_sprawdzPoprawnosc.UseVisualStyleBackColor = true;
+            this.b_sprawdzPoprawnosc.Click += new System.EventHandler(this.b_sprawdzPoprawnosc_Click);
+            // 
             // tb_nazwaWycieczki
             // 
             this.tb_nazwaWycieczki.Enabled = false;
@@ -104,6 +114,7 @@
             // 
             // b_zapisz
             // 
+            this.b_zapisz.Enabled = false;
             this.b_zapisz.Location = new System.Drawing.Point(124, 183);
             this.b_zapisz.Name = "b_zapisz";
             this.b_zapisz.Size = new System.Drawing.Size(75, 23);
@@ -184,16 +195,6 @@
             // 
             this.NumerReklamacji.Text = "Numer reklamacji";
             this.NumerReklamacji.Width = 110;
-            // 
-            // b_sprawdzPoprawnosc
-            // 
-            this.b_sprawdzPoprawnosc.Location = new System.Drawing.Point(251, 6);
-            this.b_sprawdzPoprawnosc.Name = "b_sprawdzPoprawnosc";
-            this.b_sprawdzPoprawnosc.Size = new System.Drawing.Size(105, 46);
-            this.b_sprawdzPoprawnosc.TabIndex = 24;
-            this.b_sprawdzPoprawnosc.Text = "Sprawdź poprawność";
-            this.b_sprawdzPoprawnosc.UseVisualStyleBackColor = true;
-            this.b_sprawdzPoprawnosc.Click += new System.EventHandler(this.b_sprawdzPoprawnosc_Click);
             // 
             // ReklamacjaView
             // 

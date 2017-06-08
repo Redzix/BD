@@ -156,40 +156,59 @@ namespace BD.View
                             wartoscPromocji = (katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0,
                             cenaCalkowita = katalog.Cennik.cena - ((katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0)
                         };
-            dgv_katalog.DataSource = query.ToList();
-
+            if (query == null)
+            {
+                MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.b_katalog_rezerwuj.Enabled = false;
+            }
+            else
+            {
+                dgv_katalog.DataSource = query.ToList();
+                this.b_katalog_rezerwuj.Enabled = true;
+          }
         }
 
         private void dgv_katalog_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Podświetlenie wybranego wiersza
             ((DataGridView)sender).Rows[e.RowIndex].Selected = true;
+            try
+            {
+                //Pobranie z tabeli oraz z bazy danych odpowiednich wartości do wyświetlenia.
+                int.TryParse(((DataGridView)sender)[0, e.RowIndex].FormattedValue.ToString(), out _idWycieczki);
 
-            //Pobranie z tabeli oraz z bazy danych odpowiednich wartości do wyświetlenia.
-            int.TryParse(((DataGridView)sender)[0, e.RowIndex].FormattedValue.ToString(), out _idWycieczki);
+                bazaEntities db = new bazaEntities();
 
-            bazaEntities db = new bazaEntities();
+                var query = (from katalog in db.Katalog
+                             where katalog.id_wycieczki == _idWycieczki
+                             select new
+                             {
+                                 wycieczka = katalog.Wycieczka.nazwa,
+                                 dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
+                                 dataPowrotu = katalog.Wycieczka.data_wyjazdu,
+                                 opisWycieczki = katalog.Wycieczka.opis,
+                                 miejsceDoceloweAdres = katalog.Miejsce.adres,
+                                 miejsceDoceloweMiejscowosc = katalog.Miejsce.miejscowosc
+                             }).FirstOrDefault();
 
-            var query = (from katalog in db.Katalog
-                         where katalog.id_wycieczki == _idWycieczki 
-                         select new {
-                            wycieczka = katalog.Wycieczka.nazwa,
-                            dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
-                            dataPowrotu = katalog.Wycieczka.data_wyjazdu,
-                            opisWycieczki = katalog.Wycieczka.opis,
-                            miejsceDoceloweAdres = katalog.Miejsce.adres,
-                            miejsceDoceloweMiejscowosc = katalog.Miejsce.miejscowosc
-                         }).FirstOrDefault();
+                // Dodanie wartości parametrów do opisu znajdującego się w texboxie
+                rtb_wycieczka.Text =
+                    "Nazwa: " + query.wycieczka +
+                    "\nData wyjazdu: " + query.dataOdjazdu +
+                    "\nData powrotu: " + query.dataPowrotu +
+                    "\nOpis: " + query.opisWycieczki +
+                    "\n\nAdres miejsca: " + query.miejsceDoceloweAdres +
+                    "\nMiejscowość: " + query.miejsceDoceloweMiejscowosc;
 
-            // Dodanie wartości parametrów do opisu znajdującego się w texboxie
+            }catch(FormatException exception)
+            {
+                MessageBox.Show("Wystąpił problem podczas konwersji id wycieczki","Błąd konwersji", MessageBoxButtons.OK,MessageBoxIcon.Error );
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Wystąpił problem podczas pobierania danych.", "Błąd pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            rtb_wycieczka.Text =
-                "Nazwa: " + query.wycieczka +
-                "\nData wyjazdu: " + query.dataOdjazdu +
-                "\nData powrotu: " + query.dataPowrotu +
-                "\nOpis: " + query.opisWycieczki +
-                "\n\nAdres miejsca: " + query.miejsceDoceloweAdres +
-                "\nMiejscowość: " + query.miejsceDoceloweMiejscowosc;
         }
 
         private void b_zaplac_Click(object sender, EventArgs e)

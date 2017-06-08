@@ -42,6 +42,7 @@
             // 
             // b_zapisz
             // 
+            this.b_zapisz.Enabled = false;
             this.b_zapisz.Location = new System.Drawing.Point(103, 243);
             this.b_zapisz.Name = "b_zapisz";
             this.b_zapisz.Size = new System.Drawing.Size(75, 23);
@@ -109,7 +110,6 @@
             this.cb_ocena.Name = "cb_ocena";
             this.cb_ocena.Size = new System.Drawing.Size(37, 21);
             this.cb_ocena.TabIndex = 24;
-            this.cb_ocena.SelectedIndexChanged += new System.EventHandler(this.cb_ocena_SelectedIndexChanged);
             // 
             // l_numerRezerwacji
             // 
@@ -126,6 +126,7 @@
             this.tb_numerRezerwacji.Name = "tb_numerRezerwacji";
             this.tb_numerRezerwacji.Size = new System.Drawing.Size(130, 20);
             this.tb_numerRezerwacji.TabIndex = 26;
+            this.tb_numerRezerwacji.Leave += new System.EventHandler(this.tb_numerRezerwacji_Leave);
             // 
             // tb_nazwaWycieczki
             // 

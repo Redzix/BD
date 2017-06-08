@@ -69,28 +69,31 @@ namespace BD.View
         {
             bazaEntities db = new bazaEntities();
 
-            int numer = int.Parse(tb_numerRezerwacji.Text);
-            var uczestnictwo = (from uc in db.Uczestnictwo
-                                where uc.numer_rezerwacji == numer
-                                select uc).FirstOrDefault();
-
-            var reklamacja = new Reklamacja
-            {
-                opis = tb_opis_reklamacji.Text,
-                stan = false,
-                Kierownik_pesel = "brak",
-                id_uczestnictwo = uczestnictwo.id_uczestnictwo
-            };
-            db.Reklamacja.Add(reklamacja);
-
             try
-            {
+            { 
+                int numer = int.Parse(tb_numerRezerwacji.Text);
+                var uczestnictwo = (from uc in db.Uczestnictwo
+                                    where uc.numer_rezerwacji == numer
+                                    select uc).FirstOrDefault();
+
+                var reklamacja = new Reklamacja
+                {
+                    opis = tb_opis_reklamacji.Text,
+                    stan = false,
+                    Kierownik_pesel = "brak",
+                    id_uczestnictwo = uczestnictwo.id_uczestnictwo
+                };
+                db.Reklamacja.Add(reklamacja);
+
                 db.SaveChanges();
                 MessageBox.Show("Prawidłowo dodano reklamację.", "Dodano reklamację.", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 tb_nazwaWycieczki.Text = "";
                 tb_opis_reklamacji.Text = "";
                 tb_numerRezerwacji.Text = "";
-
+            }
+            catch (FormatException exception)
+            {
+                MessageBox.Show("wprowadzono nieprawidłowy numer rezerwacji. Błąd:\n" + exception.Message, "Błąd podczas dodawania reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception exception)
             {
@@ -108,11 +111,18 @@ namespace BD.View
                               orderby reklamacja.numer_reklamacji
                               select reklamacja.numer_reklamacji;
 
-                foreach(var rek in pobierz)
+                if (pobierz == null)
                 {
-                    ListViewItem reklamacja = new ListViewItem(rek.ToString());
-                    reklamacja.Tag = rek.ToString();
-                    lv_reklamacje.Items.Add(reklamacja);
+                    MessageBox.Show("Wystąpił bład podczas pobierania danych.","Błąd pobierania danych",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    lv_reklamacje.Items.Add("Brak reklamacji");
+                }else
+                {
+                    foreach (var rek in pobierz)
+                    {
+                        ListViewItem reklamacja = new ListViewItem(rek.ToString());
+                        reklamacja.Tag = rek.ToString();
+                        lv_reklamacje.Items.Add(reklamacja);
+                    }
                 }
             }
         }
@@ -160,12 +170,15 @@ namespace BD.View
                 if (query == null)
                 {
                     tb_nazwaWycieczki.Text = "Błędna rezerwacja";
+                    this.b_zapisz.Enabled = false;
                 }
                 else
                 {
                     tb_nazwaWycieczki.Text = query;
+                    this.b_zapisz.Enabled = true;
                 }
-            }catch(FormatException exception)
+            }
+            catch(FormatException exception)
             {
                 MessageBox.Show("Wprowadź prawidłowy numer rezerwacji.","Błąd podczas pobierania danych",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }

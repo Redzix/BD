@@ -45,6 +45,7 @@
             // 
             // b_zapisz
             // 
+            this.b_zapisz.Enabled = false;
             this.b_zapisz.Location = new System.Drawing.Point(122, 156);
             this.b_zapisz.Name = "b_zapisz";
             this.b_zapisz.Size = new System.Drawing.Size(75, 23);
@@ -154,7 +155,7 @@
             this.b_oblicz.TabIndex = 32;
             this.b_oblicz.Text = "Oblicz";
             this.b_oblicz.UseVisualStyleBackColor = true;
-            this.b_oblicz.Click += new System.EventHandler(this.b_pobierz_Click);
+            this.b_oblicz.Click += new System.EventHandler(this.b_oblicz_Click);
             // 
             // RezygnacjaView
             // 

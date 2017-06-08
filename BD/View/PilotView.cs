@@ -153,8 +153,15 @@ namespace BD.View
                             pojazd = wycieczka.Pojazd_numer_rejestracyjny,
                             kierowca = wycieczka.Kierowca.imie + " " + wycieczka.Kierowca.nazwisko
                         };
-            dgv_tabelaPilot.DataSource = query.ToList();
-              
+
+            if (query == null)
+            {
+                MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                dgv_tabelaPilot.DataSource = query.ToList();
+            }           
         }
     }
 }

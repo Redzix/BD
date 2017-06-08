@@ -106,6 +106,7 @@
             // 
             // b_katalog_rezerwuj
             // 
+            this.b_katalog_rezerwuj.Enabled = false;
             this.b_katalog_rezerwuj.Location = new System.Drawing.Point(868, 277);
             this.b_katalog_rezerwuj.Name = "b_katalog_rezerwuj";
             this.b_katalog_rezerwuj.Size = new System.Drawing.Size(75, 23);
@@ -190,6 +191,7 @@
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "KlientView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Klient";

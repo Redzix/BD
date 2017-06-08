@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.l_zalgowany_jako = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.rb_sprawny = new System.Windows.Forms.RadioButton();
             this.rb_awaria = new System.Windows.Forms.RadioButton();
             this.gb_stan_pojazdu = new System.Windows.Forms.GroupBox();
@@ -55,18 +54,10 @@
             this.l_zalgowany_jako.TabIndex = 1;
             this.l_zalgowany_jako.Text = "Zalogowany jako";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(178, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Pojazdy";
-            // 
             // rb_sprawny
             // 
             this.rb_sprawny.AutoSize = true;
+            this.rb_sprawny.Enabled = false;
             this.rb_sprawny.Location = new System.Drawing.Point(16, 44);
             this.rb_sprawny.Name = "rb_sprawny";
             this.rb_sprawny.Size = new System.Drawing.Size(66, 17);
@@ -78,6 +69,7 @@
             // rb_awaria
             // 
             this.rb_awaria.AutoSize = true;
+            this.rb_awaria.Enabled = false;
             this.rb_awaria.Location = new System.Drawing.Point(127, 44);
             this.rb_awaria.Name = "rb_awaria";
             this.rb_awaria.Size = new System.Drawing.Size(57, 17);
@@ -99,6 +91,7 @@
             // 
             // b_kierowca_zapisz
             // 
+            this.b_kierowca_zapisz.Enabled = false;
             this.b_kierowca_zapisz.Location = new System.Drawing.Point(432, 161);
             this.b_kierowca_zapisz.Name = "b_kierowca_zapisz";
             this.b_kierowca_zapisz.Size = new System.Drawing.Size(75, 23);
@@ -126,13 +119,14 @@
             this.Pojemnosc,
             this.Stan});
             this.lv_pojazdy.GridLines = true;
-            this.lv_pojazdy.Location = new System.Drawing.Point(8, 33);
+            this.lv_pojazdy.Location = new System.Drawing.Point(8, 3);
             this.lv_pojazdy.MultiSelect = false;
             this.lv_pojazdy.Name = "lv_pojazdy";
-            this.lv_pojazdy.Size = new System.Drawing.Size(386, 203);
+            this.lv_pojazdy.Size = new System.Drawing.Size(386, 233);
             this.lv_pojazdy.TabIndex = 1;
             this.lv_pojazdy.UseCompatibleStateImageBehavior = false;
             this.lv_pojazdy.View = System.Windows.Forms.View.Details;
+            this.lv_pojazdy.SelectedIndexChanged += new System.EventHandler(this.lv_pojazdy_SelectedIndexChanged);
             // 
             // Nr_rejestracyjny
             // 
@@ -188,7 +182,6 @@
             this.Controls.Add(this.b_kierowca_wyjdz);
             this.Controls.Add(this.b_kierowca_zapisz);
             this.Controls.Add(this.gb_stan_pojazdu);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.l_zalgowany_jako);
             this.Name = "KierowcaView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -205,7 +198,6 @@
         #endregion
 
         private System.Windows.Forms.Label l_zalgowany_jako;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton rb_sprawny;
         private System.Windows.Forms.RadioButton rb_awaria;
         private System.Windows.Forms.GroupBox gb_stan_pojazdu;
