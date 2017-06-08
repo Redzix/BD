@@ -9,7 +9,6 @@ C:\Users\preze\Source\Repos\BD\BD\bin\Release\EntityFramework.SqlServer.xml
 C:\Users\preze\Source\Repos\BD\BD\bin\Release\itextsharp.xml
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.KierowcaView.resources
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.KierownikView.resources
-C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.Klient.resources
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.OpiniaView.resources
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.PanelPracowniczyView.resources
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.PilotView.resources
@@ -23,3 +22,4 @@ C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.csproj.GenerateResource.Cache
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.exe
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.pdb
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.csprojResolveAssemblyReference.cache
+C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.KlientView.resources

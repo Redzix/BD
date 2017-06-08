@@ -48,8 +48,8 @@
             this.l_kierowca = new System.Windows.Forms.Label();
             this.cb_pojazd = new System.Windows.Forms.ComboBox();
             this.l_pojazd = new System.Windows.Forms.Label();
-            this.tb_data_przyjazdu = new System.Windows.Forms.DateTimePicker();
-            this.tb_data_odjazdu = new System.Windows.Forms.DateTimePicker();
+            this.tb_data_wyjazdu = new System.Windows.Forms.DateTimePicker();
+            this.tb_data_powrotu = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // l_nazwa
@@ -144,18 +144,18 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 87);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 12;
-            this.label1.Text = "Miejscowość wyjazdu";
+            this.label1.Text = "Miejsce odjazdu";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(11, 113);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(117, 13);
+            this.label2.Size = new System.Drawing.Size(90, 13);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Miejscowość docelowa";
+            this.label2.Text = "Miejsce przyjazdu";
             // 
             // cb_odjazd
             // 
@@ -224,32 +224,32 @@
             this.l_pojazd.TabIndex = 21;
             this.l_pojazd.Text = "Pojazd";
             // 
-            // tb_data_przyjazdu
+            // tb_data_wyjazdu
             // 
-            this.tb_data_przyjazdu.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.tb_data_przyjazdu.Location = new System.Drawing.Point(136, 35);
-            this.tb_data_przyjazdu.Name = "tb_data_przyjazdu";
-            this.tb_data_przyjazdu.Size = new System.Drawing.Size(159, 20);
-            this.tb_data_przyjazdu.TabIndex = 23;
-            this.tb_data_przyjazdu.Value = new System.DateTime(2017, 6, 2, 21, 4, 17, 0);
-            this.tb_data_przyjazdu.ValueChanged += new System.EventHandler(this.tb_data_przyjazdu_ValueChanged);
+            this.tb_data_wyjazdu.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.tb_data_wyjazdu.Location = new System.Drawing.Point(136, 35);
+            this.tb_data_wyjazdu.Name = "tb_data_wyjazdu";
+            this.tb_data_wyjazdu.Size = new System.Drawing.Size(159, 20);
+            this.tb_data_wyjazdu.TabIndex = 23;
+            this.tb_data_wyjazdu.Value = new System.DateTime(2017, 6, 2, 21, 4, 17, 0);
+            this.tb_data_wyjazdu.ValueChanged += new System.EventHandler(this.tb_data_wyjazdu_ValueChanged);
             // 
-            // tb_data_odjazdu
+            // tb_data_powrotu
             // 
-            this.tb_data_odjazdu.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.tb_data_odjazdu.Location = new System.Drawing.Point(136, 61);
-            this.tb_data_odjazdu.Name = "tb_data_odjazdu";
-            this.tb_data_odjazdu.Size = new System.Drawing.Size(159, 20);
-            this.tb_data_odjazdu.TabIndex = 24;
-            this.tb_data_odjazdu.Value = new System.DateTime(2017, 6, 2, 21, 4, 17, 0);
+            this.tb_data_powrotu.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.tb_data_powrotu.Location = new System.Drawing.Point(136, 61);
+            this.tb_data_powrotu.Name = "tb_data_powrotu";
+            this.tb_data_powrotu.Size = new System.Drawing.Size(159, 20);
+            this.tb_data_powrotu.TabIndex = 24;
+            this.tb_data_powrotu.Value = new System.DateTime(2017, 6, 2, 21, 4, 17, 0);
             // 
             // WycieczkaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(311, 379);
-            this.Controls.Add(this.tb_data_odjazdu);
-            this.Controls.Add(this.tb_data_przyjazdu);
+            this.Controls.Add(this.tb_data_powrotu);
+            this.Controls.Add(this.tb_data_wyjazdu);
             this.Controls.Add(this.cb_pojazd);
             this.Controls.Add(this.l_pojazd);
             this.Controls.Add(this.cb_pilot);
@@ -271,11 +271,10 @@
             this.Controls.Add(this.l_data_wyjazdu);
             this.Controls.Add(this.l_nazwa);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Wycieczka";
+            this.Name = "WycieczkaView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Wycieczka";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Wycieczka_FormClosing);
-            this.Load += new System.EventHandler(this.Wycieczka_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,7 +302,7 @@
         private System.Windows.Forms.Label l_kierowca;
         private System.Windows.Forms.ComboBox cb_pojazd;
         private System.Windows.Forms.Label l_pojazd;
-        private System.Windows.Forms.DateTimePicker tb_data_przyjazdu;
-        private System.Windows.Forms.DateTimePicker tb_data_odjazdu;
+        private System.Windows.Forms.DateTimePicker tb_data_wyjazdu;
+        private System.Windows.Forms.DateTimePicker tb_data_powrotu;
     }
 }
