@@ -35,23 +35,24 @@ namespace BD.View
         public WycieczkaView(int opcja, int idWycieczki)
         {
             InitializeComponent();
-
+            this.Wycieczka_Load();
             //Data odjazdu nie moze byc taka sama jak data przyjazdu
-            tb_data_odjazdu.Value = tb_data_odjazdu.Value.AddDays(1);
+            tb_data_wyjazdu.Value = DateTime.Now;
+            tb_data_powrotu.Value = tb_data_powrotu.Value.AddDays(1);
             if (opcja == 0)
             {
                 tb_nazwa.Enabled = false;
-                tb_data_odjazdu.Enabled = false;
-                tb_data_przyjazdu.Enabled = false;
+                tb_data_powrotu.Enabled = false;
+                tb_data_wyjazdu.Enabled = false;
                 cb_docelowa.Enabled = false;
-                this.wypelnijDoEdycji(idWycieczki);
                 _opcja = 0;
+                this.wypelnijDoEdycji(idWycieczki);
             }
             else
             {
                 tb_nazwa.Enabled = true;
-                tb_data_odjazdu.Enabled = true;
-                tb_data_przyjazdu.Enabled = true;
+                tb_data_powrotu.Enabled = true;
+                tb_data_wyjazdu.Enabled = true;
                 cb_docelowa.Enabled = true;
                 _opcja = 1;
             }
@@ -70,23 +71,38 @@ namespace BD.View
                             miejsce_z = katalog.Miejsce,
                             miejsce_do = katalog.Miejsce1
                         }).FirstOrDefault();
-            var selectedItem = (from x in this.cb_odjazd.Items.OfType<KeyValuePair<string, string>>()
-                               where x.Key.Equals(query.miejsce_z.id_miejsca.ToString())
-                               select x.Key).FirstOrDefault();
+            Console.WriteLine(query.katalog.id_miejsca_odjazdu + " " + query.katalog.id_miejsca_przyjazdu);
+            var docelowa = (from x in this.cb_odjazd.Items.OfType<KeyValuePair<string, string>>()
+                               where x.Key.Equals(query.katalog.id_miejsca_odjazdu.ToString())
+                               select x).FirstOrDefault();
+            var odjazd = (from x in this.cb_docelowa.Items.OfType<KeyValuePair<string, string>>()
+                          where x.Key.Equals(query.katalog.id_miejsca_przyjazdu.ToString())
+                          select x).FirstOrDefault();
+            var kierowca = (from x in this.cb_kierowca.Items.OfType<KeyValuePair<string, string>>()
+                            where x.Key.Equals(query.wycieczka.Kierowca_pesel)
+                            select x).FirstOrDefault();
+            var pilot = (from x in this.cb_pilot.Items.OfType<KeyValuePair<string, string>>()
+                            where x.Key.Equals(query.wycieczka.Pilot_pesel)
+                            select x).FirstOrDefault();
+            var pojazd = (from x in this.cb_pojazd.Items.OfType<KeyValuePair<string, string>>()
+                            where x.Key.Equals(query.wycieczka.Pojazd_numer_rejestracyjny)
+                            select x).FirstOrDefault();
             try
             {
-                //var index = selectedItem.Where(x => x.key == query.miejsce_z.id_miejsca).Select(x => x.key).FirstOrDefault();
-               // cb_odjazd.SelectedIndex = int.Parse(selectedItem);
-                cb_odjazd.SelectedItem = query.miejsce_z.miejscowosc + ", " + query.miejsce_z.adres;
+                cb_odjazd.SelectedItem = odjazd;
+                cb_docelowa.SelectedItem = docelowa;
+                cb_kierowca.SelectedItem = kierowca;
+                cb_pilot.SelectedItem = pilot;
+                cb_pojazd.SelectedItem = pojazd;
+                tb_data_powrotu.Value = (DateTime)query.wycieczka.data_powrotu.Value;
+                tb_data_wyjazdu.Value = (DateTime)query.wycieczka.data_wyjazdu.Value;
+                tb_nazwa.Text = query.wycieczka.nazwa;
+                tb_opis.Text = query.wycieczka.opis;
+                tb_cena.Text = query.cennik.cena.Value.ToString();
             } catch
             {
                 Console.WriteLine("error");
             }
-            tb_data_odjazdu.Value = query.wycieczka.data_wyjazdu.Value;
-            tb_data_przyjazdu.Value = query.wycieczka.data_powrotu.Value;
-            tb_nazwa.Text = query.wycieczka.nazwa;
-            tb_opis.Text = query.wycieczka.opis;
-            //var index = items.Where(x => x. x.key == query.miejsce_z.id_miejsca).Select(x => x.key);
         }
 
         private void b_anuluj_Click(object sender, EventArgs e)
@@ -122,7 +138,7 @@ namespace BD.View
             }
         }
 
-        private void Wycieczka_Load(object sender, EventArgs e)
+        private void Wycieczka_Load()
         {
             bazaEntities db = new bazaEntities();
             var miejscowosci = from m in db.Miejsce orderby m.miejscowosc select m;
@@ -181,7 +197,7 @@ namespace BD.View
         {
             if (_opcja == 1)
             {
-                if (tb_data_przyjazdu.Value > tb_data_odjazdu.Value)
+                if (tb_data_wyjazdu.Value > tb_data_powrotu.Value)
                 {
                     MessageBox.Show("Wybrano błędne daty. Data powrotu nie może być późniejsza niż data odjazdu.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -199,8 +215,8 @@ namespace BD.View
                         var nowaWycieczka = new Wycieczka
                         {
                             nazwa = tb_nazwa.Text,
-                            data_powrotu = tb_data_przyjazdu.Value,
-                            data_wyjazdu = tb_data_odjazdu.Value,
+                            data_powrotu = tb_data_powrotu.Value,
+                            data_wyjazdu = tb_data_wyjazdu.Value,
                             opis = tb_opis.Text,
                             Pilot_pesel = pilotPesel,
                             Kierowca_pesel = kierowcaPesel,
@@ -209,8 +225,8 @@ namespace BD.View
                         var nowyCennik = new Cennik
                         {
                             cena = decimal.Parse(tb_cena.Text),
-                            okres_od=tb_data_odjazdu.Value,
-                            okres_do=tb_data_przyjazdu.Value
+                            okres_od = tb_data_powrotu.Value,
+                            okres_do = tb_data_wyjazdu.Value
 
                         };
                         var nowyKatalog = new Katalog
@@ -243,16 +259,15 @@ namespace BD.View
             else
             {
                 bazaEntities db = new bazaEntities();
-
                 try
                 {
-                    var edit = (from k in db.Katalog where k.Wycieczka.id_wycieczki == _idWycieczki select k).SingleOrDefault();
+                    string pilotPesel = ((KeyValuePair<string, string>)cb_pilot.SelectedItem).Key;
+                    string kierowcaPesel = ((KeyValuePair<string, string>)cb_kierowca.SelectedItem).Key;
+                    string pojazdRejestracja = ((KeyValuePair<string, string>)cb_pojazd.SelectedItem).Key;
+                    int miejsceOdjazdu = int.Parse(((KeyValuePair<string, string>)cb_odjazd.SelectedItem).Key);
+                    int miejscePrzyjazdu = int.Parse(((KeyValuePair<string, string>)cb_docelowa.SelectedItem).Key);
 
-                    string pilotPesel = ((KeyValuePair<string, string>)cb_pilot.SelectedItem).Value;
-                    string kierowcaPesel = ((KeyValuePair<string, string>)cb_kierowca.SelectedItem).Value;
-                    string pojazdRejestracja = ((KeyValuePair<string, string>)cb_pojazd.SelectedItem).Value;
-                    int miejsceOdjazdu = int.Parse(((KeyValuePair<string, string>)cb_odjazd.SelectedItem).Value);
-                    int miejscePrzyjazdu = int.Parse(((KeyValuePair<string, string>)cb_docelowa.SelectedItem).Value);
+                    var edit = db.Katalog.Find(_idWycieczki);
 
                     edit.Wycieczka.Pilot_pesel = pilotPesel;
                     edit.Wycieczka.Kierowca_pesel = kierowcaPesel;
@@ -263,9 +278,12 @@ namespace BD.View
                     edit.Cennik.cena = decimal.Parse(tb_cena.Text);
 
                     edit.Wycieczka.opis = tb_opis.Text;
-
-                    MessageBox.Show("Wycieczke edytowano pomyślnie.", "Edytowano wycieczkę", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Dispose();
+                    var liczba = db.SaveChanges();
+                    if (liczba>0)
+                    {
+                        MessageBox.Show("Wycieczke edytowano pomyślnie.", "Edytowano wycieczkę", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Dispose();
+                    }
                 }
                 catch
                 {
@@ -280,12 +298,11 @@ namespace BD.View
                 }
             }
         }
-
-
         //Za każdym razem jeśli zmieni się data w polu odjazdu, data w polu odjazdu zinkrementuje się o jeden
-        private void tb_data_przyjazdu_ValueChanged(object sender, EventArgs e)
+        private void tb_data_wyjazdu_ValueChanged(object sender, EventArgs e)
         {
-            tb_data_odjazdu.Value = ((DateTimePicker)sender).Value.AddDays(1);
+            if (_opcja != 0)
+                tb_data_powrotu.Value = ((DateTimePicker)sender).Value.AddDays(1);
         }
     }
 }
