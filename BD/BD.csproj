@@ -79,7 +79,18 @@
       <DependentUpon>BazaEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Cennik_model.cs" />
+    <Compile Include="Controller\KierowcaController.cs" />
+    <Compile Include="Controller\KierownikController.cs" />
+    <Compile Include="Controller\KlientController.cs" />
     <Compile Include="Controller\ListViewItemComparer.cs" />
+    <Compile Include="Controller\OpiniaController.cs" />
+    <Compile Include="Controller\PanelPracowniczyController.cs" />
+    <Compile Include="Controller\PilotController.cs" />
+    <Compile Include="Controller\PojazdController.cs" />
+    <Compile Include="Controller\ReklamacjaController.cs" />
+    <Compile Include="Controller\RezerwacjaController.cs" />
+    <Compile Include="Controller\RezygnacjaController.cs" />
+    <Compile Include="Controller\WycieczkaController.cs" />
     <Compile Include="Katalog.cs">
       <DependentUpon>BazaEntity.tt</DependentUpon>
     </Compile>

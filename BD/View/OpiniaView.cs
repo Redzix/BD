@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using BD.Controller;
 
 namespace BD.View
 {
     public partial class OpiniaView : Form
     {
-        List<Wycieczka_model> _listaWycieczek = new List<Wycieczka_model>();
+        OpiniaController controller = new OpiniaController();
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -64,10 +65,28 @@ namespace BD.View
             //dodac wycofanie wprowadzonych danych , czyli wyjebanie w kosmos obiektu
         }
 
-
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            bazaEntities db = new bazaEntities();
+
+
+            if(controller.DodajOpinie(tb_numerRezerwacji.Text, cb_ocena.SelectedIndex + 1, tb_opinia.Text) == 1)
+            {
+                MessageBox.Show("Opinia została dodana prawidłowo.", "Dodano opinię", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Dispose();
+            }
+            else if(controller.DodajOpinie(tb_numerRezerwacji.Text, cb_ocena.SelectedIndex + 1, tb_opinia.Text) == 0)
+            {
+                MessageBox.Show("Wystąpił problem podczas dodawania opinii. Problem zwiazany z konwersją.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else if (controller.DodajOpinie(tb_numerRezerwacji.Text, cb_ocena.SelectedIndex + 1, tb_opinia.Text) == -1)
+            {
+                MessageBox.Show("Wystąpił problem podczas dodawania opinii. Problem związany z obsługa bazy danych." , "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+
+            /*bazaEntities db = new bazaEntities();
 
             try
             {
@@ -95,15 +114,33 @@ namespace BD.View
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Wystąpił problem podczas dodawania opinii. Błąd:\n" + exception.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                MessageBox.Show("Wystąpił problem podczas dodawania opinii. Błąd:\n" + exception.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }*/
         }
-
-
+        
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
 
-            bazaEntities db = new bazaEntities();
+            string nazwaWycieczki = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text);
+
+            if (nazwaWycieczki.Equals("0")){
+                MessageBox.Show("Podaj poprawny numer rezerwacji.", "Błeny numer rezerwacji.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else if (nazwaWycieczki.Equals("-1"))
+            {
+                MessageBox.Show("Podaj poprawny numer rezerwacji. Taka rezerwacja nie isntnieje.", "Błeny numer rezerwacji.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tb_nazwaWycieczki.Text = "Brak rezerwacji";
+                this.b_zapisz.Enabled = false;
+            }
+            else
+            {
+                tb_nazwaWycieczki.Text = nazwaWycieczki;
+                this.b_zapisz.Enabled = true;
+            }
+
+
+           /* bazaEntities db = new bazaEntities();
 
             try
             {
@@ -127,7 +164,7 @@ namespace BD.View
             catch (FormatException exception)
             {
                 MessageBox.Show("Podaj poprawny numer rezerwacji.","Błeny numer rezerwacji.",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
+            }*/
         }
     }
 }
