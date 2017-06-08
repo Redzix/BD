@@ -61,30 +61,34 @@ namespace BD.View
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            Pojazd_model pojazd = new Pojazd_model();
+            bazaEntities db = new bazaEntities();
 
-            pojazd.NumerRejestracyjny = tb_numer_rejestracyjny.Text;
-            pojazd.Dostepnosc = 1;
-            pojazd.Marka = tb_marka.Text;
-            pojazd.Stan = 1;
-            pojazd.Pojemnosc = Convert.ToInt32(tb_pojemnosc.Text);
-
-            if (pojazd.DodajPojazd(pojazd))
+            try
             {
-                MessageBox.Show("Pojazd dodano pomyślnie.", "Dodano pojazd", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                int pojemnosc = int.Parse(tb_pojemnosc.Text);
+
+                var pojazd = new Pojazd
+                {
+                    numer_rejestracyjny = tb_numer_rejestracyjny.Text,
+                    dostepny = true,
+                    marka = tb_marka.Text,
+                    stan = true,
+                    pojemnosc = pojemnosc
+                };
+
+                db.Pojazd.Add(pojazd);
+                db.SaveChanges();
                 this.Dispose();
-            }
-            else
+            }catch(FormatException exception)
             {
-                if(MessageBox.Show("Napotkano problem podczas doawania pojazdu. Sprawdź poprawność numeru rejestracyjnego", "Błąd dodawania pojazdu", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
-                {
-                    this.Dispose();
-                }
-                else
-                {
-                    return;
-                }
+                MessageBox.Show("Bład podczas dodawania pojazdu. Sprwdź, czy wporwadzono poprawną pojemność","Błąd dodawania pojazdu",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }catch (Exception exception)
+            {
+                MessageBox.Show("Bład podczas dodawania pojazdu. Możliwy problem z połączeniem.", "Błąd dodawania pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+
         }
     }
 }

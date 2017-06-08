@@ -84,8 +84,7 @@ namespace BD.View
                                   select katalog.Cennik.cena).FirstOrDefault();
 
             try
-            {
-                
+            {              
                 var nowyKlient = new Klient
                 {
                     pesel = tb_pesel.Text,
