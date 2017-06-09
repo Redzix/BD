@@ -287,22 +287,22 @@
         private System.Windows.Forms.Label l_data_powrotu;
         private System.Windows.Forms.Label l_opis;
         private System.Windows.Forms.Label l_cena;
-        private System.Windows.Forms.TextBox tb_nazwa;
-        private System.Windows.Forms.TextBox tb_opis;
-        private System.Windows.Forms.TextBox tb_cena;
+        public System.Windows.Forms.TextBox tb_nazwa;
+        public System.Windows.Forms.TextBox tb_opis;
+        public System.Windows.Forms.TextBox tb_cena;
         private System.Windows.Forms.Button b_zapisz;
         private System.Windows.Forms.Button b_anuluj;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cb_odjazd;
-        private System.Windows.Forms.ComboBox cb_docelowa;
-        private System.Windows.Forms.ComboBox cb_pilot;
-        private System.Windows.Forms.ComboBox cb_kierowca;
+        public System.Windows.Forms.ComboBox cb_odjazd;
+        public System.Windows.Forms.ComboBox cb_docelowa;
+        public System.Windows.Forms.ComboBox cb_pilot;
+        public System.Windows.Forms.ComboBox cb_kierowca;
         private System.Windows.Forms.Label l_pilot;
         private System.Windows.Forms.Label l_kierowca;
-        private System.Windows.Forms.ComboBox cb_pojazd;
+        public System.Windows.Forms.ComboBox cb_pojazd;
         private System.Windows.Forms.Label l_pojazd;
-        private System.Windows.Forms.DateTimePicker tb_data_wyjazdu;
-        private System.Windows.Forms.DateTimePicker tb_data_powrotu;
+        public System.Windows.Forms.DateTimePicker tb_data_wyjazdu;
+        public System.Windows.Forms.DateTimePicker tb_data_powrotu;
     }
 }

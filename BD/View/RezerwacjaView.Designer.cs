@@ -365,11 +365,11 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tb_imie;
-        private System.Windows.Forms.TextBox tb_nazwisko;
-        private System.Windows.Forms.TextBox tb_liczba_osob;
-        private System.Windows.Forms.TextBox tb_zaliczka;
-        private System.Windows.Forms.TextBox tb_adres;
+        public System.Windows.Forms.TextBox tb_imie;
+        public System.Windows.Forms.TextBox tb_nazwisko;
+        public System.Windows.Forms.TextBox tb_liczba_osob;
+        public System.Windows.Forms.TextBox tb_zaliczka;
+        public System.Windows.Forms.TextBox tb_adres;
         private System.Windows.Forms.Label l_imie;
         private System.Windows.Forms.Label l_nazwisko;
         private System.Windows.Forms.Label l_adres;
@@ -378,8 +378,8 @@
         private System.Windows.Forms.Button b_rezerwacja_zapisz;
         private System.Windows.Forms.Button b_rezerwacja_anuluj;
         private System.Windows.Forms.Label l_miejscowosc;
-        private System.Windows.Forms.TextBox tb_miejscowosc;
-        private System.Windows.Forms.TextBox tb_pesel;
+        public System.Windows.Forms.TextBox tb_miejscowosc;
+        public System.Windows.Forms.TextBox tb_pesel;
         private System.Windows.Forms.Label l_pesel;
         private System.Windows.Forms.Panel p_rezerwuj;
         private System.Windows.Forms.Panel p_zaplac;
@@ -389,11 +389,11 @@
         private System.Windows.Forms.Label l_kwotaDoZaplaty;
         private System.Windows.Forms.Label l_nazwaWycieczkiZaplac;
         private System.Windows.Forms.Label l_numerRezerwacji;
-        private System.Windows.Forms.TextBox tb_nazwaWycieczkiZaplac;
-        private System.Windows.Forms.TextBox tb_kwotaZaplacona;
-        private System.Windows.Forms.TextBox tb_kwotaDoZaplaty;
-        private System.Windows.Forms.TextBox tb_numerRezerwacji;
+        public System.Windows.Forms.TextBox tb_nazwaWycieczkiZaplac;
+        public System.Windows.Forms.TextBox tb_kwotaZaplacona;
+        public System.Windows.Forms.TextBox tb_kwotaDoZaplaty;
+        public System.Windows.Forms.TextBox tb_numerRezerwacji;
         private System.Windows.Forms.Label l_wotaCalkowita;
-        private System.Windows.Forms.TextBox tb_kwotaCalkowita;
+        public System.Windows.Forms.TextBox tb_kwotaCalkowita;
     }
 }

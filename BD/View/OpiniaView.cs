@@ -14,7 +14,7 @@ namespace BD.View
 {
     public partial class OpiniaView : Form
     {
-        OpiniaController controller = new OpiniaController();
+        OpiniaController controller;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -23,6 +23,7 @@ namespace BD.View
         {
             InitializeComponent();
             cb_ocena.SelectedIndex = 0;
+            controller = new OpiniaController(this);
         }
 
         /// <summary>
@@ -121,21 +122,20 @@ namespace BD.View
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
 
-            string nazwaWycieczki = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text);
+            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text);
 
-            if (nazwaWycieczki.Equals("0")){
-                MessageBox.Show("Podaj poprawny numer rezerwacji.", "Błeny numer rezerwacji.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (pobierz == 0)
+            {
+                MessageBox.Show("Podaj poprawny numer rezerwacji. Błędny format.", "Błeny numer rezerwacji.", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-            else if (nazwaWycieczki.Equals("-1"))
+            else if (pobierz == -1)
             {
                 MessageBox.Show("Podaj poprawny numer rezerwacji. Taka rezerwacja nie isntnieje.", "Błeny numer rezerwacji.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                tb_nazwaWycieczki.Text = "Brak rezerwacji";
                 this.b_zapisz.Enabled = false;
             }
             else
             {
-                tb_nazwaWycieczki.Text = nazwaWycieczki;
                 this.b_zapisz.Enabled = true;
             }
 

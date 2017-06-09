@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BD.View;
 
 namespace BD.Controller
 {
     class OpiniaController
     {
+        OpiniaView _view;
+        bazaEntities db;
+
+        public OpiniaController(OpiniaView view)
+        {
+            _view = view;
+            db = new bazaEntities();
+        }
+
         public int DodajOpinie(string numerRezerwacji,int ocena, string opis)
         {
-            bazaEntities db = new bazaEntities();
-
-            try
+             try
             {
                 int numer = int.Parse(numerRezerwacji);
 
@@ -42,10 +50,8 @@ namespace BD.Controller
             }
         }
 
-        public string PobierzNazweWycieczki(string numerRezerwacji)
+        public int PobierzNazweWycieczki(string numerRezerwacji)
         {
-            bazaEntities db = new bazaEntities();
-
             try
             {
                 int numer = int.Parse(numerRezerwacji);
@@ -56,16 +62,18 @@ namespace BD.Controller
 
                 if (query == null)
                 {
-                    return "-1";
+                    _view.tb_nazwaWycieczki.Text = "Brak rezerwacji";
+                    return -1;
                 }
                 else
                 {
-                    return query;
+                    _view.tb_nazwaWycieczki.Text = query;
+                    return 1;
                 }
             }
             catch (FormatException exception)
             {
-                return "0";
+                return 0;
             }
         }
     }

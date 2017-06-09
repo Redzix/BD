@@ -217,20 +217,20 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tc_reklamacje;
-        private System.Windows.Forms.TabPage tp_dodaj_reklamacje;
+        public System.Windows.Forms.TabControl tc_reklamacje;
+        public System.Windows.Forms.TabPage tp_dodaj_reklamacje;
         private System.Windows.Forms.Button b_zapisz;
         private System.Windows.Forms.Button b_anuluj;
         private System.Windows.Forms.Label l_opis_reklamacji;
         private System.Windows.Forms.Label l_nazwa_wycieczki;
-        private System.Windows.Forms.TextBox tb_opis_reklamacji;
-        private System.Windows.Forms.TabPage tp_stan_reklamacji;
-        private System.Windows.Forms.TextBox tb_numerRezerwacji;
+        public System.Windows.Forms.TextBox tb_opis_reklamacji;
+        public System.Windows.Forms.TabPage tp_stan_reklamacji;
+        public System.Windows.Forms.TextBox tb_numerRezerwacji;
         private System.Windows.Forms.Label l_numerRezerwacji;
         private System.Windows.Forms.ListView lv_reklamacje;
         private System.Windows.Forms.ColumnHeader NumerReklamacji;
-        private System.Windows.Forms.RichTextBox rtb_reklamacja;
-        private System.Windows.Forms.TextBox tb_nazwaWycieczki;
+        public System.Windows.Forms.RichTextBox rtb_reklamacja;
+        public System.Windows.Forms.TextBox tb_nazwaWycieczki;
         private System.Windows.Forms.Button b_sprawdzPoprawnosc;
     }
 }

@@ -189,11 +189,11 @@
 
         private System.Windows.Forms.Button b_zapisz;
         private System.Windows.Forms.Button b_anuluj;
-        private System.Windows.Forms.TextBox tb_numerRezerwacji;
-        private System.Windows.Forms.TextBox tb_nazwaWycieczki;
-        private System.Windows.Forms.TextBox tb_liczbaOsob;
-        private System.Windows.Forms.TextBox tb_liczbaRezygnujacychOsob;
-        private System.Windows.Forms.TextBox tb_cenaPoRezygnacji;
+        public System.Windows.Forms.TextBox tb_numerRezerwacji;
+        public System.Windows.Forms.TextBox tb_nazwaWycieczki;
+        public System.Windows.Forms.TextBox tb_liczbaOsob;
+        public System.Windows.Forms.TextBox tb_liczbaRezygnujacychOsob;
+        public System.Windows.Forms.TextBox tb_cenaPoRezygnacji;
         private System.Windows.Forms.Label l_numerRezerwacji;
         private System.Windows.Forms.Label l_nazwaWycieczki;
         private System.Windows.Forms.Label l_liczbaOsob;
