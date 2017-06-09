@@ -50,6 +50,7 @@
             this.l_pojazd = new System.Windows.Forms.Label();
             this.tb_data_wyjazdu = new System.Windows.Forms.DateTimePicker();
             this.tb_data_powrotu = new System.Windows.Forms.DateTimePicker();
+            this.b_dodaj = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // l_nazwa
@@ -101,7 +102,7 @@
             // 
             this.tb_nazwa.Location = new System.Drawing.Point(136, 9);
             this.tb_nazwa.Name = "tb_nazwa";
-            this.tb_nazwa.Size = new System.Drawing.Size(159, 20);
+            this.tb_nazwa.Size = new System.Drawing.Size(158, 20);
             this.tb_nazwa.TabIndex = 5;
             // 
             // tb_opis
@@ -109,7 +110,7 @@
             this.tb_opis.Location = new System.Drawing.Point(136, 222);
             this.tb_opis.Multiline = true;
             this.tb_opis.Name = "tb_opis";
-            this.tb_opis.Size = new System.Drawing.Size(159, 73);
+            this.tb_opis.Size = new System.Drawing.Size(158, 73);
             this.tb_opis.TabIndex = 8;
             // 
             // tb_cena
@@ -168,7 +169,7 @@
             // cb_docelowa
             // 
             this.cb_docelowa.FormattingEnabled = true;
-            this.cb_docelowa.Location = new System.Drawing.Point(137, 114);
+            this.cb_docelowa.Location = new System.Drawing.Point(136, 114);
             this.cb_docelowa.Name = "cb_docelowa";
             this.cb_docelowa.Size = new System.Drawing.Size(158, 21);
             this.cb_docelowa.TabIndex = 16;
@@ -176,7 +177,7 @@
             // cb_pilot
             // 
             this.cb_pilot.FormattingEnabled = true;
-            this.cb_pilot.Location = new System.Drawing.Point(137, 168);
+            this.cb_pilot.Location = new System.Drawing.Point(136, 168);
             this.cb_pilot.Name = "cb_pilot";
             this.cb_pilot.Size = new System.Drawing.Size(158, 21);
             this.cb_pilot.TabIndex = 20;
@@ -229,7 +230,7 @@
             this.tb_data_wyjazdu.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.tb_data_wyjazdu.Location = new System.Drawing.Point(136, 35);
             this.tb_data_wyjazdu.Name = "tb_data_wyjazdu";
-            this.tb_data_wyjazdu.Size = new System.Drawing.Size(159, 20);
+            this.tb_data_wyjazdu.Size = new System.Drawing.Size(158, 20);
             this.tb_data_wyjazdu.TabIndex = 23;
             this.tb_data_wyjazdu.Value = new System.DateTime(2017, 6, 2, 21, 4, 17, 0);
             this.tb_data_wyjazdu.ValueChanged += new System.EventHandler(this.tb_data_wyjazdu_ValueChanged);
@@ -239,15 +240,26 @@
             this.tb_data_powrotu.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.tb_data_powrotu.Location = new System.Drawing.Point(136, 61);
             this.tb_data_powrotu.Name = "tb_data_powrotu";
-            this.tb_data_powrotu.Size = new System.Drawing.Size(159, 20);
+            this.tb_data_powrotu.Size = new System.Drawing.Size(158, 20);
             this.tb_data_powrotu.TabIndex = 24;
             this.tb_data_powrotu.Value = new System.DateTime(2017, 6, 2, 21, 4, 17, 0);
+            // 
+            // b_dodaj
+            // 
+            this.b_dodaj.Location = new System.Drawing.Point(136, 342);
+            this.b_dodaj.Name = "b_dodaj";
+            this.b_dodaj.Size = new System.Drawing.Size(75, 23);
+            this.b_dodaj.TabIndex = 25;
+            this.b_dodaj.Text = "Dodaj";
+            this.b_dodaj.UseVisualStyleBackColor = true;
+            this.b_dodaj.Click += new System.EventHandler(this.b_dodaj_Click);
             // 
             // WycieczkaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(311, 379);
+            this.Controls.Add(this.b_dodaj);
             this.Controls.Add(this.tb_data_powrotu);
             this.Controls.Add(this.tb_data_wyjazdu);
             this.Controls.Add(this.cb_pojazd);
@@ -290,7 +302,7 @@
         public System.Windows.Forms.TextBox tb_nazwa;
         public System.Windows.Forms.TextBox tb_opis;
         public System.Windows.Forms.TextBox tb_cena;
-        private System.Windows.Forms.Button b_zapisz;
+        public System.Windows.Forms.Button b_zapisz;
         private System.Windows.Forms.Button b_anuluj;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -304,5 +316,6 @@
         private System.Windows.Forms.Label l_pojazd;
         public System.Windows.Forms.DateTimePicker tb_data_wyjazdu;
         public System.Windows.Forms.DateTimePicker tb_data_powrotu;
+        private System.Windows.Forms.Button b_dodaj;
     }
 }

@@ -25,25 +25,29 @@ namespace BD.View
             InitializeComponent();
             controller = new KierownikController(this);
             this.idKatalog = idKatalog;
-            bool stan = controller.ladujPromocje(idKatalog);
+            bool stan = controller.LadujPromocje(idKatalog);
             b_dodaj.Visible = !stan;
             b_edytuj.Visible = stan;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (controller.dodajPromocje(this.idKatalog))
+            if (controller.DodajPromocje(this.idKatalog))
                 MessageBox.Show("Dodano");
             else
                 MessageBox.Show("Nie dodano");
+            controller.LadujKatalog();
+            this.Dispose();
         }
 
         private void b_edytuj_Click(object sender, EventArgs e)
         {
-            if (controller.edytujPromocje(this.idKatalog))
+            if (controller.EdytujPromocje(this.idKatalog))
                 MessageBox.Show("Zmieniono promocję");
             else
                 MessageBox.Show("NIe zmieniono, bo coś się popsuło");
+            controller.LadujKatalog();
+            this.Dispose();
         }
     }
 }

@@ -17,8 +17,8 @@ namespace BD
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Wycieczka()
         {
-            this.Katalog = new HashSet<Katalog>();
             this.Rezerwacja = new HashSet<Rezerwacja>();
+            this.Katalog = new HashSet<Katalog>();
         }
     
         public int id_wycieczki { get; set; }
@@ -30,13 +30,13 @@ namespace BD
         public string Pojazd_numer_rejestracyjny { get; set; }
         public string Kierowca_pesel { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Katalog> Katalog { get; set; }
         public virtual Kierowca Kierowca { get; set; }
         public virtual Pilot Pilot { get; set; }
         public virtual Pojazd Pojazd { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rezerwacja> Rezerwacja { get; set; }
         public virtual Promocja Promocja { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Katalog> Katalog { get; set; }
     }
 }
