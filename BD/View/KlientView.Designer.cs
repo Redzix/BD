@@ -44,6 +44,8 @@
             this.rezygnacjaZWycieczkiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.l_polaczenie = new System.Windows.Forms.Label();
             this.b_zaplac = new System.Windows.Forms.Button();
+            this.l_uzytkownik = new System.Windows.Forms.Label();
+            this.l_zalogowany_jako = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_katalog)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -177,11 +179,31 @@
             this.b_zaplac.UseVisualStyleBackColor = true;
             this.b_zaplac.Click += new System.EventHandler(this.b_zaplac_Click);
             // 
+            // l_uzytkownik
+            // 
+            this.l_uzytkownik.AutoSize = true;
+            this.l_uzytkownik.Location = new System.Drawing.Point(174, 348);
+            this.l_uzytkownik.Name = "l_uzytkownik";
+            this.l_uzytkownik.Size = new System.Drawing.Size(10, 13);
+            this.l_uzytkownik.TabIndex = 13;
+            this.l_uzytkownik.Text = " ";
+            // 
+            // l_zalogowany_jako
+            // 
+            this.l_zalogowany_jako.AutoSize = true;
+            this.l_zalogowany_jako.Location = new System.Drawing.Point(87, 348);
+            this.l_zalogowany_jako.Name = "l_zalogowany_jako";
+            this.l_zalogowany_jako.Size = new System.Drawing.Size(88, 13);
+            this.l_zalogowany_jako.TabIndex = 12;
+            this.l_zalogowany_jako.Text = "Zalogowany jako";
+            // 
             // KlientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 370);
+            this.Controls.Add(this.l_uzytkownik);
+            this.Controls.Add(this.l_zalogowany_jako);
             this.Controls.Add(this.b_zaplac);
             this.Controls.Add(this.l_polaczenie);
             this.Controls.Add(this.b_katalog_wyjdz);
@@ -223,6 +245,8 @@
         public System.Windows.Forms.DataGridViewTextBoxColumn Promocja;
         public System.Windows.Forms.DataGridViewTextBoxColumn Koszt;
         private System.Windows.Forms.Button b_zaplac;
+        private System.Windows.Forms.Label l_uzytkownik;
+        private System.Windows.Forms.Label l_zalogowany_jako;
     }
 }
 

@@ -18,14 +18,14 @@ namespace BD.Controller
             db = new bazaEntities();
         }                  
 
-        public int Oblicz(string numerRezerwacji)
+        public int Oblicz(string numerRezerwacji,string uzytkownik)
         {
             try
             {
                 int numer = int.Parse(_view.tb_numerRezerwacji.Text);
 
                 var query = (from uczestnictwo in db.Uczestnictwo
-                             where uczestnictwo.numer_rezerwacji == numer
+                             where uczestnictwo.numer_rezerwacji == numer && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                              select new
                              {
                                  nazwa = uczestnictwo.Rezerwacja.Wycieczka.nazwa,
@@ -61,21 +61,21 @@ namespace BD.Controller
             }
         }
 
-        public int Zapisz(string numerRezerwacji)
+        public int Zapisz(string numerRezerwacji,string uzytkownik)
         {
             try
             {
                 int numer = int.Parse(numerRezerwacji);
                             
                 var uczestnictwo = (from uc in db.Uczestnictwo
-                                    where uc.numer_rezerwacji == numer
+                                    where uc.numer_rezerwacji == numer && uc.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                                     select uc).FirstOrDefault();
 
                 if ((int.Parse(_view.tb_liczbaOsob.Text) - int.Parse(_view.tb_liczbaRezygnujacychOsob.Text)) == 0)
                 {
                     var usun = (from rezerw in db.Rezerwacja
-                                      where rezerw.numer_rezerwacji == numer
-                                      select rezerw).FirstOrDefault();
+                                      where rezerw.numer_rezerwacji == numer && rezerw.Klient_pesel.Equals(uzytkownik)
+                                select rezerw).FirstOrDefault();
 
                     db.Rezerwacja.Remove(usun);
                 }

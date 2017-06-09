@@ -18,14 +18,14 @@ namespace BD.Controller
             db = new bazaEntities();
         }
 
-        public int DodajOpinie(string numerRezerwacji,int ocena, string opis)
+        public int DodajOpinie(string numerRezerwacji,int ocena, string opis,string uzytkownik)
         {
              try
             {
                 int numer = int.Parse(numerRezerwacji);
 
                 var query = (from uczestnictwo in db.Uczestnictwo
-                             where uczestnictwo.numer_rezerwacji == numer
+                             where uczestnictwo.numer_rezerwacji == numer && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                              select uczestnictwo.id_uczestnictwo).FirstOrDefault();
 
                 var opinia = new Opinia
@@ -50,14 +50,14 @@ namespace BD.Controller
             }
         }
 
-        public int PobierzNazweWycieczki(string numerRezerwacji)
+        public int PobierzNazweWycieczki(string numerRezerwacji, string uzytkownik)
         {
             try
             {
                 int numer = int.Parse(numerRezerwacji);
 
                 var query = (from uczestnictwo in db.Uczestnictwo
-                             where uczestnictwo.numer_rezerwacji == numer
+                             where uczestnictwo.numer_rezerwacji == numer && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                              select uczestnictwo.Rezerwacja.Wycieczka.nazwa).FirstOrDefault();
 
                 if (query == null)

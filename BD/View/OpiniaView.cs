@@ -15,6 +15,7 @@ namespace BD.View
     public partial class OpiniaView : Form
     {
         private OpiniaController controller;
+        private string _uzytkownik;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -23,6 +24,18 @@ namespace BD.View
         {
             InitializeComponent();
             cb_ocena.SelectedIndex = 0;
+            controller = new OpiniaController(this);
+        }
+
+        /// <summary>
+        /// Dodaje rezygnację dla zdefiniowanego wcześniej użytkownika
+        /// </summary>
+        /// <param name="uzytkownik">Aktualny użytkownik</param>
+        public OpiniaView(string uzytownik)
+        {
+            InitializeComponent();
+            cb_ocena.SelectedIndex = 0;
+            _uzytkownik = uzytownik;
             controller = new OpiniaController(this);
         }
 
@@ -67,7 +80,7 @@ namespace BD.View
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            int zapisz = controller.DodajOpinie(tb_numerRezerwacji.Text, cb_ocena.SelectedIndex + 1, tb_opinia.Text);
+            int zapisz = controller.DodajOpinie(tb_numerRezerwacji.Text, cb_ocena.SelectedIndex + 1, tb_opinia.Text,_uzytkownik);
 
             switch (zapisz)
             {
@@ -89,7 +102,7 @@ namespace BD.View
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
 
-            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text);
+            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text, _uzytkownik);
 
             switch (pobierz)
             {

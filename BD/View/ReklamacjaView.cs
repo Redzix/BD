@@ -14,7 +14,8 @@ namespace BD.View
 {
     public partial class ReklamacjaView : Form
     {
-        private ReklamacjaController controller;       
+        private ReklamacjaController controller;
+        private string _uzytkownik;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -22,6 +23,13 @@ namespace BD.View
         public ReklamacjaView()
         {
             InitializeComponent();
+            controller = new ReklamacjaController(this);
+        }
+
+        public ReklamacjaView(string uzytkownik)
+        {
+            InitializeComponent();
+            _uzytkownik = uzytkownik;
             controller = new ReklamacjaController(this);
         }
 
@@ -66,7 +74,7 @@ namespace BD.View
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            int zapisz = controller.DodajReklamacje(tb_numerRezerwacji.Text);
+            int zapisz = controller.DodajReklamacje(tb_numerRezerwacji.Text,_uzytkownik);
 
             switch (zapisz)
             {
@@ -92,7 +100,7 @@ namespace BD.View
         {
             if(tc_reklamacje.SelectedIndex == 1)
             {
-                if (controller.PobierzReklamacje())
+                if (controller.PobierzReklamacje(_uzytkownik))
                 {
                     return;
                 }
@@ -105,7 +113,7 @@ namespace BD.View
 
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
         {
-            int pobierz = controller.PobierzInformacjeOReklamacji(((ListView)sender).SelectedItems[0].Tag.ToString());
+            int pobierz = controller.PobierzInformacjeOReklamacji(((ListView)sender).SelectedItems[0].Tag.ToString(), _uzytkownik);
 
             switch (pobierz)
             {
@@ -124,7 +132,7 @@ namespace BD.View
 
         private void b_sprawdzPoprawnosc_Click(object sender, EventArgs e)
         {
-            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text);
+            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text, _uzytkownik);
 
             switch (pobierz)
             {

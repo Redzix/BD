@@ -19,17 +19,15 @@ namespace BD.Controller
             db = new bazaEntities();
         }
 
-        public int PobierzNazweWycieczki(string numerRezerwacji)
+        public int PobierzNazweWycieczki(string numerRezerwacji,string uzytkownik)
         {
-            bazaEntities db = new bazaEntities();
-
             try
             {
                 int numer = int.Parse(numerRezerwacji);
                 sprawdzCzyTaSama = numer;
 
                 var rez = (from rezerwacja in db.Rezerwacja
-                           where rezerwacja.numer_rezerwacji == numer
+                           where rezerwacja.numer_rezerwacji == numer && rezerwacja.Klient_pesel.Equals(uzytkownik)
                            select rezerwacja).FirstOrDefault();
 
                 var uczest = (from uczestnictwo in db.Uczestnictwo
@@ -56,7 +54,7 @@ namespace BD.Controller
             }
         }
 
-        public int ZaplacRezerwacje(string numerRezerwacji)
+        public int ZaplacRezerwacje(string numerRezerwacji, string uzytkownik)
         {
             try
             {
@@ -65,12 +63,14 @@ namespace BD.Controller
                 if(sprawdzCzyTaSama == numer)
                 {
                     var rez = (from rezerwacja in db.Rezerwacja
-                           where rezerwacja.numer_rezerwacji == numer
-                           select rezerwacja).FirstOrDefault();
+                               where rezerwacja.numer_rezerwacji == numer 
+                               && rezerwacja.Klient_pesel.Equals(uzytkownik)
+                               select rezerwacja).FirstOrDefault();
 
                     var uczest = (from uczestnictwo in db.Uczestnictwo
-                              where uczestnictwo.numer_rezerwacji == numer
-                              select uczestnictwo).FirstOrDefault();
+                                  where uczestnictwo.numer_rezerwacji == numer 
+                                  && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
+                                  select uczestnictwo).FirstOrDefault();
                     try
                     {
                         decimal kwota = decimal.Parse(_view.tb_kwotaZaplacona.Text);

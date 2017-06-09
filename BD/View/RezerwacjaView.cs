@@ -16,6 +16,7 @@ namespace BD.View
     {
         private int _idWycieczki;
         private RezerwacjaController controller;
+        private string _uzytkownik;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -33,13 +34,14 @@ namespace BD.View
         /// Konstruktor z parametrem, otrzymuje jako parametr obiekt typu wyieczka, aby potem zapisac go do bazy
         /// </summary>
         /// <param name="wycieczka"></param>
-        public RezerwacjaView(int idWycieczki)
+        public RezerwacjaView(int idWycieczki,string uzytkownik)
         {
             _idWycieczki = idWycieczki;
             InitializeComponent();
             this.p_zaplac.Visible = false;
             this.p_rezerwuj.Visible = true;
             b_zapłaćRezerwacje.Enabled = false;
+            _uzytkownik = uzytkownik;
             controller = new RezerwacjaController(this);
         }
 
@@ -108,7 +110,7 @@ namespace BD.View
 
         private void b_zapłaćRezerwacje_Click(object sender, EventArgs e)
         {
-            int zaplac = controller.ZaplacRezerwacje(tb_numerRezerwacji.Text);
+            int zaplac = controller.ZaplacRezerwacje(tb_numerRezerwacji.Text, _uzytkownik);
 
             switch(zaplac)
             {
@@ -142,7 +144,7 @@ namespace BD.View
 
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
-            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text);
+            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text,_uzytkownik);
 
             switch(pobierz)
             {

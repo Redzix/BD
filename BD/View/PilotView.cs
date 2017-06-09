@@ -14,21 +14,8 @@ using BD.Controller;
 namespace BD.View
 {
     public partial class PilotView : Form
-    {   
-        /// <summary>
-        /// Zmienna odpowiada za utworzenie połączenia z bazą danych.
-        /// </summary>
-        SqlConnection _polaczenie = null;
-
-        /// <summary>
-        /// Zmienna przechowuje zapytanie do bazy danych.
-        /// </summary>
-        SqlCommand _zapytanie = null;
-
-        /// <summary>
-        /// Zmienna przechowujeobiekt klasy Polacz_z_baza.
-        /// </summary>
-        Polacz_z_baza _polacz = null;
+    {
+        private PilotController controller;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna,, tworzący okno oraz połączenie z bazą danych.
@@ -36,19 +23,12 @@ namespace BD.View
         public PilotView()
         {
             InitializeComponent();
+
             l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
-            _polacz = new Polacz_z_baza();
-            _polaczenie = _polacz.PolaczZBaza();
-            if (_polaczenie != null)
-            {
-                l_polaczenie.Text = "Połączony";
-                l_polaczenie.ForeColor = System.Drawing.Color.Green;
-            }
-            else
-            {
-                l_polaczenie.Text = "Rozłączony";
-                l_polaczenie.ForeColor = System.Drawing.Color.Red;
-            }
+            l_polaczenie.Text = "Połączony";
+            l_polaczenie.ForeColor = System.Drawing.Color.Green;
+
+            controller = new PilotController(this);
         }
 
         /// <summary>
@@ -59,19 +39,13 @@ namespace BD.View
         public PilotView(string uzytkownik)
         {
             InitializeComponent();
+
             l_uzytkownik.Text = uzytkownik;
-            _polacz = new Polacz_z_baza();
-            _polaczenie = _polacz.PolaczZBaza();
-            if (_polaczenie != null)
-            {
-                l_polaczenie.Text = "Połączony";
-                l_polaczenie.ForeColor = System.Drawing.Color.Green;
-            }
-            else
-            {
-                l_polaczenie.Text = "Rozłączony";
-                l_polaczenie.ForeColor = System.Drawing.Color.Red;
-            }
+            l_polaczenie.Text = "Połączony";
+            l_polaczenie.ForeColor = System.Drawing.Color.Green;
+
+            controller = new PilotController(this);
+
         }
 
         /// <summary>
@@ -133,9 +107,6 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void Pilot_Load(object sender, EventArgs e)
         {
-
-            PilotController controller = new PilotController(this);
-
             if (!controller.PobierzPilotow())
             { 
                 MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);

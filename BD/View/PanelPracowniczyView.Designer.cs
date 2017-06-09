@@ -47,6 +47,7 @@
             // 
             this.tb_haslo.Location = new System.Drawing.Point(84, 73);
             this.tb_haslo.Name = "tb_haslo";
+            this.tb_haslo.PasswordChar = '*';
             this.tb_haslo.Size = new System.Drawing.Size(100, 20);
             this.tb_haslo.TabIndex = 2;
             // 
@@ -100,7 +101,7 @@
             this.Controls.Add(this.tb_haslo);
             this.Controls.Add(this.tb_nazwa_uzytkownika);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Panel_pracowniczy";
+            this.Name = "PanelPracowniczyView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Panel pracowniczy";
             this.ResumeLayout(false);

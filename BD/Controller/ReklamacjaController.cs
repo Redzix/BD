@@ -20,10 +20,11 @@ namespace BD.Controller
             db = new bazaEntities();
         }
 
-        public bool PobierzReklamacje()
+        public bool PobierzReklamacje(string uzytkownik)
         {
 
             var pobierz = from reklamacja in db.Reklamacja
+                          where reklamacja.Uczestnictwo.Rezerwacja.Klient.pesel.Equals(uzytkownik)
                           orderby reklamacja.numer_reklamacji
                           select reklamacja.numer_reklamacji;
 
@@ -44,14 +45,14 @@ namespace BD.Controller
             }
         }
 
-        public int PobierzNazweWycieczki(string numerRezerwacji)
+        public int PobierzNazweWycieczki(string numerRezerwacji,string uzytkownik)
         {
             try
             {
                 int numer = int.Parse(numerRezerwacji);
 
                 var query = (from uczestnictwo in db.Uczestnictwo
-                             where uczestnictwo.numer_rezerwacji == numer
+                             where uczestnictwo.numer_rezerwacji == numer && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                              select uczestnictwo.Rezerwacja.Wycieczka.nazwa).FirstOrDefault();
 
                 if (query == null)
@@ -74,14 +75,14 @@ namespace BD.Controller
             }
         }
 
-        public int PobierzInformacjeOReklamacji(string numerReklamacji)
+        public int PobierzInformacjeOReklamacji(string numerReklamacji,string uzytkownik)
         {
             try
             {
                 int numer = int.Parse(numerReklamacji);
 
                 var query = (from reklamacja in db.Reklamacja
-                             where reklamacja.numer_reklamacji == numer
+                             where reklamacja.numer_reklamacji == numer && reklamacja.Uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                              select new
                              {
                                  numer = reklamacja.numer_reklamacji,
@@ -112,7 +113,7 @@ namespace BD.Controller
             }
         }
 
-        public int DodajReklamacje(string numerRezerwacji)
+        public int DodajReklamacje(string numerRezerwacji,string uzytkownik)
         {
             try
             {
@@ -122,7 +123,7 @@ namespace BD.Controller
                 {
 
                     var uczestnictwo = (from uc in db.Uczestnictwo
-                                        where uc.numer_rezerwacji == numer
+                                        where uc.numer_rezerwacji == numer && uc.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                                         select uc).FirstOrDefault();
 
                     var reklamacja = new Reklamacja

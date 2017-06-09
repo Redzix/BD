@@ -17,6 +17,7 @@ namespace BD.View
 
         private int _idWycieczki;
         private KlientController controller;
+        private string _uzytkownik;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -24,18 +25,28 @@ namespace BD.View
         public KlientView()
         {
             InitializeComponent();
-            Polacz_z_baza _polacz = new Polacz_z_baza();
-            SqlConnection _polaczenie = _polacz.PolaczZBaza();
-            if (_polaczenie != null)
-            {
-                l_polaczenie.Text = "Połączony";
-                l_polaczenie.ForeColor = System.Drawing.Color.Green;
-            }
-            else
-            {
-                l_polaczenie.Text = "Rozłączony";
-                l_polaczenie.ForeColor = System.Drawing.Color.Red;
-            }
+
+            l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
+            l_polaczenie.Text = "Połączony";
+            l_polaczenie.ForeColor = System.Drawing.Color.Green;
+       
+            controller = new KlientController(this);
+        }
+
+        /// <summary>
+        /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu 
+        /// oraz tworzący połączenie z bazą danych.
+        /// </summary>
+        /// <param name="uzytkownik">Nazwa użytkownika</param>
+        public KlientView(string uzytkownik)
+        {
+            InitializeComponent();
+
+            l_uzytkownik.Text = uzytkownik;
+            l_polaczenie.Text = "Połączony";
+            l_polaczenie.ForeColor = System.Drawing.Color.Green;
+
+            _uzytkownik = uzytkownik;
             controller = new KlientController(this);
         }
 
@@ -70,7 +81,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_katalog_rezerwuj_Click(object sender, EventArgs e)
         {
-            RezerwacjaView rezerwacja = new RezerwacjaView(_idWycieczki);
+            RezerwacjaView rezerwacja = new RezerwacjaView(_idWycieczki,_uzytkownik);
             rezerwacja.ShowDialog();
         }
 
@@ -81,7 +92,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void wystawOpinięToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpiniaView opinia = new OpiniaView();
+            OpiniaView opinia = new OpiniaView(_uzytkownik);
             opinia.ShowDialog();
         }
 
@@ -92,7 +103,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void reklamujWycieczkęToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReklamacjaView reklamancja = new ReklamacjaView();
+            ReklamacjaView reklamancja = new ReklamacjaView(_uzytkownik);
             reklamancja.ShowDialog();
         }
 
@@ -103,7 +114,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void rezygnacjaZWycieczkiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RezygnacjaView rezygnacja = new RezygnacjaView();
+            RezygnacjaView rezygnacja = new RezygnacjaView(_uzytkownik);
             rezygnacja.ShowDialog();
         }
 

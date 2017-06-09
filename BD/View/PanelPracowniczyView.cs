@@ -7,17 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BD.Controller;
 
 namespace BD.View
 {
     public partial class PanelPracowniczyView : Form
     {
+        private PanelPracowniczyController controller;
+
         /// <summary>
         /// Główny konstruktor okna.
         /// </summary>
         public PanelPracowniczyView()
         {
             InitializeComponent();
+            controller = new PanelPracowniczyController(this);
         }
         /// <summary>
         /// Zdarzenie obsługujące wyjście z aplikacji
@@ -37,7 +41,26 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zaloguj_Click(object sender, EventArgs e)
         {
-            
+            int sprawdz = controller.SprawdzDaneLogowania(tb_nazwa_uzytkownika.Text, tb_haslo.Text);
+
+            switch (sprawdz)
+            {
+                case 1:
+                    break;
+                case 0:
+                    MessageBox.Show("Wprowadź poprawne dane logowania.", "Błąd logowania", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -1:
+                    MessageBox.Show("Błąd logowania. Stopień uprawnien dla podanych danych nie isnieje.", "Błąd logowania", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -2:
+                    MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.","Błąd logowania",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    break;
+                default:
+                    break;
+            }
+
+            /*
             string login = tb_nazwa_uzytkownika.Text;
             string password = tb_haslo.Text;
             string uprawnienia = "";
@@ -117,7 +140,7 @@ namespace BD.View
                 MessageBox.Show("Podano nieprawidłowe dane użytkownika.", "Błąd logowania.", MessageBoxButtons.OK, 
                     MessageBoxIcon.Error);
             }
-            
+            */
 
         }
     }

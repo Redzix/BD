@@ -14,6 +14,7 @@ namespace BD.View
     public partial class RezygnacjaView : Form
     {
         private RezygnacjaController controller;
+        private string _uzytkownik;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -24,6 +25,20 @@ namespace BD.View
             tb_cenaPoRezygnacji.Enabled = false;
             tb_liczbaOsob.Enabled = false;
             tb_nazwaWycieczki.Enabled = false;
+            controller = new RezygnacjaController(this);
+        }
+
+        /// <summary>
+        /// Dodaje rezygnację dla zdefiniowanego wcześniej użytkownika
+        /// </summary>
+        /// <param name="uzytkownik">Aktualny użytkownik</param>
+        public RezygnacjaView(string uzytkownik)
+        {
+            InitializeComponent();
+            tb_cenaPoRezygnacji.Enabled = false;
+            tb_liczbaOsob.Enabled = false;
+            tb_nazwaWycieczki.Enabled = false;
+            _uzytkownik = uzytkownik;
             controller = new RezygnacjaController(this);
         }
 
@@ -68,7 +83,7 @@ namespace BD.View
 
         private void b_oblicz_Click(object sender, EventArgs e)
          {
-            int oblicz = controller.Oblicz(tb_numerRezerwacji.Text);
+            int oblicz = controller.Oblicz(tb_numerRezerwacji.Text,_uzytkownik);
 
             switch (oblicz)
             {
@@ -102,7 +117,7 @@ namespace BD.View
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            int zapisz = controller.Zapisz(tb_numerRezerwacji.Text);
+            int zapisz = controller.Zapisz(tb_numerRezerwacji.Text, _uzytkownik);
 
             switch (zapisz)
             {
