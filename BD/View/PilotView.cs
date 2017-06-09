@@ -16,6 +16,7 @@ namespace BD.View
     public partial class PilotView : Form
     {
         private PilotController controller;
+        private string _uzytkownik;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna,, tworzący okno oraz połączenie z bazą danych.
@@ -42,6 +43,7 @@ namespace BD.View
 
             l_uzytkownik.Text = uzytkownik;
             l_polaczenie.Text = "Połączony";
+            _uzytkownik = uzytkownik;
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
 
             controller = new PilotController(this);
@@ -107,7 +109,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void Pilot_Load(object sender, EventArgs e)
         {
-            if (!controller.PobierzPilotow())
+            if (!controller.PobierzWycieczki(_uzytkownik))
             { 
                 MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

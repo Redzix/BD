@@ -16,6 +16,7 @@ namespace BD.View
     public partial class KierownikView : Form
     {
         private int _idReklamacji = 0;
+        private string _uzytkownik;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna, tworzący okno oraz połączenie z bazą danych.
@@ -24,6 +25,8 @@ namespace BD.View
         {
             InitializeComponent();
             l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
+            l_polaczenie.Text = "Połączono";
+            l_polaczenie.ForeColor = System.Drawing.Color.Green;
         }
 
         /// <summary>
@@ -34,7 +37,10 @@ namespace BD.View
         public KierownikView(string uzytkownik)
         {
             InitializeComponent();
+            _uzytkownik = uzytkownik;
             l_uzytkownik.Text = uzytkownik;
+            l_polaczenie.Text = "Połączono";
+            l_polaczenie.ForeColor = System.Drawing.Color.Green;
         }
 
         /// <summary>
@@ -218,13 +224,6 @@ namespace BD.View
 
         private void b_edytuj_pojazd_Click(object sender, EventArgs e)
         {
-            /////Trzeba to zrobic jeszcze zmiane tego pojazdu w bazie
-
-
-
-
-
-
             //Pobranie wybranego numeru rejestracyjnego z listview
             string numerRejestracyjny = lv_pojazdy.SelectedItems[0].SubItems[0].Text;
 
@@ -341,7 +340,7 @@ namespace BD.View
 
         private void b_rozpatrz_pozytywnie_Click(object sender, EventArgs e)
         {
-            if((new Kierownik_model()).RozpatrzReklamacje(_idReklamacji, 1))
+            if((new Kierownik_model()).RozpatrzReklamacje(_idReklamacji, 1,_uzytkownik))
             {
                 MessageBox.Show("Reklamacja została rozpatrzona pozytywnie.","Rozpatrzenie reklamacji", MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
@@ -354,7 +353,7 @@ namespace BD.View
 
         private void b_rozpatrz_negatywnie_Click(object sender, EventArgs e)
         {
-            if((new Kierownik_model()).RozpatrzReklamacje(_idReklamacji, 0))
+            if((new Kierownik_model()).RozpatrzReklamacje(_idReklamacji, 0, _uzytkownik))
             {
                     MessageBox.Show("Reklamacja została rozpatrzona negatywnie.", "Rozpatrzenie reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

@@ -15,7 +15,7 @@ namespace BD.Controller
         {
             _view = view;
         }
-        public bool PobierzPilotow()
+        public bool PobierzWycieczki(string uzytkownik)
         {
             _view.dgv_tabelaPilot.AutoGenerateColumns = false;
             // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
@@ -29,6 +29,7 @@ namespace BD.Controller
             bazaEntities db = new bazaEntities();
 
             var query = from wycieczka in db.Wycieczka
+                        where wycieczka.Pilot_pesel.Equals(uzytkownik)
                         join kierowca in db.Kierowca on wycieczka.Kierowca_pesel equals kierowca.pesel
                         select new
                         {

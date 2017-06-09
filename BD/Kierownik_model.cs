@@ -59,13 +59,14 @@ namespace BD
             }
         }
 
-        public bool RozpatrzReklamacje(int numerReklamacji, int stan)
+        public bool RozpatrzReklamacje(int numerReklamacji, int stan, string uzytkownik)
         {
             Polacz_z_baza polacz = new Polacz_z_baza();
             SqlConnection polaczenie = polacz.PolaczZBaza();
             SqlCommand zapytanie = polacz.UtworzZapytanie("UPDATE Reklamacja " +
                     "SET " +
-                    "stan = " + stan + " " +
+                    "stan = " + stan + ", " +
+                    "Kierownik_pesel= '" + uzytkownik + "'" +
                     "WHERE Reklamacja.numer_reklamacji= " + numerReklamacji);
 
             try
