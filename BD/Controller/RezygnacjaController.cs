@@ -88,6 +88,8 @@ namespace BD.Controller
                 try
                 {
                     db.SaveChanges();
+                    db.Dispose();
+                    db = new bazaEntities();
                     return 1;
                 }
                 catch (Exception exception)

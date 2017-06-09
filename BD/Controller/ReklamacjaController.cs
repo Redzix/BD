@@ -136,6 +136,8 @@ namespace BD.Controller
                     db.Reklamacja.Add(reklamacja);
 
                     db.SaveChanges();
+                    db.Dispose();
+                    db = new bazaEntities();
                     return 1;
                 }
                 else

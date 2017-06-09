@@ -189,6 +189,7 @@
             this.lv_reklamacje.TabIndex = 0;
             this.lv_reklamacje.UseCompatibleStateImageBehavior = false;
             this.lv_reklamacje.View = System.Windows.Forms.View.Details;
+            this.lv_reklamacje.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lv_reklamacje_ColumnClick);
             this.lv_reklamacje.ItemActivate += new System.EventHandler(this.lv_reklamacje_ItemActivate);
             // 
             // NumerReklamacji

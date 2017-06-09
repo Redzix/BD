@@ -80,6 +80,8 @@ namespace BD.Controller
                             rez.zaliczka += kwota;
                             rez.stan = true;
                             db.SaveChanges();
+                            db.Dispose();
+                            db = new bazaEntities();
                             return 1;
                         }
                         else if ((kwota + rez.zaliczka) > uczest.cena_rezerwacji)
@@ -91,6 +93,8 @@ namespace BD.Controller
                             rez.zaliczka += kwota;
                             rez.stan = false;
                             db.SaveChanges();
+                            db.Dispose();
+                            db = new bazaEntities();
                             return -1;
                         }
                         return 2;
@@ -159,6 +163,8 @@ namespace BD.Controller
                 db.Rezerwacja.Add(nowaRezerwacja);
                 db.Uczestnictwo.Add(noweUczestnictwo);
                 db.SaveChanges();
+                db.Dispose();
+                db = new bazaEntities();
 
                 return 1;
             }

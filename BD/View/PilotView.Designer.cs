@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.dgv_tabelaPilot = new System.Windows.Forms.DataGridView();
-            this.l_zalogowany_jako = new System.Windows.Forms.Label();
-            this.b_wyjdz = new System.Windows.Forms.Button();
-            this.l_uzytkownik = new System.Windows.Forms.Label();
-            this.l_polaczenie = new System.Windows.Forms.Label();
             this.id_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Data_wyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Data_powrotu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Pojazd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Kierowca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.l_zalogowany_jako = new System.Windows.Forms.Label();
+            this.b_wyjdz = new System.Windows.Forms.Button();
+            this.l_uzytkownik = new System.Windows.Forms.Label();
+            this.l_polaczenie = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_tabelaPilot)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,6 +57,38 @@
             this.dgv_tabelaPilot.Name = "dgv_tabelaPilot";
             this.dgv_tabelaPilot.Size = new System.Drawing.Size(651, 150);
             this.dgv_tabelaPilot.TabIndex = 0;
+            this.dgv_tabelaPilot.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_tabelaPilot_ColumnHeaderMouseClick);
+            // 
+            // id_wycieczki
+            // 
+            this.id_wycieczki.HeaderText = "Id wycieczki";
+            this.id_wycieczki.Name = "id_wycieczki";
+            this.id_wycieczki.Visible = false;
+            // 
+            // Nazwa_wycieczki
+            // 
+            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
+            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
+            // 
+            // Data_wyjazdu
+            // 
+            this.Data_wyjazdu.HeaderText = "Data wyjazdu";
+            this.Data_wyjazdu.Name = "Data_wyjazdu";
+            // 
+            // Data_powrotu
+            // 
+            this.Data_powrotu.HeaderText = "Data powrotu";
+            this.Data_powrotu.Name = "Data_powrotu";
+            // 
+            // Pojazd
+            // 
+            this.Pojazd.HeaderText = "Pojazd";
+            this.Pojazd.Name = "Pojazd";
+            // 
+            // Kierowca
+            // 
+            this.Kierowca.HeaderText = "Kierowca";
+            this.Kierowca.Name = "Kierowca";
             // 
             // l_zalogowany_jako
             // 
@@ -94,37 +126,6 @@
             this.l_polaczenie.Size = new System.Drawing.Size(10, 13);
             this.l_polaczenie.TabIndex = 7;
             this.l_polaczenie.Text = " ";
-            // 
-            // id_wycieczki
-            // 
-            this.id_wycieczki.HeaderText = "Id wycieczki";
-            this.id_wycieczki.Name = "id_wycieczki";
-            this.id_wycieczki.Visible = false;
-            // 
-            // Nazwa_wycieczki
-            // 
-            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
-            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
-            // 
-            // Data_wyjazdu
-            // 
-            this.Data_wyjazdu.HeaderText = "Data wyjazdu";
-            this.Data_wyjazdu.Name = "Data_wyjazdu";
-            // 
-            // Data_powrotu
-            // 
-            this.Data_powrotu.HeaderText = "Data powrotu";
-            this.Data_powrotu.Name = "Data_powrotu";
-            // 
-            // Pojazd
-            // 
-            this.Pojazd.HeaderText = "Pojazd";
-            this.Pojazd.Name = "Pojazd";
-            // 
-            // Kierowca
-            // 
-            this.Kierowca.HeaderText = "Kierowca";
-            this.Kierowca.Name = "Kierowca";
             // 
             // PilotView
             // 

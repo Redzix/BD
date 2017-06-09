@@ -126,6 +126,7 @@
             this.lv_pojazdy.TabIndex = 1;
             this.lv_pojazdy.UseCompatibleStateImageBehavior = false;
             this.lv_pojazdy.View = System.Windows.Forms.View.Details;
+            this.lv_pojazdy.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lv_pojazdy_ColumnClick);
             this.lv_pojazdy.SelectedIndexChanged += new System.EventHandler(this.lv_pojazdy_SelectedIndexChanged);
             // 
             // Nr_rejestracyjny

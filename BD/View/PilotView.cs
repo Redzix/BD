@@ -114,5 +114,10 @@ namespace BD.View
                 MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void dgv_tabelaPilot_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+           
+        }
     }
 }

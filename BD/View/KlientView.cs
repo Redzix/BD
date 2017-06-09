@@ -187,5 +187,6 @@ namespace BD.View
             RezerwacjaView rezerwacja = new RezerwacjaView();
             rezerwacja.ShowDialog();
         }
+
     }
 }

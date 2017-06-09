@@ -150,5 +150,20 @@ namespace BD.View
                 this.rb_sprawny.Enabled = true;
                 this.b_kierowca_zapisz.Enabled = true;
         }
+
+        private void sortListViewByColumn(object sender, ColumnClickEventArgs e)
+        {
+            if (((ListView)sender).Sorting == System.Windows.Forms.SortOrder.Ascending)
+                ((ListView)sender).Sorting = System.Windows.Forms.SortOrder.Descending;
+            else
+                ((ListView)sender).Sorting = System.Windows.Forms.SortOrder.Ascending;
+            ((ListView)sender).Sort();
+            ((ListView)sender).ListViewItemSorter = new ListViewItemComparer(e.Column, ((ListView)sender).Sorting);
+        }
+
+        private void lv_pojazdy_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            sortListViewByColumn(sender,e);
+        }
     }
 }

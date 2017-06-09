@@ -37,7 +37,8 @@ namespace BD.Controller
 
                 db.Opinia.Add(opinia);
                 db.SaveChanges();
-
+                db.Dispose();
+                db = new bazaEntities();
                 return 1;
             }
             catch (FormatException exception)

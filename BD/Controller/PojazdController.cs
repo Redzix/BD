@@ -40,7 +40,8 @@ namespace BD.Controller
 
                     db.Pojazd.Add(pojazd);
                     db.SaveChanges();
-
+                    db.Dispose();
+                    db = new bazaEntities();
                     return 1;
                 }
                 else
