@@ -9,8 +9,8 @@ namespace BD.Controller
 {
     class RezygnacjaController
     {
-        RezygnacjaView _view;
-        bazaEntities db;
+        private RezygnacjaView _view;
+        private bazaEntities db;
 
         public RezygnacjaController(RezygnacjaView view)
         {

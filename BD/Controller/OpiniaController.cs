@@ -9,8 +9,8 @@ namespace BD.Controller
 {
     class OpiniaController
     {
-        OpiniaView _view;
-        bazaEntities db;
+        private OpiniaView _view;
+        private bazaEntities db;
 
         public OpiniaController(OpiniaView view)
         {

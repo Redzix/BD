@@ -10,8 +10,8 @@ namespace BD.Controller
 {
     class KierowcaController
     {
-        KierowcaView _view;
-        bazaEntities db;
+        private KierowcaView _view;
+        private bazaEntities db;
 
         public KierowcaController(KierowcaView view)
         {

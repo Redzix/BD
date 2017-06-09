@@ -227,8 +227,8 @@
         public System.Windows.Forms.TabPage tp_stan_reklamacji;
         public System.Windows.Forms.TextBox tb_numerRezerwacji;
         private System.Windows.Forms.Label l_numerRezerwacji;
-        private System.Windows.Forms.ListView lv_reklamacje;
-        private System.Windows.Forms.ColumnHeader NumerReklamacji;
+        public System.Windows.Forms.ListView lv_reklamacje;
+        public System.Windows.Forms.ColumnHeader NumerReklamacji;
         public System.Windows.Forms.RichTextBox rtb_reklamacja;
         public System.Windows.Forms.TextBox tb_nazwaWycieczki;
         private System.Windows.Forms.Button b_sprawdzPoprawnosc;

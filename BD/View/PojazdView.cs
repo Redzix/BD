@@ -7,17 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BD.Controller;
 
 namespace BD.View
 {
     public partial class PojazdView : Form
     {
+        private PojazdController controller; 
+
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
         public PojazdView()
         {
             InitializeComponent();
+            controller = new PojazdController(this);
         }
 
         /// <summary>
@@ -61,34 +65,26 @@ namespace BD.View
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            bazaEntities db = new bazaEntities();
+            int zapisz = controller.DodajPojazd();
 
-            try
+            switch (zapisz)
             {
-                int pojemnosc = int.Parse(tb_pojemnosc.Text);
-
-                var pojazd = new Pojazd
-                {
-                    numer_rejestracyjny = tb_numer_rejestracyjny.Text,
-                    dostepny = true,
-                    marka = tb_marka.Text,
-                    stan = true,
-                    pojemnosc = pojemnosc
-                };
-
-                db.Pojazd.Add(pojazd);
-                db.SaveChanges();
-                this.Dispose();
-            }catch(FormatException exception)
-            {
-                MessageBox.Show("Bład podczas dodawania pojazdu. Sprwdź, czy wporwadzono poprawną pojemność","Błąd dodawania pojazdu",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }catch (Exception exception)
-            {
-                MessageBox.Show("Bład podczas dodawania pojazdu. Możliwy problem z połączeniem.", "Błąd dodawania pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
-
+                case 1:
+                    MessageBox.Show("Pojazd dodano pomyślnie", "Dodanie pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Dispose();
+                    break;
+                case 0:
+                    MessageBox.Show("Bład podczas dodawania pojazdu. Sprwdź, czy wporwadzono poprawną pojemność", "Błąd dodawania pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -1:
+                    MessageBox.Show("Bład podczas dodawania pojazdu. Problem z zapisem do bazy.", "Błąd dodawania pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -2:
+                    MessageBox.Show("Bład podczas dodawania pojazdu. Pojazd o podanym numerze rejestracyjnym już istenieje.", "Błąd dodawania pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    break;
+            }          
         }
     }
 }

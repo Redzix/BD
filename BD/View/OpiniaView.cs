@@ -14,7 +14,7 @@ namespace BD.View
 {
     public partial class OpiniaView : Form
     {
-        OpiniaController controller;
+        private OpiniaController controller;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna

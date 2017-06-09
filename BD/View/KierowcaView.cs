@@ -14,7 +14,7 @@ namespace BD.View
 {
     public partial class KierowcaView : Form
     {
-        KierowcaController controller;
+        private KierowcaController controller;
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>

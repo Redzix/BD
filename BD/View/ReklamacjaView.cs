@@ -8,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using BD.Controller;
 
 namespace BD.View
 {
     public partial class ReklamacjaView : Form
     {
-        List<Wycieczka_model>  _listaWycieczek= new List<Wycieczka_model>();
-        List<Reklamacja_model> _listaReklamacji = new List<Reklamacja_model>();
-        Polacz_z_baza _polacz = new Polacz_z_baza();
-        SqlConnection _polaczenie = new SqlConnection();
+        private ReklamacjaController controller;       
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -24,6 +22,7 @@ namespace BD.View
         public ReklamacjaView()
         {
             InitializeComponent();
+            controller = new ReklamacjaController(this);
         }
 
         /// <summary>
@@ -67,37 +66,25 @@ namespace BD.View
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            bazaEntities db = new bazaEntities();
+            int zapisz = controller.DodajReklamacje(tb_numerRezerwacji.Text);
 
-            try
-            { 
-                int numer = int.Parse(tb_numerRezerwacji.Text);
-                var uczestnictwo = (from uc in db.Uczestnictwo
-                                    where uc.numer_rezerwacji == numer
-                                    select uc).FirstOrDefault();
-
-                var reklamacja = new Reklamacja
-                {
-                    opis = tb_opis_reklamacji.Text,
-                    stan = false,
-                    Kierownik_pesel = "brak",
-                    id_uczestnictwo = uczestnictwo.id_uczestnictwo
-                };
-                db.Reklamacja.Add(reklamacja);
-
-                db.SaveChanges();
-                MessageBox.Show("Prawidłowo dodano reklamację.", "Dodano reklamację.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                tb_nazwaWycieczki.Text = "";
-                tb_opis_reklamacji.Text = "";
-                tb_numerRezerwacji.Text = "";
-            }
-            catch (FormatException exception)
+            switch (zapisz)
             {
-                MessageBox.Show("wprowadzono nieprawidłowy numer rezerwacji. Błąd:\n" + exception.Message, "Błąd podczas dodawania reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show("Wystąpił problem podczas dodawania reklamacji. Błąd:\n" + exception.Message, "Błąd podczas dodawania reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                case 1:
+                    MessageBox.Show("Prawidłowo dodano reklamację.", "Dodano reklamację.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Dispose();
+                    break;
+                case 0:
+                    MessageBox.Show("Wprowadzono nieprawidłowy numer rezerwacji. Błedny format.", "Błąd podczas dodawania reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -1:
+                    MessageBox.Show("Wystąpił problem podczas dodawania reklamacji. Błąd z zapisem do bazy danych." , "Błąd podczas dodawania reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -2:
+                    MessageBox.Show("Wprowadzono inny numer rezerwacji. Sprawdź poprawność tego numeru.", "Błąd podczas dodawania reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    break;
             }             
         }
 
@@ -105,83 +92,61 @@ namespace BD.View
         {
             if(tc_reklamacje.SelectedIndex == 1)
             {
-                bazaEntities db = new bazaEntities();
-
-                var pobierz = from reklamacja in db.Reklamacja
-                              orderby reklamacja.numer_reklamacji
-                              select reklamacja.numer_reklamacji;
-
-                if (pobierz == null)
+                if (controller.PobierzReklamacje())
                 {
-                    MessageBox.Show("Wystąpił bład podczas pobierania danych.","Błąd pobierania danych",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    lv_reklamacje.Items.Add("Brak reklamacji");
-                }else
+                    return;
+                }
+                else
                 {
-                    foreach (var rek in pobierz)
-                    {
-                        ListViewItem reklamacja = new ListViewItem(rek.ToString());
-                        reklamacja.Tag = rek.ToString();
-                        lv_reklamacje.Items.Add(reklamacja);
-                    }
+                    MessageBox.Show("Wystąpił bład podczas pobierania danych.", "Błąd pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
         {
-            int numer = int.Parse(((ListView)sender).SelectedItems[0].Tag.ToString());
+            int pobierz = controller.PobierzInformacjeOReklamacji(((ListView)sender).SelectedItems[0].Tag.ToString());
 
-            bazaEntities db = new bazaEntities();
-
-            var query = (from reklamacja in db.Reklamacja
-                         where reklamacja.numer_reklamacji == numer
-                         select new
-                         {
-                             numer = reklamacja.numer_reklamacji,
-                             nazwa = reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.nazwa,
-                             stan = reklamacja.stan,
-                             dataOdjazdu = reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.data_wyjazdu,
-                             dataPowrotu = reklamacja.Uczestnictwo.Rezerwacja.Wycieczka.data_powrotu,
-                             opis = reklamacja.opis
-                         }).FirstOrDefault();
-
-            // Dodanie wartości parametrów do opisu znajdującego się w texboxie
-            rtb_reklamacja.Text =
-                "Numer reklamacji: " + query.numer +
-                "\nStan: " + ((bool.Parse(query.stan.ToString())) ? "Rozpatrzona" : "Nierpozatrzona") +
-                "\nNazwa wycieczki: " + query.nazwa +
-                "\nData wycieczki: " + query.dataOdjazdu + "--" + query.dataPowrotu +
-                "\nOpis: " + query.opis;
-
+            switch (pobierz)
+            {
+                case 1:
+                    break;
+                case 0:
+                    MessageBox.Show("Nieprawidłowy format numeru reklamacji. Błędny format.", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -1:
+                    MessageBox.Show("Wystapił problem podczas pobierania danych.", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void b_sprawdzPoprawnosc_Click(object sender, EventArgs e)
-        {         
-            bazaEntities db = new bazaEntities();
+        {
+            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text);
 
-            try
+            switch (pobierz)
             {
-                int numer = int.Parse(tb_numerRezerwacji.Text);
-
-                var query = (from uczestnictwo in db.Uczestnictwo
-                             where uczestnictwo.numer_rezerwacji == numer
-                             select uczestnictwo.Rezerwacja.Wycieczka.nazwa).FirstOrDefault();
-
-                if (query == null)
-                {
+                case 1:
+                    b_zapisz.Enabled = true;
+                    break;
+                case -1:
+                    MessageBox.Show("Wprowadź prawidłowy numer rezerwacji. Taka rezerwacja nie istnieje.", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     tb_nazwaWycieczki.Text = "Błędna rezerwacja";
-                    this.b_zapisz.Enabled = false;
-                }
-                else
-                {
-                    tb_nazwaWycieczki.Text = query;
-                    this.b_zapisz.Enabled = true;
-                }
-            }
-            catch(FormatException exception)
-            {
-                MessageBox.Show("Wprowadź prawidłowy numer rezerwacji.","Błąd podczas pobierania danych",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
+                    b_zapisz.Enabled = false;
+                    break;
+                case 0:
+                    MessageBox.Show("Wprowadź prawidłowy numer rezerwacji. Błędny format.", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    b_zapisz.Enabled = false;
+                    break;
+                case -2:
+                    MessageBox.Show("Wystapił problem podczas pobierania danych.", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    b_zapisz.Enabled = false;
+                    break;
+                default:
+                    break;
+            }          
         }
     }
 }

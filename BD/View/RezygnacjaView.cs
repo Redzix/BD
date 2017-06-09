@@ -13,7 +13,7 @@ namespace BD.View
 {
     public partial class RezygnacjaView : Form
     {
-        RezygnacjaController controller;
+        private RezygnacjaController controller;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -66,7 +66,7 @@ namespace BD.View
             }
         }
 
-         private void b_oblicz_Click(object sender, EventArgs e)
+        private void b_oblicz_Click(object sender, EventArgs e)
          {
             int oblicz = controller.Oblicz(tb_numerRezerwacji.Text);
 
@@ -97,70 +97,7 @@ namespace BD.View
                     break;
                 default:
                     break;
-            }
-
-           /* bazaEntities db = new bazaEntities();
-            try
-            {
-                int numer = int.Parse(tb_numerRezerwacji.Text);
-
-                var query = (from uczestnictwo in db.Uczestnictwo
-                             where uczestnictwo.numer_rezerwacji == numer
-                             select new
-                                 {
-                                     nazwa = uczestnictwo.Rezerwacja.Wycieczka.nazwa,
-                                     cenaRezerwacji = uczestnictwo.cena_rezerwacji,
-                                     liczbaOsob = uczestnictwo.liczba_osob
-                                 }).FirstOrDefault();
-
-                tb_nazwaWycieczki.Text = query.nazwa;
-                tb_liczbaOsob.Text = query.liczbaOsob.ToString();
-
-                if (query.liczbaOsob < int.Parse(tb_liczbaRezygnujacychOsob.Text))
-                {
-                    MessageBox.Show("Podano zbyt dużą ilość rezygnujących osób." ,"Bład wprowadzaznia danych",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    this.b_zapisz.Enabled = false;
-                }
-                else if (query.liczbaOsob == int.Parse(tb_liczbaRezygnujacychOsob.Text))
-                {
-                    if (MessageBox.Show("rezerwacja zostanie usunięta, czy na pewno chcesz to zrobić?", "Usuwanie rezerwacji", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        var usun = (from uczestnictwo in db.Uczestnictwo
-                                    where uczestnictwo.numer_rezerwacji == numer
-                                    select uczestnictwo.Rezerwacja).FirstOrDefault();
-                        db.Rezerwacja.Remove(usun);
-                        this.b_zapisz.Enabled = true;
-                    }
-                    else
-                    {
-                        this.b_zapisz.Enabled = false;
-                    }
-               
-                }
-                else
-                {
-                    var cenaPoRezygnacji = query.cenaRezerwacji - (int.Parse(tb_liczbaRezygnujacychOsob.Text) * (query.cenaRezerwacji / query.liczbaOsob));
-                    tb_cenaPoRezygnacji.Text = cenaPoRezygnacji.ToString();
-                    this.b_zapisz.Enabled = true;
-                }
-            }
-            catch (FormatException exception)
-            {
-                MessageBox.Show("Wprowadź prawidłowy numer rezerwacji oraz liczbę rezygnujących osób..", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show("Rezerwacja nie isnieje.", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show("Wystąpił problem podczas zapisywania zmian do bazy danych.", "Błąd podczas zapisywania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
+            }          
         }
 
         private void b_zapisz_Click(object sender, EventArgs e)
