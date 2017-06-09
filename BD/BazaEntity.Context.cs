@@ -26,7 +26,6 @@ namespace BD
         }
     
         public virtual DbSet<Cennik> Cennik { get; set; }
-        public virtual DbSet<Katalog> Katalog { get; set; }
         public virtual DbSet<Kierowca> Kierowca { get; set; }
         public virtual DbSet<Kierownik> Kierownik { get; set; }
         public virtual DbSet<Klient> Klient { get; set; }
@@ -40,5 +39,6 @@ namespace BD
         public virtual DbSet<Uczestnictwo> Uczestnictwo { get; set; }
         public virtual DbSet<Wycieczka> Wycieczka { get; set; }
         public virtual DbSet<Promocja> Promocja { get; set; }
+        public virtual DbSet<Katalog> Katalog { get; set; }
     }
 }

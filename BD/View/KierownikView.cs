@@ -17,6 +17,7 @@ namespace BD.View
     {
         private int _idReklamacji = 0;
         private string _uzytkownik;
+        KierownikController controller;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna, tworzący okno oraz połączenie z bazą danych.
@@ -24,6 +25,7 @@ namespace BD.View
         public KierownikView()
         {
             InitializeComponent();
+            controller = new KierownikController(this);
             l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
             l_polaczenie.Text = "Połączono";
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
@@ -37,20 +39,12 @@ namespace BD.View
         public KierownikView(string uzytkownik)
         {
             InitializeComponent();
+            controller = new KierownikController(this);
+            controller.LadujKatalog();
             _uzytkownik = uzytkownik;
             l_uzytkownik.Text = uzytkownik;
             l_polaczenie.Text = "Połączono";
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
-        }
-
-        /// <summary>
-        /// a co to je?
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Kierownik_Load(object sender, EventArgs e)
-        {
-            this.ZaladujWycieczki();
         }
 
         /// <summary>
@@ -127,7 +121,7 @@ namespace BD.View
         {
             WycieczkaView wycieczka = new WycieczkaView(1, 0);
             wycieczka.ShowDialog();
-            ZaladujWycieczki();
+            controller.LadujKatalog();
         }
 
         private void tc_kierownik_SelectedIndexChanged(object sender, EventArgs e)
@@ -135,7 +129,7 @@ namespace BD.View
             switch (tc_kierownik.SelectedIndex)
             {
                 case 0:
-                    this.ZaladujWycieczki();
+                    controller.LadujKatalog();
                     break;
                 case 1:
                     this.ZaladujReklamacje();
@@ -144,34 +138,6 @@ namespace BD.View
                     this.ZaladujPojazdy();
                     break;
             } 
-        }
-
-        public void ZaladujWycieczki()
-        {
-
-            bazaEntities db = new bazaEntities();
-            lv_wycieczki.Items.Clear();
-            //All hail LINQ kurwa
-            var query = from katalog in db.Katalog
-                        select new {
-                            katalog,
-                            wycieczka = katalog.Wycieczka,
-                            cennik = katalog.Cennik,
-                            miejsce_z = katalog.Miejsce,
-                            miejsce_do = katalog.Miejsce1
-                        };
-            
-            foreach(var wyc in query)
-            {
-                ListViewItem wycieczka = new ListViewItem(wyc.wycieczka.nazwa); //Miejsce
-                wycieczka.Tag = wyc.katalog.id_katalogu; //Ukryte ID
-                wycieczka.SubItems.Add(String.Format("{0:dd.MM.yyyy}",(DateTime)wyc.wycieczka.data_wyjazdu)); //Data z
-                wycieczka.SubItems.Add(String.Format("{0:dd.MM.yyyy}", (DateTime)wyc.wycieczka.data_powrotu)); //data do
-                wycieczka.SubItems.Add(wyc.miejsce_z.miejscowosc); //miejsce od
-                wycieczka.SubItems.Add(wyc.miejsce_do.miejscowosc); //miejsce do
-                wycieczka.SubItems.Add(wyc.cennik.cena.ToString()); //cena
-                lv_wycieczki.Items.Add(wycieczka);
-            }
         }
 
         public void ZaladujPojazdy()
@@ -299,30 +265,6 @@ namespace BD.View
             lv_pojazdy.Refresh();
         }
 
-        private void cb_nazwa_wycieczki_SelectedIndexChanged(object sender, EventArgs e)
-        {          
-            List<int> listaNumerowReklamacji = new List<int>();
-            lv_reklamacje.Items.Clear();
-
-            bazaEntities db = new bazaEntities();
-            //lv_pojazdy.Items.Clear();
-            /*var query = from reklamacja in db.Reklamacja
-                                 join uczestnictwo in db.Uczestnictwo on reklamacja.id_uczestnictwo equals uczestnictwo.id_uczestnictwo
-                                 join rezerwacja in db.Rezerwacja on uczestnictwo.numer_rezerwacji equals rezerwacja.numer_rezerwacji
-                                 join wycieczka in db.Wycieczka on rezerwacja.id_wycieczki equals wycieczka.id_wycieczki
-                                 where wycieczka.nazwa == cb_nazwa_wycieczki.Text
-                                 select reklamacja.numer_reklamacji;*/
-            var query = from r in db.Reklamacja select r;
-                foreach (Reklamacja rek in query)
-                {
-                    ListViewItem reklamacjaItem = new ListViewItem(rek.numer_reklamacji.ToString());
-                    reklamacjaItem.Tag = rek.numer_reklamacji;
-                    reklamacjaItem.SubItems.Add(rek.opis.Substring(0, 30));
-                    lv_reklamacje.Items.Add(reklamacjaItem);
-                }
-            lv_reklamacje.Refresh();
-        }
-
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
         {
             bazaEntities db = new bazaEntities();
@@ -371,7 +313,7 @@ namespace BD.View
                 var id = lv_wycieczki.SelectedItems[0].Tag;
                 WycieczkaView wycieczka = new WycieczkaView(0, (int)id);
                 wycieczka.ShowDialog();
-                ZaladujWycieczki();
+                controller.LadujKatalog();
             } catch
             {
                 MessageBox.Show("Musisz najpierw wybrać wycieczkę do edycji");
@@ -384,15 +326,12 @@ namespace BD.View
             if(dialogResult == DialogResult.Yes)
             {
                 bazaEntities db = new bazaEntities();
-                var idKat = lv_wycieczki.SelectedItems[0].Tag;
-                var katalog = new Katalog { id_katalogu = (int)idKat };
-                try
+                var idKatalog = lv_wycieczki.SelectedItems[0].Tag;
+                if(controller.UsunKatalog((int)idKatalog))
                 {
-                    db.Entry(katalog).State = EntityState.Deleted;
-                    db.SaveChanges();
                     MessageBox.Show("Usunięto wybraną wycieczkę.", "Usuwanie wycieczki", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.ZaladujWycieczki();
-                } catch
+                    controller.LadujKatalog();
+                } else
                 {
                     MessageBox.Show("Wystąpił błąd podczas usuwania wycieczki.", "Błąd usuwania wycieczki.", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -435,7 +374,7 @@ namespace BD.View
             var id = lv_wycieczki.SelectedItems[0].Tag;
             PromocjaView promo = new PromocjaView((int)id);
             promo.ShowDialog();
-            ZaladujWycieczki();
+            controller.LadujKatalog();
         }
 
         private void lv_wycieczki_ColumnClick(object sender, ColumnClickEventArgs e)

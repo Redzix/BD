@@ -19,6 +19,7 @@
     <Property Name="id_miejsca_odjazdu" Type="int" />
     <Property Name="id_miejsca_przyjazdu" Type="int" />
     <Property Name="id_wycieczki" Type="int" />
+    <Property Name="cena" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="Kierowca">
     <Key>
@@ -151,7 +152,9 @@
     <Property Name="Kierowca_pesel" Type="varchar" MaxLength="11" />
   </EntityType>
   <Association Name="Katalog_Cennik_FK">
-    <End Role="Cennik" Type="Self.Cennik" Multiplicity="0..1" />
+    <End Role="Cennik" Type="Self.Cennik" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Katalog" Type="Self.Katalog" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Cennik">
