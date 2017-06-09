@@ -152,3 +152,4 @@ D:\Visual_projekty\_BD\BD\obj\Debug\BD.exe
 D:\Visual_projekty\_BD\BD\obj\Debug\BD.pdb
 F:\Repos\BD\obj\Debug\BD.csprojResolveAssemblyReference.cache
 C:\Users\preze\Source\Repos\BD\BD\obj\Debug\BD.View.KlientView.resources
+C:\Users\preze\Source\Repos\BD\BD\obj\Debug\BD.View.PromocjaView.resources

@@ -189,7 +189,7 @@ namespace BD.View
             foreach(var wyc in query)
             {
                 ListViewItem wycieczka = new ListViewItem(wyc.wycieczka.nazwa); //Miejsce
-                wycieczka.Tag = wyc.katalog.id_wycieczki; //Ukryte ID
+                wycieczka.Tag = wyc.katalog.id_katalogu; //Ukryte ID
                 wycieczka.SubItems.Add(String.Format("{0:dd.MM.yyyy}",(DateTime)wyc.wycieczka.data_wyjazdu)); //Data z
                 wycieczka.SubItems.Add(String.Format("{0:dd.MM.yyyy}", (DateTime)wyc.wycieczka.data_powrotu)); //data do
                 wycieczka.SubItems.Add(wyc.miejsce_z.miejscowosc); //miejsce od
@@ -451,6 +451,19 @@ namespace BD.View
         }
         
         private void lv_pojazdy_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            sortListViewByColumn(sender, e);
+        }
+
+        private void b_promocja_Click(object sender, EventArgs e)
+        {
+            var id = lv_wycieczki.SelectedItems[0].Tag;
+            PromocjaView promo = new PromocjaView((int)id);
+            promo.ShowDialog();
+            ZaladujWycieczki();
+        }
+
+        private void lv_wycieczki_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender, e);
         }
