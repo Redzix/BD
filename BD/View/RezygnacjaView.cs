@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BD.Controller;
 
 namespace BD.View
 {
     public partial class RezygnacjaView : Form
     {
+        RezygnacjaController controller;
+
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
@@ -20,7 +23,8 @@ namespace BD.View
             InitializeComponent();
             tb_cenaPoRezygnacji.Enabled = false;
             tb_liczbaOsob.Enabled = false;
-            tb_nazwaWycieczki.Enabled = false;            
+            tb_nazwaWycieczki.Enabled = false;
+            controller = new RezygnacjaController(this);
         }
 
         /// <summary>
@@ -64,7 +68,38 @@ namespace BD.View
 
          private void b_oblicz_Click(object sender, EventArgs e)
          {
-            bazaEntities db = new bazaEntities();
+            int oblicz = controller.Oblicz(tb_numerRezerwacji.Text);
+
+            switch (oblicz)
+            {
+                case -3:
+                    MessageBox.Show("Rezerwacja nie isnieje.", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -2:
+                    MessageBox.Show("Wprowadź prawidłowy numer rezerwacji oraz liczbę rezygnujących osób..", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -1:
+                    if (MessageBox.Show("Rezerwacja zostanie usunięta, czy na pewno chcesz to zrobić?", "Usuwanie rezerwacji", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        this.b_zapisz.Enabled = true;
+                    }
+                    else
+                    {
+                        this.b_zapisz.Enabled = false;
+                    }
+                    break;
+                case 0:
+                    MessageBox.Show("Podano zbyt dużą ilość rezygnujących osób.", "Bład wprowadzaznia danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.b_zapisz.Enabled = false;
+                    break;
+                case 1:
+                    this.b_zapisz.Enabled = true;
+                    break;
+                default:
+                    break;
+            }
+
+           /* bazaEntities db = new bazaEntities();
             try
             {
                 int numer = int.Parse(tb_numerRezerwacji.Text);
@@ -125,45 +160,28 @@ namespace BD.View
             catch (Exception exc)
             {
                 MessageBox.Show("Wystąpił problem podczas zapisywania zmian do bazy danych.", "Błąd podczas zapisywania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
         }
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            bazaEntities db = new bazaEntities();
+            int zapisz = controller.Zapisz(tb_numerRezerwacji.Text);
 
-            try
+            switch (zapisz)
             {
-                int numer = int.Parse(tb_numerRezerwacji.Text);                     
-
-                var rezerwacja = (from rezerw in db.Rezerwacja
-                                  where rezerw.numer_rezerwacji == numer
-                                  select rezerw).FirstOrDefault();
-
-                rezerwacja.liczba_osob = int.Parse(tb_liczbaOsob.Text) - int.Parse(tb_liczbaRezygnujacychOsob.Text);          
-
-                var uczestnictwo = (from uc in db.Uczestnictwo
-                                    where uc.numer_rezerwacji == numer
-                                    select uc).FirstOrDefault();
-
-                uczestnictwo.cena_rezerwacji = decimal.Parse(tb_cenaPoRezygnacji.Text);
-                uczestnictwo.liczba_osob = int.Parse(tb_liczbaOsob.Text) - int.Parse(tb_liczbaRezygnujacychOsob.Text);         
-
-                try
-                {
-                    db.SaveChanges();
-                    MessageBox.Show("Zmiany wprowadzono poprawnie","Zmieniono rezerwację.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                case 1:
+                    MessageBox.Show("Zmiany wprowadzono poprawnie", "Zmieniono rezerwację.", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Dispose();
-
-                }catch(Exception exception)
-                {
-                    MessageBox.Show("Wystąpił problem podczas wprowadzania zmian. Błąd:\n" + exception.Message,"Błąd podczas zmiany rezerwacji",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                }
-            }
-            catch (FormatException exception)
-            {
-                MessageBox.Show("Wprowadź prawidłowy numer rezerwacji.", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                    break;
+                case -1:
+                    MessageBox.Show("Wystąpił błąd podczas wprowadzania zmian. Problem z połączeniem." , "Błąd podczas zmiany rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case 0:
+                    MessageBox.Show("Wprowadź prawidłowy numer rezerwacji.", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    break;
+            }           
         }    
     }
 }

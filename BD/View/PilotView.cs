@@ -140,38 +140,6 @@ namespace BD.View
             { 
                 MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            /*
-             // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
-             dgv_tabelaPilot.Columns["id_wycieczki"].DataPropertyName = "wycieczkaId";
-             dgv_tabelaPilot.Columns["Nazwa_wycieczki"].DataPropertyName = "wycieczka";
-             dgv_tabelaPilot.Columns["Data_wyjazdu"].DataPropertyName = "dataOdjazdu";
-             dgv_tabelaPilot.Columns["Data_powrotu"].DataPropertyName = "dataPowrotu";
-             dgv_tabelaPilot.Columns["Pojazd"].DataPropertyName = "pojazd";
-             dgv_tabelaPilot.Columns["Kierowca"].DataPropertyName = "kierowca";
-
-             bazaEntities db = new bazaEntities();
-
-             var query = from wycieczka in db.Wycieczka
-                         join kierowca in db.Kierowca on wycieczka.Kierowca_pesel equals kierowca.pesel
-                         select new
-                         {
-                             wycieczkaId = wycieczka.id_wycieczki,
-                             wycieczka = wycieczka.nazwa,
-                             dataOdjazdu = wycieczka.data_wyjazdu,
-                             dataPowrotu = wycieczka.data_powrotu,
-                             pojazd = wycieczka.Pojazd_numer_rejestracyjny,
-                             kierowca = wycieczka.Kierowca.imie + " " + wycieczka.Kierowca.nazwisko
-                         };
-
-             if (query == null)
-             {
-                 MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             }
-             else
-             {
-                 dgv_tabelaPilot.DataSource = query.ToList();
-             } */
         }
     }
 }
