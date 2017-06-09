@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using BD.Controller;
 
 namespace BD.View
 {
     public partial class RezerwacjaView : Form
     {
         private int _idWycieczki;
+        private RezerwacjaController controller;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -23,6 +25,8 @@ namespace BD.View
             InitializeComponent();
             this.p_rezerwuj.Visible = false;
             this.p_zaplac.Visible = true;
+            b_zapłaćRezerwacje.Enabled = false;
+            controller = new RezerwacjaController(this);
         }
 
         /// <summary>
@@ -35,7 +39,10 @@ namespace BD.View
             InitializeComponent();
             this.p_zaplac.Visible = false;
             this.p_rezerwuj.Visible = true;
+            b_zapłaćRezerwacje.Enabled = false;
+            controller = new RezerwacjaController(this);
         }
+
         /// <summary>
         /// Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
         /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
@@ -77,62 +84,22 @@ namespace BD.View
 
         private void b_rezerwacja_zapisz_Click(object sender, EventArgs e)
         {
-            bazaEntities db = new bazaEntities();
+            int zapisz = controller.DodajRezerwacje(_idWycieczki);
 
-            var cenaRezerwacji = (from katalog in db.Katalog
-                                  where katalog.id_wycieczki == _idWycieczki
-                                  select katalog.Cennik.cena).FirstOrDefault();
-
-            try
-            {              
-                var nowyKlient = new Klient
-                {
-                    pesel = tb_pesel.Text,
-                    imie = tb_imie.Text,
-                    nazwisko = tb_nazwisko.Text,
-                    ulica = tb_adres.Text,
-                    miejscowosc = tb_miejscowosc.Text,
-                };
-
-                var czyKlientIstnieje = (from czyIstnieje in db.Klient
-                                         where czyIstnieje.pesel.Equals(nowyKlient.pesel)
-                                         select czyIstnieje).FirstOrDefault();
-
-                if(czyKlientIstnieje == null)
-                {
-                    db.Klient.Add(nowyKlient);
-                }            
-
-                var nowaRezerwacja = new Rezerwacja
-                {
-                    liczba_osob = int.Parse(tb_liczba_osob.Text),
-                    stan = false,
-                    zaliczka = decimal.Parse(tb_zaliczka.Text),
-                    id_wycieczki = _idWycieczki,
-                    Klient_pesel = nowyKlient.pesel
-                };
-
-               var noweUczestnictwo = new Uczestnictwo
-                {
-                    liczba_osob = nowaRezerwacja.liczba_osob,
-                    numer_rezerwacji = nowaRezerwacja.numer_rezerwacji,
-                    cena_rezerwacji = cenaRezerwacji * nowaRezerwacja.liczba_osob
-               };
-                nowaRezerwacja.Klient = nowyKlient;
-                noweUczestnictwo.Rezerwacja = nowaRezerwacja;
-                db.Rezerwacja.Add(nowaRezerwacja);
-                db.Uczestnictwo.Add(noweUczestnictwo);
-                db.SaveChanges();
-
-                MessageBox.Show("Dodano nową rezerwację .", "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Dispose();
-            }
-            catch(Exception exception)
+            switch (zapisz)
             {
-                MessageBox.Show("Napotkano problem podczas dodawania nowej rezerwacji. Błąd:\n" + exception.Message.ToString() , "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-         }
+                case 1:
+                   MessageBox.Show("Dodano nową rezerwację .", "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                   this.Dispose();
+                   break;
+                case -1:
+                    MessageBox.Show("Napotkano problem podczas dodawania nowej rezerwacji. Błąd konwersji.Upewnij się, ze wprowadziłeś poprawne dane.", "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case 0:
+                    MessageBox.Show("Napotkano problem podczas dodawania nowej rezerwacji. Błąd z zapisu do bazym danych.",  "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }        
+        }
 
         private void b_anlujZaplate_Click(object sender, EventArgs e)
         {
@@ -141,101 +108,58 @@ namespace BD.View
 
         private void b_zapłaćRezerwacje_Click(object sender, EventArgs e)
         {
-            bazaEntities db = new bazaEntities();
-            Rezerwacja rez = new Rezerwacja();
-            Uczestnictwo uczest = new Uczestnictwo();
+            int zaplac = controller.ZaplacRezerwacje(tb_numerRezerwacji.Text);
 
-            try
+            switch(zaplac)
             {
-                int numer = int.Parse(tb_numerRezerwacji.Text);
-                rez = (from rezerwacja in db.Rezerwacja
-                           where rezerwacja.numer_rezerwacji == numer
-                           select rezerwacja).FirstOrDefault();
-
-                uczest = (from uczestnictwo in db.Uczestnictwo
-                              where uczestnictwo.numer_rezerwacji == numer
-                              select uczestnictwo).FirstOrDefault();
-
-                tb_nazwaWycieczkiZaplac.Text = rez.Wycieczka.nazwa;
-                tb_kwotaCalkowita.Text = (uczest.cena_rezerwacji).ToString();
-                tb_kwotaDoZaplaty.Text = (uczest.cena_rezerwacji - rez.zaliczka).ToString();
-
-                try
-                {
-                    decimal kwota = decimal.Parse(tb_kwotaZaplacona.Text);
-                    if ((kwota + rez.zaliczka) == uczest.cena_rezerwacji)
-                    {
-                        rez.zaliczka += kwota;
-                        rez.stan = true;
-                        MessageBox.Show("Wycieczka została w całości zapłacona.", "Zapłacono", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    }
-                    else if((kwota + rez.zaliczka) > uczest.cena_rezerwacji)
-                    {
-                        MessageBox.Show("Podano za wysoką kwotę.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else if((kwota + rez.zaliczka) < uczest.cena_rezerwacji)
-                    {
-                        rez.zaliczka += kwota;
-                        rez.stan = false;
-                        MessageBox.Show("Zapłacono: " + rez.zaliczka.ToString() + 
-                            "\nDo zapłaty pozostało: " + (uczest.cena_rezerwacji - rez.zaliczka).ToString(), 
-                            "Do zapłaty", MessageBoxButtons.OK, MessageBoxIcon.Information);                        
-                    }
-
-                    db.SaveChanges();
+                case 1:
+                    MessageBox.Show("Wycieczka została w całości zapłacona.", "Zapłacono", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case 0:
+                    MessageBox.Show("Podano za wysoką kwotę.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -1:
+                    decimal zaplacono = decimal.Parse(tb_kwotaDoZaplaty.Text) + decimal.Parse(tb_kwotaZaplacona.Text);
+                    decimal doZaplaty = decimal.Parse(tb_kwotaCalkowita.Text) - zaplacono;
+                    MessageBox.Show("Zapłacono: " + zaplacono.ToString() + 
+                      "\nDo zapłaty pozostało: " + doZaplaty.ToString(),
+                     "Do zapłaty", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Dispose();
-                }
-                catch (FormatException exception)
-                {
+                    break;
+                case -2:
+                    MessageBox.Show("Zmieniono numer rezerwacji. Konieczne jest ponowne oblcizenie.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -3:
                     MessageBox.Show("Podano nieprawidłową kwotę.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (FormatException exception)
-            {
-                MessageBox.Show("Podano nieprawidłowy numer rezerwacji.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }         
+                    break;
+                case -4:
+                    MessageBox.Show("Podano nieprawidłowy numer rezerwacji.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    break;
+            }   
         }
 
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
-            bazaEntities db = new bazaEntities();
-            int numer;
- 
-            try
+            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text);
+
+            switch(pobierz)
             {
-                numer = int.Parse(tb_numerRezerwacji.Text);
-
-                var rez = (from rezerwacja in db.Rezerwacja
-                           where rezerwacja.numer_rezerwacji == numer
-                           select rezerwacja).FirstOrDefault();
-
-                var uczest = (from uczestnictwo in db.Uczestnictwo
-                              where uczestnictwo.numer_rezerwacji == numer
-                              select uczestnictwo).FirstOrDefault();
-
-                tb_nazwaWycieczkiZaplac.Text = rez.Wycieczka.nazwa;
-                tb_kwotaCalkowita.Text = (uczest.cena_rezerwacji).ToString();
-                tb_kwotaDoZaplaty.Text = (uczest.cena_rezerwacji - rez.zaliczka).ToString();
-
-                if((uczest.cena_rezerwacji - rez.zaliczka) <= 0)
-                {
-                    tb_kwotaZaplacona.Enabled = false;
-                }
-                else
-                {
-                    tb_kwotaZaplacona.Enabled = true;
-
-                }
-            }
-            catch(FormatException exception)
-            {
-                MessageBox.Show("Podano nieprawidłowy numer rezerwacji.","Błąd",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                return;
-            }
-
-
-
+                case -1:
+                    MessageBox.Show("Podano nieprawidłowy numer rezerwacji. Taka rezerwacja nie istnieje.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    b_zapłaćRezerwacje.Enabled = false;
+                    break;
+                case 1:
+                    b_zapłaćRezerwacje.Enabled = true;
+                    break;
+                case 0:
+                    MessageBox.Show("Podano nieprawidłowy numer rezerwacji.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    b_zapłaćRezerwacje.Enabled = false;
+                    break;
+                default:
+                    break;
+            }      
         }
     }
 }

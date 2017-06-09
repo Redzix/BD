@@ -207,8 +207,8 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgv_katalog;
-        private System.Windows.Forms.RichTextBox rtb_wycieczka;
+        public System.Windows.Forms.DataGridView dgv_katalog;
+        public System.Windows.Forms.RichTextBox rtb_wycieczka;
         private System.Windows.Forms.Button b_katalog_rezerwuj;
         private System.Windows.Forms.Button b_katalog_wyjdz;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -216,12 +216,12 @@
         private System.Windows.Forms.ToolStripMenuItem reklamujWycieczkęToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rezygnacjaZWycieczkiToolStripMenuItem;
         private System.Windows.Forms.Label l_polaczenie;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id_wycieczki;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nazwa_wycieczki;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Okres;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Data_wyjazdu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Promocja;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Koszt;
+        public System.Windows.Forms.DataGridViewTextBoxColumn id_wycieczki;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Nazwa_wycieczki;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Okres;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Data_wyjazdu;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Promocja;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Koszt;
         private System.Windows.Forms.Button b_zaplac;
     }
 }

@@ -167,11 +167,11 @@
         private System.Windows.Forms.Button b_anuluj;
         private System.Windows.Forms.Label l_uwagi;
         private System.Windows.Forms.Label l_nazwa_wycieczki;
-        private System.Windows.Forms.TextBox tb_opinia;
+        public System.Windows.Forms.TextBox tb_opinia;
         private System.Windows.Forms.Label l_ocena;
-        private System.Windows.Forms.ComboBox cb_ocena;
+        public System.Windows.Forms.ComboBox cb_ocena;
         private System.Windows.Forms.Label l_numerRezerwacji;
-        private System.Windows.Forms.TextBox tb_numerRezerwacji;
-        private System.Windows.Forms.TextBox tb_nazwaWycieczki;
+        public System.Windows.Forms.TextBox tb_numerRezerwacji;
+        public System.Windows.Forms.TextBox tb_nazwaWycieczki;
     }
 }

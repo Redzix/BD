@@ -133,10 +133,10 @@
 
         private System.Windows.Forms.Label l_nr_rejestracyjny;
         private System.Windows.Forms.Button b_zapisz;
-        private System.Windows.Forms.TextBox tb_numer_rejestracyjny;
-        private System.Windows.Forms.TextBox tb_marka;
+        public System.Windows.Forms.TextBox tb_numer_rejestracyjny;
+        public System.Windows.Forms.TextBox tb_marka;
         private System.Windows.Forms.Label l_marka;
-        private System.Windows.Forms.TextBox tb_pojemnosc;
+        public System.Windows.Forms.TextBox tb_pojemnosc;
         private System.Windows.Forms.Label l_pojemnosc;
         private System.Windows.Forms.Button b_anuluj;
     }

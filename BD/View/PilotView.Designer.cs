@@ -10,7 +10,7 @@
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="dispsosing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -150,16 +150,16 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgv_tabelaPilot;
+        public System.Windows.Forms.DataGridView dgv_tabelaPilot;
         private System.Windows.Forms.Label l_zalogowany_jako;
         private System.Windows.Forms.Button b_wyjdz;
         private System.Windows.Forms.Label l_uzytkownik;
         private System.Windows.Forms.Label l_polaczenie;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id_wycieczki;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nazwa_wycieczki;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Data_wyjazdu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Data_powrotu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pojazd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Kierowca;
+        public System.Windows.Forms.DataGridViewTextBoxColumn id_wycieczki;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Nazwa_wycieczki;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Data_wyjazdu;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Data_powrotu;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Pojazd;
+        public System.Windows.Forms.DataGridViewTextBoxColumn Kierowca;
     }
 }

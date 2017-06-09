@@ -110,8 +110,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tb_nazwa_uzytkownika;
-        private System.Windows.Forms.TextBox tb_haslo;
+        public System.Windows.Forms.TextBox tb_nazwa_uzytkownika;
+        public System.Windows.Forms.TextBox tb_haslo;
         private System.Windows.Forms.Label l_nazwa_uzytkownika;
         private System.Windows.Forms.Label l_haslo;
         private System.Windows.Forms.Button b_zaloguj;

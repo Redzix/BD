@@ -8,18 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using BD.Controller;
 
 namespace BD.View
 {
     public partial class KierowcaView : Form
     {
-
+        private KierowcaController controller;
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
         public KierowcaView()
         {
             InitializeComponent();
+           
         }
 
         /// <summary>
@@ -45,6 +47,7 @@ namespace BD.View
                 l_polaczenie.Text = "Rozłączony";
                 l_polaczenie.ForeColor = System.Drawing.Color.Red;
             }
+            controller = new KierowcaController(this);
         }
 
         /// <summary>
@@ -101,112 +104,55 @@ namespace BD.View
 
         private void Kierowca_Load(object sender, EventArgs e)
         {
-            ZaladujPojazdy();
+            int pobierz = controller.PobierzPojazdy();
+
+            if(pobierz == -1)
+            {
+                MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy. Brak pojazdów.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }else if(pobierz == -1)
+            {
+                MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void b_kierowca_zapisz_Click(object sender, EventArgs e)
         {
             string numerRejestracyjny = ((ListView)sender).SelectedItems[0].Tag.ToString();
 
-            bazaEntities db = new bazaEntities();
-            lv_pojazdy.Items.Clear();
-            
-            if (rb_awaria.Checked)
-            {              
-                var query = (from pojazd in db.Pojazd
-                            where pojazd.numer_rejestracyjny.Equals(numerRejestracyjny)
-                            select pojazd).FirstOrDefault();
+            int zapisz = controller.ZapiszZmiany(numerRejestracyjny);
 
-                if (query == null)
-                {
-                    MessageBox.Show("Brak pojazdu o podanym numerze rejestracyjnym.","Błędny numer rejestracyjny",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                }
-                else
-                {
-                    query.stan = false;
-
-                    try
-                    {
-                        db.SaveChanges();
-                        MessageBox.Show("W pojezdzie o numerze rejestracyjnym " + numerRejestracyjny +
+            switch(zapisz)
+            {
+                case 1:
+                    MessageBox.Show("W pojezdzie o numerze rejestracyjnym " + numerRejestracyjny +
                         " ustawiono stan na awarię", "Dodano awarię", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception exception)
-                    {
-                        MessageBox.Show("Błąd podczas wprowadzania zmian", "Błąd \n" + exception.Message.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                    lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Awaria";
-                }
-            }
-            else if (rb_sprawny.Checked)
-            {
-                var query = (from pojazd in db.Pojazd
-                             where pojazd.numer_rejestracyjny.Equals(numerRejestracyjny)
-                             select pojazd).FirstOrDefault();
-
-                if (query == null)
-                {
+                    break;
+                case -1:
                     MessageBox.Show("Brak pojazdu o podanym numerze rejestracyjnym.", "Błędny numer rejestracyjny", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    query.stan = true;
-
-                    try
-                    {
-                        db.SaveChanges();
-                        MessageBox.Show("W pojezdzie o numerze rejestracyjnym " + numerRejestracyjny +
-                        " ustawiono stan na sprawność", "Dodano sprawność", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception exception)
-                    {
-                        MessageBox.Show("Błąd podczas wprowadzania zmian", "Błąd \n" + exception.Message.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                    lv_pojazdy.Items[lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Sprawny";
-                }
-            }
-            else
-            {
-                MessageBox.Show("Nie podano żadnej zmiany stanu pojazdu.", "Brak zmian", MessageBoxButtons.OK,MessageBoxIcon.Information);
-            }
-            lv_pojazdy.Refresh();
+                    break;
+                case 2:
+                    MessageBox.Show("W pojezdzie o numerze rejestracyjnym " + numerRejestracyjny +
+                         " ustawiono stan na sprawność", "Dodano sprawność", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case -2:
+                    MessageBox.Show("Brak pojazdu o podanym numerze rejestracyjnym.", "Błędny numer rejestracyjny", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case 0:
+                    MessageBox.Show("Błąd podczas wprowadzania zmian. Błąd w trakcie zapisywania do bazy.", "Błąd ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -3:
+                    MessageBox.Show("Nie podano żadnej zmiany stanu pojazdu.", "Brak zmian", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                default:
+                    break;
+            }    
         }
         
-        private void ZaladujPojazdy()
-        {
-            bazaEntities db = new bazaEntities();
-            lv_pojazdy.Items.Clear();
-
-            var query = from pojazd in db.Pojazd
-                        select pojazd;
-
-            if (query == null)
-            {
-                MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                lv_pojazdy.Items.Add("Brak pojazów");
-            }
-            else
-            {
-                foreach (Pojazd poj in query)
-                {
-                    ListViewItem pojazd = new ListViewItem(poj.numer_rejestracyjny);
-                    pojazd.Tag = poj.numer_rejestracyjny;
-                    pojazd.SubItems.Add((bool)poj.dostepny ? ("Dostępny") : ("Niedostępny"));
-                    pojazd.SubItems.Add(poj.marka);
-                    pojazd.SubItems.Add(poj.pojemnosc.ToString());
-                    pojazd.SubItems.Add((bool)poj.stan ? ("Sprawny") : ("Awaria"));
-                    lv_pojazdy.Items.Add(pojazd);
-                }
-            }
-        }
-
         private void lv_pojazdy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.rb_awaria.Enabled = true;
-            this.rb_sprawny.Enabled = true;
-            this.b_kierowca_zapisz.Enabled = true;
+                this.rb_awaria.Enabled = true;
+                this.rb_sprawny.Enabled = true;
+                this.b_kierowca_zapisz.Enabled = true;
         }
     }
-   }
+}

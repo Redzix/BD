@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using BD.Controller;
 
 namespace BD.View
 {
@@ -15,7 +16,7 @@ namespace BD.View
     {
 
         private int _idWycieczki;
-
+        private KlientController controller;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -35,6 +36,7 @@ namespace BD.View
                 l_polaczenie.Text = "Rozłączony";
                 l_polaczenie.ForeColor = System.Drawing.Color.Red;
             }
+            controller = new KlientController(this);
         }
 
         /// <summary>
@@ -68,7 +70,6 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_katalog_rezerwuj_Click(object sender, EventArgs e)
         {
-
             RezerwacjaView rezerwacja = new RezerwacjaView(_idWycieczki);
             rezerwacja.ShowDialog();
         }
@@ -136,79 +137,38 @@ namespace BD.View
 
         private void Klient_Load(object sender, EventArgs e)
         {
-            dgv_katalog.AutoGenerateColumns = false;
-            // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
-            dgv_katalog.Columns["id_wycieczki"].DataPropertyName = "wycieczkaId";
-            dgv_katalog.Columns["Nazwa_wycieczki"].DataPropertyName = "wycieczka";
-            dgv_katalog.Columns["Okres"].DataPropertyName = "okresTrwaniaWycieczki";
-            dgv_katalog.Columns["Data_wyjazdu"].DataPropertyName = "dataOdjazdu";
-            dgv_katalog.Columns["Promocja"].DataPropertyName = "wartoscPromocji";
-            dgv_katalog.Columns["Koszt"].DataPropertyName = "cenaCalkowita";
-
-            bazaEntities db = new bazaEntities();
-
-            var query = from katalog in db.Katalog
-                        select new {
-                            wycieczkaId = katalog.id_wycieczki,
-                            wycieczka = katalog.Wycieczka.nazwa,
-                            okresTrwaniaWycieczki = katalog.okres_trwania_wycieczki,
-                            dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
-                            wartoscPromocji = (katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0,
-                            cenaCalkowita = katalog.Cennik.cena - ((katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0)
-                        };
-            if (query == null)
+            if(controller.PobierzWycieczki())
+            {
+                this.b_katalog_rezerwuj.Enabled = true;
+            }
+            else
             {
                 MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.b_katalog_rezerwuj.Enabled = false;
             }
-            else
-            {
-                dgv_katalog.DataSource = query.ToList();
-                this.b_katalog_rezerwuj.Enabled = true;
-          }
-        }
+      }
 
         private void dgv_katalog_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
+        {           
             // Podświetlenie wybranego wiersza
             ((DataGridView)sender).Rows[e.RowIndex].Selected = true;
-            try
+
+            int pobierz = controller.PobierzDaneWycieczki(((DataGridView)sender)[0, e.RowIndex].FormattedValue.ToString());
+
+            switch (pobierz)
             {
-                //Pobranie z tabeli oraz z bazy danych odpowiednich wartości do wyświetlenia.
-                int.TryParse(((DataGridView)sender)[0, e.RowIndex].FormattedValue.ToString(), out _idWycieczki);
-
-                bazaEntities db = new bazaEntities();
-
-                var query = (from katalog in db.Katalog
-                             where katalog.id_wycieczki == _idWycieczki
-                             select new
-                             {
-                                 wycieczka = katalog.Wycieczka.nazwa,
-                                 dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
-                                 dataPowrotu = katalog.Wycieczka.data_wyjazdu,
-                                 opisWycieczki = katalog.Wycieczka.opis,
-                                 miejsceDoceloweAdres = katalog.Miejsce.adres,
-                                 miejsceDoceloweMiejscowosc = katalog.Miejsce.miejscowosc
-                             }).FirstOrDefault();
-
-                // Dodanie wartości parametrów do opisu znajdującego się w texboxie
-                rtb_wycieczka.Text =
-                    "Nazwa: " + query.wycieczka +
-                    "\nData wyjazdu: " + query.dataOdjazdu +
-                    "\nData powrotu: " + query.dataPowrotu +
-                    "\nOpis: " + query.opisWycieczki +
-                    "\n\nAdres miejsca: " + query.miejsceDoceloweAdres +
-                    "\nMiejscowość: " + query.miejsceDoceloweMiejscowosc;
-
-            }catch(FormatException exception)
-            {
-                MessageBox.Show("Wystąpił problem podczas konwersji id wycieczki","Błąd konwersji", MessageBoxButtons.OK,MessageBoxIcon.Error );
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show("Wystąpił problem podczas pobierania danych.", "Błąd pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
+                case 1:
+                    int.TryParse(((DataGridView)sender)[0, e.RowIndex].FormattedValue.ToString(), out _idWycieczki);
+                    break;
+                case 0:
+                    MessageBox.Show("Wystąpił problem podczas konwersji id wycieczki", "Błąd konwersji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -1:
+                    MessageBox.Show("Wystąpił problem podczas pobierania danych.", "Błąd pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    break;
+            }           
         }
 
         private void b_zaplac_Click(object sender, EventArgs e)

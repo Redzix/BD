@@ -14,7 +14,7 @@ namespace BD.View
 {
     public partial class OpiniaView : Form
     {
-        OpiniaController controller = new OpiniaController();
+        private OpiniaController controller;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -23,6 +23,7 @@ namespace BD.View
         {
             InitializeComponent();
             cb_ocena.SelectedIndex = 0;
+            controller = new OpiniaController(this);
         }
 
         /// <summary>
@@ -62,109 +63,49 @@ namespace BD.View
         private void b_anuluj_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            //dodac wycofanie wprowadzonych danych , czyli wyjebanie w kosmos obiektu
         }
 
         private void b_zapisz_Click(object sender, EventArgs e)
         {
+            int zapisz = controller.DodajOpinie(tb_numerRezerwacji.Text, cb_ocena.SelectedIndex + 1, tb_opinia.Text);
 
-
-            if(controller.DodajOpinie(tb_numerRezerwacji.Text, cb_ocena.SelectedIndex + 1, tb_opinia.Text) == 1)
+            switch (zapisz)
             {
-                MessageBox.Show("Opinia została dodana prawidłowo.", "Dodano opinię", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Dispose();
-            }
-            else if(controller.DodajOpinie(tb_numerRezerwacji.Text, cb_ocena.SelectedIndex + 1, tb_opinia.Text) == 0)
-            {
-                MessageBox.Show("Wystąpił problem podczas dodawania opinii. Problem zwiazany z konwersją.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            else if (controller.DodajOpinie(tb_numerRezerwacji.Text, cb_ocena.SelectedIndex + 1, tb_opinia.Text) == -1)
-            {
-                MessageBox.Show("Wystąpił problem podczas dodawania opinii. Problem związany z obsługa bazy danych." , "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-
-
-            /*bazaEntities db = new bazaEntities();
-
-            try
-            {
-                int numer = int.Parse(tb_numerRezerwacji.Text);
-
-                var query = (from uczestnictwo in db.Uczestnictwo
-                             where uczestnictwo.numer_rezerwacji == numer
-                             select uczestnictwo.id_uczestnictwo).FirstOrDefault();
-
-                var opinia = new Opinia
-                {
-                    opis = tb_opinia.Text,
-                    ocena = cb_ocena.SelectedIndex + 1,
-                    id_uczestnictwo = query
-                };
-                db.Opinia.Add(opinia);
-
-                db.SaveChanges();
-                MessageBox.Show("Opinia została dodana prawidłowo.", "Dodano opinię", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Dispose();
-            }
-            catch (FormatException exception)
-            {
-                MessageBox.Show("Wystąpił problem podczas dodawania opinii. Błąd:\n" + exception.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show("Wystąpił problem podczas dodawania opinii. Błąd:\n" + exception.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
+                case 1:
+                    MessageBox.Show("Opinia została dodana prawidłowo.", "Dodano opinię", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Dispose();
+                    break;
+                case -1:
+                    MessageBox.Show("Wystąpił problem podczas dodawania opinii. Problem związany z obsługa bazy danych.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case 0:
+                    MessageBox.Show("Wystąpił problem podczas dodawania opinii. Problem zwiazany z konwersją.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    break;
+            } 
         }
         
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
 
-            string nazwaWycieczki = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text);
+            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text);
 
-            if (nazwaWycieczki.Equals("0")){
-                MessageBox.Show("Podaj poprawny numer rezerwacji.", "Błeny numer rezerwacji.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            else if (nazwaWycieczki.Equals("-1"))
+            switch (pobierz)
             {
-                MessageBox.Show("Podaj poprawny numer rezerwacji. Taka rezerwacja nie isntnieje.", "Błeny numer rezerwacji.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                tb_nazwaWycieczki.Text = "Brak rezerwacji";
-                this.b_zapisz.Enabled = false;
-            }
-            else
-            {
-                tb_nazwaWycieczki.Text = nazwaWycieczki;
-                this.b_zapisz.Enabled = true;
-            }
-
-
-           /* bazaEntities db = new bazaEntities();
-
-            try
-            {
-                int numer = int.Parse(tb_numerRezerwacji.Text);
-                var query = (from uczestnictwo in db.Uczestnictwo
-                             where uczestnictwo.numer_rezerwacji == numer
-                             select uczestnictwo.Rezerwacja.Wycieczka.nazwa).FirstOrDefault();
-
-                if(query == null)
-                {
-                    MessageBox.Show("Podaj poprawny numer rezerwacji. Taka rezerwacja nie isntnieje.", "Błeny numer rezerwacji.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    tb_nazwaWycieczki.Text = "Brak rezerwacji";
-                    this.b_zapisz.Enabled = false;
-                }
-                else
-                {
-                    tb_nazwaWycieczki.Text = query;
+                case 1:
                     this.b_zapisz.Enabled = true;
-                }
-            }
-            catch (FormatException exception)
-            {
-                MessageBox.Show("Podaj poprawny numer rezerwacji.","Błeny numer rezerwacji.",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }*/
+                    break;
+                case -1:
+                    MessageBox.Show("Podaj poprawny numer rezerwacji. Taka rezerwacja nie isntnieje.", "Błeny numer rezerwacji.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.b_zapisz.Enabled = false;
+                    break;
+                case 0:
+                    MessageBox.Show("Podaj poprawny numer rezerwacji. Błędny format.", "Błeny numer rezerwacji.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    break;
+            }    
         }
     }
 }

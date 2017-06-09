@@ -198,17 +198,17 @@
         #endregion
 
         private System.Windows.Forms.Label l_zalgowany_jako;
-        private System.Windows.Forms.RadioButton rb_sprawny;
-        private System.Windows.Forms.RadioButton rb_awaria;
+        public System.Windows.Forms.RadioButton rb_sprawny;
+        public System.Windows.Forms.RadioButton rb_awaria;
         private System.Windows.Forms.GroupBox gb_stan_pojazdu;
         private System.Windows.Forms.Button b_kierowca_zapisz;
         private System.Windows.Forms.Button b_kierowca_wyjdz;
-        private System.Windows.Forms.ListView lv_pojazdy;
-        private System.Windows.Forms.ColumnHeader Nr_rejestracyjny;
-        private System.Windows.Forms.ColumnHeader Dostępnosc;
-        private System.Windows.Forms.ColumnHeader Marka;
-        private System.Windows.Forms.ColumnHeader Pojemnosc;
-        private System.Windows.Forms.ColumnHeader Stan;
+        public System.Windows.Forms.ListView lv_pojazdy;
+        public System.Windows.Forms.ColumnHeader Nr_rejestracyjny;
+        public System.Windows.Forms.ColumnHeader Dostępnosc;
+        public System.Windows.Forms.ColumnHeader Marka;
+        public System.Windows.Forms.ColumnHeader Pojemnosc;
+        public System.Windows.Forms.ColumnHeader Stan;
         private System.Windows.Forms.Label l_uzytkownik;
         private System.Windows.Forms.Label l_polaczenie;
     }
