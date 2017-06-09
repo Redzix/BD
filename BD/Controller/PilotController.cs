@@ -17,6 +17,7 @@ namespace BD.Controller
         }
         public bool PobierzPilotow()
         {
+            _view.dgv_tabelaPilot.AutoGenerateColumns = false;
             // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
             _view.dgv_tabelaPilot.Columns["id_wycieczki"].DataPropertyName = "wycieczkaId";
             _view.dgv_tabelaPilot.Columns["Nazwa_wycieczki"].DataPropertyName = "wycieczka";
