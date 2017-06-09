@@ -18,8 +18,15 @@ namespace BD.Controller
             db = new bazaEntities();
         }
 
-        /**
-         */
+
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idKatalog"></param>
+        /// <returns></returns>
         public bool dodajPromocje(int idKatalog)
         {
             var wycieczka = (from katalog in db.Katalog
@@ -40,6 +47,11 @@ namespace BD.Controller
             }
             return true;
         }
+        /// <summary>
+        /// Ładowanie ceny do textboxa z kwotą
+        /// </summary>
+        /// <param name="idKatalogu">Wiadomo</param>
+        /// <returns>True, jeśli załadowało. False jeśli promocja nie istnieje</returns>
         public bool ladujPromocje(int idKatalogu)
         {
             var idWyc = db.Katalog.Where(x => x.id_katalogu == idKatalogu).Select(x => x.id_wycieczki).FirstOrDefault();
@@ -50,11 +62,15 @@ namespace BD.Controller
             }
             return false;
         }
-        
+        /// <summary>
+        /// Edycja promocji
+        /// </summary>
+        /// <param name="idKatalogu">ID katalogu, który zawiera promocję w wycieczce do edycji</param>
+        /// <returns>True, jeśli się uda. False jeśli nie</returns>
         public bool edytujPromocje(int idKatalogu)
         {
             PromocjaView pView = ((PromocjaView)view);
-            if (pView.tb_kwota.Text.Equals(""))
+            if (pView.tb_kwota.Text.Equals("") || pView.tb_kwota.Text.Equals("0"))
             {
                 return this.usunPromocje(idKatalogu);
             }
@@ -75,7 +91,11 @@ namespace BD.Controller
             }
             return true;
         }
-
+        /// <summary>
+        /// Metoda służąca do usunięcia promocji, jeśli jej wartość wynosi 0 lub jest pusta
+        /// </summary>
+        /// <param name="idKatalogu">Id katalogu, w którym jest wycieczka z daną promocją do usunięcia</param>
+        /// <returns>True jeśli usunięte, false jeśli nie</returns>
         public bool usunPromocje(int idKatalogu)
         {
             var idWyc = db.Katalog.Where(x => x.id_katalogu == idKatalogu).Select(x => x.id_wycieczki).FirstOrDefault();
