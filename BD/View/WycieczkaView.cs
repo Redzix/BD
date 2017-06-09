@@ -17,7 +17,7 @@ namespace BD.View
         private List<Pilot_model> _listaPilotow = new List<Pilot_model>();
         private List<Kierowca_model> _listaKierowcow = new List<Kierowca_model>();
         private List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();
-        private int _idWycieczki;
+        private int idKatalog;
 
         private int _opcja = 1;
         /// <summary>
@@ -32,10 +32,11 @@ namespace BD.View
         /// Konstruktor, który tworzy formę wyciećzki dostosowaną do wybranej opcji edycji bądź dodawania wycieczki
         /// </summary>
         /// <param name="opcja">Kiedy jeden dodaje wycieczke, kiedy zero usuwa.</param>
-        public WycieczkaView(int opcja, int idWycieczki)
+        public WycieczkaView(int opcja, int idKatalog)
         {
             InitializeComponent();
             this.Wycieczka_Load();
+            this.idKatalog = idKatalog;
             //Data odjazdu nie moze byc taka sama jak data przyjazdu
             tb_data_wyjazdu.Value = DateTime.Now;
             tb_data_powrotu.Value = tb_data_powrotu.Value.AddDays(1);
@@ -46,7 +47,7 @@ namespace BD.View
                 tb_data_wyjazdu.Enabled = false;
                 cb_docelowa.Enabled = false;
                 _opcja = 0;
-                this.wypelnijDoEdycji(idWycieczki);
+                this.wypelnijDoEdycji(idKatalog);
             }
             else
             {
@@ -62,7 +63,7 @@ namespace BD.View
         {
             bazaEntities db = new bazaEntities();
             var query = (from katalog in db.Katalog
-                        where katalog.id_wycieczki == id
+                        where katalog.id_katalogu == id
                         select new
                         {
                             katalog,
@@ -267,14 +268,22 @@ namespace BD.View
                     int miejsceOdjazdu = int.Parse(((KeyValuePair<string, string>)cb_odjazd.SelectedItem).Key);
                     int miejscePrzyjazdu = int.Parse(((KeyValuePair<string, string>)cb_docelowa.SelectedItem).Key);
 
-                    var edit = db.Katalog.Find(_idWycieczki);
+                    var edit = (from katalog in db.Katalog
+                               where katalog.id_katalogu == idKatalog
+                               select new
+                               {
+                                   katalog,
+                                   Wycieczka = katalog.Wycieczka,
+                                   Cennik = katalog.Cennik
+
+                               }).FirstOrDefault();
 
                     edit.Wycieczka.Pilot_pesel = pilotPesel;
                     edit.Wycieczka.Kierowca_pesel = kierowcaPesel;
                     edit.Wycieczka.Pojazd_numer_rejestracyjny = pojazdRejestracja;
 
-                    edit.id_miejsca_odjazdu = miejsceOdjazdu;
-                    edit.id_miejsca_przyjazdu = miejscePrzyjazdu;
+                    edit.katalog.id_miejsca_odjazdu = miejscePrzyjazdu;
+                    edit.katalog.id_miejsca_przyjazdu = miejsceOdjazdu;
                     edit.Cennik.cena = decimal.Parse(tb_cena.Text);
 
                     edit.Wycieczka.opis = tb_opis.Text;

@@ -15,12 +15,6 @@ namespace BD.View
 {
     public partial class KierownikView : Form
     {
-        SqlConnection _polaczenie = null;
-        Polacz_z_baza _polacz = null;
-        List<Pojazd_model> _listaPojazdow = new List<Pojazd_model>();
-        List<Reklamacja_model> _listaReklamacji = new List<Reklamacja_model>();
-        List<Wycieczka_model> _listaWycieczek = new List<Wycieczka_model>();
-        List<Katalog_model> _listaKatalogu = new List<Katalog_model>();
         private int _idReklamacji = 0;
 
         /// <summary>
@@ -30,18 +24,6 @@ namespace BD.View
         {
             InitializeComponent();
             l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
-            _polacz = new Polacz_z_baza();
-            _polaczenie = _polacz.PolaczZBaza();
-            if (_polaczenie != null)
-            {
-                l_polaczenie.Text = "Połączony";
-                l_polaczenie.ForeColor = System.Drawing.Color.Green;
-            }
-            else
-            {
-                l_polaczenie.Text = "Rozłączony";
-                l_polaczenie.ForeColor = System.Drawing.Color.Red;
-            }
         }
 
         /// <summary>
@@ -53,18 +35,6 @@ namespace BD.View
         {
             InitializeComponent();
             l_uzytkownik.Text = uzytkownik;
-            _polacz = new Polacz_z_baza();
-            _polaczenie = _polacz.PolaczZBaza();
-            if (_polaczenie != null)
-            {
-                l_polaczenie.Text = "Połączony";
-                l_polaczenie.ForeColor = System.Drawing.Color.Green;
-            }
-            else
-            {
-                l_polaczenie.Text = "Rozłączony";
-                l_polaczenie.ForeColor = System.Drawing.Color.Red;
-            }
         }
 
         /// <summary>
@@ -75,7 +45,6 @@ namespace BD.View
         private void Kierownik_Load(object sender, EventArgs e)
         {
             this.ZaladujWycieczki();
-            // this.reportViewer1.RefreshReport();
         }
 
         /// <summary>
@@ -189,7 +158,7 @@ namespace BD.View
             foreach(var wyc in query)
             {
                 ListViewItem wycieczka = new ListViewItem(wyc.wycieczka.nazwa); //Miejsce
-                wycieczka.Tag = wyc.katalog.id_wycieczki; //Ukryte ID
+                wycieczka.Tag = wyc.katalog.id_katalogu; //Ukryte ID
                 wycieczka.SubItems.Add(String.Format("{0:dd.MM.yyyy}",(DateTime)wyc.wycieczka.data_wyjazdu)); //Data z
                 wycieczka.SubItems.Add(String.Format("{0:dd.MM.yyyy}", (DateTime)wyc.wycieczka.data_powrotu)); //data do
                 wycieczka.SubItems.Add(wyc.miejsce_z.miejscowosc); //miejsce od
@@ -354,6 +323,7 @@ namespace BD.View
                 }
             lv_reklamacje.Refresh();
         }
+
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
         {
             bazaEntities db = new bazaEntities();
@@ -414,13 +384,19 @@ namespace BD.View
             DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz usunąc wycieczke o indeksie: " + (lv_wycieczki.SelectedItems[0].Index + 1).ToString() + " ?","Usunięcie wycieczki.",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
             if(dialogResult == DialogResult.Yes)
             {
-                if ((new Kierownik_model()).UsunWycieczke(lv_wycieczki.SelectedItems[0].Index + 1))
+                bazaEntities db = new bazaEntities();
+                var idKat = lv_wycieczki.SelectedItems[0].Tag;
+                var katalog = new Katalog { id_katalogu = (int)idKat };
+                try
                 {
+                    db.Entry(katalog).State = EntityState.Deleted;
+                    db.SaveChanges();
                     MessageBox.Show("Usunięto wybraną wycieczkę.", "Usuwanie wycieczki", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
+                    this.ZaladujWycieczki();
+                } catch
                 {
                     MessageBox.Show("Wystąpił błąd podczas usuwania wycieczki.", "Błąd usuwania wycieczki.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
             }
             else
@@ -451,6 +427,19 @@ namespace BD.View
         }
         
         private void lv_pojazdy_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            sortListViewByColumn(sender, e);
+        }
+
+        private void b_promocja_Click(object sender, EventArgs e)
+        {
+            var id = lv_wycieczki.SelectedItems[0].Tag;
+            PromocjaView promo = new PromocjaView((int)id);
+            promo.ShowDialog();
+            ZaladujWycieczki();
+        }
+
+        private void lv_wycieczki_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender, e);
         }

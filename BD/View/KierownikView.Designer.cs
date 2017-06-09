@@ -72,6 +72,7 @@
             this.l_zalogowany_jako = new System.Windows.Forms.Label();
             this.l_uzytkownik = new System.Windows.Forms.Label();
             this.l_polaczenie = new System.Windows.Forms.Label();
+            this.b_promocja = new System.Windows.Forms.Button();
             this.tc_kierownik.SuspendLayout();
             this.tp_zarzadzaj_wycieczkami.SuspendLayout();
             this.tp_rozpatrz_reklamacje.SuspendLayout();
@@ -94,6 +95,7 @@
             // 
             // tp_zarzadzaj_wycieczkami
             // 
+            this.tp_zarzadzaj_wycieczkami.Controls.Add(this.b_promocja);
             this.tp_zarzadzaj_wycieczkami.Controls.Add(this.lv_wycieczki);
             this.tp_zarzadzaj_wycieczkami.Controls.Add(this.b_usun_wycieczke);
             this.tp_zarzadzaj_wycieczkami.Controls.Add(this.b_edytuj);
@@ -125,6 +127,7 @@
             this.lv_wycieczki.TabIndex = 1;
             this.lv_wycieczki.UseCompatibleStateImageBehavior = false;
             this.lv_wycieczki.View = System.Windows.Forms.View.Details;
+            this.lv_wycieczki.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lv_wycieczki_ColumnClick);
             // 
             // Nazwa
             // 
@@ -168,7 +171,7 @@
             // 
             // b_edytuj
             // 
-            this.b_edytuj.Location = new System.Drawing.Point(626, 106);
+            this.b_edytuj.Location = new System.Drawing.Point(626, 58);
             this.b_edytuj.Name = "b_edytuj";
             this.b_edytuj.Size = new System.Drawing.Size(103, 23);
             this.b_edytuj.TabIndex = 3;
@@ -483,6 +486,16 @@
             this.l_polaczenie.TabIndex = 6;
             this.l_polaczenie.Text = " ";
             // 
+            // b_promocja
+            // 
+            this.b_promocja.Location = new System.Drawing.Point(627, 87);
+            this.b_promocja.Name = "b_promocja";
+            this.b_promocja.Size = new System.Drawing.Size(102, 23);
+            this.b_promocja.TabIndex = 5;
+            this.b_promocja.Text = "Promocja";
+            this.b_promocja.UseVisualStyleBackColor = true;
+            this.b_promocja.Click += new System.EventHandler(this.b_promocja_Click);
+            // 
             // KierownikView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -521,13 +534,13 @@
         private System.Windows.Forms.Button b_dodaj_wycieczke;
         private System.Windows.Forms.TabPage tp_zarzadzaj_flota;
         private System.Windows.Forms.Button b_dodaj_pojazd;
-        public System.Windows.Forms.ListView lv_pojazdy;
+        private System.Windows.Forms.ListView lv_pojazdy;
         private System.Windows.Forms.Button b_usun_pojazd;
-        public System.Windows.Forms.ColumnHeader Nr_rejestracyjny;
-        public System.Windows.Forms.ColumnHeader Dostepnosc;
-        public System.Windows.Forms.ColumnHeader Marka;
-        public System.Windows.Forms.ColumnHeader Pojemnosc;
-        public System.Windows.Forms.ColumnHeader Stan;
+        private System.Windows.Forms.ColumnHeader Nr_rejestracyjny;
+        private System.Windows.Forms.ColumnHeader Dostepnosc;
+        private System.Windows.Forms.ColumnHeader Marka;
+        private System.Windows.Forms.ColumnHeader Pojemnosc;
+        private System.Windows.Forms.ColumnHeader Stan;
         private System.Windows.Forms.Button b_edytuj_pojazd;
         private System.Windows.Forms.TabPage tp_raporty;
         private System.Windows.Forms.Button b_raport_reklamacje;
@@ -537,25 +550,26 @@
         private System.Windows.Forms.Label l_zalogowany_jako;
         private System.Windows.Forms.Label l_uzytkownik;
         private System.Windows.Forms.Label l_polaczenie;
-        public System.Windows.Forms.ListView lv_wycieczki;
-        public System.Windows.Forms.ColumnHeader Nazwa;
-        public System.Windows.Forms.ListView lv_reklamacje;
-        public System.Windows.Forms.ColumnHeader numer_reklamacji;
+        private System.Windows.Forms.ListView lv_wycieczki;
+        private System.Windows.Forms.ColumnHeader Nazwa;
+        private System.Windows.Forms.ListView lv_reklamacje;
+        private System.Windows.Forms.ColumnHeader numer_reklamacji;
         private System.Windows.Forms.Button b_rozpatrz_negatywnie;
         private System.Windows.Forms.Label l_opis_reklamacji;
         private System.Windows.Forms.Label l_okres_wycieczki;
         private System.Windows.Forms.Label l_nazwa_wycieczki;
         private System.Windows.Forms.Button b_rozpatrz_pozytywnie;
-        public System.Windows.Forms.RichTextBox rtb_opisReklamacji;
-        public System.Windows.Forms.TextBox tb_okresTrwaniaWycieczki;
+        private System.Windows.Forms.RichTextBox rtb_opisReklamacji;
+        private System.Windows.Forms.TextBox tb_okresTrwaniaWycieczki;
         private System.Windows.Forms.Button button1;
-        public System.Windows.Forms.TextBox tb_nazwa_wycieczki;
-        public System.Windows.Forms.ColumnHeader skrot_skargi;
-        public System.Windows.Forms.ColumnHeader stan_reklamacji;
-        public System.Windows.Forms.ColumnHeader columnHeader1;
-        public System.Windows.Forms.ColumnHeader columnHeader2;
-        public System.Windows.Forms.ColumnHeader columnHeader3;
-        public System.Windows.Forms.ColumnHeader columnHeader4;
-        public System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.TextBox tb_nazwa_wycieczki;
+        private System.Windows.Forms.ColumnHeader skrot_skargi;
+        private System.Windows.Forms.ColumnHeader stan_reklamacji;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Button b_promocja;
     }
 }
