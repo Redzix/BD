@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 using BD.Controller;
 
 namespace BD.View
@@ -157,10 +156,16 @@ namespace BD.View
                 MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.b_katalog_rezerwuj.Enabled = false;
             }
-      }
+        }
 
-        private void dgv_katalog_CellClick(object sender, DataGridViewCellEventArgs e)
-        {           
+        private void b_zaplac_Click(object sender, EventArgs e)
+        {
+            RezerwacjaView rezerwacja = new RezerwacjaView();
+            rezerwacja.ShowDialog();
+        }
+
+        private void dgv_katalog_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
             // Podświetlenie wybranego wiersza
             ((DataGridView)sender).Rows[e.RowIndex].Selected = true;
 
@@ -179,14 +184,9 @@ namespace BD.View
                     break;
                 default:
                     break;
-            }           
+            }
         }
 
-        private void b_zaplac_Click(object sender, EventArgs e)
-        {
-            RezerwacjaView rezerwacja = new RezerwacjaView();
-            rezerwacja.ShowDialog();
-        }
-
+     
     }
 }

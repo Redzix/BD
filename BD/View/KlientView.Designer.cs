@@ -65,7 +65,7 @@
             this.dgv_katalog.Name = "dgv_katalog";
             this.dgv_katalog.Size = new System.Drawing.Size(585, 304);
             this.dgv_katalog.TabIndex = 0;
-            this.dgv_katalog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_katalog_CellClick);
+            this.dgv_katalog.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_katalog_CellContentClick);
             // 
             // id_wycieczki
             // 

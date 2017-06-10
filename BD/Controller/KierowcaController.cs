@@ -9,16 +9,31 @@ using System.Windows.Forms;
 namespace BD.Controller
 {
     class KierowcaController
-    {
+
+    {   /// <summary>
+        /// Obiekt widoku.
+        /// </summary>
         private KierowcaView _view;
+
+        /// <summary>
+        /// Model danych.
+        /// </summary>
         private bazaEntities db;
 
+        /// <summary>
+        /// Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+        /// </summary>
+        /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
         public KierowcaController(KierowcaView view)
         {
             _view = view;
             db = new bazaEntities();
         }
 
+        /// <summary>
+        /// Metoda pobierająca pojazdy z bazy danych oraz dodająca je do widoku.
+        /// </summary>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int PobierzPojazdy()
         {
             _view.lv_pojazdy.Items.Clear();
@@ -53,8 +68,14 @@ namespace BD.Controller
             {
                 return 0;
             }
-        }  
+        }
 
+
+        /// <summary>
+        /// Metoda zapisuuje do bazy danych zmiany dla wybranego wcześniej pojazdu.
+        /// </summary>
+        /// <param name="numerRejestracyjny">Numer rejestracyjny edytowanego pojazdu.</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int ZapiszZmiany(string numerRejestracyjny)
         {
 

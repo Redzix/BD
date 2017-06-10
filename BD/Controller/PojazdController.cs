@@ -9,15 +9,30 @@ namespace BD.Controller
 {
     class PojazdController
     {
+        /// <summary>
+        /// Obiekt widoku.
+        /// </summary>
         private PojazdView _view;
-        private bazaEntities db;
 
+        /// <summary>
+        /// Model danych.
+        /// </summary>
+        private bazaEntities db;
+        
+        /// <summary>
+        /// Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+        /// </summary>
+        /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
         public PojazdController(PojazdView view)
         {
             _view = view;
             db = new bazaEntities();
         }
 
+        /// <summary>
+        /// Metoda odpowiedzialna za dodawanie nowego pojazdu do bazy danych wraz z wszystimi informacjami o nim.
+        /// </summary>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int DodajPojazd()
         {
             try

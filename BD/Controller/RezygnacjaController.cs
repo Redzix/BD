@@ -9,15 +9,32 @@ namespace BD.Controller
 {
     class RezygnacjaController
     {
+        /// <summary>
+        /// Obiekt widoku.
+        /// </summary>
         private RezygnacjaView _view;
+
+        /// <summary>
+        /// Model danych.
+        /// </summary>
         private bazaEntities db;
 
+        /// <summary>
+        /// Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+        /// </summary>
+        /// <param name="view">Referencja do widoku, który controller ma obsługiwac</
         public RezygnacjaController(RezygnacjaView view)
         {
             _view = view;
             db = new bazaEntities();
-        }                  
+        }
 
+        /// <summary>
+        /// Metoda obliczająca nową kwotę rezerwacji po wprowadzonych zmianach i sprwdzająca poprawność danych
+        /// </summary>
+        /// <param name="numerRezerwacji">Numer rezerwacji, której dotyczy opinia.</param>
+        /// <param name="uzytkownik">Pesel użytkownika, który zamawiał wycieczkę</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int Oblicz(string numerRezerwacji,string uzytkownik)
         {
             try
@@ -61,6 +78,12 @@ namespace BD.Controller
             }
         }
 
+        /// <summary>
+        /// Metoda zapisująca zmiany do bazy danych.
+        /// </summary>
+        /// <param name="numerRezerwacji">Numer rezerwacji, której dotyczy opinia.</param>
+        /// <param name="uzytkownik">Pesel użytkownika, który zamawiał wycieczkę</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int Zapisz(string numerRezerwacji,string uzytkownik)
         {
             try

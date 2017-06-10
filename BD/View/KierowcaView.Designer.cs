@@ -118,6 +118,7 @@
             this.Marka,
             this.Pojemnosc,
             this.Stan});
+            this.lv_pojazdy.FullRowSelect = true;
             this.lv_pojazdy.GridLines = true;
             this.lv_pojazdy.Location = new System.Drawing.Point(8, 3);
             this.lv_pojazdy.MultiSelect = false;

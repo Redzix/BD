@@ -10,16 +10,37 @@ namespace BD.Controller
 {
     class ReklamacjaController
     {
+        /// <summary>
+        /// Obiekt widoku.
+        /// </summary>
         private ReklamacjaView _view;
+
+        /// <summary>
+        /// Model danych.
+        /// </summary>
         private bazaEntities db;
+
+        /// <summary>
+        /// Zmienna przechowująca informacje o tym, czy użytkownik
+        /// chce zapisać zmiany dla pierwotnie wybranej rezerwacji, czy zmienił jej numer
+        /// </summary>
         private int sprawdzCzyTaSama;
 
+        /// <summary>
+        /// Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+        /// </summary>
+        /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
         public ReklamacjaController(ReklamacjaView view)
         {
             _view = view;
             db = new bazaEntities();
         }
 
+        /// <summary>
+        /// Metoda pobierajaca numery reklamacji dla aktualnego użytkownika i dodająca je do widoku
+        /// </summary>
+        /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public bool PobierzReklamacje(string uzytkownik)
         {
 
@@ -45,6 +66,12 @@ namespace BD.Controller
             }
         }
 
+        /// <summary>
+        /// Metoda odpowiedzialna za pobieranie informacji o wybranej rezerwacji i dodające je do widoku.
+        /// </summary>
+        /// <param name="numerRezerwacji">Numer rezerwacji, dla której pobierane sa informacje.</param>
+        /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int PobierzNazweWycieczki(string numerRezerwacji,string uzytkownik)
         {
             try
@@ -75,6 +102,12 @@ namespace BD.Controller
             }
         }
 
+        /// <summary>
+        /// Metoda pobierająca informacje o aktualnie wybranej reklamacji i dodające je do widoku.
+        /// </summary>
+        /// <param name="numerReklamacji">Numer reklamacji, dla której są pobierane informacje.</param>
+        /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int PobierzInformacjeOReklamacji(string numerReklamacji,string uzytkownik)
         {
             try
@@ -113,6 +146,12 @@ namespace BD.Controller
             }
         }
 
+        /// <summary>
+        /// Metoda dodająca reklamację do bazy danych.
+        /// </summary>
+        /// <param name="numerRezerwacji">Nume rezerwacji, dla której dodawana jest reklamacja.</param>
+        /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int DodajReklamacje(string numerRezerwacji,string uzytkownik)
         {
             try

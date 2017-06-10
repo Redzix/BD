@@ -9,16 +9,40 @@ namespace BD.Controller
 {
     class RezerwacjaController
     {
+        /// <summary>
+        /// Obiekt widoku.
+        /// </summary>
         private RezerwacjaView _view;
-        private bazaEntities db;
-        private int sprawdzCzyTaSama; 
 
+        /// <summary>
+        /// Model danych.
+        /// </summary>
+        private bazaEntities db;
+
+        /// <summary>
+        /// Zmienna przechowująca informacje o tym, czy użytkownik
+        /// chce zapisać zmiany dla pierwotnie wybranej rezerwacji, czy zmienił jej numer
+        /// </summary>
+        private int sprawdzCzyTaSama;
+
+
+        /// <summary>
+        /// Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+        /// </summary>
+        /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param
         public RezerwacjaController(RezerwacjaView view)
         {
             _view = view;
             db = new bazaEntities();
         }
 
+        /// <summary>
+        /// Metoda pobierająca informacje o aktualnie wybranej rezerwacji, 
+        /// obliczająca kwotę do zapłąty po wprowadzonych zmianach i doajace te informacje do widoku
+        /// </summary>
+        /// <param name="numerRezerwacji">Numer rezerwacji, dla której pobierane sa informacje.</param>
+        /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int PobierzNazweWycieczki(string numerRezerwacji,string uzytkownik)
         {
             try
@@ -54,6 +78,12 @@ namespace BD.Controller
             }
         }
 
+        /// <summary>
+        /// Metoda dodająca zmiany w rezerwacji do bazy danych.
+        /// </summary>
+        /// <param name="numerRezerwacji">Numer rezerwacji, dla której pobierane sa informacje.</param>
+        /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int ZaplacRezerwacje(string numerRezerwacji, string uzytkownik)
         {
             try
@@ -115,6 +145,11 @@ namespace BD.Controller
             }
         }
 
+        /// <summary>
+        /// Metoda dodająca nową rezerwację dla aktualnie wy ranej przez użytkownika wycieczki.
+        /// </summary>
+        /// <param name="idWycieczki">Aktualny numer wycieczki wybranej przez użytkownika.</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int DodajRezerwacje(int idWycieczki)
         {
 

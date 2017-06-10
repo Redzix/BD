@@ -9,15 +9,33 @@ namespace BD.Controller
 {
     class PanelPracowniczyController
     {
+        /// <summary>
+        /// Obiekt widoku.
+        /// </summary>
         private PanelPracowniczyView _view;
+
+        /// <summary>
+        /// Model danych.
+        /// </summary>
         private bazaEntities db;
 
+        /// <summary>
+        /// Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+        /// </summary>
+        /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
         public PanelPracowniczyController(PanelPracowniczyView view)
         {
             _view = view;
             db = new bazaEntities();
         }
 
+        /// <summary>
+        /// Metoda sprwdzająca poprawność wprowadzonych danych logowania, sprawdza uprawnienia i
+        /// tworzy odpowiednie widoki.
+        /// </summary>
+        /// <param name="login">Nazwa użytkownika pobrana z widoku</param>
+        /// <param name="haslo">Hasło użytkownika pobrane z widoku.</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int SprawdzDaneLogowania(string login, string haslo)
         {
             try
