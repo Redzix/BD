@@ -13,6 +13,9 @@ namespace BD.View
 {
     public partial class PanelPracowniczyView : Form
     {
+        /// <summary>
+        /// Obiekt przechowujący kontroler
+        /// </summary>
         private PanelPracowniczyController controller;
 
         /// <summary>
@@ -23,8 +26,9 @@ namespace BD.View
             InitializeComponent();
             controller = new PanelPracowniczyController(this);
         }
+
         /// <summary>
-        /// Zdarzenie obsługujące wyjście z aplikacji
+        /// Metoda obsługująca zdarzenie wyjście z aplikacji
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
         /// <param name="e">Zdarzenia systemowe</param>

@@ -14,7 +14,14 @@ namespace BD.View
 {
     public partial class OpiniaView : Form
     {
+        /// <summary>
+        /// Obiekt przechowujący kontroler.
+        /// </summary>
         private OpiniaController controller;
+
+        /// <summary>
+        /// Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+        /// </summary>
         private string _uzytkownik;
 
         /// <summary>
@@ -40,7 +47,7 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Zdarzenie obsługujące wyłączenie okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
+        /// Metoda obsługująca zdarzenie  wyłączenia okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
         /// <param name="e">Zdarzenia systemowe</param>
@@ -68,7 +75,7 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
+        /// Metoda obsługująca zdarzenie wyłączenia okna po wciśnięciu przycisku "Anuluj".
         /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
@@ -78,6 +85,12 @@ namespace BD.View
             this.Dispose();
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie klikniecia b_zapisz, odpowiada za wywołanie funkcji zapisującej
+        /// opinie do bazy danych i obsługę jej komunikatów
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapisz_Click(object sender, EventArgs e)
         {
             int zapisz = controller.DodajOpinie(tb_numerRezerwacji.Text, cb_ocena.SelectedIndex + 1, tb_opinia.Text,_uzytkownik);
@@ -98,7 +111,13 @@ namespace BD.View
                     break;
             } 
         }
-        
+
+        /// <summary>
+        /// Metoda obsługująca zdarzenie opuszczenie textboxa numeru rezerwacji, 
+        /// odpowiada za wywołanie funkcji pobierającej informacje o wycieczce i obsługe jej komunikatów.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
 

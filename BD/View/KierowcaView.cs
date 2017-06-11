@@ -12,8 +12,14 @@ using BD.Controller;
 
 namespace BD.View
 {
+    /// <summary>
+    /// Klasa odpowiedzialna za obsługę zdarzeń wiodku udostępnianego kierowcy.
+    /// </summary>
     public partial class KierowcaView : Form
     {
+        /// <summary>
+        /// Obiekt przechowujący kontroler.
+        /// </summary>
         private KierowcaController controller;
 
         /// <summary>
@@ -71,7 +77,7 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Zdarzenie obsługujące wyłączenie aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
+        /// Metoda obsługujące zdarzenie wyłączenia aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
         /// <param name="e">Zdarzenia systemowe</param>
@@ -98,6 +104,12 @@ namespace BD.View
             }
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie ładowania widoku, wywołuje funkcję pobierającą
+        /// informacje o pojazdach i obsługuje komunikaty tej funkcji.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void Kierowca_Load(object sender, EventArgs e)
         {
             int pobierz = controller.PobierzPojazdy();
@@ -111,6 +123,12 @@ namespace BD.View
             }
         }
 
+        /// <summary>
+        /// Metoda obsługujące zdarzenie kliknięcia przycisku b_kierowca_zapisz, odpowiada za uruchomienie funkcji
+        /// zapisującej zmiany i obsługe jej komunikatów.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_kierowca_zapisz_Click(object sender, EventArgs e)
         {
             string numerRejestracyjny = ((ListView)sender).SelectedItems[0].Tag.ToString();
@@ -122,6 +140,9 @@ namespace BD.View
                 case 1:
                     MessageBox.Show("W pojezdzie o numerze rejestracyjnym " + numerRejestracyjny +
                         " ustawiono stan na awarię", "Dodano awarię", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.rb_awaria.Enabled = false;
+                    this.rb_sprawny.Enabled = false;
+                    this.b_kierowca_zapisz.Enabled = false;
                     break;
                 case -1:
                     MessageBox.Show("Brak pojazdu o podanym numerze rejestracyjnym.", "Błędny numer rejestracyjny", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -129,6 +150,9 @@ namespace BD.View
                 case 2:
                     MessageBox.Show("W pojezdzie o numerze rejestracyjnym " + numerRejestracyjny +
                          " ustawiono stan na sprawność", "Dodano sprawność", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.rb_awaria.Enabled = false;
+                    this.rb_sprawny.Enabled = false;
+                    this.b_kierowca_zapisz.Enabled = false;
                     break;
                 case -2:
                     MessageBox.Show("Brak pojazdu o podanym numerze rejestracyjnym.", "Błędny numer rejestracyjny", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -143,7 +167,12 @@ namespace BD.View
                     break;
             }    
         }
-        
+
+        /// <summary>
+        /// Metoda odpowiadająca za udostepnianie edycji kontrolek po zmianie wyboru pojazdu
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void lv_pojazdy_SelectedIndexChanged(object sender, EventArgs e)
         {
                 this.rb_awaria.Enabled = true;
@@ -151,6 +180,11 @@ namespace BD.View
                 this.b_kierowca_zapisz.Enabled = true;
         }
 
+        /// <summary>
+        /// Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void sortListViewByColumn(object sender, ColumnClickEventArgs e)
         {
             if (((ListView)sender).Sorting == System.Windows.Forms.SortOrder.Ascending)
@@ -161,6 +195,11 @@ namespace BD.View
             ((ListView)sender).ListViewItemSorter = new ListViewItemComparer(e.Column, ((ListView)sender).Sorting);
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia na nagłówek kolumny, sortuje zawartość listview według danej kolumny
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void lv_pojazdy_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender,e);

@@ -57,7 +57,6 @@
             this.dgv_tabelaPilot.Name = "dgv_tabelaPilot";
             this.dgv_tabelaPilot.Size = new System.Drawing.Size(651, 150);
             this.dgv_tabelaPilot.TabIndex = 0;
-            this.dgv_tabelaPilot.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_tabelaPilot_ColumnHeaderMouseClick);
             // 
             // id_wycieczki
             // 

@@ -13,9 +13,19 @@ namespace BD.View
 {
     public partial class KlientView : Form
     {
-
+        /// <summary>
+        /// Zmienna przechowująca id aktualnie wybranej wycieczki
+        /// </summary>
         private int _idWycieczki;
+
+        /// <summary>
+        /// Obiekt przechowujący kontroler.
+        /// </summary>
         private KlientController controller;
+
+        /// <summary>
+        /// Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+        /// </summary>
         private string _uzytkownik;
 
         /// <summary>
@@ -145,6 +155,12 @@ namespace BD.View
             }
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie ładowania widoku, odpowiada za wywołanie funkcji ładującej
+        /// informacje o wycieczkach do widoku i obsługuje jej komunikaty.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void Klient_Load(object sender, EventArgs e)
         {
             if(controller.PobierzWycieczki())
@@ -158,12 +174,25 @@ namespace BD.View
             }
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zaplac, odpowiada za wywołanie widoku 
+        /// płacenia za wycieczkę
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_zaplac_Click(object sender, EventArgs e)
         {
             RezerwacjaView rezerwacja = new RezerwacjaView();
             rezerwacja.ShowDialog();
         }
 
+
+        /// <summary>
+        /// Metoda obsługująca zdarzenie ładowania kliknięcie komórki garagridview, odpowiada za wywołanie funkcji ładującej
+        /// informacje o wybranej wycieczce do richtextboxa.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void dgv_katalog_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // Podświetlenie wybranego wiersza
@@ -186,7 +215,6 @@ namespace BD.View
                     break;
             }
         }
-
      
     }
 }

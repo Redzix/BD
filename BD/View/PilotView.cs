@@ -15,7 +15,14 @@ namespace BD.View
 {
     public partial class PilotView : Form
     {
+        /// <summary>
+        /// Obiekt przechowujący kontroler.
+        /// </summary>
         private PilotController controller;
+
+        /// <summary>
+        /// Zmienna przechowująca id aktualnie wybranej wycieczki
+        /// </summary>
         private string _uzytkownik;
 
         /// <summary>
@@ -51,7 +58,7 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Zdarzenie obsługujące wylogowanie z systemu po wciśnięciu przycisku "Wyjdź", po kliknięciu program przechodzi do panelu logowania.
+        /// Metoda obsługująca zdarzenie wylogowania z systemu po wciśnięciu przycisku "Wyjdź", po kliknięciu program przechodzi do panelu logowania.
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
         /// <param name="e">Zdarzenia systemowe</param>
@@ -75,7 +82,7 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Zdarzenie obsługujące wyłączenie aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
+        /// Metoda obsługująca zdarzenie wyłączenia aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
         /// <param name="e">Zdarzenia systemowe</param>
@@ -103,7 +110,8 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Zdarzenie, które po załadowaniu aplikacji ładuje dane z bazy danych do dataGridView
+        /// Metoda obsługująca zdarzenie ładowania widoku odpowiedzialne za wywołanie funkcji ładującej informacje
+        /// o wycieczkach do widoku i obsługujące jej komunikaty.
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
         /// <param name="e">Zdarzenia systemowe</param>
@@ -115,9 +123,5 @@ namespace BD.View
             }
         }
 
-        private void dgv_tabelaPilot_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-           
-        }
     }
 }
