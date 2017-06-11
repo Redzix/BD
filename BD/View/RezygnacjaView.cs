@@ -13,7 +13,15 @@ namespace BD.View
 {
     public partial class RezygnacjaView : Form
     {
+
+        /// <summary>
+        /// Obiekt przechowujący kontroler.
+        /// </summary>
         private RezygnacjaController controller;
+
+        /// <summary>
+        /// Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+        /// </summary>
         private string _uzytkownik;
 
         /// <summary>
@@ -81,6 +89,12 @@ namespace BD.View
             }
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia przycisku b_oblicz, odpowiada za wywołanie funkcji 
+        /// sprawdzającej poprawnoość numeru rezerwacji oraz obliczajacej sugerowane koszty i obsługuje jej komunikat
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_oblicz_Click(object sender, EventArgs e)
          {
             int oblicz = controller.Oblicz(tb_numerRezerwacji.Text,_uzytkownik);
@@ -115,6 +129,12 @@ namespace BD.View
             }          
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji 
+        /// zapisującej obliczone informacje do bazy i obsługe jej komunikatów
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapisz_Click(object sender, EventArgs e)
         {
             int zapisz = controller.Zapisz(tb_numerRezerwacji.Text, _uzytkownik);

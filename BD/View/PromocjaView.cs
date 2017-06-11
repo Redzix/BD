@@ -13,13 +13,30 @@ namespace BD.View
 {
     public partial class PromocjaView : Form
     {
+        /// <summary>
+        /// Obiekt przechowujący kontroler.
+        /// </summary>
         KierownikController controller;
+
+        /// <summary>
+        /// Id aktualnie wybranego katalogu
+        /// </summary>
         int idKatalog;
+
+        /// <summary>
+        /// Główny bezparametrowy konstruktor okna
+        /// </summary>
         public PromocjaView()
         {
             InitializeComponent();
         }
 
+
+        /// <summary>
+        /// Konstruktor pobierający inforamcje o aktualnie wybranym katalogu, wywołujący funkcję pobrania i zapisu informacji o
+        /// promocji do widoku.
+        /// </summary>
+        /// <param name="idKatalog">Aktualny katalog</param>
         public PromocjaView(int idKatalog)
         {
             InitializeComponent();
@@ -30,6 +47,12 @@ namespace BD.View
             b_edytuj.Visible = stan;
         }
 
+        /// <summary>
+        /// Metoda obsługująca klikniecie przyciku dodaj promocję, wywołuje funkcję odpowiedzialną za dodawanie
+        /// nowej promocji.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param
         private void button1_Click(object sender, EventArgs e)
         {
             if (controller.DodajPromocje(this.idKatalog))
@@ -40,6 +63,12 @@ namespace BD.View
             this.Dispose();
         }
 
+        /// <summary>
+        /// Metoda obsługująca klikniecie przyciku dodaj promocję, wywołuje funkcję odpowiedzialną za edycję
+        /// promocji.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param
         private void b_edytuj_Click(object sender, EventArgs e)
         {
             if (controller.EdytujPromocje(this.idKatalog))

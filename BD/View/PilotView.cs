@@ -21,7 +21,7 @@ namespace BD.View
         private PilotController controller;
 
         /// <summary>
-        /// Zmienna przechowująca id aktualnie wybranej wycieczki
+        /// Zmienna przechowująca pesel aktualnie wybranej wycieczki
         /// </summary>
         private string _uzytkownik;
 

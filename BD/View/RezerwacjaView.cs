@@ -14,8 +14,19 @@ namespace BD.View
 {
     public partial class RezerwacjaView : Form
     {
+        /// <summary>
+        /// Zmienna przechowująca id aktualnie wybranej wycieczki
+        /// </summary>
         private int _idWycieczki;
+
+        /// <summary>
+        /// Obiekt przechowujący kontroler.
+        /// </summary>
         private RezerwacjaController controller;
+
+        /// <summary>
+        /// Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+        /// </summary>
         private string _uzytkownik;
 
         /// <summary>
@@ -84,6 +95,12 @@ namespace BD.View
             }
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji 
+        /// zapisującej nową rezerwację do bazy i obsługe jej komunikatów
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_rezerwacja_zapisz_Click(object sender, EventArgs e)
         {
             int zapisz = controller.DodajRezerwacje(_idWycieczki);
@@ -103,11 +120,23 @@ namespace BD.View
             }        
         }
 
+        /// <summary>
+        /// Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
+        /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_anlujZaplate_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zapłaćRezerwacje, odpowiada za wywołanie funkcji 
+        /// zapisującej obliczone informacje do bazy i obsługe jej komunikatów
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapłaćRezerwacje_Click(object sender, EventArgs e)
         {
             int zaplac = controller.ZaplacRezerwacje(tb_numerRezerwacji.Text, _uzytkownik);
@@ -142,6 +171,12 @@ namespace BD.View
             }   
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji 
+        /// pobierającej i wyswiętlającej informacje o rezerwacji i obsługe jej komunikatów
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
             int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text,_uzytkownik);

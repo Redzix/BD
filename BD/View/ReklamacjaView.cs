@@ -14,7 +14,14 @@ namespace BD.View
 {
     public partial class ReklamacjaView : Form
     {
+        /// <summary>
+        /// Obiekt przechowujący kontroler.
+        /// </summary>
         private ReklamacjaController controller;
+
+        /// <summary>
+        /// Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+        /// </summary>
         private string _uzytkownik;
 
         /// <summary>
@@ -26,6 +33,10 @@ namespace BD.View
             controller = new ReklamacjaController(this);
         }
 
+        /// <summary>
+        /// Dodaje reklamację dla zdefiniowanego wcześniej użytkownika
+        /// </summary>
+        /// <param name="uzytkownik">Aktualny użytkownik</param>
         public ReklamacjaView(string uzytkownik)
         {
             InitializeComponent();
@@ -34,7 +45,7 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
+        /// Metoda obsługująca zdarzenie wyłączenia okna po wciśnięciu przycisku "Anuluj".
         /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
@@ -45,7 +56,7 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Zdarzenie obsługujące wyłączenie okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
+        /// Metoda obsługująca zdarzenie wyłączenia okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
         /// <param name="e">Zdarzenia systemowe</param>
@@ -72,6 +83,12 @@ namespace BD.View
             }
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji
+        /// dodającej nową reklamację do bazy i obsługe jej komunikatów.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapisz_Click(object sender, EventArgs e)
         {
             int zapisz = controller.DodajReklamacje(tb_numerRezerwacji.Text,_uzytkownik);
@@ -96,6 +113,12 @@ namespace BD.View
             }             
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie zmiany zakładki, odpowiada za wywołanie funkcji pobierającej
+        /// numery reklamacji i obsługuje jej komunikaty
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void tc_reklamacje_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(tc_reklamacje.SelectedIndex == 1)
@@ -111,6 +134,12 @@ namespace BD.View
             }
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia komórki w listview, odpowiada za wywołanie
+        /// funkcji pobierającej informacje o wybranej wycieczce i obsługuje jej komunikaty
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
         {
             int pobierz = controller.PobierzInformacjeOReklamacji(((ListView)sender).SelectedItems[0].Tag.ToString(), _uzytkownik);
@@ -130,6 +159,12 @@ namespace BD.View
             }
         }
 
+        /// <summary>
+        /// Metoda obsługująca kliknięcie przycisku b_sprawdzPoprawnosc, odpowiada za wywołanie funkcji pobierającej
+        /// nazwę wycieczki w celu weryfikacji poprawnego numeru rezerwacji i obsługuje jej komunikaty
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_sprawdzPoprawnosc_Click(object sender, EventArgs e)
         {
             int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text, _uzytkownik);
@@ -157,6 +192,11 @@ namespace BD.View
             }          
         }
 
+        /// <summary>
+        /// Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void sortListViewByColumn(object sender, ColumnClickEventArgs e)
         {
             if (((ListView)sender).Sorting == System.Windows.Forms.SortOrder.Ascending)
@@ -167,6 +207,11 @@ namespace BD.View
             ((ListView)sender).ListViewItemSorter = new ListViewItemComparer(e.Column, ((ListView)sender).Sorting);
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia na nagłówek kolumny, sortuje zawartość listview według danej kolumny
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void lv_reklamacje_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender, e);

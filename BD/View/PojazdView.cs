@@ -13,6 +13,9 @@ namespace BD.View
 {
     public partial class PojazdView : Form
     {
+        /// <summary>
+        /// Obiekt przechowujący kontroler.
+        /// </summary>
         private PojazdController controller; 
 
         /// <summary>
@@ -25,7 +28,7 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
+        /// Metoda obsługująca zdarzenie wyłączenia okna po wciśnięciu przycisku "Anuluj".
         /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
@@ -36,7 +39,7 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Zdarzenie obsługujące wyłączenie okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
+        /// Metoda obsługująca zdarzenie wyłączenia okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
         /// <param name="e">Zdarzenia systemowe</param>
@@ -63,6 +66,12 @@ namespace BD.View
             }
         }
 
+        /// <summary>
+        /// Metoda obsługująca kliknięcie przycisku b_zapisz, odpowiada za wywołanie funkcji
+        /// dodającej pojazd do bazy i obsługe jej komunikatów.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapisz_Click(object sender, EventArgs e)
         {
             int zapisz = controller.DodajPojazd();
