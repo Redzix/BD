@@ -102,6 +102,7 @@
             this.tb_numerRezerwacji.Name = "tb_numerRezerwacji";
             this.tb_numerRezerwacji.Size = new System.Drawing.Size(121, 20);
             this.tb_numerRezerwacji.TabIndex = 22;
+            this.tb_numerRezerwacji.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_numerRezerwacji_KeyPress);
             // 
             // l_numerRezerwacji
             // 

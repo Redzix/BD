@@ -139,5 +139,18 @@ namespace BD.View
                     break;
             }    
         }
+
+        /// <summary>
+        /// Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_numerRezerwacji
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void tb_numerRezerwacji_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

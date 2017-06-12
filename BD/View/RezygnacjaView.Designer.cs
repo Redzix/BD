@@ -70,6 +70,7 @@
             this.tb_numerRezerwacji.Name = "tb_numerRezerwacji";
             this.tb_numerRezerwacji.Size = new System.Drawing.Size(120, 20);
             this.tb_numerRezerwacji.TabIndex = 22;
+            this.tb_numerRezerwacji.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_numerRezerwacji_KeyPress);
             // 
             // tb_nazwaWycieczki
             // 
@@ -93,6 +94,7 @@
             this.tb_liczbaRezygnujacychOsob.Name = "tb_liczbaRezygnujacychOsob";
             this.tb_liczbaRezygnujacychOsob.Size = new System.Drawing.Size(120, 20);
             this.tb_liczbaRezygnujacychOsob.TabIndex = 25;
+            this.tb_liczbaRezygnujacychOsob.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_liczbaRezygnujacychOsob_KeyPress);
             // 
             // tb_cenaPoRezygnacji
             // 

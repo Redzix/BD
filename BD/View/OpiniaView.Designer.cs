@@ -126,6 +126,7 @@
             this.tb_numerRezerwacji.Name = "tb_numerRezerwacji";
             this.tb_numerRezerwacji.Size = new System.Drawing.Size(130, 20);
             this.tb_numerRezerwacji.TabIndex = 26;
+            this.tb_numerRezerwacji.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_numerRezerwacji_KeyPress);
             this.tb_numerRezerwacji.Leave += new System.EventHandler(this.tb_numerRezerwacji_Leave);
             // 
             // tb_nazwaWycieczki

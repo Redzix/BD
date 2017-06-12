@@ -119,6 +119,7 @@
             this.tb_cena.Name = "tb_cena";
             this.tb_cena.Size = new System.Drawing.Size(100, 20);
             this.tb_cena.TabIndex = 9;
+            this.tb_cena.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_cena_KeyPress);
             // 
             // b_zapisz
             // 
