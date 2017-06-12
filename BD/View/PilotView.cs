@@ -20,6 +20,9 @@ namespace BD.View
         /// </summary>
         private PilotController controller;
 
+        Aktualizacja akt = new Aktualizacja();
+        private Thread trd;
+
         /// <summary>
         /// Zmienna przechowująca pesel aktualnie wybranej wycieczki
         /// </summary>
@@ -51,9 +54,13 @@ namespace BD.View
             l_uzytkownik.Text = uzytkownik;
             l_polaczenie.Text = "Połączony";
             _uzytkownik = uzytkownik;
-            l_polaczenie.ForeColor = System.Drawing.Color.Green;
+            l_polaczenie.ForeColor = System.Drawing.Color.Green;         
 
             controller = new PilotController(this);
+
+            trd = new Thread(new ThreadStart(this.ThreadTask));
+            trd.IsBackground = true;
+            trd.Start();
 
         }
 
@@ -146,6 +153,40 @@ namespace BD.View
         private void lv_pilot_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender, e);
+
+            //
+            //
+            if (akt.czyBylaAktualizacja())
+            {
+                MessageBox.Show("ja");
+
+            }
+            else
+            {
+                MessageBox.Show("nie");
+            }
+
         }
+
+        private void ThreadTask()
+        {
+            if (lv_pilot.InvokeRequired)
+            {
+                lv_pilot.BeginInvoke(new testDelegate(ThreadTask));             
+            }else
+            {
+                while (true)
+                {
+                    if (akt.czyBylaAktualizacja())
+                    {
+                        controller.PobierzWycieczki(_uzytkownik);
+                    }
+
+                    Thread.Sleep(200);
+                }
+            }
+        }
+
+        public delegate void testDelegate();
     }
 }

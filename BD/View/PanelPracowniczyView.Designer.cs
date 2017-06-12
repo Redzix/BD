@@ -34,18 +34,19 @@
             this.l_haslo = new System.Windows.Forms.Label();
             this.b_zaloguj = new System.Windows.Forms.Button();
             this.b_zakończ = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // tb_nazwa_uzytkownika
             // 
-            this.tb_nazwa_uzytkownika.Location = new System.Drawing.Point(84, 25);
+            this.tb_nazwa_uzytkownika.Location = new System.Drawing.Point(84, 26);
             this.tb_nazwa_uzytkownika.Name = "tb_nazwa_uzytkownika";
             this.tb_nazwa_uzytkownika.Size = new System.Drawing.Size(100, 20);
             this.tb_nazwa_uzytkownika.TabIndex = 1;
             // 
             // tb_haslo
             // 
-            this.tb_haslo.Location = new System.Drawing.Point(84, 73);
+            this.tb_haslo.Location = new System.Drawing.Point(84, 65);
             this.tb_haslo.Name = "tb_haslo";
             this.tb_haslo.PasswordChar = '*';
             this.tb_haslo.Size = new System.Drawing.Size(100, 20);
@@ -54,7 +55,7 @@
             // l_nazwa_uzytkownika
             // 
             this.l_nazwa_uzytkownika.AutoSize = true;
-            this.l_nazwa_uzytkownika.Location = new System.Drawing.Point(82, 9);
+            this.l_nazwa_uzytkownika.Location = new System.Drawing.Point(82, 8);
             this.l_nazwa_uzytkownika.Name = "l_nazwa_uzytkownika";
             this.l_nazwa_uzytkownika.Size = new System.Drawing.Size(102, 13);
             this.l_nazwa_uzytkownika.TabIndex = 3;
@@ -63,7 +64,7 @@
             // l_haslo
             // 
             this.l_haslo.AutoSize = true;
-            this.l_haslo.Location = new System.Drawing.Point(116, 57);
+            this.l_haslo.Location = new System.Drawing.Point(116, 49);
             this.l_haslo.Name = "l_haslo";
             this.l_haslo.Size = new System.Drawing.Size(36, 13);
             this.l_haslo.TabIndex = 5;
@@ -71,7 +72,7 @@
             // 
             // b_zaloguj
             // 
-            this.b_zaloguj.Location = new System.Drawing.Point(47, 108);
+            this.b_zaloguj.Location = new System.Drawing.Point(47, 100);
             this.b_zaloguj.Name = "b_zaloguj";
             this.b_zaloguj.Size = new System.Drawing.Size(75, 23);
             this.b_zaloguj.TabIndex = 7;
@@ -81,7 +82,7 @@
             // 
             // b_zakończ
             // 
-            this.b_zakończ.Location = new System.Drawing.Point(148, 108);
+            this.b_zakończ.Location = new System.Drawing.Point(148, 100);
             this.b_zakończ.Name = "b_zakończ";
             this.b_zakończ.Size = new System.Drawing.Size(75, 23);
             this.b_zakończ.TabIndex = 8;
@@ -89,11 +90,18 @@
             this.b_zakończ.UseVisualStyleBackColor = true;
             this.b_zakończ.Click += new System.EventHandler(this.b_zakoncz_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 0;
+            // 
             // PanelPracowniczyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 146);
+            this.ClientSize = new System.Drawing.Size(270, 157);
             this.Controls.Add(this.b_zakończ);
             this.Controls.Add(this.b_zaloguj);
             this.Controls.Add(this.l_haslo);
@@ -111,12 +119,12 @@
 
         #endregion
 
-        public System.Windows.Forms.TextBox tb_nazwa_uzytkownika;
-        public System.Windows.Forms.TextBox tb_haslo;
-        private System.Windows.Forms.Label l_nazwa_uzytkownika;
-        private System.Windows.Forms.Label l_haslo;
-        private System.Windows.Forms.Button b_zaloguj;
         private System.Windows.Forms.Button b_zakończ;
-
+        private System.Windows.Forms.Button b_zaloguj;
+        private System.Windows.Forms.Label l_haslo;
+        private System.Windows.Forms.Label l_nazwa_uzytkownika;
+        public System.Windows.Forms.TextBox tb_haslo;
+        public System.Windows.Forms.TextBox tb_nazwa_uzytkownika;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

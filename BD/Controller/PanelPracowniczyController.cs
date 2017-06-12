@@ -50,42 +50,42 @@ namespace BD.Controller
                 }
                 else
                 {
-                    if (pobierz.stopien.Equals("kierownik"))
-                    {
-                        _view.Hide();
-                        KierownikView kierownik = new KierownikView(pobierz.Kierownik_pesel);
-                        kierownik.Closed += (s, args) => _view.Close();
-                        kierownik.ShowDialog();
+                        if (pobierz.stopien.Equals("kierownik"))
+                        {
+                            _view.Hide();
+                            KierownikView kierownik = new KierownikView(pobierz.Kierownik_pesel);
+                            kierownik.Closed += (s, args) => _view.Close();
+                            kierownik.ShowDialog();
 
-                    }
-                    else if (pobierz.stopien.Equals("klient"))
-                    {
-                        _view.Hide();
-                        KlientView klient = new KlientView(pobierz.Klient_pesel);
-                        klient.Closed += (s, args) => _view.Close();
-                        klient.ShowDialog();
+                        }
+                        else if (pobierz.stopien.Equals("klient"))
+                        {
+                            _view.Hide();
+                            KlientView klient = new KlientView(pobierz.Klient_pesel);
+                            klient.Closed += (s, args) => _view.Close();
+                            klient.ShowDialog();
 
-                    }
-                    else if (pobierz.stopien.Equals("kierowca"))
-                    {
-                        _view.Hide();
-                        KierowcaView kierowca = new KierowcaView(pobierz.Kierowca_pesel);
-                        kierowca.Closed += (s, args) => _view.Close();
-                        kierowca.ShowDialog();
+                        }
+                        else if (pobierz.stopien.Equals("kierowca"))
+                        {
+                            _view.Hide();
+                            KierowcaView kierowca = new KierowcaView(pobierz.Kierowca_pesel);
+                            kierowca.Closed += (s, args) => _view.Close();
+                            kierowca.ShowDialog();
 
-                    }
-                    else if (pobierz.stopien.Equals("pilot"))
-                    {
-                        _view.Hide();
-                        PilotView pilot = new PilotView(pobierz.Pilot_pesel);
-                        pilot.Closed += (s, args) => _view.Close();
-                        pilot.ShowDialog();
-                    }
-                    else
-                    {
-                        return -1;
-                    }
-                    return 1;
+                        }
+                        else if (pobierz.stopien.Equals("pilot"))
+                        {
+                            _view.Hide();
+                            PilotView pilot = new PilotView(pobierz.Pilot_pesel);
+                            pilot.Closed += (s, args) => _view.Close();
+                            pilot.ShowDialog();
+                        }
+                        else
+                        {
+                            return -1;
+                        }
+                        return 1;            
                 }
             }catch(Exception exception)
             {

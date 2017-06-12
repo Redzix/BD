@@ -8,8 +8,17 @@ namespace BD
 {
     class Aktualizacja
     {
+        private SqlConnection _polaczenie;
+        private SqlCommand _zapytanie;
+ 
         private string lastupdate;
         private string databasename;
+
+        public Aktualizacja()
+        {
+            _polaczenie = new SqlConnection();
+            _zapytanie = new SqlCommand();
+        }
 
         public string ostatniaAktualizacja
         {
@@ -25,20 +34,30 @@ namespace BD
 
         public string dataOstatniejAktualizacji()
         {
-            Polacz_z_baza _polacz = new Polacz_z_baza();
-            SqlConnection _polaczenie = _polacz.PolaczZBaza();
-            SqlCommand _zapytanie = _polacz.UtworzZapytanie("select OBJECT_NAME(OBJECT_ID) AS DatabaseName, last_user_update from sys.dm_db_index_usage_stats where database_id = DB_ID('baza') order by last_user_update desc");
+            
+            _polaczenie.ConnectionString = "Server=bditake.database.windows.net; Database=baza; User Id=bdsql; password=Chuj123123";
+            _polaczenie.Open();
+
+            _zapytanie.Connection = _polaczenie;
+            _zapytanie.CommandText = "select OBJECT_NAME(OBJECT_ID) AS DatabaseName," +
+                " last_user_update" +
+                " from sys.dm_db_index_usage_stats " +
+                "where database_id = DB_ID('baza') " +
+                "order by last_user_update desc";
+
             SqlDataReader reader = _zapytanie.ExecuteReader();
             reader.Read();
             var tmpupdate = reader["last_user_update"].ToString();
             this.databasename = reader["DatabaseName"].ToString();
             reader.Close();
+
+            _polaczenie.Close();
             return tmpupdate;
         }
 
         public bool czyBylaAktualizacja() 
         {
-            if (this.lastupdate.Equals(dataOstatniejAktualizacji()))
+            if (dataOstatniejAktualizacji().Equals(lastupdate))
                 return false;
             else
             {
