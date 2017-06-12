@@ -163,6 +163,7 @@
             this.lv_klient.UseCompatibleStateImageBehavior = false;
             this.lv_klient.View = System.Windows.Forms.View.Details;
             this.lv_klient.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lv_klient_ColumnClick);
+            this.lv_klient.ItemActivate += new System.EventHandler(this.lv_klient_ItemActivate);
             // 
             // nazwaWycieczki
             // 

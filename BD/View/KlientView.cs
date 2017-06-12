@@ -186,36 +186,6 @@ namespace BD.View
             rezerwacja.ShowDialog();
         }
 
-
-        /// <summary>
-        /// Metoda obsługująca zdarzenie ładowania kliknięcie komórki garagridview, odpowiada za wywołanie funkcji ładującej
-        /// informacje o wybranej wycieczce do richtextboxa.
-        /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
-        /// <param name="e">Zdarzenia systemowe</param>
-        private void dgv_katalog_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Podświetlenie wybranego wiersza
-            ((DataGridView)sender).Rows[e.RowIndex].Selected = true;
-
-            int pobierz = controller.PobierzDaneWycieczki(((DataGridView)sender)[0, e.RowIndex].FormattedValue.ToString());
-
-            switch (pobierz)
-            {
-                case 1:
-                    int.TryParse(((DataGridView)sender)[0, e.RowIndex].FormattedValue.ToString(), out _idWycieczki);
-                    break;
-                case 0:
-                    MessageBox.Show("Wystąpił problem podczas konwersji id wycieczki", "Błąd konwersji", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
-                case -1:
-                    MessageBox.Show("Wystąpił problem podczas pobierania danych.", "Błąd pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
-                default:
-                    break;
-            }
-        }
-
         /// <summary>
         /// Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
         /// </summary>
@@ -239,6 +209,32 @@ namespace BD.View
         private void lv_klient_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender, e);
+        }
+
+        /// <summary>
+        /// Metoda obsługująca zdarzenie ładowania kliknięcie komórki garagridview, odpowiada za wywołanie funkcji ładującej
+        /// informacje o wybranej wycieczce do richtextboxa.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void lv_klient_ItemActivate(object sender, EventArgs e)
+        {
+            int pobierz = controller.PobierzDaneWycieczki(((ListView)sender).SelectedItems[0].Tag.ToString());
+
+            switch (pobierz)
+            {
+                case 1:
+                    int.TryParse(((ListView)sender).SelectedItems[0].Tag.ToString(), out _idWycieczki);
+                    break;
+                case 0:
+                    MessageBox.Show("Wystąpił problem podczas konwersji id wycieczki", "Błąd konwersji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case -1:
+                    MessageBox.Show("Wystąpił problem podczas pobierania danych.", "Błąd pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

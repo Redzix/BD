@@ -46,7 +46,7 @@ namespace BD.Controller
                             okresTrwaniaWycieczki = katalog.okres_trwania_wycieczki,
                             dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
                             wartoscPromocji = (katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0,
-                            cenaCalkowita = katalog.Cennik.cena - ((katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0)
+                            cenaCalkowita = katalog.cena - ((katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0)
                         };
             if (query == null)
             {
