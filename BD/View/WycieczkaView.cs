@@ -132,7 +132,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_cena_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != 44))
             {
                 e.Handled = true;
             }

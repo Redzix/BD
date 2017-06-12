@@ -79,6 +79,7 @@
             this.tb_kwota.Name = "tb_kwota";
             this.tb_kwota.Size = new System.Drawing.Size(102, 20);
             this.tb_kwota.TabIndex = 5;
+            this.tb_kwota.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_kwota_KeyPress);
             // 
             // dtp_termin_koniec
             // 
