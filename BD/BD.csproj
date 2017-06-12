@@ -78,7 +78,6 @@
     <Compile Include="Cennik.cs">
       <DependentUpon>BazaEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Cennik_model.cs" />
     <Compile Include="Controller\KierowcaController.cs" />
     <Compile Include="Controller\KierownikController.cs" />
     <Compile Include="Controller\KlientController.cs" />
@@ -101,6 +100,7 @@
     <Compile Include="Kierownik.cs">
       <DependentUpon>BazaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Kierownik_model.cs" />
     <Compile Include="Klient.cs">
       <DependentUpon>BazaEntity.tt</DependentUpon>
     </Compile>
@@ -119,6 +119,7 @@
     <Compile Include="Pojazd.cs">
       <DependentUpon>BazaEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pracownik_modelcs.cs" />
     <Compile Include="Promocja.cs">
       <DependentUpon>BazaEntity.tt</DependentUpon>
     </Compile>
@@ -137,36 +138,30 @@
     <Compile Include="View\KierowcaView.Designer.cs">
       <DependentUpon>KierowcaView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kierowca_model.cs" />
     <Compile Include="View\KierownikView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\KierownikView.Designer.cs">
       <DependentUpon>KierownikView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Kierownik_model.cs" />
     <Compile Include="View\KlientView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\KlientView.Designer.cs">
       <DependentUpon>KlientView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Klient_model.cs" />
-    <Compile Include="Miejsce_model.cs" />
     <Compile Include="View\OpiniaView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\OpiniaView.Designer.cs">
       <DependentUpon>OpiniaView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Opinia_model.cs" />
     <Compile Include="View\PanelPracowniczyView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\PanelPracowniczyView.Designer.cs">
       <DependentUpon>PanelPracowniczyView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Panel_pracowniczy_model.cs" />
     <Compile Include="Controller\PdfCreator.cs" />
     <Compile Include="View\PilotView.cs">
       <SubType>Form</SubType>
@@ -174,16 +169,13 @@
     <Compile Include="View\PilotView.Designer.cs">
       <DependentUpon>PilotView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pilot_model.cs" />
     <Compile Include="View\PojazdView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\PojazdView.Designer.cs">
       <DependentUpon>PojazdView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pojazd_model.cs" />
     <Compile Include="Polacz_z_baza.cs" />
-    <Compile Include="Pracownik_model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Promocja_model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,15 +198,12 @@
     <Compile Include="View\RezerwacjaView.Designer.cs">
       <DependentUpon>RezerwacjaView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rezerwacja_model.cs" />
     <Compile Include="View\RezygnacjaView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\RezygnacjaView.Designer.cs">
       <DependentUpon>RezygnacjaView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rezygnacja_model.cs" />
-    <Compile Include="Uczestnictwo_model.cs" />
     <Compile Include="View\WycieczkaView.cs">
       <SubType>Form</SubType>
     </Compile>

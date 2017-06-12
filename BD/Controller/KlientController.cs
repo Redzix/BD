@@ -48,6 +48,7 @@ namespace BD.Controller
                             wartoscPromocji = (katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0,
                             cenaCalkowita = katalog.cena - ((katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0)
                         };
+
             if (query == null)
             {
                 _view.lv_klient.Items.Add("Brak wycieczek");
@@ -89,8 +90,8 @@ namespace BD.Controller
                                  dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
                                  dataPowrotu = katalog.Wycieczka.data_wyjazdu,
                                  opisWycieczki = katalog.Wycieczka.opis,
-                                 miejsceDoceloweAdres = katalog.Miejsce.adres,
-                                 miejsceDoceloweMiejscowosc = katalog.Miejsce.miejscowosc
+                                 miejsceDoceloweAdres = katalog.Miejsce1.adres,
+                                 miejsceDoceloweMiejscowosc = katalog.Miejsce1.miejscowosc
                              }).FirstOrDefault();
 
                 if (pobierz == null)
@@ -119,6 +120,47 @@ namespace BD.Controller
             catch (Exception exception)
             {
                 return -1;
+            }
+        }
+
+        /// <summary>
+        /// Metoda pobiera wyszukująca wycieczki według nazwy i miejscowosci
+        /// </summary>
+        /// <param name="_idWycieczki">Id aktualnie wybranej w listview wycieczki.</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        public bool SzukajWycieczki(string szukanaFraza)
+        {
+            var szukaj = from katalog in db.Katalog
+                         where (katalog.Wycieczka.nazwa + " " + katalog.Miejsce1.miejscowosc).Contains(szukanaFraza)
+                         select new
+                         {
+                             wycieczkaId = katalog.id_wycieczki,
+                             wycieczka = katalog.Wycieczka.nazwa,
+                             okresTrwaniaWycieczki = katalog.okres_trwania_wycieczki,
+                             dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
+                             wartoscPromocji = (katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0,
+                             cenaCalkowita = katalog.cena - ((katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0)
+                         };
+
+            if (szukaj.Count() == 0)
+            {
+                _view.lv_klient.Items.Add("Brak wycieczek");
+                return false;
+            }
+            else
+            {
+                _view.lv_klient.Items.Clear();
+                foreach (var kli in szukaj)
+                {
+                    ListViewItem klient = new ListViewItem(kli.wycieczka);
+                    klient.Tag = kli.wycieczkaId;
+                    klient.SubItems.Add(kli.okresTrwaniaWycieczki.ToString());
+                    klient.SubItems.Add(kli.dataOdjazdu.ToString());
+                    klient.SubItems.Add(kli.wartoscPromocji.ToString());
+                    klient.SubItems.Add(kli.cenaCalkowita.ToString());
+                    _view.lv_klient.Items.Add(klient);
+                }
+                return true;
             }
         }
     }

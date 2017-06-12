@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.rtb_wycieczka = new System.Windows.Forms.RichTextBox();
             this.b_katalog_rezerwuj = new System.Windows.Forms.Button();
             this.b_katalog_wyjdz = new System.Windows.Forms.Button();
@@ -45,6 +46,10 @@
             this.dataWyjazdu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.promocja = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cenaCalkowita = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tb_szukaj = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.l_szukaj = new System.Windows.Forms.Label();
+            this.b_szukaj = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -121,7 +126,7 @@
             // 
             // b_zaplac
             // 
-            this.b_zaplac.Location = new System.Drawing.Point(613, 277);
+            this.b_zaplac.Location = new System.Drawing.Point(776, 277);
             this.b_zaplac.Name = "b_zaplac";
             this.b_zaplac.Size = new System.Drawing.Size(75, 23);
             this.b_zaplac.TabIndex = 11;
@@ -190,11 +195,47 @@
             this.cenaCalkowita.Text = "Cena całkowita";
             this.cenaCalkowita.Width = 110;
             // 
+            // tb_szukaj
+            // 
+            this.tb_szukaj.Location = new System.Drawing.Point(613, 297);
+            this.tb_szukaj.Name = "tb_szukaj";
+            this.tb_szukaj.Size = new System.Drawing.Size(110, 20);
+            this.tb_szukaj.TabIndex = 15;
+            this.tb_szukaj.TextChanged += new System.EventHandler(this.tb_szukaj_TextChanged);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // l_szukaj
+            // 
+            this.l_szukaj.AutoSize = true;
+            this.l_szukaj.Location = new System.Drawing.Point(610, 281);
+            this.l_szukaj.Name = "l_szukaj";
+            this.l_szukaj.Size = new System.Drawing.Size(103, 13);
+            this.l_szukaj.TabIndex = 17;
+            this.l_szukaj.Text = "Podaj szukaną frazę";
+            // 
+            // b_szukaj
+            // 
+            this.b_szukaj.Enabled = false;
+            this.b_szukaj.Location = new System.Drawing.Point(613, 323);
+            this.b_szukaj.Name = "b_szukaj";
+            this.b_szukaj.Size = new System.Drawing.Size(75, 23);
+            this.b_szukaj.TabIndex = 18;
+            this.b_szukaj.Text = "Szukaj";
+            this.b_szukaj.UseVisualStyleBackColor = true;
+            this.b_szukaj.Click += new System.EventHandler(this.b_szukaj_Click);
+            // 
             // KlientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 370);
+            this.Controls.Add(this.b_szukaj);
+            this.Controls.Add(this.l_szukaj);
+            this.Controls.Add(this.tb_szukaj);
             this.Controls.Add(this.lv_klient);
             this.Controls.Add(this.l_uzytkownik);
             this.Controls.Add(this.l_zalogowany_jako);
@@ -237,6 +278,10 @@
         public System.Windows.Forms.ColumnHeader dataWyjazdu;
         public System.Windows.Forms.ColumnHeader promocja;
         private System.Windows.Forms.ColumnHeader cenaCalkowita;
+        private System.Windows.Forms.TextBox tb_szukaj;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Label l_szukaj;
+        private System.Windows.Forms.Button b_szukaj;
     }
 }
 

@@ -36,7 +36,7 @@ namespace BD
             catch (SqlException e)
             {
                 return false;
-            }          
+            }
         }
 
         public bool EdytujDostepnoscPojazdu(string numerRejestracyjny, int dostepnosc)

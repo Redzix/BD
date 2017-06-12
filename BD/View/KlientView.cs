@@ -212,7 +212,7 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Metoda obsługująca zdarzenie ładowania kliknięcie komórki garagridview, odpowiada za wywołanie funkcji ładującej
+        /// Metoda obsługująca zdarzenie ładowania kliknięcie komórki listview, odpowiada za wywołanie funkcji ładującej
         /// informacje o wybranej wycieczce do richtextboxa.
         /// </summary>
         /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
@@ -235,6 +235,38 @@ namespace BD.View
                 default:
                     break;
             }
+        }
+
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia pprzycisku b_szukaj, wywołuje funkcje odpowiedzialną za wyszukiwanie w bazie danych i 
+        /// obsługuje jej komunikaty
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void b_szukaj_Click(object sender, EventArgs e)
+        {
+            if (controller.SzukajWycieczki(tb_szukaj.Text))
+            {
+                b_szukaj.Enabled = false;               
+            }
+            else
+            {
+                MessageBox.Show("Brak wyszukiwanych wycieczek.","Brak rezultatów",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                controller.PobierzWycieczki();
+                b_szukaj.Enabled = false;
+            }
+
+        }
+
+        /// <summary>
+        /// Metoda obsługująca zdarzenie wprowadzenia tekstu do tb_szukaj, zmienia stan przycisku b_szukaj na enable, co pozwala
+        /// uruchomic wyszukiwanie
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void tb_szukaj_TextChanged(object sender, EventArgs e)
+        {
+            b_szukaj.Enabled = true;
         }
     }
 }
