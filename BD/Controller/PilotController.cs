@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BD.View;
+using System.Windows.Forms;
 
 namespace BD.Controller
 {
@@ -36,17 +37,7 @@ namespace BD.Controller
         /// <returns>Zwraca informacje o poprawnym pobraniu wycieczek.</returns>
         public bool PobierzWycieczki(string uzytkownik)
         {
-            _view.dgv_tabelaPilot.AutoGenerateColumns = false;
-
-            // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
-            _view.dgv_tabelaPilot.Columns["id_wycieczki"].DataPropertyName = "wycieczkaId";
-            _view.dgv_tabelaPilot.Columns["Nazwa_wycieczki"].DataPropertyName = "wycieczka";
-            _view.dgv_tabelaPilot.Columns["Data_wyjazdu"].DataPropertyName = "dataOdjazdu";
-            _view.dgv_tabelaPilot.Columns["Data_powrotu"].DataPropertyName = "dataPowrotu";
-            _view.dgv_tabelaPilot.Columns["Pojazd"].DataPropertyName = "pojazd";
-            _view.dgv_tabelaPilot.Columns["Kierowca"].DataPropertyName = "kierowca";
-
-
+            _view.lv_pilot.Items.Clear();
 
             var query = from wycieczka in db.Wycieczka
                         where wycieczka.Pilot_pesel.Equals(uzytkownik)
@@ -63,11 +54,21 @@ namespace BD.Controller
 
             if (query == null)
             {
+                _view.lv_pilot.Items.Add("Brak wycieczek.");
                 return false;
             }
             else
             {
-                _view.dgv_tabelaPilot.DataSource = query.ToList();
+                foreach(var pil in query)
+                {
+                    ListViewItem pilot = new ListViewItem(pil.wycieczka);
+                    pilot.Tag = pil.wycieczkaId;
+                    pilot.SubItems.Add(pil.dataOdjazdu.ToString());
+                    pilot.SubItems.Add(pil.dataPowrotu.ToString());
+                    pilot.SubItems.Add(pil.pojazd);
+                    pilot.SubItems.Add(pil.kierowca);
+                    _view.lv_pilot.Items.Add(pilot);
+                }
                 return true;
             }     
         }

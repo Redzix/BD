@@ -123,5 +123,29 @@ namespace BD.View
             }
         }
 
+        /// <summary>
+        /// Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void sortListViewByColumn(object sender, ColumnClickEventArgs e)
+        {
+            if (((ListView)sender).Sorting == System.Windows.Forms.SortOrder.Ascending)
+                ((ListView)sender).Sorting = System.Windows.Forms.SortOrder.Descending;
+            else
+                ((ListView)sender).Sorting = System.Windows.Forms.SortOrder.Ascending;
+            ((ListView)sender).Sort();
+            ((ListView)sender).ListViewItemSorter = new ListViewItemComparer(e.Column, ((ListView)sender).Sorting);
+        }
+
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia na nagłówek kolumny, sortuje zawartość listview według danej kolumny
+        /// </summary>
+        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void lv_pilot_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            sortListViewByColumn(sender, e);
+        }
     }
 }

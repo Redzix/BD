@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BD.View;
+using System.Windows.Forms;
 
 namespace BD.Controller
 {
@@ -35,15 +36,7 @@ namespace BD.Controller
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public bool PobierzWycieczki()
         {
-            _view.dgv_katalog.AutoGenerateColumns = false;
-
-            // Bindowanie odpowiednich kolumn bazy danych z kolumnami tabeli dgv_tabelaPilot
-            _view.dgv_katalog.Columns["id_wycieczki"].DataPropertyName = "wycieczkaId";
-            _view.dgv_katalog.Columns["Nazwa_wycieczki"].DataPropertyName = "wycieczka";
-            _view.dgv_katalog.Columns["Okres"].DataPropertyName = "okresTrwaniaWycieczki";
-            _view.dgv_katalog.Columns["Data_wyjazdu"].DataPropertyName = "dataOdjazdu";
-            _view.dgv_katalog.Columns["Promocja"].DataPropertyName = "wartoscPromocji";
-            _view.dgv_katalog.Columns["Koszt"].DataPropertyName = "cenaCalkowita";
+            _view.lv_klient.Items.Clear();
 
             var query = from katalog in db.Katalog
                         select new
@@ -54,15 +47,24 @@ namespace BD.Controller
                             dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
                             wartoscPromocji = (katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0,
                             cenaCalkowita = katalog.Cennik.cena - ((katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0)
-
                         };
             if (query == null)
             {
+                _view.lv_klient.Items.Add("Brak wycieczek");
                 return false;
             }
             else
             {
-                _view.dgv_katalog.DataSource = query.ToList();
+                foreach (var kli in query)
+                {
+                    ListViewItem klient = new ListViewItem(kli.wycieczka);
+                    klient.Tag = kli.wycieczkaId;
+                    klient.SubItems.Add(kli.okresTrwaniaWycieczki.ToString());
+                    klient.SubItems.Add(kli.dataOdjazdu.ToString());
+                    klient.SubItems.Add(kli.wartoscPromocji.ToString());
+                    klient.SubItems.Add(kli.cenaCalkowita.ToString());
+                    _view.lv_klient.Items.Add(klient);
+                }
                 return true;
             }
         }

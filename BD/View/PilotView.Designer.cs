@@ -28,66 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgv_tabelaPilot = new System.Windows.Forms.DataGridView();
-            this.id_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nazwa_wycieczki = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Data_wyjazdu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Data_powrotu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pojazd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kierowca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.l_zalogowany_jako = new System.Windows.Forms.Label();
             this.b_wyjdz = new System.Windows.Forms.Button();
             this.l_uzytkownik = new System.Windows.Forms.Label();
             this.l_polaczenie = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_tabelaPilot)).BeginInit();
+            this.lv_pilot = new System.Windows.Forms.ListView();
+            this.nazwaWycieczki = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dataWyjazdu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dataPowrotu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pojazd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.kierowca = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
-            // 
-            // dgv_tabelaPilot
-            // 
-            this.dgv_tabelaPilot.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv_tabelaPilot.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_tabelaPilot.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id_wycieczki,
-            this.Nazwa_wycieczki,
-            this.Data_wyjazdu,
-            this.Data_powrotu,
-            this.Pojazd,
-            this.Kierowca});
-            this.dgv_tabelaPilot.Location = new System.Drawing.Point(12, 12);
-            this.dgv_tabelaPilot.Name = "dgv_tabelaPilot";
-            this.dgv_tabelaPilot.Size = new System.Drawing.Size(651, 150);
-            this.dgv_tabelaPilot.TabIndex = 0;
-            // 
-            // id_wycieczki
-            // 
-            this.id_wycieczki.HeaderText = "Id wycieczki";
-            this.id_wycieczki.Name = "id_wycieczki";
-            this.id_wycieczki.Visible = false;
-            // 
-            // Nazwa_wycieczki
-            // 
-            this.Nazwa_wycieczki.HeaderText = "Nazwa wycieczki";
-            this.Nazwa_wycieczki.Name = "Nazwa_wycieczki";
-            // 
-            // Data_wyjazdu
-            // 
-            this.Data_wyjazdu.HeaderText = "Data wyjazdu";
-            this.Data_wyjazdu.Name = "Data_wyjazdu";
-            // 
-            // Data_powrotu
-            // 
-            this.Data_powrotu.HeaderText = "Data powrotu";
-            this.Data_powrotu.Name = "Data_powrotu";
-            // 
-            // Pojazd
-            // 
-            this.Pojazd.HeaderText = "Pojazd";
-            this.Pojazd.Name = "Pojazd";
-            // 
-            // Kierowca
-            // 
-            this.Kierowca.HeaderText = "Kierowca";
-            this.Kierowca.Name = "Kierowca";
             // 
             // l_zalogowany_jako
             // 
@@ -100,7 +51,7 @@
             // 
             // b_wyjdz
             // 
-            this.b_wyjdz.Location = new System.Drawing.Point(588, 184);
+            this.b_wyjdz.Location = new System.Drawing.Point(529, 192);
             this.b_wyjdz.Name = "b_wyjdz";
             this.b_wyjdz.Size = new System.Drawing.Size(75, 23);
             this.b_wyjdz.TabIndex = 2;
@@ -126,40 +77,80 @@
             this.l_polaczenie.TabIndex = 7;
             this.l_polaczenie.Text = " ";
             // 
+            // lv_pilot
+            // 
+            this.lv_pilot.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nazwaWycieczki,
+            this.dataWyjazdu,
+            this.dataPowrotu,
+            this.pojazd,
+            this.kierowca});
+            this.lv_pilot.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lv_pilot.FullRowSelect = true;
+            this.lv_pilot.Location = new System.Drawing.Point(0, 0);
+            this.lv_pilot.Name = "lv_pilot";
+            this.lv_pilot.Size = new System.Drawing.Size(616, 175);
+            this.lv_pilot.TabIndex = 8;
+            this.lv_pilot.UseCompatibleStateImageBehavior = false;
+            this.lv_pilot.View = System.Windows.Forms.View.Details;
+            this.lv_pilot.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lv_pilot_ColumnClick);
+            // 
+            // nazwaWycieczki
+            // 
+            this.nazwaWycieczki.Text = "Nazwa wycieczki";
+            this.nazwaWycieczki.Width = 110;
+            // 
+            // dataWyjazdu
+            // 
+            this.dataWyjazdu.Text = "Data wyjazdu";
+            this.dataWyjazdu.Width = 130;
+            // 
+            // dataPowrotu
+            // 
+            this.dataPowrotu.Text = "Data powrotu";
+            this.dataPowrotu.Width = 130;
+            // 
+            // pojazd
+            // 
+            this.pojazd.Text = "Pojazd";
+            this.pojazd.Width = 110;
+            // 
+            // kierowca
+            // 
+            this.kierowca.Text = "Kierowca";
+            this.kierowca.Width = 110;
+            // 
             // PilotView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(675, 219);
+            this.ClientSize = new System.Drawing.Size(616, 219);
+            this.Controls.Add(this.lv_pilot);
             this.Controls.Add(this.l_polaczenie);
             this.Controls.Add(this.l_uzytkownik);
             this.Controls.Add(this.b_wyjdz);
             this.Controls.Add(this.l_zalogowany_jako);
-            this.Controls.Add(this.dgv_tabelaPilot);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "PilotView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Pilot";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Pilot_FormClosing);
             this.Load += new System.EventHandler(this.Pilot_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_tabelaPilot)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        public System.Windows.Forms.DataGridView dgv_tabelaPilot;
         private System.Windows.Forms.Label l_zalogowany_jako;
         private System.Windows.Forms.Button b_wyjdz;
         private System.Windows.Forms.Label l_uzytkownik;
         private System.Windows.Forms.Label l_polaczenie;
-        public System.Windows.Forms.DataGridViewTextBoxColumn id_wycieczki;
-        public System.Windows.Forms.DataGridViewTextBoxColumn Nazwa_wycieczki;
-        public System.Windows.Forms.DataGridViewTextBoxColumn Data_wyjazdu;
-        public System.Windows.Forms.DataGridViewTextBoxColumn Data_powrotu;
-        public System.Windows.Forms.DataGridViewTextBoxColumn Pojazd;
-        public System.Windows.Forms.DataGridViewTextBoxColumn Kierowca;
+        public System.Windows.Forms.ListView lv_pilot;
+        public System.Windows.Forms.ColumnHeader nazwaWycieczki;
+        public System.Windows.Forms.ColumnHeader dataWyjazdu;
+        public System.Windows.Forms.ColumnHeader dataPowrotu;
+        public System.Windows.Forms.ColumnHeader pojazd;
+        public System.Windows.Forms.ColumnHeader kierowca;
     }
 }
