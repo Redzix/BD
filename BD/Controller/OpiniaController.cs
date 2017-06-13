@@ -46,15 +46,15 @@ namespace BD.Controller
 
                 var query = (from uczestnictwo in db.Uczestnictwo
                              where uczestnictwo.numer_rezerwacji == numer && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
-                             select uczestnictwo.id_uczestnictwo).FirstOrDefault();
+                             select uczestnictwo).FirstOrDefault();
 
                 var opinia = new Opinia
                 {
                     opis = opis,
                     ocena = ocena,
-                    id_uczestnictwo = query
                 };
 
+                opinia.Uczestnictwo = query;
                 db.Opinia.Add(opinia);
                 db.SaveChanges();
                 db.Dispose();

@@ -42,6 +42,7 @@ namespace BD.Controller
                 var sprawdz = (from poj in db.Pojazd
                                where poj.numer_rejestracyjny.Equals(_view.tb_numer_rejestracyjny.Text)
                                select poj).FirstOrDefault();
+
                 if (sprawdz == null)
                 {
                     var pojazd = new Pojazd
