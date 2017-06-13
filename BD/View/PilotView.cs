@@ -23,7 +23,7 @@ namespace BD.View
         /// <summary>
         /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
         /// </summary>
-        Aktualizacja aktWycieczki;
+        AktualizacjaController aktWycieczki;
 
         /// <summary>
         /// Zmienna przechowująca pesel aktualnie wybranej wycieczki
@@ -43,7 +43,7 @@ namespace BD.View
 
             controller = new PilotController(this);
 
-            aktWycieczki = new Aktualizacja("wycieczka");
+            aktWycieczki = new AktualizacjaController("wycieczka");
 
         }
 
@@ -63,7 +63,7 @@ namespace BD.View
 
             controller = new PilotController(this);
 
-            aktWycieczki = new Aktualizacja("wycieczka");
+            aktWycieczki = new AktualizacjaController("wycieczka");
 
             timer1.Start();
         }
