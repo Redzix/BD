@@ -25,9 +25,9 @@ namespace BD.View
         private RezerwacjaController controller;
 
         /// <summary>
-        /// Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+        /// Zmienna przechowująca obiekt aktualnie zalogowanego użytkownika
         /// </summary>
-        private string _uzytkownik;
+        private Klient _uzytkownik;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -52,8 +52,11 @@ namespace BD.View
             this.p_zaplac.Visible = false;
             this.p_rezerwuj.Visible = true;
             b_zapłaćRezerwacje.Enabled = false;
-            _uzytkownik = uzytkownik;
+             
+
             controller = new RezerwacjaController(this);
+
+            _uzytkownik = controller.PobierzDaneKlienta(uzytkownik);
         }
 
         /// <summary>
@@ -139,7 +142,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapłaćRezerwacje_Click(object sender, EventArgs e)
         {
-            int zaplac = controller.ZaplacRezerwacje(tb_numerRezerwacji.Text, _uzytkownik);
+            int zaplac = controller.ZaplacRezerwacje(tb_numerRezerwacji.Text, _uzytkownik.pesel);
 
             switch(zaplac)
             {
@@ -179,7 +182,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
-            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text,_uzytkownik);
+            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text,_uzytkownik.pesel);
 
             switch(pobierz)
             {

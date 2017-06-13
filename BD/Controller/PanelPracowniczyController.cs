@@ -10,7 +10,7 @@ namespace BD.Controller
     class PanelPracowniczyController
     {
         /// <summary>
-        /// Obiekt widoku.
+        /// Obiekt widoku. 
         /// </summary>
         private PanelPracowniczyView _view;
 

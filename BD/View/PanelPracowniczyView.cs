@@ -64,6 +64,13 @@ namespace BD.View
                     break;
             }          
         }
-       
+
+        private void b_zarejestruj_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            RejestracjaView rejestracja = new RejestracjaView();
+            rejestracja.Closed += (s, args) => this.Close();
+            rejestracja.ShowDialog();
+        }
     }
 }

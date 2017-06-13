@@ -178,11 +178,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void Klient_Load(object sender, EventArgs e)
         {
-            if(controller.PobierzWycieczki())
-            {
-                this.b_katalog_rezerwuj.Enabled = true;
-            }
-            else
+            if(!controller.PobierzWycieczki())
             {
                 MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.b_katalog_rezerwuj.Enabled = false;
@@ -240,12 +236,15 @@ namespace BD.View
             {
                 case 1:
                     int.TryParse(((ListView)sender).SelectedItems[0].Tag.ToString(), out _idWycieczki);
+                    this.b_katalog_rezerwuj.Enabled = true;
                     break;
                 case 0:
                     MessageBox.Show("Wystąpił problem podczas konwersji id wycieczki", "Błąd konwersji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.b_katalog_rezerwuj.Enabled = false;
                     break;
                 case -1:
                     MessageBox.Show("Wystąpił problem podczas pobierania danych.", "Błąd pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.b_katalog_rezerwuj.Enabled = false;
                     break;
                 default:
                     break;

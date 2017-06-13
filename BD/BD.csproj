@@ -86,6 +86,7 @@
     <Compile Include="Controller\PanelPracowniczyController.cs" />
     <Compile Include="Controller\PilotController.cs" />
     <Compile Include="Controller\PojazdController.cs" />
+    <Compile Include="Controller\RejestracjaController.cs" />
     <Compile Include="Controller\ReklamacjaController.cs" />
     <Compile Include="Controller\RezerwacjaController.cs" />
     <Compile Include="Controller\RezygnacjaController.cs" />
@@ -185,6 +186,12 @@
     <Compile Include="View\PromocjaView.Designer.cs">
       <DependentUpon>PromocjaView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\RejestracjaView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\RejestracjaView.Designer.cs">
+      <DependentUpon>RejestracjaView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ReklamacjaView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +253,9 @@
     </Compile>
     <EmbeddedResource Include="View\PromocjaView.resx">
       <DependentUpon>PromocjaView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\RejestracjaView.resx">
+      <DependentUpon>RejestracjaView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ReklamacjaView.resx">
       <DependentUpon>ReklamacjaView.cs</DependentUpon>

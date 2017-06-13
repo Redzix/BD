@@ -179,3 +179,4 @@ C:\Users\karol\Source\Re\BD2\BD\bin\Debug\itextsharp.dll
 C:\Users\karol\Source\Re\BD2\BD\bin\Debug\EntityFramework.xml
 C:\Users\karol\Source\Re\BD2\BD\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\karol\Source\Re\BD2\BD\bin\Debug\itextsharp.xml
+C:\Users\karol\Source\Re\BD2\BD\obj\Debug\BD.View.RejestracjaView.resources

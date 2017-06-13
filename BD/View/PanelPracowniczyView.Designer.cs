@@ -35,6 +35,7 @@
             this.b_zaloguj = new System.Windows.Forms.Button();
             this.b_zakończ = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.b_zarejestruj = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tb_nazwa_uzytkownika
@@ -97,11 +98,22 @@
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 0;
             // 
+            // b_zarejestruj
+            // 
+            this.b_zarejestruj.Location = new System.Drawing.Point(96, 131);
+            this.b_zarejestruj.Name = "b_zarejestruj";
+            this.b_zarejestruj.Size = new System.Drawing.Size(75, 23);
+            this.b_zarejestruj.TabIndex = 9;
+            this.b_zarejestruj.Text = "Zarejestruj";
+            this.b_zarejestruj.UseVisualStyleBackColor = true;
+            this.b_zarejestruj.Click += new System.EventHandler(this.b_zarejestruj_Click);
+            // 
             // PanelPracowniczyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 157);
+            this.ClientSize = new System.Drawing.Size(270, 166);
+            this.Controls.Add(this.b_zarejestruj);
             this.Controls.Add(this.b_zakończ);
             this.Controls.Add(this.b_zaloguj);
             this.Controls.Add(this.l_haslo);
@@ -126,5 +138,6 @@
         public System.Windows.Forms.TextBox tb_haslo;
         public System.Windows.Forms.TextBox tb_nazwa_uzytkownika;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button b_zarejestruj;
     }
 }

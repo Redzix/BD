@@ -182,6 +182,7 @@
             // 
             // tb_pesel
             // 
+            this.tb_pesel.Enabled = false;
             this.tb_pesel.Location = new System.Drawing.Point(107, 26);
             this.tb_pesel.Name = "tb_pesel";
             this.tb_pesel.Size = new System.Drawing.Size(100, 20);

@@ -150,8 +150,9 @@ namespace BD.Controller
         /// </summary>
         /// <param name="idWycieczki">Aktualny numer wycieczki wybranej przez użytkownika.</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int DodajRezerwacje(int idWycieczki, string uzytkownik)
+        public int DodajRezerwacje(int idWycieczki, Klient uzytkownik)
         {
+            bool czyZmianaDanych = false;
 
             var cenaRezerwacji = (from katalog in db.Katalog
                                   where katalog.id_wycieczki == idWycieczki
@@ -159,14 +160,15 @@ namespace BD.Controller
 
             try
             {
-                var nowyKlient = new Klient
+                if ((uzytkownik.imie.Equals(_view.tb_imie.Text)) && (uzytkownik.nazwisko.Equals(_view.tb_nazwisko.Text)) 
+                    && (uzytkownik.ulica.Equals(_view.tb_adres.Text)) && (uzytkownik.miejscowosc.Equals(_view.tb_miejscowosc.Text)))
                 {
-                        pesel = _view.tb_pesel.Text,
-                        imie = _view.tb_imie.Text,
-                        nazwisko = _view.tb_nazwisko.Text,
-                        ulica = _view.tb_adres.Text,
-                        miejscowosc = _view.tb_miejscowosc.Text,
-                 };
+                    czyZmianaDanych = false;
+                }
+                else
+                {
+                    czyZmianaDanych = true;
+                }
 
                 var nowaRezerwacja = new Rezerwacja
                 {
@@ -182,16 +184,15 @@ namespace BD.Controller
                     cena_rezerwacji = cenaRezerwacji * nowaRezerwacja.liczba_osob
                 };
 
-                var czyKlientIstnieje = (from czyIstnieje in db.Klient
-                                         where czyIstnieje.pesel.Equals(nowyKlient.pesel)
-                                         select czyIstnieje).FirstOrDefault();
-
-                if (czyKlientIstnieje == null)
+                if (czyZmianaDanych)
                 {
-                    db.Klient.Add(nowyKlient);
+                    uzytkownik.imie = _view.tb_imie.Text;
+                    uzytkownik.nazwisko = _view.tb_nazwisko.Text;
+                    uzytkownik.ulica = _view.tb_adres.Text;
+                    uzytkownik.miejscowosc = _view.tb_miejscowosc.Text;
                 }
 
-                nowaRezerwacja.Klient = nowyKlient;
+                nowaRezerwacja.Klient = uzytkownik;
                 noweUczestnictwo.Rezerwacja = nowaRezerwacja;
                 db.Rezerwacja.Add(nowaRezerwacja);
                 db.Uczestnictwo.Add(noweUczestnictwo);
@@ -209,6 +210,26 @@ namespace BD.Controller
             {
                 return 0;
             }
+        }
+
+        /// <summary>
+        /// Metoda pobierająca z bazy dane uzytkownika i ładująca je do textboxow
+        /// </summary>
+        /// <param name="idWycieczki">Aktualny numer wycieczki wybranej przez użytkownika.</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        public Klient PobierzDaneKlienta(string uzytkownik)
+        {
+            var klient = (from kli in db.Klient
+                          where kli.pesel.Equals(uzytkownik)
+                          select kli).FirstOrDefault();
+
+            _view.tb_pesel.Text = klient.pesel;
+            _view.tb_imie.Text = klient.imie;
+            _view.tb_nazwisko.Text = klient.nazwisko;
+            _view.tb_adres.Text = klient.ulica;
+            _view.tb_miejscowosc.Text = klient.miejscowosc;
+
+            return klient;
         }
     }
 }
