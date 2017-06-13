@@ -23,6 +23,11 @@ namespace BD.View
         private KierowcaController controller;
 
         /// <summary>
+        /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+        /// </summary>
+        Aktualizacja aktPojazdu;
+
+        /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
         public KierowcaView()
@@ -35,6 +40,9 @@ namespace BD.View
 
             controller = new KierowcaController(this);
 
+            aktPojazdu = new Aktualizacja("pojazd");
+
+            timer1.Start();
         }
 
         /// <summary>
@@ -50,12 +58,17 @@ namespace BD.View
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
 
             controller = new KierowcaController(this);
+
+            aktPojazdu = new Aktualizacja("pojazd");
+
+            timer1.Start();
+
         }
 
         /// <summary>
         /// Zdarzenie obsługujące wylogowanie z systemu po wciśnięciu przycisku "Wyjdź", po kliknięciu program przechodzi do panelu logowania.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_kierowca_wyjdz_Click(object sender, EventArgs e)
         {
@@ -79,7 +92,7 @@ namespace BD.View
         /// <summary>
         /// Metoda obsługujące zdarzenie wyłączenia aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Kierowca_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -108,7 +121,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie ładowania widoku, wywołuje funkcję pobierającą
         /// informacje o pojazdach i obsługuje komunikaty tej funkcji.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Kierowca_Load(object sender, EventArgs e)
         {
@@ -127,7 +140,7 @@ namespace BD.View
         /// Metoda obsługujące zdarzenie kliknięcia przycisku b_kierowca_zapisz, odpowiada za uruchomienie funkcji
         /// zapisującej zmiany i obsługe jej komunikatów.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_kierowca_zapisz_Click(object sender, EventArgs e)
         {
@@ -171,7 +184,7 @@ namespace BD.View
         /// <summary>
         /// Metoda odpowiadająca za udostepnianie edycji kontrolek po zmianie wyboru pojazdu
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void lv_pojazdy_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -183,7 +196,7 @@ namespace BD.View
         /// <summary>
         /// Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void sortListViewByColumn(object sender, ColumnClickEventArgs e)
         {
@@ -198,11 +211,28 @@ namespace BD.View
         /// <summary>
         /// Metoda obsługująca zdarzenie kliknięcia na nagłówek kolumny, sortuje zawartość listview według danej kolumny
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void lv_pojazdy_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender,e);
         }
+
+        /// <summary>
+        /// Metoda obsługująca kolejne ticki timera, co 5s uruchamia metode sprawdzającą, czy nastąpiła aktualizacja w bazie danych
+        /// </summary>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (aktPojazdu.czyBylaAktualizacja())
+            {
+                controller.PobierzPojazdy();
+            }
+            else
+            {
+                return;
+            }       
+       }
     }
 }

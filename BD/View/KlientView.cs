@@ -29,6 +29,12 @@ namespace BD.View
         private string _uzytkownik;
 
         /// <summary>
+        /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+        /// </summary>
+        Aktualizacja aktKlienta;
+     
+
+        /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
         public KlientView()
@@ -40,6 +46,10 @@ namespace BD.View
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
        
             controller = new KlientController(this);
+
+            aktKlienta = new Aktualizacja("wycieczka");
+
+            timer1.Start();
         }
 
         /// <summary>
@@ -57,12 +67,17 @@ namespace BD.View
 
             _uzytkownik = uzytkownik;
             controller = new KlientController(this);
+
+            aktKlienta = new Aktualizacja("wycieczka promocja katalog");
+
+            timer1.Start();
+
         }
 
         /// <summary>
         /// Zdarzenie obsługujące wylogowanie z systemu po wciśnięciu przycisku "Wyjdź", po kliknięciu program przechodzi do panelu logowania.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_katalog_wyjdz_Click(object sender, EventArgs e)
         {
@@ -86,7 +101,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie otwiera okno dialogowe pozwalające złozyć rezerwację..
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_katalog_rezerwuj_Click(object sender, EventArgs e)
         {
@@ -97,7 +112,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie otwiera okno dialogowe pozwalające wystawić opinię.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void wystawOpinięToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -108,7 +123,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie otwiera okno dialogowe pozwalające na złożenie reklamacji.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void reklamujWycieczkęToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -119,7 +134,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie otwiera okno dialogowe pozwalające wprowadzić do bazy nową wycieczkę.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void rezygnacjaZWycieczkiToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -130,7 +145,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie obsługujące wyłączenie aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Klient_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -159,7 +174,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie ładowania widoku, odpowiada za wywołanie funkcji ładującej
         /// informacje o wycieczkach do widoku i obsługuje jej komunikaty.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Klient_Load(object sender, EventArgs e)
         {
@@ -178,7 +193,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zaplac, odpowiada za wywołanie widoku 
         /// płacenia za wycieczkę
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zaplac_Click(object sender, EventArgs e)
         {
@@ -189,7 +204,7 @@ namespace BD.View
         /// <summary>
         /// Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void sortListViewByColumn(object sender, ColumnClickEventArgs e)
         {
@@ -204,7 +219,7 @@ namespace BD.View
         /// <summary>
         /// Metoda obsługująca zdarzenie kliknięcia na nagłówek kolumny, sortuje zawartość listview według danej kolumny
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void lv_klient_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -215,7 +230,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie ładowania kliknięcie komórki listview, odpowiada za wywołanie funkcji ładującej
         /// informacje o wybranej wycieczce do richtextboxa.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void lv_klient_ItemActivate(object sender, EventArgs e)
         {
@@ -241,7 +256,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie kliknięcia pprzycisku b_szukaj, wywołuje funkcje odpowiedzialną za wyszukiwanie w bazie danych i 
         /// obsługuje jej komunikaty
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_szukaj_Click(object sender, EventArgs e)
         {
@@ -262,11 +277,28 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie wprowadzenia tekstu do tb_szukaj, zmienia stan przycisku b_szukaj na enable, co pozwala
         /// uruchomic wyszukiwanie
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego/param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_szukaj_TextChanged(object sender, EventArgs e)
         {
             b_szukaj.Enabled = true;
+        }
+
+        /// <summary>
+        /// Metoda obsługująca kolejne ticki timera, co 5s uruchamia metode sprawdzającą, czy nastąpiła aktualizacja w bazie danych
+        /// </summary>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (aktKlienta.czyBylaAktualizacja())
+            {
+                controller.PobierzWycieczki();
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }

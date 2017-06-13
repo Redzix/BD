@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tc_reklamacje = new System.Windows.Forms.TabControl();
             this.tp_dodaj_reklamacje = new System.Windows.Forms.TabPage();
             this.b_sprawdzPoprawnosc = new System.Windows.Forms.Button();
@@ -43,6 +44,7 @@
             this.rtb_reklamacja = new System.Windows.Forms.RichTextBox();
             this.lv_reklamacje = new System.Windows.Forms.ListView();
             this.NumerReklamacji = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tc_reklamacje.SuspendLayout();
             this.tp_dodaj_reklamacje.SuspendLayout();
             this.tp_stan_reklamacji.SuspendLayout();
@@ -198,6 +200,11 @@
             this.NumerReklamacji.Text = "Numer reklamacji";
             this.NumerReklamacji.Width = 110;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Interval = 5000;
+            // 
             // ReklamacjaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,5 +241,6 @@
         public System.Windows.Forms.RichTextBox rtb_reklamacja;
         public System.Windows.Forms.TextBox tb_nazwaWycieczki;
         private System.Windows.Forms.Button b_sprawdzPoprawnosc;
+        private System.Windows.Forms.Timer timer1;
     }
 }

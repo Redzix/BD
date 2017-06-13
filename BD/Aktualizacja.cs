@@ -13,11 +13,13 @@ namespace BD
  
         private string lastupdate;
         private string databasename;
+        private string nazwaTabeli;
 
-        public Aktualizacja()
+        public Aktualizacja(string nazwa)
         {
             _polaczenie = new SqlConnection();
             _zapytanie = new SqlCommand();
+            nazwaTabeli = nazwa;
         }
 
         public string ostatniaAktualizacja
@@ -42,7 +44,7 @@ namespace BD
             _zapytanie.CommandText = "select OBJECT_NAME(OBJECT_ID) AS DatabaseName," +
                 " last_user_update" +
                 " from sys.dm_db_index_usage_stats " +
-                "where database_id = DB_ID('baza') " +
+                "where database_id = DB_ID('baza') AND CHARINDEX(OBJECT_NAME(OBJECT_ID), '"+ nazwaTabeli +"', 1)<>0" +
                 "order by last_user_update desc";
 
             SqlDataReader reader = _zapytanie.ExecuteReader();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.l_zalgowany_jako = new System.Windows.Forms.Label();
             this.rb_sprawny = new System.Windows.Forms.RadioButton();
             this.rb_awaria = new System.Windows.Forms.RadioButton();
@@ -42,6 +43,7 @@
             this.Stan = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.l_uzytkownik = new System.Windows.Forms.Label();
             this.l_polaczenie = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.gb_stan_pojazdu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -173,6 +175,11 @@
             this.l_polaczenie.TabIndex = 12;
             this.l_polaczenie.Text = " ";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Interval = 5000;
+            // 
             // KierowcaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,5 +220,6 @@
         public System.Windows.Forms.ColumnHeader Stan;
         private System.Windows.Forms.Label l_uzytkownik;
         private System.Windows.Forms.Label l_polaczenie;
+        private System.Windows.Forms.Timer timer1;
     }
 }

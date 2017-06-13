@@ -26,7 +26,6 @@ namespace BD.Controller
         public PanelPracowniczyController(PanelPracowniczyView view)
         {
             _view = view;
-            db = new bazaEntities();
         }
 
         /// <summary>
@@ -38,6 +37,7 @@ namespace BD.Controller
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int SprawdzDaneLogowania(string login, string haslo)
         {
+            db = new bazaEntities();
             try
             {
                 var pobierz = (from panel in db.Panel_pracowniczy

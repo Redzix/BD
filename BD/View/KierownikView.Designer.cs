@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tc_kierownik = new System.Windows.Forms.TabControl();
             this.tp_zarzadzaj_wycieczkami = new System.Windows.Forms.TabPage();
             this.b_promocja = new System.Windows.Forms.Button();
@@ -73,6 +74,7 @@
             this.l_zalogowany_jako = new System.Windows.Forms.Label();
             this.l_uzytkownik = new System.Windows.Forms.Label();
             this.l_polaczenie = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tc_kierownik.SuspendLayout();
             this.tp_zarzadzaj_wycieczkami.SuspendLayout();
             this.tp_rozpatrz_reklamacje.SuspendLayout();
@@ -496,6 +498,11 @@
             this.l_polaczenie.TabIndex = 6;
             this.l_polaczenie.Text = " ";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Interval = 5000;
+            // 
             // KierownikView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -570,5 +577,6 @@
         public System.Windows.Forms.ColumnHeader columnHeader4;
         public System.Windows.Forms.ColumnHeader columnHeader5;
         public System.Windows.Forms.Button b_promocja;
+        private System.Windows.Forms.Timer timer1;
     }
 }

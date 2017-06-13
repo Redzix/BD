@@ -50,6 +50,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.l_szukaj = new System.Windows.Forms.Label();
             this.b_szukaj = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -228,6 +229,11 @@
             this.b_szukaj.UseVisualStyleBackColor = true;
             this.b_szukaj.Click += new System.EventHandler(this.b_szukaj_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Interval = 5000;
+            // 
             // KlientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,6 +288,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Label l_szukaj;
         private System.Windows.Forms.Button b_szukaj;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

@@ -15,9 +15,35 @@ namespace BD.View
 {
     public partial class KierownikView : Form
     {
+        /// <summary>
+        /// Zmienna przechowująca id aktualnie wybranej reklamacji
+        /// </summary>
         private int _idReklamacji = 0;
+
+        /// <summary>
+        /// Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+        /// </summary>
         private string _uzytkownik;
+
+        /// <summary>
+        /// Obiekt przechowujący kontroler.
+        /// </summary>
         KierownikController controller;
+
+        /// <summary>
+        /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+        /// </summary>
+        Aktualizacja aktKatalog;
+
+        /// <summary>
+        /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+        /// </summary>
+        Aktualizacja aktReklamacja;
+
+        /// <summary>
+        /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+        /// </summary>
+        Aktualizacja aktPojazd;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna, tworzący okno oraz połączenie z bazą danych.
@@ -29,6 +55,12 @@ namespace BD.View
             l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
             l_polaczenie.Text = "Połączono";
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
+
+            aktKatalog= new Aktualizacja("wycieczka katalog");
+            aktReklamacja = new Aktualizacja("reklamacja");
+            aktPojazd = new Aktualizacja("pojazd");
+
+            timer1.Start();
         }
 
         /// <summary>
@@ -45,6 +77,12 @@ namespace BD.View
             l_uzytkownik.Text = uzytkownik;
             l_polaczenie.Text = "Połączono";
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
+
+            aktKatalog = new Aktualizacja("wycieczka katalog");
+            aktReklamacja = new Aktualizacja("reklamacja");
+            aktPojazd = new Aktualizacja("pojazd");
+
+            timer1.Start();
         }
 
         /// <summary>
@@ -380,6 +418,30 @@ namespace BD.View
         private void lv_wycieczki_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender, e);
+        }
+
+        /// <summary>
+        /// Metoda obsługująca kolejne ticki timera, co 5s uruchamia metode sprawdzającą, czy nastąpiła aktualizacja w bazie danych
+        /// </summary>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            switch (tc_kierownik.SelectedIndex)
+            {
+                case 0:
+                    if (aktKatalog.czyBylaAktualizacja())
+                        controller.LadujKatalog();
+                    break;
+                case 1:
+                    if (aktReklamacja.czyBylaAktualizacja())
+                        this.ZaladujReklamacje();
+                    break;
+                case 2:
+                    if (aktPojazd.czyBylaAktualizacja())
+                        this.ZaladujPojazdy();
+                    break;
+            }           
         }
     }
 }

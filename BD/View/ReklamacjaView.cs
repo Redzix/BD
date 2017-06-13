@@ -25,12 +25,19 @@ namespace BD.View
         private string _uzytkownik;
 
         /// <summary>
+        /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+        /// </summary>
+        Aktualizacja aktReklamacji;
+
+        /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
         public ReklamacjaView()
         {
             InitializeComponent();
             controller = new ReklamacjaController(this);
+
+            aktReklamacji = new Aktualizacja("Reklamacja");
         }
 
         /// <summary>
@@ -42,6 +49,8 @@ namespace BD.View
             InitializeComponent();
             _uzytkownik = uzytkownik;
             controller = new ReklamacjaController(this);
+
+            aktReklamacji = new Aktualizacja("Reklamacja");
         }
 
         /// <summary>
@@ -227,6 +236,23 @@ namespace BD.View
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Metoda obsługująca kolejne ticki timera, co 5s uruchamia metode sprawdzającą, czy nastąpiła aktualizacja w bazie danych
+        /// </summary>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (aktReklamacji.czyBylaAktualizacja())
+            {
+                controller.PobierzReklamacje(_uzytkownik);
+            }
+            else
+            {
+                return;
             }
         }
     }

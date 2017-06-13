@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.l_zalogowany_jako = new System.Windows.Forms.Label();
             this.b_wyjdz = new System.Windows.Forms.Button();
             this.l_uzytkownik = new System.Windows.Forms.Label();
@@ -38,6 +39,7 @@
             this.dataPowrotu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pojazd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.kierowca = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // l_zalogowany_jako
@@ -120,6 +122,11 @@
             this.kierowca.Text = "Kierowca";
             this.kierowca.Width = 110;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // PilotView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,5 +159,6 @@
         public System.Windows.Forms.ColumnHeader dataPowrotu;
         public System.Windows.Forms.ColumnHeader pojazd;
         public System.Windows.Forms.ColumnHeader kierowca;
+        private System.Windows.Forms.Timer timer1;
     }
 }

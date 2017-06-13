@@ -20,8 +20,10 @@ namespace BD.View
         /// </summary>
         private PilotController controller;
 
-        Aktualizacja akt = new Aktualizacja();
-        private Thread trd;
+        /// <summary>
+        /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+        /// </summary>
+        Aktualizacja aktWycieczki;
 
         /// <summary>
         /// Zmienna przechowująca pesel aktualnie wybranej wycieczki
@@ -40,6 +42,9 @@ namespace BD.View
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
 
             controller = new PilotController(this);
+
+            aktWycieczki = new Aktualizacja("wycieczka");
+
         }
 
         /// <summary>
@@ -58,16 +63,15 @@ namespace BD.View
 
             controller = new PilotController(this);
 
-            trd = new Thread(new ThreadStart(this.ThreadTask));
-            trd.IsBackground = true;
-            trd.Start();
+            aktWycieczki = new Aktualizacja("wycieczka");
 
+            timer1.Start();
         }
 
         /// <summary>
         /// Metoda obsługująca zdarzenie wylogowania z systemu po wciśnięciu przycisku "Wyjdź", po kliknięciu program przechodzi do panelu logowania.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_wyjdz_Click(object sender, EventArgs e)
         {
@@ -91,7 +95,7 @@ namespace BD.View
         /// <summary>
         /// Metoda obsługująca zdarzenie wyłączenia aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Pilot_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -120,7 +124,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie ładowania widoku odpowiedzialne za wywołanie funkcji ładującej informacje
         /// o wycieczkach do widoku i obsługujące jej komunikaty.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Pilot_Load(object sender, EventArgs e)
         {
@@ -133,7 +137,7 @@ namespace BD.View
         /// <summary>
         /// Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void sortListViewByColumn(object sender, ColumnClickEventArgs e)
         {
@@ -148,45 +152,28 @@ namespace BD.View
         /// <summary>
         /// Metoda obsługująca zdarzenie kliknięcia na nagłówek kolumny, sortuje zawartość listview według danej kolumny
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void lv_pilot_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender, e);
+        }
 
-            //
-            //
-            if (akt.czyBylaAktualizacja())
+        /// <summary>
+        /// Metoda obsługująca kolejne ticki timera, co 5s uruchamia metode sprawdzającą, czy nastąpiła aktualizacja w bazie danych
+        /// </summary>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (aktWycieczki.czyBylaAktualizacja())
             {
-                MessageBox.Show("ja");
-
+                controller.PobierzWycieczki(_uzytkownik);
             }
             else
             {
-                MessageBox.Show("nie");
-            }
-
-        }
-
-        private void ThreadTask()
-        {
-            if (lv_pilot.InvokeRequired)
-            {
-                lv_pilot.BeginInvoke(new testDelegate(ThreadTask));             
-            }else
-            {
-                while (true)
-                {
-                    if (akt.czyBylaAktualizacja())
-                    {
-                        controller.PobierzWycieczki(_uzytkownik);
-                    }
-
-                    Thread.Sleep(200);
-                }
+                return;
             }
         }
-
-        public delegate void testDelegate();
     }
 }
