@@ -13,7 +13,6 @@ namespace BD.Controller
     class KierownikController
     {
         object view;
-        bazaEntities db;
         public KierownikController(object view)
         {
             this.view = view;
@@ -23,8 +22,9 @@ namespace BD.Controller
         {
             KierownikView kView = (KierownikView)view;
             kView.lv_wycieczki.Items.Clear();
-            using (db = new bazaEntities())
+            using (var db = new bazaEntities())
             {
+                var czyWszystkie = kView.cBox_wycieczki.Checked;
                 var query = from katalog in db.Katalog
                             select new
                             {
@@ -33,18 +33,16 @@ namespace BD.Controller
                                 miejsce_z = katalog.Miejsce,
                                 miejsce_do = katalog.Miejsce1
                             };
-
                 foreach (var wyc in query)
                 {
                     ListViewItem wycieczka = new ListViewItem(wyc.wycieczka.nazwa); //Miejsce
-                    var roznica = wyc.wycieczka.data_wyjazdu.Value.Date - wyc.wycieczka.data_powrotu.Value.Date;
 
                     wycieczka.Tag = wyc.katalog.id_katalogu; //Ukryte ID
-                    if (DateTime.Now.Date > wyc.wycieczka.data_powrotu.Value.Date)
+                    if (wyc.wycieczka.WycieczkaOdbyta(DateTime.Now))
                         wycieczka.BackColor = Color.LightCoral;
-                    else if (DateTime.Now.Date >= wyc.wycieczka.data_wyjazdu.Value.Date && DateTime.Now.Date <=wyc.wycieczka.data_powrotu.Value.Date)
+                    else if (wyc.wycieczka.WycieczkaWTrakcie(DateTime.Now))
                         wycieczka.BackColor = Color.LightGreen;
-           
+
                     wycieczka.SubItems.Add(String.Format("{0:dd.MM.yyyy}", (DateTime)wyc.wycieczka.data_wyjazdu)); //Data z
                     wycieczka.SubItems.Add(String.Format("{0:dd.MM.yyyy}", (DateTime)wyc.wycieczka.data_powrotu)); //data do
                     wycieczka.SubItems.Add(wyc.miejsce_z.miejscowosc); //miejsce od
@@ -55,7 +53,6 @@ namespace BD.Controller
             }
             return true;
         }
-
         public bool DodajKatalog()
         {
             WycieczkaView wView = (WycieczkaView)view;
@@ -76,26 +73,17 @@ namespace BD.Controller
                     Kierowca_pesel = kierowcaPesel,
                     Pojazd_numer_rejestracyjny = pojazdRejestracja,
                 };
-                var nowyCennik = new Cennik
-                {
-                    cena = decimal.Parse(wView.tb_cena.Text),
-                    okres_od = wView.tb_data_powrotu.Value,
-                    okres_do = wView.tb_data_wyjazdu.Value
-
-                };
                 var nowyKatalog = new Katalog
                 {
                     id_miejsca_odjazdu = miejsceOdjazdu,
                     id_miejsca_przyjazdu = miejscePrzyjazdu,
                     cena = decimal.Parse(wView.tb_cena.Text)
                 };
-                nowyKatalog.Cennik = nowyCennik;
                 nowyKatalog.Wycieczka = nowaWycieczka;
-                using (db = new bazaEntities())
+                using (var db = new bazaEntities())
                 {
                     db.Katalog.Add(nowyKatalog);
                     db.Wycieczka.Add(nowaWycieczka);
-                    db.Cennik.Add(nowyCennik);
                     db.SaveChanges();
                 }
             } catch
@@ -108,7 +96,7 @@ namespace BD.Controller
         {
             WycieczkaView wView = (WycieczkaView)view;
 
-            using (db = new bazaEntities())
+            using (var db = new bazaEntities())
             {
                 var miejscowosci = from m in db.Miejsce orderby m.miejscowosc select m;
                 var piloci = from m in db.Pilot orderby m.nazwisko select m;
@@ -164,7 +152,7 @@ namespace BD.Controller
         {
             WycieczkaView wView = (WycieczkaView)view;
 
-            using (db = new bazaEntities())
+            using (var db = new bazaEntities())
             {
                 var query = (from katalog in db.Katalog
                              where katalog.id_katalogu == idKatalog
@@ -226,7 +214,7 @@ namespace BD.Controller
                 string pojazdRejestracja = ((KeyValuePair<string, string>)wView.cb_pojazd.SelectedItem).Key;
                 int miejsceOdjazdu = int.Parse(((KeyValuePair<string, string>)wView.cb_odjazd.SelectedItem).Key);
                 int miejscePrzyjazdu = int.Parse(((KeyValuePair<string, string>)wView.cb_docelowa.SelectedItem).Key);
-                using (db = new bazaEntities())
+                using (var db = new bazaEntities())
                 {
                     var edit = (from katalog in db.Katalog
                                 where katalog.id_katalogu == idKatalog
@@ -258,11 +246,10 @@ namespace BD.Controller
 
             return true;
         }
-
         public bool UsunKatalog(int idKatalog) {
             try
             {
-                using (db = new bazaEntities())
+                using (var db = new bazaEntities())
                 {
                     var idWyc = (from katalog in db.Katalog
                                 where katalog.id_katalogu == idKatalog
@@ -278,7 +265,211 @@ namespace BD.Controller
             }
             return true;
         }
+       
+        public bool LadujReklamacje()
+        {
+            KierownikView kView = (KierownikView)view;
+            using (var db = new bazaEntities()) {
+                var czyWszystkie = kView.cBox_reklamacja.Checked;
+                IQueryable query = null;
+                if (czyWszystkie)
+                    query = from r in db.Reklamacja select r;
+                else
+                    query = from r in db.Reklamacja where r.Kierownik_pesel == null select r;
 
+                kView.lv_reklamacje.Items.Clear();
+                foreach (Reklamacja rek in query)
+                {
+                    ListViewItem reklamacjaItem = new ListViewItem(rek.numer_reklamacji.ToString());
+                    reklamacjaItem.Tag = rek.numer_reklamacji;
+                    reklamacjaItem.SubItems.Add((rek.opis.Length <= 30) ? rek.opis : rek.opis.Substring(0, 30));
+                    reklamacjaItem.SubItems.Add((bool)rek.stan ? "Pozytywnie" : "Negatywnie");
+                    kView.lv_reklamacje.Items.Add(reklamacjaItem);
+                }
+            }
+            return true;
+        }
+        public bool WypelnijReklamacjeDoRozpatrzenia(int idReklamacji)
+        {
+            KierownikView kView = (KierownikView)view;
+            try
+            {
+                using (var db = new bazaEntities())
+                {
+                    var reklamacjaDoPrzegladu = (from reklamacja in db.Reklamacja
+                                                 where reklamacja.numer_reklamacji == idReklamacji
+                                                 select new
+                                                 {
+                                                     reklamacja,
+                                                     reklamacja.Uczestnictwo.Rezerwacja.Wycieczka,
+                                                     reklamacja.Kierownik,
+                                                     reklamacja.Uczestnictwo.Rezerwacja.Klient
+                                                 }).FirstOrDefault();
+
+                    kView.rtb_opisReklamacji.Text = reklamacjaDoPrzegladu.reklamacja.opis;
+                    kView.tb_nazwa_wycieczki.Text = reklamacjaDoPrzegladu.Wycieczka.nazwa;
+                    kView.tb_Reklamujacy.Text = reklamacjaDoPrzegladu.Klient.DaneOsobowe();
+                    kView.tb_Rozstrzygajacy.Text = (reklamacjaDoPrzegladu.Kierownik == null) ? "Nierozstrzygnięte" : reklamacjaDoPrzegladu.Kierownik.DaneOsobowe();
+                    TimeSpan roznica = (TimeSpan)(reklamacjaDoPrzegladu.Wycieczka.data_powrotu - reklamacjaDoPrzegladu.Wycieczka.data_wyjazdu);
+                    kView.tb_okresTrwaniaWycieczki.Text = String.Format("{0} dni", roznica.Days);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool RozpatrzReklamacje(int idReklamacji, bool stan, string peselKierownika)
+        {
+            try
+            {
+                using (var db = new bazaEntities())
+                {
+                    var reklamacja = (from rek in db.Reklamacja
+                                      where rek.numer_reklamacji == idReklamacji
+                                      select rek).FirstOrDefault();
+                    reklamacja.stan = stan;
+                    reklamacja.Kierownik_pesel = peselKierownika;
+                    db.SaveChanges();
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool LadujPojazdy()
+        {
+            try
+            {
+                using (var db = new bazaEntities())
+                {
+                    KierownikView kView = (KierownikView)view;
+                    kView.lv_pojazdy.Items.Clear();
+
+                    var query = from p in db.Pojazd select p;
+
+                    foreach (Pojazd poj in query)
+                    {
+                        ListViewItem pojazd = new ListViewItem(poj.numer_rejestracyjny);
+                        pojazd.Tag = poj.numer_rejestracyjny;
+                        pojazd.SubItems.Add((bool)poj.dostepny ? "Dostępny" : "Niedostępny");
+                        pojazd.SubItems.Add(poj.marka);
+                        pojazd.SubItems.Add(poj.pojemnosc.ToString());
+                        pojazd.SubItems.Add((bool)poj.stan ? "Sprawny" : "Awaria");
+                        kView.lv_pojazdy.Items.Add(pojazd);
+                    }
+                }
+            } catch
+            {
+                return false;
+            }
+            return true;
+        }
+        /// <summary>
+        /// Metoda odpowiedzialna za dodawanie nowego pojazdu do bazy danych wraz z wszystimi informacjami o nim.
+        /// </summary>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        public int DodajPojazd()
+        {
+            try
+            {
+                PojazdView _view = (PojazdView)view;
+                using (var db = new bazaEntities())
+                {
+                    int pojemnosc = int.Parse(_view.tb_pojemnosc.Text);
+
+                    var sprawdz = (from poj in db.Pojazd
+                                   where poj.numer_rejestracyjny.Equals(_view.tb_numer_rejestracyjny.Text)
+                                   select poj).FirstOrDefault();
+                    if (sprawdz == null)
+                    {
+                        var pojazd = new Pojazd
+                        {
+                            numer_rejestracyjny = _view.tb_numer_rejestracyjny.Text,
+                            dostepny = true,
+                            marka = _view.tb_marka.Text,
+                            stan = true,
+                            pojemnosc = pojemnosc
+                        };
+
+                        db.Pojazd.Add(pojazd);
+                        db.SaveChanges();
+                        db.Dispose();
+                        return 1;
+                    }
+                    else
+                    {
+                        return -2;
+                    }
+                }
+            }
+            catch (FormatException exception)
+            {
+                return 0;
+            }
+            catch (Exception exception)
+            {
+                return -1;
+            }
+        }
+        public bool EdytujStanPojazdu(string pojazdRejestracja, bool stan)
+        {
+            try
+            {
+                using (var db = new bazaEntities())
+                {
+                    var ePojazd = (from pojazd in db.Pojazd
+                                   where pojazd.numer_rejestracyjny == pojazdRejestracja
+                                   select pojazd).FirstOrDefault();
+                    ePojazd.stan = stan;
+                    db.SaveChanges();
+                }
+            } catch
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool EdytujDostepnoscPojazdu(string pojazdRejestracja, bool dostepny)
+        {
+            try
+            {
+                using (var db = new bazaEntities())
+                {
+                    var ePojazd = (from pojazd in db.Pojazd
+                                   where pojazd.numer_rejestracyjny == pojazdRejestracja
+                                   select pojazd).FirstOrDefault();
+                    ePojazd.dostepny = dostepny;
+                    db.SaveChanges();
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool UsunPojazd(string pojazdRejestracja)
+        {
+            try
+            {
+                using (var db = new bazaEntities())
+                {
+                    var pojazdDoUsuniecia = new Pojazd { numer_rejestracyjny = pojazdRejestracja };
+                    db.Entry(pojazdDoUsuniecia).State = EntityState.Deleted;
+                    db.SaveChanges();
+                }
+            } catch
+            {
+                return false;
+            }
+            return true;
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -286,23 +477,27 @@ namespace BD.Controller
         /// <returns></returns>
         public bool DodajPromocje(int idKatalog)
         {
-            var wycieczka = (from katalog in db.Katalog
-                            where katalog.id_katalogu == idKatalog
-                            select katalog.Wycieczka).FirstOrDefault();
-            var promocja = new Promocja
+            using (var db = new bazaEntities())
             {
-                cena = decimal.Parse(((PromocjaView)view).tb_kwota.Text)
-            };
-            promocja.Wycieczka = wycieczka;
-            try
-            {
-                db.Promocja.Add(promocja);
-                db.SaveChanges();
-            } catch
-            {
-                return false;
+                var wycieczka = (from katalog in db.Katalog
+                                 where katalog.id_katalogu == idKatalog
+                                 select katalog.Wycieczka).FirstOrDefault();
+                var promocja = new Promocja
+                {
+                    cena = decimal.Parse(((PromocjaView)view).tb_kwota.Text)
+                };
+                promocja.Wycieczka = wycieczka;
+                try
+                {
+                    db.Promocja.Add(promocja);
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    return false;
+                }
+                return true;
             }
-            return true;
         }
         /// <summary>
         /// Ładowanie ceny do textboxa z kwotą
@@ -311,7 +506,7 @@ namespace BD.Controller
         /// <returns>True, jeśli załadowało. False jeśli promocja nie istnieje</returns>
         public bool LadujPromocje(int idKatalogu)
         {
-            using (db = new bazaEntities())
+            using (var db = new bazaEntities())
             {
                 var idWyc = db.Katalog.Where(x => x.id_katalogu == idKatalogu).Select(x => x.id_wycieczki).FirstOrDefault();
                 if (db.Promocja.Any(x => x.id_wycieczki == idWyc))
@@ -338,7 +533,7 @@ namespace BD.Controller
             {
                 try
                 {
-                    using (db = new bazaEntities())
+                    using (var db = new bazaEntities())
                     {
                         var edit = (from katalog in db.Katalog
                                     where katalog.id_katalogu == idKatalogu
@@ -361,7 +556,7 @@ namespace BD.Controller
         /// <returns>True jeśli usunięte, false jeśli nie</returns>
         public bool UsunPromocje(int idKatalogu)
         {
-            using (db = new bazaEntities())
+            using (var db = new bazaEntities())
             {
                 var idWyc = db.Katalog.Where(x => x.id_katalogu == idKatalogu).Select(x => x.id_wycieczki).FirstOrDefault();
                 var promoDoUsuniecia = new Promocja { id_wycieczki = (int)idWyc };

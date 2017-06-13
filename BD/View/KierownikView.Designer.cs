@@ -75,6 +75,12 @@
             this.l_uzytkownik = new System.Windows.Forms.Label();
             this.l_polaczenie = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tb_Reklamujacy = new System.Windows.Forms.TextBox();
+            this.tb_Rozstrzygajacy = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cBox_reklamacja = new System.Windows.Forms.CheckBox();
+            this.cBox_wycieczki = new System.Windows.Forms.CheckBox();
             this.tc_kierownik.SuspendLayout();
             this.tp_zarzadzaj_wycieczkami.SuspendLayout();
             this.tp_rozpatrz_reklamacje.SuspendLayout();
@@ -97,6 +103,7 @@
             // 
             // tp_zarzadzaj_wycieczkami
             // 
+            this.tp_zarzadzaj_wycieczkami.Controls.Add(this.cBox_wycieczki);
             this.tp_zarzadzaj_wycieczkami.Controls.Add(this.b_promocja);
             this.tp_zarzadzaj_wycieczkami.Controls.Add(this.lv_wycieczki);
             this.tp_zarzadzaj_wycieczkami.Controls.Add(this.b_usun_wycieczke);
@@ -203,6 +210,11 @@
             // 
             // tp_rozpatrz_reklamacje
             // 
+            this.tp_rozpatrz_reklamacje.Controls.Add(this.cBox_reklamacja);
+            this.tp_rozpatrz_reklamacje.Controls.Add(this.label2);
+            this.tp_rozpatrz_reklamacje.Controls.Add(this.label1);
+            this.tp_rozpatrz_reklamacje.Controls.Add(this.tb_Rozstrzygajacy);
+            this.tp_rozpatrz_reklamacje.Controls.Add(this.tb_Reklamujacy);
             this.tp_rozpatrz_reklamacje.Controls.Add(this.tb_nazwa_wycieczki);
             this.tp_rozpatrz_reklamacje.Controls.Add(this.tb_okresTrwaniaWycieczki);
             this.tp_rozpatrz_reklamacje.Controls.Add(this.rtb_opisReklamacji);
@@ -223,7 +235,7 @@
             // tb_nazwa_wycieczki
             // 
             this.tb_nazwa_wycieczki.Enabled = false;
-            this.tb_nazwa_wycieczki.Location = new System.Drawing.Point(390, 44);
+            this.tb_nazwa_wycieczki.Location = new System.Drawing.Point(409, 6);
             this.tb_nazwa_wycieczki.Name = "tb_nazwa_wycieczki";
             this.tb_nazwa_wycieczki.Size = new System.Drawing.Size(162, 20);
             this.tb_nazwa_wycieczki.TabIndex = 15;
@@ -231,16 +243,17 @@
             // tb_okresTrwaniaWycieczki
             // 
             this.tb_okresTrwaniaWycieczki.Enabled = false;
-            this.tb_okresTrwaniaWycieczki.Location = new System.Drawing.Point(390, 76);
+            this.tb_okresTrwaniaWycieczki.Location = new System.Drawing.Point(409, 32);
             this.tb_okresTrwaniaWycieczki.Name = "tb_okresTrwaniaWycieczki";
             this.tb_okresTrwaniaWycieczki.Size = new System.Drawing.Size(162, 20);
             this.tb_okresTrwaniaWycieczki.TabIndex = 14;
             // 
             // rtb_opisReklamacji
             // 
-            this.rtb_opisReklamacji.Location = new System.Drawing.Point(390, 104);
+            this.rtb_opisReklamacji.Enabled = false;
+            this.rtb_opisReklamacji.Location = new System.Drawing.Point(409, 110);
             this.rtb_opisReklamacji.Name = "rtb_opisReklamacji";
-            this.rtb_opisReklamacji.Size = new System.Drawing.Size(337, 130);
+            this.rtb_opisReklamacji.Size = new System.Drawing.Size(312, 181);
             this.rtb_opisReklamacji.TabIndex = 13;
             this.rtb_opisReklamacji.Text = "";
             // 
@@ -255,11 +268,12 @@
             this.lv_reklamacje.Location = new System.Drawing.Point(9, 6);
             this.lv_reklamacje.MultiSelect = false;
             this.lv_reklamacje.Name = "lv_reklamacje";
-            this.lv_reklamacje.Size = new System.Drawing.Size(280, 350);
+            this.lv_reklamacje.Size = new System.Drawing.Size(280, 317);
             this.lv_reklamacje.TabIndex = 1;
             this.lv_reklamacje.UseCompatibleStateImageBehavior = false;
             this.lv_reklamacje.View = System.Windows.Forms.View.Details;
-            this.lv_reklamacje.ItemActivate += new System.EventHandler(this.lv_reklamacje_ItemActivate);
+            this.lv_reklamacje.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lv_reklamacje_ColumnClick);
+            this.lv_reklamacje.Click += new System.EventHandler(this.lv_reklamacje_ItemActivate);
             // 
             // numer_reklamacji
             // 
@@ -278,7 +292,7 @@
             // 
             // b_rozpatrz_negatywnie
             // 
-            this.b_rozpatrz_negatywnie.Location = new System.Drawing.Point(558, 240);
+            this.b_rozpatrz_negatywnie.Location = new System.Drawing.Point(508, 297);
             this.b_rozpatrz_negatywnie.Name = "b_rozpatrz_negatywnie";
             this.b_rozpatrz_negatywnie.Size = new System.Drawing.Size(93, 49);
             this.b_rozpatrz_negatywnie.TabIndex = 9;
@@ -289,7 +303,7 @@
             // l_opis_reklamacji
             // 
             this.l_opis_reklamacji.AutoSize = true;
-            this.l_opis_reklamacji.Location = new System.Drawing.Point(307, 104);
+            this.l_opis_reklamacji.Location = new System.Drawing.Point(300, 113);
             this.l_opis_reklamacji.Name = "l_opis_reklamacji";
             this.l_opis_reklamacji.Size = new System.Drawing.Size(78, 13);
             this.l_opis_reklamacji.TabIndex = 8;
@@ -298,7 +312,7 @@
             // l_okres_wycieczki
             // 
             this.l_okres_wycieczki.AutoSize = true;
-            this.l_okres_wycieczki.Location = new System.Drawing.Point(300, 76);
+            this.l_okres_wycieczki.Location = new System.Drawing.Point(300, 35);
             this.l_okres_wycieczki.Name = "l_okres_wycieczki";
             this.l_okres_wycieczki.Size = new System.Drawing.Size(84, 13);
             this.l_okres_wycieczki.TabIndex = 6;
@@ -307,7 +321,7 @@
             // l_nazwa_wycieczki
             // 
             this.l_nazwa_wycieczki.AutoSize = true;
-            this.l_nazwa_wycieczki.Location = new System.Drawing.Point(295, 47);
+            this.l_nazwa_wycieczki.Location = new System.Drawing.Point(300, 6);
             this.l_nazwa_wycieczki.Name = "l_nazwa_wycieczki";
             this.l_nazwa_wycieczki.Size = new System.Drawing.Size(89, 13);
             this.l_nazwa_wycieczki.TabIndex = 4;
@@ -315,7 +329,7 @@
             // 
             // b_rozpatrz_pozytywnie
             // 
-            this.b_rozpatrz_pozytywnie.Location = new System.Drawing.Point(459, 240);
+            this.b_rozpatrz_pozytywnie.Location = new System.Drawing.Point(409, 297);
             this.b_rozpatrz_pozytywnie.Name = "b_rozpatrz_pozytywnie";
             this.b_rozpatrz_pozytywnie.Size = new System.Drawing.Size(93, 49);
             this.b_rozpatrz_pozytywnie.TabIndex = 3;
@@ -386,11 +400,12 @@
             this.Marka,
             this.Pojemnosc,
             this.Stan});
+            this.lv_pojazdy.FullRowSelect = true;
             this.lv_pojazdy.GridLines = true;
             this.lv_pojazdy.Location = new System.Drawing.Point(82, 3);
             this.lv_pojazdy.MultiSelect = false;
             this.lv_pojazdy.Name = "lv_pojazdy";
-            this.lv_pojazdy.Size = new System.Drawing.Size(388, 356);
+            this.lv_pojazdy.Size = new System.Drawing.Size(361, 356);
             this.lv_pojazdy.TabIndex = 1;
             this.lv_pojazdy.UseCompatibleStateImageBehavior = false;
             this.lv_pojazdy.View = System.Windows.Forms.View.Details;
@@ -500,8 +515,64 @@
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // tb_Reklamujacy
+            // 
+            this.tb_Reklamujacy.Enabled = false;
+            this.tb_Reklamujacy.Location = new System.Drawing.Point(409, 58);
+            this.tb_Reklamujacy.Name = "tb_Reklamujacy";
+            this.tb_Reklamujacy.Size = new System.Drawing.Size(162, 20);
+            this.tb_Reklamujacy.TabIndex = 16;
+            // 
+            // tb_Rozstrzygajacy
+            // 
+            this.tb_Rozstrzygajacy.Enabled = false;
+            this.tb_Rozstrzygajacy.Location = new System.Drawing.Point(409, 84);
+            this.tb_Rozstrzygajacy.Name = "tb_Rozstrzygajacy";
+            this.tb_Rozstrzygajacy.Size = new System.Drawing.Size(162, 20);
+            this.tb_Rozstrzygajacy.TabIndex = 17;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(300, 61);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Osoba reklamująca";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(300, 91);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Osoba reklamująca";
+            // 
+            // cBox_reklamacja
+            // 
+            this.cBox_reklamacja.AutoSize = true;
+            this.cBox_reklamacja.Location = new System.Drawing.Point(9, 329);
+            this.cBox_reklamacja.Name = "cBox_reklamacja";
+            this.cBox_reklamacja.Size = new System.Drawing.Size(116, 17);
+            this.cBox_reklamacja.TabIndex = 20;
+            this.cBox_reklamacja.Text = "Wyświetl wszystkie";
+            this.cBox_reklamacja.UseVisualStyleBackColor = true;
+            this.cBox_reklamacja.CheckedChanged += new System.EventHandler(this.cBox_reklamacja_CheckedChanged);
+            // 
+            // cBox_wycieczki
+            // 
+            this.cBox_wycieczki.AutoSize = true;
+            this.cBox_wycieczki.Location = new System.Drawing.Point(627, 7);
+            this.cBox_wycieczki.Name = "cBox_wycieczki";
+            this.cBox_wycieczki.Size = new System.Drawing.Size(101, 17);
+            this.cBox_wycieczki.TabIndex = 6;
+            this.cBox_wycieczki.Text = "Ładuj wszystkie";
+            this.cBox_wycieczki.UseVisualStyleBackColor = true;
+            this.cBox_wycieczki.CheckedChanged += new System.EventHandler(this.cBox_wycieczki_CheckedChanged);
             // 
             // KierownikView
             // 
@@ -521,6 +592,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kierownik_FormClosing);
             this.tc_kierownik.ResumeLayout(false);
             this.tp_zarzadzaj_wycieczkami.ResumeLayout(false);
+            this.tp_zarzadzaj_wycieczkami.PerformLayout();
             this.tp_rozpatrz_reklamacje.ResumeLayout(false);
             this.tp_rozpatrz_reklamacje.PerformLayout();
             this.tp_zarzadzaj_flota.ResumeLayout(false);
@@ -578,5 +650,11 @@
         public System.Windows.Forms.ColumnHeader columnHeader5;
         public System.Windows.Forms.Button b_promocja;
         private System.Windows.Forms.Timer timer1;
+        public System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox tb_Rozstrzygajacy;
+        public System.Windows.Forms.TextBox tb_Reklamujacy;
+        public System.Windows.Forms.CheckBox cBox_wycieczki;
+        public System.Windows.Forms.CheckBox cBox_reklamacja;
     }
 }

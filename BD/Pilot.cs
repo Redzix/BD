@@ -31,5 +31,10 @@ namespace BD
         public virtual ICollection<Panel_pracowniczy> Panel_pracowniczy { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wycieczka> Wycieczka { get; set; }
+
+        public string DaneOsobowe()
+        {
+            return this.imie + " " + this.nazwisko;
+        }
     }
 }
