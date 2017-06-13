@@ -88,7 +88,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie otwiera okno dialogowe pozwalające wprowadzić do bazy nowy pojazd.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_pojazd_Click(object sender, EventArgs e)
         {
@@ -100,7 +100,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie obsługujące wyłączenie aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Kierownik_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -128,7 +128,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie obsługujące wylogowanie z systemu po wciśnięciu przycisku "Wyjdź", po kliknięciu program przechodzi do panelu logowania.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_wyjdz_Click(object sender, EventArgs e)
         {
@@ -153,7 +153,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie otwiera okno dialogowe pozwalające wprowadzić do bazy nową wycieczkę.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_dodaj_wycieczke_Click(object sender, EventArgs e)
         {

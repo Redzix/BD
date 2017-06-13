@@ -51,7 +51,7 @@ namespace BD.View
         /// Metoda obsługująca klikniecie przyciku dodaj promocję, wywołuje funkcję odpowiedzialną za dodawanie
         /// nowej promocji.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param
         private void button1_Click(object sender, EventArgs e)
         {
@@ -67,7 +67,7 @@ namespace BD.View
         /// Metoda obsługująca klikniecie przyciku dodaj promocję, wywołuje funkcję odpowiedzialną za edycję
         /// promocji.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param
         private void b_edytuj_Click(object sender, EventArgs e)
         {
@@ -82,7 +82,7 @@ namespace BD.View
         /// <summary>
         /// Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_cena
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_kwota_KeyPress(object sender, KeyPressEventArgs e)
         {

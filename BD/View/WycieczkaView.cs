@@ -14,9 +14,21 @@ namespace BD.View
 {
     public partial class WycieczkaView : Form
     {
+        /// <summary>
+        /// Zmienna przechowująca id aktualnie wybranego katalogu
+        /// </summary
         private int idKatalog;
+
+        /// <summary>
+        /// Obiekt przechowujący kontroler.
+        /// </summary>
         KierownikController controller;
+
+        /// <summary>
+        /// Zmienna przechowująca id aktualnie wybraną opcje(dodaj/edytuj)
+        /// /// </summary
         private int _opcja;
+
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
@@ -47,7 +59,12 @@ namespace BD.View
                 controller.WypelnijKatalogDoEdycji(idKatalog);
         }
 
-
+        /// <summary>
+        /// Metoda obsługująca zdarzenie wyłączenia okna po wciśnięciu przycisku "Anuluj".
+        /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
+        /// </summary>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_anuluj_Click(object sender, EventArgs e)
         {
             this.Dispose();
@@ -56,7 +73,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie obsługujące wyłączenie okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Wycieczka_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -128,7 +145,7 @@ namespace BD.View
         /// <summary>
         /// Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_cena
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_cena_KeyPress(object sender, KeyPressEventArgs e)
         {

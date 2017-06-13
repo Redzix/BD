@@ -60,7 +60,7 @@ namespace BD.View
         /// Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
         /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_rezerwacja_anuluj_Click(object sender, EventArgs e)
         {
@@ -70,7 +70,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie obsługujące wyłączenie okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Rezerwacja_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -99,7 +99,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji 
         /// zapisującej nową rezerwację do bazy i obsługe jej komunikatów
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_rezerwacja_zapisz_Click(object sender, EventArgs e)
         {
@@ -124,7 +124,7 @@ namespace BD.View
         /// Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
         /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_anlujZaplate_Click(object sender, EventArgs e)
         {
@@ -135,7 +135,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zapłaćRezerwacje, odpowiada za wywołanie funkcji 
         /// zapisującej obliczone informacje do bazy i obsługe jej komunikatów
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapłaćRezerwacje_Click(object sender, EventArgs e)
         {
@@ -175,7 +175,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji 
         /// pobierającej i wyswiętlającej informacje o rezerwacji i obsługe jej komunikatów
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {

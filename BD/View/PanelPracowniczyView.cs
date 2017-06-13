@@ -30,7 +30,7 @@ namespace BD.View
         /// <summary>
         /// Metoda obsługująca zdarzenie wyjście z aplikacji
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zakoncz_Click(object sender, EventArgs e)
         {
@@ -41,7 +41,7 @@ namespace BD.View
         /// Obsługuje wyszukiwanie w bazie loginu i hasła podanych przez użytkownika wraz z odpowiednimi prawami, 
         /// następnie uruchamia odpowiedni panel
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zaloguj_Click(object sender, EventArgs e)
         {

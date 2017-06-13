@@ -54,7 +54,7 @@ namespace BD.View
         /// Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
         /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_anuluj_Click(object sender, EventArgs e)
         {
@@ -64,7 +64,7 @@ namespace BD.View
         /// <summary>
         /// Zdarzenie obsługujące wyłączenie okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Rezygnacja_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -93,7 +93,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie kliknięcia przycisku b_oblicz, odpowiada za wywołanie funkcji 
         /// sprawdzającej poprawnoość numeru rezerwacji oraz obliczajacej sugerowane koszty i obsługuje jej komunikat
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_oblicz_Click(object sender, EventArgs e)
          {
@@ -133,7 +133,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji 
         /// zapisującej obliczone informacje do bazy i obsługe jej komunikatów
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapisz_Click(object sender, EventArgs e)
         {
@@ -159,7 +159,7 @@ namespace BD.View
         /// <summary>
         /// Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_numerRezerwacji
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_numerRezerwacji_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -172,7 +172,7 @@ namespace BD.View
         /// <summary>
         /// Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_liczbaRezygnujacychOsob
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_liczbaRezygnujacychOsob_KeyPress(object sender, KeyPressEventArgs e)
         {

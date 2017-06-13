@@ -57,7 +57,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie wyłączenia okna po wciśnięciu przycisku "Anuluj".
         /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_anuluj_Click(object sender, EventArgs e)
         {
@@ -67,7 +67,7 @@ namespace BD.View
         /// <summary>
         /// Metoda obsługująca zdarzenie wyłączenia okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Reklamacja_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -96,7 +96,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji
         /// dodającej nową reklamację do bazy i obsługe jej komunikatów.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapisz_Click(object sender, EventArgs e)
         {
@@ -126,7 +126,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie zmiany zakładki, odpowiada za wywołanie funkcji pobierającej
         /// numery reklamacji i obsługuje jej komunikaty
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void tc_reklamacje_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -147,7 +147,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie kliknięcia komórki w listview, odpowiada za wywołanie
         /// funkcji pobierającej informacje o wybranej wycieczce i obsługuje jej komunikaty
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
         {
@@ -172,7 +172,7 @@ namespace BD.View
         /// Metoda obsługująca kliknięcie przycisku b_sprawdzPoprawnosc, odpowiada za wywołanie funkcji pobierającej
         /// nazwę wycieczki w celu weryfikacji poprawnego numeru rezerwacji i obsługuje jej komunikaty
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_sprawdzPoprawnosc_Click(object sender, EventArgs e)
         {
@@ -204,7 +204,7 @@ namespace BD.View
         /// <summary>
         /// Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void sortListViewByColumn(object sender, ColumnClickEventArgs e)
         {
@@ -219,7 +219,7 @@ namespace BD.View
         /// <summary>
         /// Metoda obsługująca zdarzenie kliknięcia na nagłówek kolumny, sortuje zawartość listview według danej kolumny
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void lv_reklamacje_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -229,7 +229,7 @@ namespace BD.View
         /// <summary>
         /// Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_numerRezerwacji
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_numerRezerwacji_KeyPress(object sender, KeyPressEventArgs e)
         {

@@ -49,7 +49,7 @@ namespace BD.View
         /// <summary>
         /// Metoda obsługująca zdarzenie  wyłączenia okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void Opinia_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -78,7 +78,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie wyłączenia okna po wciśnięciu przycisku "Anuluj".
         /// Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_anuluj_Click(object sender, EventArgs e)
         {
@@ -89,7 +89,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie klikniecia b_zapisz, odpowiada za wywołanie funkcji zapisującej
         /// opinie do bazy danych i obsługę jej komunikatów
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapisz_Click(object sender, EventArgs e)
         {
@@ -116,7 +116,7 @@ namespace BD.View
         /// Metoda obsługująca zdarzenie opuszczenie textboxa numeru rezerwacji, 
         /// odpowiada za wywołanie funkcji pobierającej informacje o wycieczce i obsługe jej komunikatów.
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
@@ -143,7 +143,7 @@ namespace BD.View
         /// <summary>
         /// Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_numerRezerwacji
         /// </summary>
-        /// <param name="sender">Rozpoznanie wciśniętego przycisku</param>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_numerRezerwacji_KeyPress(object sender, KeyPressEventArgs e)
         {
