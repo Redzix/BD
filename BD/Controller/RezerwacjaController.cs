@@ -43,7 +43,7 @@ namespace BD.Controller
         /// <param name="numerRezerwacji">Numer rezerwacji, dla której pobierane sa informacje.</param>
         /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int PobierzNazweWycieczki(string numerRezerwacji,string uzytkownik)
+        public int PobierzNazweWycieczki(string numerRezerwacji, string uzytkownik)
         {
             try
             {
@@ -90,15 +90,15 @@ namespace BD.Controller
             {
                 int numer = int.Parse(_view.tb_numerRezerwacji.Text);
 
-                if(sprawdzCzyTaSama == numer)
+                if (sprawdzCzyTaSama == numer)
                 {
                     var rez = (from rezerwacja in db.Rezerwacja
-                               where rezerwacja.numer_rezerwacji == numer 
+                               where rezerwacja.numer_rezerwacji == numer
                                && rezerwacja.Klient_pesel.Equals(uzytkownik)
                                select rezerwacja).FirstOrDefault();
 
                     var uczest = (from uczestnictwo in db.Uczestnictwo
-                                  where uczestnictwo.numer_rezerwacji == numer 
+                                  where uczestnictwo.numer_rezerwacji == numer
                                   && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                                   select uczestnictwo).FirstOrDefault();
                     try
@@ -150,7 +150,7 @@ namespace BD.Controller
         /// </summary>
         /// <param name="idWycieczki">Aktualny numer wycieczki wybranej przez użytkownika.</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int DodajRezerwacje(int idWycieczki)
+        public int DodajRezerwacje(int idWycieczki, string uzytkownik)
         {
 
             var cenaRezerwacji = (from katalog in db.Katalog
@@ -161,12 +161,12 @@ namespace BD.Controller
             {
                 var nowyKlient = new Klient
                 {
-                    pesel = _view.tb_pesel.Text,
-                    imie = _view.tb_imie.Text,
-                    nazwisko = _view.tb_nazwisko.Text,
-                    ulica = _view.tb_adres.Text,
-                    miejscowosc = _view.tb_miejscowosc.Text,
-                };
+                        pesel = _view.tb_pesel.Text,
+                        imie = _view.tb_imie.Text,
+                        nazwisko = _view.tb_nazwisko.Text,
+                        ulica = _view.tb_adres.Text,
+                        miejscowosc = _view.tb_miejscowosc.Text,
+                 };
 
                 var nowaRezerwacja = new Rezerwacja
                 {
@@ -174,17 +174,13 @@ namespace BD.Controller
                     stan = false,
                     zaliczka = decimal.Parse(_view.tb_zaliczka.Text),
                     id_wycieczki = idWycieczki,
-                    Klient_pesel = nowyKlient.pesel
                 };
 
                 var noweUczestnictwo = new Uczestnictwo
                 {
                     liczba_osob = nowaRezerwacja.liczba_osob,
-                    numer_rezerwacji = nowaRezerwacja.numer_rezerwacji,
                     cena_rezerwacji = cenaRezerwacji * nowaRezerwacja.liczba_osob
                 };
-                nowaRezerwacja.Klient = nowyKlient;
-                noweUczestnictwo.Rezerwacja = nowaRezerwacja;
 
                 var czyKlientIstnieje = (from czyIstnieje in db.Klient
                                          where czyIstnieje.pesel.Equals(nowyKlient.pesel)
@@ -195,6 +191,8 @@ namespace BD.Controller
                     db.Klient.Add(nowyKlient);
                 }
 
+                nowaRezerwacja.Klient = nowyKlient;
+                noweUczestnictwo.Rezerwacja = nowaRezerwacja;
                 db.Rezerwacja.Add(nowaRezerwacja);
                 db.Uczestnictwo.Add(noweUczestnictwo);
                 db.SaveChanges();
