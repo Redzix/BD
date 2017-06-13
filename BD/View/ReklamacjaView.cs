@@ -27,7 +27,7 @@ namespace BD.View
         /// <summary>
         /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
         /// </summary>
-        Aktualizacja aktReklamacji;
+        AktualizacjaController aktReklamacji;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -37,7 +37,7 @@ namespace BD.View
             InitializeComponent();
             controller = new ReklamacjaController(this);
 
-            aktReklamacji = new Aktualizacja("Reklamacja");
+            aktReklamacji = new AktualizacjaController("Reklamacja");
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace BD.View
             _uzytkownik = uzytkownik;
             controller = new ReklamacjaController(this);
 
-            aktReklamacji = new Aktualizacja("Reklamacja");
+            aktReklamacji = new AktualizacjaController("Reklamacja");
         }
 
         /// <summary>

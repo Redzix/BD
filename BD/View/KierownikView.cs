@@ -29,17 +29,17 @@ namespace BD.View
         /// <summary>
         /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
         /// </summary>
-        Aktualizacja aktKatalog;
+        AktualizacjaController aktKatalog;
 
         /// <summary>
         /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
         /// </summary>
-        Aktualizacja aktReklamacja;
+        AktualizacjaController aktReklamacja;
 
         /// <summary>
         /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
         /// </summary>
-        Aktualizacja aktPojazd;
+        AktualizacjaController aktPojazd;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna, tworzący okno oraz połączenie z bazą danych.
@@ -52,9 +52,9 @@ namespace BD.View
             l_polaczenie.Text = "Połączono";
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
 
-            aktKatalog= new Aktualizacja("wycieczka katalog");
-            aktReklamacja = new Aktualizacja("reklamacja");
-            aktPojazd = new Aktualizacja("pojazd");
+            aktKatalog= new AktualizacjaController("wycieczka katalog");
+            aktReklamacja = new AktualizacjaController("reklamacja");
+            aktPojazd = new AktualizacjaController("pojazd");
 
             timer1.Start();
         }
@@ -74,9 +74,9 @@ namespace BD.View
             l_polaczenie.Text = "Połączono";
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
 
-            aktKatalog = new Aktualizacja("wycieczka katalog");
-            aktReklamacja = new Aktualizacja("reklamacja");
-            aktPojazd = new Aktualizacja("pojazd");
+            aktKatalog = new AktualizacjaController("wycieczka katalog");
+            aktReklamacja = new AktualizacjaController("reklamacja");
+            aktPojazd = new AktualizacjaController("pojazd");
 
             timer1.Start();
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 namespace BD
 {
-    class Aktualizacja
+    class AktualizacjaController
     {
         private SqlConnection _polaczenie;
         private SqlCommand _zapytanie;
@@ -15,7 +15,7 @@ namespace BD
         private string databasename;
         private string nazwaTabeli;
 
-        public Aktualizacja(string nazwa)
+        public AktualizacjaController(string nazwa)
         {
             _polaczenie = new SqlConnection();
             _zapytanie = new SqlCommand();

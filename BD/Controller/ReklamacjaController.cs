@@ -72,11 +72,13 @@ namespace BD.Controller
         /// <param name="numerRezerwacji">Numer rezerwacji, dla której pobierane sa informacje.</param>
         /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int PobierzNazweWycieczki(string numerRezerwacji,string uzytkownik)
+        public int PobierzNazweWycieczki(string numerRezerwacji, string uzytkownik)
         {
             try
             {
                 int numer = int.Parse(numerRezerwacji);
+
+                sprawdzCzyTaSama = numer;
 
                 var query = (from uczestnictwo in db.Uczestnictwo
                              where uczestnictwo.numer_rezerwacji == numer && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
@@ -108,7 +110,7 @@ namespace BD.Controller
         /// <param name="numerReklamacji">Numer reklamacji, dla której są pobierane informacje.</param>
         /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int PobierzInformacjeOReklamacji(string numerReklamacji,string uzytkownik)
+        public int PobierzInformacjeOReklamacji(string numerReklamacji, string uzytkownik)
         {
             try
             {
@@ -152,7 +154,7 @@ namespace BD.Controller
         /// <param name="numerRezerwacji">Nume rezerwacji, dla której dodawana jest reklamacja.</param>
         /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int DodajReklamacje(string numerRezerwacji,string uzytkownik)
+        public int DodajReklamacje(string numerRezerwacji, string uzytkownik)
         {
             try
             {
@@ -169,11 +171,12 @@ namespace BD.Controller
                     {
                         opis = _view.tb_opis_reklamacji.Text,
                         stan = false,
-                        Kierownik_pesel = "brak",
-                        id_uczestnictwo = uczestnictwo.id_uczestnictwo
+                        Kierownik_pesel = null,
                     };
-                    db.Reklamacja.Add(reklamacja);
 
+                    reklamacja.Uczestnictwo = uczestnictwo;
+
+                    db.Reklamacja.Add(reklamacja);
                     db.SaveChanges();
                     db.Dispose();
                     db = new bazaEntities();

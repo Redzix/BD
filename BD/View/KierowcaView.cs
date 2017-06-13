@@ -25,7 +25,7 @@ namespace BD.View
         /// <summary>
         /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
         /// </summary>
-        Aktualizacja aktPojazdu;
+        AktualizacjaController aktPojazdu;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -40,7 +40,7 @@ namespace BD.View
 
             controller = new KierowcaController(this);
 
-            aktPojazdu = new Aktualizacja("pojazd");
+            aktPojazdu = new AktualizacjaController("pojazd");
 
             timer1.Start();
         }
@@ -59,7 +59,7 @@ namespace BD.View
 
             controller = new KierowcaController(this);
 
-            aktPojazdu = new Aktualizacja("pojazd");
+            aktPojazdu = new AktualizacjaController("pojazd");
 
             timer1.Start();
 

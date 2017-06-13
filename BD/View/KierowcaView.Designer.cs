@@ -125,7 +125,7 @@
             this.lv_pojazdy.Location = new System.Drawing.Point(8, 3);
             this.lv_pojazdy.MultiSelect = false;
             this.lv_pojazdy.Name = "lv_pojazdy";
-            this.lv_pojazdy.Size = new System.Drawing.Size(386, 233);
+            this.lv_pojazdy.Size = new System.Drawing.Size(398, 233);
             this.lv_pojazdy.TabIndex = 1;
             this.lv_pojazdy.UseCompatibleStateImageBehavior = false;
             this.lv_pojazdy.View = System.Windows.Forms.View.Details;
@@ -145,7 +145,7 @@
             // Marka
             // 
             this.Marka.Text = "Marka";
-            this.Marka.Width = 50;
+            this.Marka.Width = 72;
             // 
             // Pojemnosc
             // 
@@ -177,8 +177,8 @@
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // KierowcaView
             // 

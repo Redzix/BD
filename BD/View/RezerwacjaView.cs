@@ -103,7 +103,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_rezerwacja_zapisz_Click(object sender, EventArgs e)
         {
-            int zapisz = controller.DodajRezerwacje(_idWycieczki);
+            int zapisz = controller.DodajRezerwacje(_idWycieczki,_uzytkownik);
 
             switch (zapisz)
             {

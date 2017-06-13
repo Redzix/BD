@@ -31,7 +31,7 @@ namespace BD.View
         /// <summary>
         /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
         /// </summary>
-        Aktualizacja aktKlienta;
+        AktualizacjaController aktKlienta;
      
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace BD.View
        
             controller = new KlientController(this);
 
-            aktKlienta = new Aktualizacja("wycieczka");
+            aktKlienta = new AktualizacjaController("wycieczka");
 
             timer1.Start();
         }
@@ -68,7 +68,7 @@ namespace BD.View
             _uzytkownik = uzytkownik;
             controller = new KlientController(this);
 
-            aktKlienta = new Aktualizacja("wycieczka promocja katalog");
+            aktKlienta = new AktualizacjaController("wycieczka promocja katalog");
 
             timer1.Start();
 
