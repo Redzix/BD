@@ -16,7 +16,7 @@ namespace BD.View
         /// <summary>
         /// Obiekt przechowujący kontroler.
         /// </summary>
-        private PojazdController controller; 
+        private KierownikController controller; 
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna
@@ -24,7 +24,7 @@ namespace BD.View
         public PojazdView()
         {
             InitializeComponent();
-            controller = new PojazdController(this);
+            controller = new KierownikController(this);
         }
 
         /// <summary>

@@ -38,5 +38,25 @@ namespace BD
         public virtual Promocja Promocja { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Katalog> Katalog { get; set; }
+
+        public bool WycieczkaWTrakcie(DateTime dateTime)
+        {
+            if (dateTime.Date >= this.data_wyjazdu.Value.Date && dateTime.Date <= this.data_powrotu.Value.Date)
+                return true;
+            return false;
+
+        }
+        public bool WycieczkaOdbyta(DateTime dateTime)
+        {
+            if (dateTime.Date > this.data_powrotu.Value.Date)
+                return true;
+            return false;
+        }
+        public bool WycieczkaZaplanowana(DateTime dateTime)
+        {
+            if (dateTime < this.data_wyjazdu)
+                return true;
+            return false;
+        }
     }
 }

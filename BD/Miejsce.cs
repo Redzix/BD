@@ -29,5 +29,10 @@ namespace BD
         public virtual ICollection<Katalog> Katalog { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Katalog> Katalog1 { get; set; }
+
+        public string PelnyAdres()
+        {
+            return this.miejscowosc + ", " + this.adres;
+        }
     }
 }
