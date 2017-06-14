@@ -159,7 +159,6 @@ namespace BD.View
                     this.rb_awaria.Enabled = false;
                     this.rb_sprawny.Enabled = false;
                     this.b_kierowca_zapisz.Enabled = false;
-                    controller.PobierzPojazdy();
                     break;
                 case -1:
                     MessageBox.Show("Brak pojazdu o podanym numerze rejestracyjnym.", "Błędny numer rejestracyjny", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -170,7 +169,6 @@ namespace BD.View
                     this.rb_awaria.Enabled = false;
                     this.rb_sprawny.Enabled = false;
                     this.b_kierowca_zapisz.Enabled = false;
-                    controller.PobierzPojazdy();
                     break;
                 case -2:
                     MessageBox.Show("Brak pojazdu o podanym numerze rejestracyjnym.", "Błędny numer rejestracyjny", MessageBoxButtons.OK, MessageBoxIcon.Error);
