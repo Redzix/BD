@@ -48,12 +48,12 @@
             this.dataWyjazdu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.promocja = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cenaCalkowita = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cenaDoZaplaty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tb_szukaj = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.l_szukaj = new System.Windows.Forms.Label();
             this.b_szukaj = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.cenaDoZaplaty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -146,6 +146,7 @@
             // 
             // b_zaplac
             // 
+            this.b_zaplac.Enabled = false;
             this.b_zaplac.Location = new System.Drawing.Point(776, 263);
             this.b_zaplac.Name = "b_zaplac";
             this.b_zaplac.Size = new System.Drawing.Size(75, 23);
@@ -219,7 +220,6 @@
             // cenaDoZaplaty
             // 
             this.cenaDoZaplaty.Text = "Do zapłaty";
-            this.cenaCalkowita.Width = 110;
             // 
             // tb_szukaj
             // 

@@ -202,13 +202,20 @@ namespace BD.Controller
                 foreach (var ucz in query)
                 {
                     ListViewItem rezerwacja = new ListViewItem(ucz.rezerwacja.numer_rezerwacji.ToString());
-
+                    rezerwacja.Tag = ucz.rezerwacja.numer_rezerwacji.ToString();
                     rezerwacja.SubItems.Add(ucz.wycieczka.nazwa);
                     rezerwacja.SubItems.Add(ucz.wycieczka.data_wyjazdu.ToString());
                     rezerwacja.SubItems.Add(ucz.wycieczka.data_powrotu.ToString());
-
+               
                     if ((ucz.wycieczka.WycieczkaZaplanowana(DateTime.Now)) && (!bool.Parse(ucz.rezerwacja.stan.ToString())))
-                        doZaplaty++; 
+                    {
+                        rezerwacja.BackColor = Color.White;
+                        doZaplaty++;
+                    }
+                    else if (ucz.wycieczka.WycieczkaOdbyta(DateTime.Now))
+                        rezerwacja.BackColor = Color.LightCoral;
+                    else if ((ucz.wycieczka.WycieczkaZaplanowana(DateTime.Now)) && (bool.Parse(ucz.rezerwacja.stan.ToString())))
+                        rezerwacja.BackColor = Color.LightGreen;
 
                     rezerwacja.SubItems.Add(ucz.rezerwacja.zaliczka.ToString());
                     rezerwacja.SubItems.Add((ucz.cenaCalkowita - ucz.rezerwacja.zaliczka).ToString());
@@ -216,6 +223,76 @@ namespace BD.Controller
                 }
                 return doZaplaty;
             }
+        }
+
+        /// <summary>
+        /// Metoda pobiera szczegółowe informacje o wybranej rezerwacji i dodaje je do richtextboxa
+        /// </summary>
+        /// <param name="numerRezerwacji">Numeraktualnie wybranej w listview rezerwacji.</param>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        public int PobierzDaneRezerwacji(string numerRezerwacji)
+        {
+            try
+            {
+                //Pobranie z tabeli oraz z bazy danych odpowiednich wartości do wyświetlenia.
+                int numer = int.Parse(numerRezerwacji);
+
+                var pobierz = (from uczestnictwo in db.Uczestnictwo
+                               where uczestnictwo.numer_rezerwacji == numer
+                               select new
+                               {
+                                   rezerwacja = uczestnictwo.Rezerwacja,
+                                   wycieczka = uczestnictwo.Rezerwacja.Wycieczka,
+                                   uczest = uczestnictwo
+                               }).FirstOrDefault();
+
+                if (pobierz == null)
+                {
+                    return -1;
+                }
+                else
+                {
+                    // Dodanie wartości parametrów do opisu znajdującego się w texboxie
+                    _view.rtb_wycieczka.Text = "Numer rezerwacji " + pobierz.rezerwacja.numer_rezerwacji +
+                        "\nNazwa Wycieczki " + pobierz.wycieczka.nazwa +
+                        "\nLiczba osób " + pobierz.uczest.liczba_osob +
+                        "\nCena całkowita " + pobierz.uczest.cena_rezerwacji +
+                        "\nData wyjazdu " + pobierz.wycieczka.data_wyjazdu +
+                        "\nData powrotu " + pobierz.wycieczka.data_powrotu +
+                        "\nOpis wycieczki " + pobierz.wycieczka.opis;
+                 }
+
+                return 1;
+
+            }
+            catch (FormatException exception)
+            {
+                return 0;
+            }
+            catch (Exception exception)
+            {
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// Metoda sprawdza, czy wycieczka została już odbyta lub jest w rakcie
+        /// </summary>
+        /// <param name="_idWycieczki">Numeraktualnie wybranej w listview wycieczki.</param>
+        /// <returns>Zwraca  true jeśli wycieczka została odbyta, false jeśli jest zaplanowana.</returns>
+        public bool SprawdzCzyOdbyta(int idWycieczki)
+        {
+            var sprawdz = (from wycieczka in db.Wycieczka
+                           where wycieczka.id_wycieczki == idWycieczki
+                           select wycieczka).FirstOrDefault();
+
+            if(sprawdz.WycieczkaOdbyta(DateTime.Now) || sprawdz.WycieczkaWTrakcie(DateTime.Now))
+            {
+                return true;
+            }
+            else{
+                return false;
+            }           
         }
     }
 }

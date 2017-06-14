@@ -113,8 +113,15 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_katalog_rezerwuj_Click(object sender, EventArgs e)
         {
-            RezerwacjaView rezerwacja = new RezerwacjaView(_idWycieczki,_uzytkownik);
-            rezerwacja.ShowDialog();
+            if (controller.SprawdzCzyOdbyta(_idWycieczki))
+            {
+                MessageBox.Show("Wybrana wycieczka została już odbyta", "Wycieczka odbyta.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                RezerwacjaView rezerwacja = new RezerwacjaView(_idWycieczki, _uzytkownik);
+                rezerwacja.ShowDialog();
+            }
         }
 
         /// <summary>
@@ -238,24 +245,49 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void lv_klient_ItemActivate(object sender, EventArgs e)
         {
-            int pobierz = controller.PobierzDaneWycieczki(((ListView)sender).SelectedItems[0].Tag.ToString());
-
-            switch (pobierz)
+            if (indeksListview == 0)
             {
-                case 1:
-                    int.TryParse(((ListView)sender).SelectedItems[0].Tag.ToString(), out _idWycieczki);
-                    this.b_katalog_rezerwuj.Enabled = true;
-                    break;
-                case 0:
-                    MessageBox.Show("Wystąpił problem podczas konwersji id wycieczki", "Błąd konwersji", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.b_katalog_rezerwuj.Enabled = false;
-                    break;
-                case -1:
-                    MessageBox.Show("Wystąpił problem podczas pobierania danych.", "Błąd pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.b_katalog_rezerwuj.Enabled = false;
-                    break;
-                default:
-                    break;
+                int pobierz = controller.PobierzDaneWycieczki(((ListView)sender).SelectedItems[0].Tag.ToString());
+
+                switch (pobierz)
+                {
+                    case 1:
+                        int.TryParse(((ListView)sender).SelectedItems[0].Tag.ToString(), out _idWycieczki);
+                        this.b_katalog_rezerwuj.Enabled = true;
+                        break;
+                    case 0:
+                        MessageBox.Show("Wystąpił problem podczas konwersji id wycieczki", "Błąd konwersji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.b_katalog_rezerwuj.Enabled = false;
+                        break;
+                    case -1:
+                        MessageBox.Show("Wystąpił problem podczas pobierania danych.", "Błąd pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.b_katalog_rezerwuj.Enabled = false;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                int pobierz = controller.PobierzDaneRezerwacji(((ListView)sender).SelectedItems[0].Tag.ToString());
+
+                switch (pobierz)
+                {
+                    case 1:
+                        int.TryParse(((ListView)sender).SelectedItems[0].Tag.ToString(), out _idWycieczki);
+                        this.b_katalog_rezerwuj.Enabled = true;
+                        break;
+                    case 0:
+                        MessageBox.Show("Wystąpił problem podczas konwersji id wycieczki", "Błąd konwersji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.b_katalog_rezerwuj.Enabled = false;
+                        break;
+                    case -1:
+                        MessageBox.Show("Wystąpił problem podczas pobierania danych.", "Błąd pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.b_katalog_rezerwuj.Enabled = false;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -324,9 +356,9 @@ namespace BD.View
             this.cenaCalkowita.Text = "Cena całkowita";
             this.cenaCalkowita.Width = 110;
             this.lv_klient.Columns.Remove(this.cenaDoZaplaty);
-            this.lv_klient.Enabled = true;
             this.tb_szukaj.Enabled = true;
-
+            this.rtb_wycieczka.Text = "Nazwa\nData wyjazdu\nData powrotu\nOpis\n\nAdres miejsca\nMiejscowość";
+            this.b_zaplac.Enabled = false;
             indeksListview = 0;
 
             controller.PobierzWycieczki();
@@ -348,10 +380,9 @@ namespace BD.View
             this.cenaCalkowita.Width = 70;
             this.lv_klient.Columns.Insert(5,this.cenaDoZaplaty);
             this.cenaDoZaplaty.Width = 110;
-            this.lv_klient.Enabled = false;
             this.tb_szukaj.Enabled = false;
             this.b_szukaj.Enabled = false;
-
+            this.rtb_wycieczka.Text = "Numer rezerwacji\nLiczba osób\nNazwa Wycieczki\nCena całkowita\nData wyjazdu\nData powrotu\nOpis wycieczki";
             indeksListview = 1;
 
             int pobierz = controller.PobierzRezerwacje(_uzytkownik);
