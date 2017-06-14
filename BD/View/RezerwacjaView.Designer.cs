@@ -84,6 +84,7 @@
             this.tb_liczba_osob.Name = "tb_liczba_osob";
             this.tb_liczba_osob.Size = new System.Drawing.Size(100, 20);
             this.tb_liczba_osob.TabIndex = 5;
+            this.tb_liczba_osob.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_liczba_osob_KeyPress);
             // 
             // tb_zaliczka
             // 
@@ -91,6 +92,7 @@
             this.tb_zaliczka.Name = "tb_zaliczka";
             this.tb_zaliczka.Size = new System.Drawing.Size(100, 20);
             this.tb_zaliczka.TabIndex = 6;
+            this.tb_zaliczka.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_zaliczka_KeyPress);
             // 
             // tb_adres
             // 

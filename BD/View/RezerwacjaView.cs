@@ -212,5 +212,31 @@ namespace BD.View
                     break;
             }      
         }
+
+        /// <summary>
+        /// Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_liczba_osob
+        /// </summary>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void tb_liczba_osob_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_zaliczka
+        /// </summary>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void tb_zaliczka_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !(e.KeyChar == 44))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
