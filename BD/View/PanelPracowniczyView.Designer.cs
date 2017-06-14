@@ -49,9 +49,9 @@
             // 
             this.tb_haslo.Location = new System.Drawing.Point(84, 65);
             this.tb_haslo.Name = "tb_haslo";
-            this.tb_haslo.PasswordChar = '*';
             this.tb_haslo.Size = new System.Drawing.Size(100, 20);
             this.tb_haslo.TabIndex = 2;
+            this.tb_haslo.UseSystemPasswordChar = true;
             // 
             // l_nazwa_uzytkownika
             // 

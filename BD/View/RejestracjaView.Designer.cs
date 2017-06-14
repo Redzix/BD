@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.b_anuluj = new System.Windows.Forms.Button();
             this.tb_pesel = new System.Windows.Forms.TextBox();
             this.tb_imie = new System.Windows.Forms.TextBox();
@@ -46,6 +47,7 @@
             this.l_haslo = new System.Windows.Forms.Label();
             this.l_powtorzHaslo = new System.Windows.Forms.Label();
             this.b_zarejestruj = new System.Windows.Forms.Button();
+            this.tT_haslo = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // b_anuluj
@@ -104,17 +106,19 @@
             // 
             this.tb_haslo.Location = new System.Drawing.Point(116, 168);
             this.tb_haslo.Name = "tb_haslo";
-            this.tb_haslo.PasswordChar = '*';
             this.tb_haslo.Size = new System.Drawing.Size(117, 20);
             this.tb_haslo.TabIndex = 7;
+            this.tT_haslo.SetToolTip(this.tb_haslo, "Pamiętaj, że hasło musi zawierać co najmniej 8 znaków.");
+            this.tb_haslo.UseSystemPasswordChar = true;
             // 
             // tb_powtorzHaslo
             // 
             this.tb_powtorzHaslo.Location = new System.Drawing.Point(116, 194);
             this.tb_powtorzHaslo.Name = "tb_powtorzHaslo";
-            this.tb_powtorzHaslo.PasswordChar = '*';
             this.tb_powtorzHaslo.Size = new System.Drawing.Size(117, 20);
             this.tb_powtorzHaslo.TabIndex = 8;
+            this.tT_haslo.SetToolTip(this.tb_powtorzHaslo, "Hasła musza być takie same.");
+            this.tb_powtorzHaslo.UseSystemPasswordChar = true;
             // 
             // l_pesel
             // 
@@ -252,5 +256,6 @@
         private System.Windows.Forms.Label l_haslo;
         private System.Windows.Forms.Label l_powtorzHaslo;
         private System.Windows.Forms.Button b_zarejestruj;
+        private System.Windows.Forms.ToolTip tT_haslo;
     }
 }
