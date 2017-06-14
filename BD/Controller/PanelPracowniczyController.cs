@@ -53,7 +53,7 @@ namespace BD.Controller
                         if (pobierz.stopien.Equals("kierownik"))
                         {
                             _view.Hide();
-                            KierownikView kierownik = new KierownikView(pobierz.Kierownik_pesel);
+                            KierownikView kierownik = new KierownikView(pobierz.Kierownik);
                             kierownik.Closed += (s, args) => _view.Close();
                             kierownik.ShowDialog();
 
@@ -61,7 +61,7 @@ namespace BD.Controller
                         else if (pobierz.stopien.Equals("klient"))
                         {
                             _view.Hide();
-                            KlientView klient = new KlientView(pobierz.Klient_pesel);
+                            KlientView klient = new KlientView(pobierz.Klient);
                             klient.Closed += (s, args) => _view.Close();
                             klient.ShowDialog();
 
@@ -69,7 +69,7 @@ namespace BD.Controller
                         else if (pobierz.stopien.Equals("kierowca"))
                         {
                             _view.Hide();
-                            KierowcaView kierowca = new KierowcaView(pobierz.Kierowca_pesel);
+                            KierowcaView kierowca = new KierowcaView(pobierz.Kierowca);
                             kierowca.Closed += (s, args) => _view.Close();
                             kierowca.ShowDialog();
 
@@ -77,7 +77,7 @@ namespace BD.Controller
                         else if (pobierz.stopien.Equals("pilot"))
                         {
                             _view.Hide();
-                            PilotView pilot = new PilotView(pobierz.Pilot_pesel);
+                            PilotView pilot = new PilotView(pobierz.Pilot);
                             pilot.Closed += (s, args) => _view.Close();
                             pilot.ShowDialog();
                         }

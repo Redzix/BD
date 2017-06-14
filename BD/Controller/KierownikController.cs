@@ -33,6 +33,8 @@ namespace BD.Controller
                                 miejsce_z = katalog.Miejsce,
                                 miejsce_do = katalog.Miejsce1
                             };
+                if (!czyWszystkie)
+                    query = query.Where(x => !(x.wycieczka.data_powrotu < DateTime.Now)).Select(x=>x);
                 foreach (var wyc in query)
                 {
                     ListViewItem wycieczka = new ListViewItem(wyc.wycieczka.nazwa); //Miejsce
@@ -68,6 +70,7 @@ namespace BD.Controller
                     nazwa = wView.tb_nazwa.Text,
                     data_powrotu = wView.tb_data_powrotu.Value,
                     data_wyjazdu = wView.tb_data_wyjazdu.Value,
+                    
                     opis = wView.tb_opis.Text,
                     Pilot_pesel = pilotPesel,
                     Kierowca_pesel = kierowcaPesel,
@@ -77,6 +80,7 @@ namespace BD.Controller
                 {
                     id_miejsca_odjazdu = miejsceOdjazdu,
                     id_miejsca_przyjazdu = miejscePrzyjazdu,
+                    okres_trwania_wycieczki = (wView.tb_data_powrotu.Value - wView.tb_data_wyjazdu.Value).Days,
                     cena = decimal.Parse(wView.tb_cena.Text)
                 };
                 nowyKatalog.Wycieczka = nowaWycieczka;
@@ -283,7 +287,8 @@ namespace BD.Controller
                     ListViewItem reklamacjaItem = new ListViewItem(rek.numer_reklamacji.ToString());
                     reklamacjaItem.Tag = rek.numer_reklamacji;
                     reklamacjaItem.SubItems.Add((rek.opis.Length <= 30) ? rek.opis : rek.opis.Substring(0, 30));
-                    reklamacjaItem.SubItems.Add((bool)rek.stan ? "Pozytywnie" : "Negatywnie");
+                    //reklamacjaItem.SubItems.Add((bool)rek.stan ? "Pozytywnie" : "Negatywnie");
+                    reklamacjaItem.SubItems.Add(rek.Kierownik == null ? "Nierozpatrzona" : "Rozpatrzona");
                     kView.lv_reklamacje.Items.Add(reklamacjaItem);
                 }
             }
@@ -309,7 +314,7 @@ namespace BD.Controller
                     kView.rtb_opisReklamacji.Text = reklamacjaDoPrzegladu.reklamacja.opis;
                     kView.tb_nazwa_wycieczki.Text = reklamacjaDoPrzegladu.Wycieczka.nazwa;
                     kView.tb_Reklamujacy.Text = reklamacjaDoPrzegladu.Klient.DaneOsobowe();
-                    kView.tb_Rozstrzygajacy.Text = (reklamacjaDoPrzegladu.Kierownik == null) ? "Nierozstrzygnięte" : reklamacjaDoPrzegladu.Kierownik.DaneOsobowe();
+                    kView.tb_Rozstrzygajacy.Text = (reklamacjaDoPrzegladu.Kierownik == null) ? "Jeszcze nierozpatrzone" : reklamacjaDoPrzegladu.Kierownik.DaneOsobowe();
                     TimeSpan roznica = (TimeSpan)(reklamacjaDoPrzegladu.Wycieczka.data_powrotu - reklamacjaDoPrzegladu.Wycieczka.data_wyjazdu);
                     kView.tb_okresTrwaniaWycieczki.Text = String.Format("{0} dni", roznica.Days);
                 }
