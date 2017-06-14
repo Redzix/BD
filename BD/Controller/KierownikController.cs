@@ -70,6 +70,7 @@ namespace BD.Controller
                     nazwa = wView.tb_nazwa.Text,
                     data_powrotu = wView.tb_data_powrotu.Value,
                     data_wyjazdu = wView.tb_data_wyjazdu.Value,
+                    
                     opis = wView.tb_opis.Text,
                     Pilot_pesel = pilotPesel,
                     Kierowca_pesel = kierowcaPesel,
@@ -79,6 +80,7 @@ namespace BD.Controller
                 {
                     id_miejsca_odjazdu = miejsceOdjazdu,
                     id_miejsca_przyjazdu = miejscePrzyjazdu,
+                    okres_trwania_wycieczki = (wView.tb_data_powrotu.Value - wView.tb_data_wyjazdu.Value).Days,
                     cena = decimal.Parse(wView.tb_cena.Text)
                 };
                 nowyKatalog.Wycieczka = nowaWycieczka;
