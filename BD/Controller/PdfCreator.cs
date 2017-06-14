@@ -12,15 +12,25 @@ namespace BD.Controller
 {
     class PdfCreator
     {
-        private PdfPCell getCell(String text, int alignment)
+        /// <summary>
+        /// Nazwa raportu który zostanie wygenerowany
+        /// </summary>
+        string nazwaRaportu;
+        /// <summary>
+        /// Konstruktor klasy
+        /// </summary>
+        /// <param name="nazwa">Nazwa raportu do wygenerowania</param>
+        public PdfCreator(string nazwa)
         {
-            PdfPCell cell = new PdfPCell(new Phrase(text));
-            cell.Padding = 0;
-            cell.HorizontalAlignment = alignment;
-            cell.Border = PdfPCell.NO_BORDER;
-            return cell;
+            if (!nazwa.Equals(""))
+                this.nazwaRaportu = nazwa;
+            else
+                this.nazwaRaportu = "raport";
         }
-
+        /// <summary>
+        /// Tworzy plik PDF o podanej nazwie w konstruktorze
+        /// </summary>
+        /// <param name="view">ListView z którego ma pobrać dane</param>
         public void createPDF(ListView view)
         {
             PdfPTable mainRaport = new PdfPTable(view.Columns.Count);
@@ -36,7 +46,7 @@ namespace BD.Controller
             //Adding Header row
             foreach (ColumnHeader column in view.Columns)
             {
-                PdfPCell cell = new PdfPCell(new Phrase(column.Text, fontHeader));
+                PdfPCell cell = new PdfPCell(new Phrase(this.FormatujNazweKolumny(column.Text), fontHeader));
                 mainRaport.AddCell(cell);
             }
 
@@ -49,10 +59,6 @@ namespace BD.Controller
                 }
             }
 
-
-
-
-
             using (Document pdfDoc = new Document(PageSize.A4))
             {
                 //Strona tytułowa
@@ -64,7 +70,7 @@ namespace BD.Controller
                 tempCell.Border = PdfPCell.NO_BORDER;
                 frontPage.AddCell(tempCell);
 
-                tempCell = new PdfPCell(new Paragraph("Raport wygenerowany dla listy " + view.Name, header));
+                tempCell = new PdfPCell(new Paragraph("Raport wygenerowany dla " + nazwaRaportu, header));
                 tempCell.MinimumHeight = (pdfDoc.PageSize.Height - (pdfDoc.BottomMargin + pdfDoc.TopMargin))-30;
                 tempCell.VerticalAlignment = PdfPCell.ALIGN_MIDDLE;
                 tempCell.Border = PdfPCell.NO_BORDER;
@@ -73,7 +79,9 @@ namespace BD.Controller
 
                 try
                 {
-                    using (FileStream stream = new FileStream("ListView.pdf", FileMode.Create))
+                    string nazwaPliku = String.Format("{0}_{1:dd_MM_yyyy}.pdf", nazwaRaportu, DateTime.Now);
+                    Console.WriteLine(nazwaPliku);
+                    using (FileStream stream = new FileStream(nazwaPliku, FileMode.Create))
                     { 
                         PdfWriter.GetInstance(pdfDoc, stream);
 
@@ -90,6 +98,18 @@ namespace BD.Controller
                     MessageBox.Show("Zamknij najpierw plik pdf.");
                 }
             }
+        }
+
+        /// <summary>
+        /// Funkcja do edycji nazwy kolumny, usuwająca krawężniki oraz zamieniająca pierwszą literę na wielką.
+        /// </summary>
+        /// <param name="kolumna">Nazwa kolumny do edycji</param>
+        /// <returns></returns>
+        private string FormatujNazweKolumny(string kolumna)
+        {
+            kolumna = kolumna.Replace("_", " ");
+            kolumna = char.ToUpper(kolumna[0]) + kolumna.Substring(1);
+            return kolumna;
         }
     }
 }

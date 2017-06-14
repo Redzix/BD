@@ -208,3 +208,4 @@ C:\Users\karol\Source\Re\BD\BD\bin\Debug\EntityFramework.xml
 C:\Users\karol\Source\Re\BD\BD\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\karol\Source\Re\BD\BD\bin\Debug\itextsharp.xml
 C:\Users\preze\Source\Repos\BD\BD\obj\Debug\BD.View.RejestracjaView.resources
+C:\Users\preze\Source\Repos\BD\BD\obj\Debug\BD.View.RaporterView.resources

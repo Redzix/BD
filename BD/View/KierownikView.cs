@@ -324,7 +324,7 @@ namespace BD.View
                 controller.LadujKatalog();
             } catch
             {
-                MessageBox.Show("Musisz najpierw wybrać wycieczkę do edycji");
+                MessageBox.Show("Musisz najpierw wybrać wycieczkę do edycji", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -357,14 +357,6 @@ namespace BD.View
                 return;
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            PdfCreator pdf = new PdfCreator();
-            pdf.createPDF(lv_pojazdy);
-        }
-
-
         /// <summary>
         /// Używana do sortowania po kolumnach dla obiektów typu ListView.
         /// </summary>
@@ -395,7 +387,7 @@ namespace BD.View
                 controller.LadujKatalog();
             } catch
             {
-                MessageBox.Show("Cos się popsuło");
+                MessageBox.Show("Najpierw należy wybrać wycieczkę", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -441,6 +433,24 @@ namespace BD.View
         private void cBox_wycieczki_CheckedChanged(object sender, EventArgs e)
         {
             controller.LadujKatalog();
+        }
+
+        private void b_raport_pojazdy_Click(object sender, EventArgs e)
+        {
+            RaporterView rView = new RaporterView(2);
+            rView.ShowDialog();
+        }
+
+        private void b_raport_wycieczki_Click(object sender, EventArgs e)
+        {
+            RaporterView rView = new RaporterView(0);
+            rView.ShowDialog();
+        }
+
+        private void b_raport_reklamacje_Click(object sender, EventArgs e)
+        {
+            RaporterView rView = new RaporterView(1);
+            rView.ShowDialog();
         }
     }
 }

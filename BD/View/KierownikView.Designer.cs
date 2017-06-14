@@ -62,7 +62,6 @@
             this.l_nazwa_wycieczki = new System.Windows.Forms.Label();
             this.b_rozpatrz_pozytywnie = new System.Windows.Forms.Button();
             this.tp_zarzadzaj_flota = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.b_edytuj_pojazd = new System.Windows.Forms.Button();
             this.b_usun_pojazd = new System.Windows.Forms.Button();
             this.b_dodaj_pojazd = new System.Windows.Forms.Button();
@@ -395,7 +394,6 @@
             // 
             // tp_zarzadzaj_flota
             // 
-            this.tp_zarzadzaj_flota.Controls.Add(this.button1);
             this.tp_zarzadzaj_flota.Controls.Add(this.b_edytuj_pojazd);
             this.tp_zarzadzaj_flota.Controls.Add(this.b_usun_pojazd);
             this.tp_zarzadzaj_flota.Controls.Add(this.b_dodaj_pojazd);
@@ -407,16 +405,6 @@
             this.tp_zarzadzaj_flota.TabIndex = 2;
             this.tp_zarzadzaj_flota.Text = "Zarządzaj flotą";
             this.tp_zarzadzaj_flota.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(476, 237);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // b_edytuj_pojazd
             // 
@@ -513,6 +501,7 @@
             this.b_raport_reklamacje.TabIndex = 2;
             this.b_raport_reklamacje.Text = "Drukuj raport reklamacji";
             this.b_raport_reklamacje.UseVisualStyleBackColor = true;
+            this.b_raport_reklamacje.Click += new System.EventHandler(this.b_raport_reklamacje_Click);
             // 
             // b_raport_pojazdy
             // 
@@ -522,6 +511,7 @@
             this.b_raport_pojazdy.TabIndex = 1;
             this.b_raport_pojazdy.Text = "Drukuj raport pojazdów";
             this.b_raport_pojazdy.UseVisualStyleBackColor = true;
+            this.b_raport_pojazdy.Click += new System.EventHandler(this.b_raport_pojazdy_Click);
             // 
             // b_raport_wycieczki
             // 
@@ -531,6 +521,7 @@
             this.b_raport_wycieczki.TabIndex = 0;
             this.b_raport_wycieczki.Text = "Drukuj raport wycieczek";
             this.b_raport_wycieczki.UseVisualStyleBackColor = true;
+            this.b_raport_wycieczki.Click += new System.EventHandler(this.b_raport_wycieczki_Click);
             // 
             // b_wyjdz
             // 
@@ -639,7 +630,6 @@
         public System.Windows.Forms.Button b_rozpatrz_pozytywnie;
         public System.Windows.Forms.RichTextBox rtb_opisReklamacji;
         public System.Windows.Forms.TextBox tb_okresTrwaniaWycieczki;
-        public System.Windows.Forms.Button button1;
         public System.Windows.Forms.TextBox tb_nazwa_wycieczki;
         public System.Windows.Forms.ColumnHeader skrot_skargi;
         public System.Windows.Forms.ColumnHeader stan_reklamacji;

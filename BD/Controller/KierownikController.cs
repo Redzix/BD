@@ -12,12 +12,23 @@ namespace BD.Controller
 {
     class KierownikController
     {
+        /// <summary>
+        /// Widok obsługiwan w danej instancji przez kontroler
+        /// </summary>
         object view;
+        /// <summary>
+        /// Konstruktor kontrolera
+        /// </summary>
+        /// <param name="view">Widok obsługiwany przez kontroler</param>
         public KierownikController(object view)
         {
             this.view = view;
         }
 
+        /// <summary>
+        /// Ładuje wszystkie wpisy katalogu do odpowiedniego listview. Ładuje tylko aktualne wyceiczki gdy checkbox nie jest aktywny na formatce.
+        /// </summary>
+        /// <returns>True, jeśli wszystko dobrze</returns>
         public bool LadujKatalog()
         {
             KierownikView kView = (KierownikView)view;
@@ -55,6 +66,10 @@ namespace BD.Controller
             }
             return true;
         }
+        /// <summary>
+        /// Dodaje katalog do bazy danych
+        /// </summary>
+        /// <returns>True jeśli się powiodło, false jeśli nie</returns>
         public bool DodajKatalog()
         {
             WycieczkaView wView = (WycieczkaView)view;
@@ -96,6 +111,10 @@ namespace BD.Controller
             }
             return true;
         }
+        /// <summary>
+        /// Metoda do wypełnienia wsyzstkich comboboxów
+        /// </summary>
+        /// <returns>True jeśli się powiodło</returns>
         public bool WypelnijKatalogBoxy()
         {
             WycieczkaView wView = (WycieczkaView)view;
@@ -152,6 +171,11 @@ namespace BD.Controller
             }
             return true;
         }
+        /// <summary>
+        /// Wypełnienie pól katalogu w celu jego edycji
+        /// </summary>
+        /// <param name="idKatalog">ID katalog edytowanego</param>
+        /// <returns>True jesli wypełnienie się uda</returns>
         public bool WypelnijKatalogDoEdycji(int idKatalog)
         {
             WycieczkaView wView = (WycieczkaView)view;
@@ -208,6 +232,11 @@ namespace BD.Controller
             }
             return true;
         }
+        /// <summary>
+        /// Metoda do edycji katalogu.
+        /// </summary>
+        /// <param name="idKatalog">ID katalogu edytowanego</param>
+        /// <returns>True jeśli modyfikacja się udała</returns>
         public bool EdytujKatalog(int idKatalog)
         {
             WycieczkaView wView = (WycieczkaView)view;
@@ -250,6 +279,11 @@ namespace BD.Controller
 
             return true;
         }
+        /// <summary>
+        /// Metoda do usuwania katalogu razem z "braćmi"
+        /// </summary>
+        /// <param name="idKatalog">ID katalogu do usunięcia</param>
+        /// <returns>True jeśli się powiodło usunięcie</returns>
         public bool UsunKatalog(int idKatalog) {
             try
             {
@@ -270,6 +304,10 @@ namespace BD.Controller
             return true;
         }
        
+        /// <summary>
+        /// Ładowanie reklamacji do listview w zależności od checkboxa na formie.
+        /// </summary>
+        /// <returns>True jeśli się powiodło</returns>
         public bool LadujReklamacje()
         {
             KierownikView kView = (KierownikView)view;
@@ -294,6 +332,11 @@ namespace BD.Controller
             }
             return true;
         }
+        /// <summary>
+        /// Metoda ladująca odpowiednie pola służące do rozpatrzenia rekalamcji
+        /// </summary>
+        /// <param name="idReklamacji">ID reklamacji do rozpatrzenia</param>
+        /// <returns>True jeśli się powiodła zmiana</returns>
         public bool WypelnijReklamacjeDoRozpatrzenia(int idReklamacji)
         {
             KierownikView kView = (KierownikView)view;
@@ -325,6 +368,13 @@ namespace BD.Controller
             }
             return true;
         }
+        /// <summary>
+        /// Metoda służaca do aktualizacji stanu reklamacji
+        /// </summary>
+        /// <param name="idReklamacji">ID reklamacji do rozpatrzenia</param>
+        /// <param name="stan">True jeśi pozytywnie</param>
+        /// <param name="peselKierownika">Pesel kierownika dokonującego rozpatrzenia</param>
+        /// <returns></returns>
         public bool RozpatrzReklamacje(int idReklamacji, bool stan, string peselKierownika)
         {
             try
@@ -345,7 +395,10 @@ namespace BD.Controller
             }
             return true;
         }
-
+        /// <summary>
+        /// Metoda służaca do ładowania wszystkich pojazdów do odpowiedniego listview
+        /// </summary>
+        /// <returns>True jeśli się powiodło</returns>
         public bool LadujPojazdy()
         {
             try
@@ -421,6 +474,12 @@ namespace BD.Controller
                 return -1;
             }
         }
+        /// <summary>
+        /// Metoda do zmiany stanu pojazdu
+        /// </summary>
+        /// <param name="pojazdRejestracja">Numer rejestracyjny pojazdu</param>
+        /// <param name="stan">True jeśli sprawny, false jesli niesprawny</param>
+        /// <returns>True jeśli się powiodła zmiana stanu</returns>
         public bool EdytujStanPojazdu(string pojazdRejestracja, bool stan)
         {
             try
@@ -439,6 +498,12 @@ namespace BD.Controller
             }
             return true;
         }
+        /// <summary>
+        /// Metoda zmieniająca wartość dostepności danego pojazdu
+        /// </summary>
+        /// <param name="pojazdRejestracja">Numer rejestracyjny pojazdu edytowanego</param>
+        /// <param name="dostepny">Dostępność pojazdu</param>
+        /// <returns>True jeśli się powiodła zmiana</returns>
         public bool EdytujDostepnoscPojazdu(string pojazdRejestracja, bool dostepny)
         {
             try
@@ -458,6 +523,11 @@ namespace BD.Controller
             }
             return true;
         }
+        /// <summary>
+        /// Metoda do usuwania pojazdu
+        /// </summary>
+        /// <param name="pojazdRejestracja">NUmer rejestracyjny pojazdu usuwanego</param>
+        /// <returns>Zwraca true jeśli się powiodło</returns>
         public bool UsunPojazd(string pojazdRejestracja)
         {
             try
@@ -476,10 +546,10 @@ namespace BD.Controller
         }
         
         /// <summary>
-        /// 
+        /// Metoda służąca do dodania promocji
         /// </summary>
-        /// <param name="idKatalog"></param>
-        /// <returns></returns>
+        /// <param name="idKatalog">ID katalogu do którego jest wycieczka na promocji</param>
+        /// <returns>True jeśli się uda</returns>
         public bool DodajPromocje(int idKatalog)
         {
             using (var db = new bazaEntities())
