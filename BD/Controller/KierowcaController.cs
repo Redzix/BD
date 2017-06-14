@@ -100,7 +100,6 @@ namespace BD.Controller
                         db.SaveChanges();
                         db.Dispose();
                         db = new bazaEntities();
-                        _view.lv_pojazdy.Items[_view.lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Awaria";
                         return 1;
                     }
                     catch (Exception exception)
@@ -126,7 +125,6 @@ namespace BD.Controller
                     try
                     {
                         db.SaveChanges();
-                        _view.lv_pojazdy.Items[_view.lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Sprawny";
                         return 2;
                     }
                     catch (Exception exception)
