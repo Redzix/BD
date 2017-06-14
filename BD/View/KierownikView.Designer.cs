@@ -81,6 +81,7 @@
             this.l_uzytkownik = new System.Windows.Forms.Label();
             this.l_polaczenie = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.tc_kierownik.SuspendLayout();
             this.tp_zarzadzaj_wycieczkami.SuspendLayout();
             this.tp_rozpatrz_reklamacje.SuspendLayout();
@@ -574,6 +575,10 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // helpProvider
+            // 
+            this.helpProvider.HelpNamespace = "C:\\Users\\karol\\Source\\Re\\BD\\BD\\Helper\\Kierownik.chm";
+            // 
             // KierownikView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -585,8 +590,11 @@
             this.Controls.Add(this.b_wyjdz);
             this.Controls.Add(this.tc_kierownik);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.HelpButton = true;
+            this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Index);
             this.MaximizeBox = false;
             this.Name = "KierownikView";
+            this.helpProvider.SetShowHelp(this, true);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kierownik";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kierownik_FormClosing);
@@ -656,5 +664,6 @@
         public System.Windows.Forms.TextBox tb_Reklamujacy;
         public System.Windows.Forms.CheckBox cBox_wycieczki;
         public System.Windows.Forms.CheckBox cBox_reklamacja;
+        private System.Windows.Forms.HelpProvider helpProvider;
     }
 }

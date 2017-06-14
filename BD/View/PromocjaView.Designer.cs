@@ -123,6 +123,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "PromocjaView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Promocja";
             this.ResumeLayout(false);
             this.PerformLayout();

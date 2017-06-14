@@ -40,6 +40,7 @@
             this.pojazd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.kierowca = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.SuspendLayout();
             // 
             // l_zalogowany_jako
@@ -127,6 +128,10 @@
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // helpProvider
+            // 
+            this.helpProvider.HelpNamespace = "C:\\Users\\karol\\Source\\Re\\BD\\BD\\Helper\\Klient.chm";
+            // 
             // PilotView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -138,7 +143,11 @@
             this.Controls.Add(this.b_wyjdz);
             this.Controls.Add(this.l_zalogowany_jako);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.HelpButton = true;
+            this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Index);
+            this.MaximizeBox = false;
             this.Name = "PilotView";
+            this.helpProvider.SetShowHelp(this, true);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Pilot";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Pilot_FormClosing);
@@ -160,5 +169,6 @@
         public System.Windows.Forms.ColumnHeader pojazd;
         public System.Windows.Forms.ColumnHeader kierowca;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.HelpProvider helpProvider;
     }
 }
