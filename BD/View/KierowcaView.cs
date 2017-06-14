@@ -28,6 +28,11 @@ namespace BD.View
         AktualizacjaController aktPojazdu;
 
         /// <summary>
+        /// Zmienna przechowuje numer aktualnie wybranego pojazdu
+        /// </summary>
+        private string numerRejestracyjny;
+
+        /// <summary>
         /// Główny bezparametrowy konstruktor okna
         /// </summary>
         public KierowcaView()
@@ -144,8 +149,6 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_kierowca_zapisz_Click(object sender, EventArgs e)
         {
-            string numerRejestracyjny = ((ListView)sender).SelectedItems[0].Tag.ToString();
-
             int zapisz = controller.ZapiszZmiany(numerRejestracyjny);
 
             switch(zapisz)
@@ -156,6 +159,7 @@ namespace BD.View
                     this.rb_awaria.Enabled = false;
                     this.rb_sprawny.Enabled = false;
                     this.b_kierowca_zapisz.Enabled = false;
+                    controller.PobierzPojazdy();
                     break;
                 case -1:
                     MessageBox.Show("Brak pojazdu o podanym numerze rejestracyjnym.", "Błędny numer rejestracyjny", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -166,6 +170,7 @@ namespace BD.View
                     this.rb_awaria.Enabled = false;
                     this.rb_sprawny.Enabled = false;
                     this.b_kierowca_zapisz.Enabled = false;
+                    controller.PobierzPojazdy();
                     break;
                 case -2:
                     MessageBox.Show("Brak pojazdu o podanym numerze rejestracyjnym.", "Błędny numer rejestracyjny", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -191,6 +196,7 @@ namespace BD.View
                 this.rb_awaria.Enabled = true;
                 this.rb_sprawny.Enabled = true;
                 this.b_kierowca_zapisz.Enabled = true;
+                numerRejestracyjny = ((ListView)sender).SelectedItems[0].Tag.ToString();
         }
 
         /// <summary>

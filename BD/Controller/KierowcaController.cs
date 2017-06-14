@@ -126,7 +126,6 @@ namespace BD.Controller
                     try
                     {
                         db.SaveChanges();
-                        _view.lv_pojazdy.Items[_view.lv_pojazdy.SelectedItems[0].Index].SubItems[4].Text = "Sprawny";
                         return 2;
                     }
                     catch (Exception exception)
