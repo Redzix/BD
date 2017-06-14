@@ -378,6 +378,7 @@ namespace BD.View
             this.promocja.Text = "Data powrotu";
             this.cenaCalkowita.Text = "Zaliczka";
             this.cenaCalkowita.Width = 70;
+            this.lv_klient.Columns.Remove(this.cenaDoZaplaty);
             this.lv_klient.Columns.Insert(5,this.cenaDoZaplaty);
             this.cenaDoZaplaty.Width = 110;
             this.tb_szukaj.Enabled = false;

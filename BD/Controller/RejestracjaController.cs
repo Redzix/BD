@@ -25,7 +25,7 @@ namespace BD.Controller
         /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
         public RejestracjaController(RejestracjaView view)
         {
-            _view = view;
+            _view = (RejestracjaView)view;
             db = new bazaEntities();
         }
 

@@ -32,7 +32,7 @@ namespace BD.Controller
         /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
         public ReklamacjaController(ReklamacjaView view)
         {
-            _view = view;
+            _view = (ReklamacjaView)view;
             db = new bazaEntities();
         }
 

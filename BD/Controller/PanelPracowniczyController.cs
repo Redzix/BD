@@ -25,7 +25,7 @@ namespace BD.Controller
         /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
         public PanelPracowniczyController(PanelPracowniczyView view)
         {
-            _view = view;
+            _view = (PanelPracowniczyView)view;
         }
 
         /// <summary>

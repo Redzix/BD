@@ -25,7 +25,7 @@ namespace BD.Controller
         /// <param name="view">Referencja do widoku, który controller ma obsługiwac</
         public RezygnacjaController(RezygnacjaView view)
         {
-            _view = view;
+            _view = (RezygnacjaView)view;
             db = new bazaEntities();
         }
 

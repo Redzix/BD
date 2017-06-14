@@ -26,7 +26,7 @@ namespace BD.Controller
         /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
         public PilotController(PilotView view)
         {
-            _view = view;
+            _view = (PilotView)view;
             db = new bazaEntities();
         }
 

@@ -27,7 +27,7 @@ namespace BD.Controller
         /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
         public KlientController(KlientView view)
         {
-            _view = view;
+            _view = (KlientView)view;
             db = new bazaEntities();
         }
 
