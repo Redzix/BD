@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tc_kierownik = new System.Windows.Forms.TabControl();
             this.tp_zarzadzaj_wycieczkami = new System.Windows.Forms.TabPage();
+            this.cBox_wycieczki = new System.Windows.Forms.CheckBox();
             this.b_promocja = new System.Windows.Forms.Button();
             this.lv_wycieczki = new System.Windows.Forms.ListView();
             this.Nazwa = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -43,6 +44,11 @@
             this.b_edytuj = new System.Windows.Forms.Button();
             this.b_dodaj_wycieczke = new System.Windows.Forms.Button();
             this.tp_rozpatrz_reklamacje = new System.Windows.Forms.TabPage();
+            this.cBox_reklamacja = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tb_Rozstrzygajacy = new System.Windows.Forms.TextBox();
+            this.tb_Reklamujacy = new System.Windows.Forms.TextBox();
             this.tb_nazwa_wycieczki = new System.Windows.Forms.TextBox();
             this.tb_okresTrwaniaWycieczki = new System.Windows.Forms.TextBox();
             this.rtb_opisReklamacji = new System.Windows.Forms.RichTextBox();
@@ -75,12 +81,6 @@
             this.l_uzytkownik = new System.Windows.Forms.Label();
             this.l_polaczenie = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.tb_Reklamujacy = new System.Windows.Forms.TextBox();
-            this.tb_Rozstrzygajacy = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cBox_reklamacja = new System.Windows.Forms.CheckBox();
-            this.cBox_wycieczki = new System.Windows.Forms.CheckBox();
             this.tc_kierownik.SuspendLayout();
             this.tp_zarzadzaj_wycieczkami.SuspendLayout();
             this.tp_rozpatrz_reklamacje.SuspendLayout();
@@ -116,6 +116,17 @@
             this.tp_zarzadzaj_wycieczkami.TabIndex = 0;
             this.tp_zarzadzaj_wycieczkami.Text = "Zarządzaj wycieczkami";
             this.tp_zarzadzaj_wycieczkami.UseVisualStyleBackColor = true;
+            // 
+            // cBox_wycieczki
+            // 
+            this.cBox_wycieczki.AutoSize = true;
+            this.cBox_wycieczki.Location = new System.Drawing.Point(627, 7);
+            this.cBox_wycieczki.Name = "cBox_wycieczki";
+            this.cBox_wycieczki.Size = new System.Drawing.Size(101, 17);
+            this.cBox_wycieczki.TabIndex = 6;
+            this.cBox_wycieczki.Text = "Ładuj wszystkie";
+            this.cBox_wycieczki.UseVisualStyleBackColor = true;
+            this.cBox_wycieczki.CheckedChanged += new System.EventHandler(this.cBox_wycieczki_CheckedChanged);
             // 
             // b_promocja
             // 
@@ -231,6 +242,51 @@
             this.tp_rozpatrz_reklamacje.TabIndex = 1;
             this.tp_rozpatrz_reklamacje.Text = "Rozpatrz reklamacje";
             this.tp_rozpatrz_reklamacje.UseVisualStyleBackColor = true;
+            // 
+            // cBox_reklamacja
+            // 
+            this.cBox_reklamacja.AutoSize = true;
+            this.cBox_reklamacja.Location = new System.Drawing.Point(9, 329);
+            this.cBox_reklamacja.Name = "cBox_reklamacja";
+            this.cBox_reklamacja.Size = new System.Drawing.Size(116, 17);
+            this.cBox_reklamacja.TabIndex = 20;
+            this.cBox_reklamacja.Text = "Wyświetl wszystkie";
+            this.cBox_reklamacja.UseVisualStyleBackColor = true;
+            this.cBox_reklamacja.CheckedChanged += new System.EventHandler(this.cBox_reklamacja_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(300, 87);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Rozpratrujący";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(300, 61);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Osoba reklamująca";
+            // 
+            // tb_Rozstrzygajacy
+            // 
+            this.tb_Rozstrzygajacy.Enabled = false;
+            this.tb_Rozstrzygajacy.Location = new System.Drawing.Point(409, 84);
+            this.tb_Rozstrzygajacy.Name = "tb_Rozstrzygajacy";
+            this.tb_Rozstrzygajacy.Size = new System.Drawing.Size(162, 20);
+            this.tb_Rozstrzygajacy.TabIndex = 17;
+            // 
+            // tb_Reklamujacy
+            // 
+            this.tb_Reklamujacy.Enabled = false;
+            this.tb_Reklamujacy.Location = new System.Drawing.Point(409, 58);
+            this.tb_Reklamujacy.Name = "tb_Reklamujacy";
+            this.tb_Reklamujacy.Size = new System.Drawing.Size(162, 20);
+            this.tb_Reklamujacy.TabIndex = 16;
             // 
             // tb_nazwa_wycieczki
             // 
@@ -517,62 +573,6 @@
             // 
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // tb_Reklamujacy
-            // 
-            this.tb_Reklamujacy.Enabled = false;
-            this.tb_Reklamujacy.Location = new System.Drawing.Point(409, 58);
-            this.tb_Reklamujacy.Name = "tb_Reklamujacy";
-            this.tb_Reklamujacy.Size = new System.Drawing.Size(162, 20);
-            this.tb_Reklamujacy.TabIndex = 16;
-            // 
-            // tb_Rozstrzygajacy
-            // 
-            this.tb_Rozstrzygajacy.Enabled = false;
-            this.tb_Rozstrzygajacy.Location = new System.Drawing.Point(409, 84);
-            this.tb_Rozstrzygajacy.Name = "tb_Rozstrzygajacy";
-            this.tb_Rozstrzygajacy.Size = new System.Drawing.Size(162, 20);
-            this.tb_Rozstrzygajacy.TabIndex = 17;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(300, 61);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Osoba reklamująca";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(300, 91);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 13);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "Osoba reklamująca";
-            // 
-            // cBox_reklamacja
-            // 
-            this.cBox_reklamacja.AutoSize = true;
-            this.cBox_reklamacja.Location = new System.Drawing.Point(9, 329);
-            this.cBox_reklamacja.Name = "cBox_reklamacja";
-            this.cBox_reklamacja.Size = new System.Drawing.Size(116, 17);
-            this.cBox_reklamacja.TabIndex = 20;
-            this.cBox_reklamacja.Text = "Wyświetl wszystkie";
-            this.cBox_reklamacja.UseVisualStyleBackColor = true;
-            this.cBox_reklamacja.CheckedChanged += new System.EventHandler(this.cBox_reklamacja_CheckedChanged);
-            // 
-            // cBox_wycieczki
-            // 
-            this.cBox_wycieczki.AutoSize = true;
-            this.cBox_wycieczki.Location = new System.Drawing.Point(627, 7);
-            this.cBox_wycieczki.Name = "cBox_wycieczki";
-            this.cBox_wycieczki.Size = new System.Drawing.Size(101, 17);
-            this.cBox_wycieczki.TabIndex = 6;
-            this.cBox_wycieczki.Text = "Ładuj wszystkie";
-            this.cBox_wycieczki.UseVisualStyleBackColor = true;
-            this.cBox_wycieczki.CheckedChanged += new System.EventHandler(this.cBox_wycieczki_CheckedChanged);
             // 
             // KierownikView
             // 

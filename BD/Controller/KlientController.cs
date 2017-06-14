@@ -40,6 +40,7 @@ namespace BD.Controller
             _view.lv_klient.Items.Clear();
 
             var query = from katalog in db.Katalog
+                        where DateTime.Now < katalog.Wycieczka.data_wyjazdu
                         select new
                         {
                             wycieczkaId = katalog.id_wycieczki,
@@ -61,12 +62,6 @@ namespace BD.Controller
                 {
                     ListViewItem klient = new ListViewItem(kli.wycieczka.nazwa);
                     klient.Tag = kli.wycieczkaId;
-
-                    if (kli.wycieczka.WycieczkaOdbyta(DateTime.Now))
-                        klient.BackColor = Color.LightCoral;
-                    else if (kli.wycieczka.WycieczkaWTrakcie(DateTime.Now))
-                        klient.BackColor = Color.LightGreen;
-
                     klient.SubItems.Add(kli.okresTrwaniaWycieczki.ToString());
                     klient.SubItems.Add(kli.dataOdjazdu.ToString());
                     klient.SubItems.Add(kli.wartoscPromocji.ToString());

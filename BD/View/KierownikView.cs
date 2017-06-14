@@ -19,7 +19,7 @@ namespace BD.View
         /// <summary>
         /// Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
         /// </summary>
-        private string _uzytkownik;
+        private Kierownik _uzytkownik;
 
         /// <summary>
         /// Obiekt przechowujący kontroler.
@@ -64,13 +64,13 @@ namespace BD.View
         /// oraz tworzący połączenie z bazą danych.
         /// </summary>
         /// <param name="uzytkownik">Nazwa użytkownika</param>
-        public KierownikView(string uzytkownik)
+        public KierownikView(Kierownik uzytkownik)
         {
             InitializeComponent();
             controller = new KierownikController(this);
             controller.LadujKatalog();
             _uzytkownik = uzytkownik;
-            l_uzytkownik.Text = uzytkownik;
+            l_uzytkownik.Text = _uzytkownik.DaneOsobowe();
             l_polaczenie.Text = "Połączono";
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
 
@@ -176,73 +176,86 @@ namespace BD.View
         private void b_usun_pojazd_Click(object sender, EventArgs e)
         {
             //Pobranie wybranego numeru rejestracyjnego z listview
-            string numerRejestracyjny = (string)lv_pojazdy.SelectedItems[0].Tag;
+            try
+            {
+                string numerRejestracyjny = (string)lv_pojazdy.SelectedItems[0].Tag;
 
-            if(controller.UsunPojazd(numerRejestracyjny))
-            {
-                MessageBox.Show("Pojazd usunięto poprawnie.", "Usunięcie pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (controller.UsunPojazd(numerRejestracyjny))
+                {
+                    MessageBox.Show("Pojazd usunięto poprawnie.", "Usunięcie pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    controller.LadujPojazdy();
+                }
+                else
+                {
+                    MessageBox.Show("Napotkano problem podczas usuwania pojazdu", "Usunięcie pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("Napotkano problem podczas usuwania pojazdu", "Usunięcie pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Należy najpierw wybrać pojazd w celu jego usunięcia", "Usunięcie pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            controller.LadujPojazdy();
         }
 
         private void b_edytuj_pojazd_Click(object sender, EventArgs e)
         {
             //Pobranie wybranego numeru rejestracyjnego z listview
-            string numerRejestracyjny = (string)lv_pojazdy.SelectedItems[0].Tag;
-
-            DialogResult dialog = MessageBox.Show("Jesli chcesz ustawić dostępność pojazdu na 'Dostepny', kliknij 'Tak', w przeciwnym razie kliknij 'Nie'.", "Zmiana dostępnosci", MessageBoxButtons.YesNoCancel);
-
-            switch (dialog)
+            try
             {
-                case DialogResult.Yes:
-                    if (controller.EdytujDostepnoscPojazdu(numerRejestracyjny, true))
-                        MessageBox.Show("Poprawnie zmieniono dostępność pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    else
-                        MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
-                case DialogResult.No:
-                    if (controller.EdytujDostepnoscPojazdu(numerRejestracyjny, false))
-                        MessageBox.Show("Poprawnie zmieniono dostępność pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    else
-                        MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
-                case DialogResult.Cancel:
-                    MessageBox.Show("Nie zmieniono dostepnośći w pojeździe o numerze rejestracyjnym: " + numerRejestracyjny, "Brak zmian", MessageBoxButtons.OK);
-                    break;
-            }
+                string numerRejestracyjny = (string)lv_pojazdy.SelectedItems[0].Tag;
 
-            dialog = MessageBox.Show("Jesli chcesz ustawić stan pojazdu na 'Sprawny', kliknij 'Tak', w przeciwnym razie kliknij 'Nie'.", "Zmiana stanu", MessageBoxButtons.YesNoCancel);
-            switch (dialog)
+                DialogResult dialog = MessageBox.Show("Jesli chcesz ustawić dostępność pojazdu na 'Dostepny', kliknij 'Tak', w przeciwnym razie kliknij 'Nie'.", "Zmiana dostępnosci", MessageBoxButtons.YesNoCancel);
+
+                switch (dialog)
+                {
+                    case DialogResult.Yes:
+                        if (controller.EdytujDostepnoscPojazdu(numerRejestracyjny, true))
+                            MessageBox.Show("Poprawnie zmieniono dostępność pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else
+                            MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case DialogResult.No:
+                        if (controller.EdytujDostepnoscPojazdu(numerRejestracyjny, false))
+                            MessageBox.Show("Poprawnie zmieniono dostępność pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else
+                            MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case DialogResult.Cancel:
+                        MessageBox.Show("Nie zmieniono dostepnośći w pojeździe o numerze rejestracyjnym: " + numerRejestracyjny, "Brak zmian", MessageBoxButtons.OK);
+                        break;
+                }
+
+                dialog = MessageBox.Show("Jesli chcesz ustawić stan pojazdu na 'Sprawny', kliknij 'Tak', w przeciwnym razie kliknij 'Nie'.", "Zmiana stanu", MessageBoxButtons.YesNoCancel);
+                switch (dialog)
+                {
+                    case DialogResult.Yes:
+                        if (controller.EdytujStanPojazdu(numerRejestracyjny, true))
+                        {
+                            MessageBox.Show("Poprawnie zmieniono stan pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        break;
+                    case DialogResult.No:
+                        if (controller.EdytujStanPojazdu(numerRejestracyjny, false))
+                        {
+                            MessageBox.Show("Poprawnie zmieniono stan pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        break;
+                    case DialogResult.Cancel:
+                        MessageBox.Show("Nie zmieniono stanu w pojeździe o numerze rejestracyjnym: " + numerRejestracyjny, "Brak zmian", MessageBoxButtons.OK);
+                        break;
+                }
+                controller.LadujPojazdy();
+            } catch
             {
-                case DialogResult.Yes:
-                    if (controller.EdytujStanPojazdu(numerRejestracyjny, true))
-                    {
-                        MessageBox.Show("Poprawnie zmieniono stan pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    break;
-                case DialogResult.No:
-                    if (controller.EdytujStanPojazdu(numerRejestracyjny, false))
-                    {
-                        MessageBox.Show("Poprawnie zmieniono stan pojazdu o numerze rejestracyjnym " + numerRejestracyjny, "Zmiana dostępności pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Napotkano błąd podczas zmiany dostępności pojazdu.", "Błąd podczas zmiany.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    break;
-                case DialogResult.Cancel:
-                    MessageBox.Show("Nie zmieniono stanu w pojeździe o numerze rejestracyjnym: " + numerRejestracyjny, "Brak zmian", MessageBoxButtons.OK);
-                    break;
+                MessageBox.Show("Najpierw należy wybrać pojazd do edycji", "Brak zmian", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            controller.LadujPojazdy();
         }
 
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
@@ -263,7 +276,7 @@ namespace BD.View
             try
             {
                 var idReklamacji = (int)lv_reklamacje.SelectedItems[0].Tag;
-                if (controller.RozpatrzReklamacje(idReklamacji, true, _uzytkownik))
+                if (controller.RozpatrzReklamacje(idReklamacji, true, _uzytkownik.pesel))
                 {
                     MessageBox.Show("Reklamacja została rozpatrzona pozytywnie.", "Rozpatrzenie reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -284,9 +297,10 @@ namespace BD.View
             try
             {
                 var idReklamacji = (int)lv_reklamacje.SelectedItems[0].Tag;
-                if (controller.RozpatrzReklamacje(idReklamacji, false, _uzytkownik))
+                if (controller.RozpatrzReklamacje(idReklamacji, false, _uzytkownik.pesel))
                 {
                     MessageBox.Show("Reklamacja została rozpatrzona negatywnie.", "Rozpatrzenie reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    controller.LadujReklamacje();
                 }
                 else
                 {
@@ -297,7 +311,7 @@ namespace BD.View
             {
                 MessageBox.Show("Należy najpierw wybrać zgłoszoną reklamację", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            controller.LadujReklamacje();
+            
         }
 
         private void b_edytuj_Click(object sender, EventArgs e)
@@ -316,7 +330,7 @@ namespace BD.View
 
         private void b_usun_wycieczke_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz usunąc wycieczke o indeksie: " + (lv_wycieczki.SelectedItems[0].Index + 1).ToString() + " ?","Usunięcie wycieczki.",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz usunąć wycieczkę?","Usunięcie wycieczki.",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
             if(dialogResult == DialogResult.Yes)
             {
                 try
@@ -334,7 +348,7 @@ namespace BD.View
                     }
                 } catch
                 {
-                    MessageBox.Show("Wystąpił błąd podczas usuwania wycieczki.", "Błąd usuwania wycieczki.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Najpierw to należy wybrać wycieczkę.", "Błąd usuwania wycieczki.", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else

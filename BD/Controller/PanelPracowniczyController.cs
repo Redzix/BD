@@ -53,7 +53,7 @@ namespace BD.Controller
                         if (pobierz.stopien.Equals("kierownik"))
                         {
                             _view.Hide();
-                            KierownikView kierownik = new KierownikView(pobierz.Kierownik_pesel);
+                            KierownikView kierownik = new KierownikView(pobierz.Kierownik);
                             kierownik.Closed += (s, args) => _view.Close();
                             kierownik.ShowDialog();
 
