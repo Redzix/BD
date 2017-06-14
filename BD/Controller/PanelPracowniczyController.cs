@@ -41,7 +41,7 @@ namespace BD.Controller
             try
             {
                 var pobierz = (from panel in db.Panel_pracowniczy
-                               where panel.login.Equals(login) && panel.login.Equals(haslo)
+                               where panel.login.Equals(login) && panel.haslo.Equals(haslo)
                                select panel).FirstOrDefault();
 
                 if (pobierz == null)

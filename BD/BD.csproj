@@ -85,7 +85,6 @@
     <Compile Include="Controller\OpiniaController.cs" />
     <Compile Include="Controller\PanelPracowniczyController.cs" />
     <Compile Include="Controller\PilotController.cs" />
-    <Compile Include="Controller\PojazdController.cs" />
     <Compile Include="Controller\RejestracjaController.cs" />
     <Compile Include="Controller\ReklamacjaController.cs" />
     <Compile Include="Controller\RezerwacjaController.cs" />
@@ -101,7 +100,6 @@
     <Compile Include="Kierownik.cs">
       <DependentUpon>BazaEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Kierownik_model.cs" />
     <Compile Include="Klient.cs">
       <DependentUpon>BazaEntity.tt</DependentUpon>
     </Compile>

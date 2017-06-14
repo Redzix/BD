@@ -64,6 +64,7 @@
             // 
             // tb_imie
             // 
+            this.tb_imie.Enabled = false;
             this.tb_imie.Location = new System.Drawing.Point(107, 52);
             this.tb_imie.Name = "tb_imie";
             this.tb_imie.Size = new System.Drawing.Size(100, 20);
@@ -71,6 +72,7 @@
             // 
             // tb_nazwisko
             // 
+            this.tb_nazwisko.Enabled = false;
             this.tb_nazwisko.Location = new System.Drawing.Point(107, 78);
             this.tb_nazwisko.Name = "tb_nazwisko";
             this.tb_nazwisko.Size = new System.Drawing.Size(100, 20);

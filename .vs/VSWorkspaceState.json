@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BD"
+    "\\BD",
+    "\\BD\\Controller"
   ],
+  "SelectedNode": "\\BD\\Controller\\Aktualizacja.cs",
   "PreviewInSolutionExplorer": false
 }

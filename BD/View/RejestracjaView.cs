@@ -77,7 +77,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zarejestruj_Click(object sender, EventArgs e)
         {
-            if(controller.SprawdzCzyIstnieje(this.tb_pesel.Text))
+            if(controller.SprawdzCzyPeselIstnieje(this.tb_pesel.Text))
             {//istnieje
                 MessageBox.Show("Użytkownik o podanym peselu już istnieje.", "Użytkownik istnieje.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

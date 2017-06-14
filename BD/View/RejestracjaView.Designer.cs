@@ -225,7 +225,7 @@
             this.MaximizeBox = false;
             this.Name = "RejestracjaView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Rejestracja";
+            this.Text = "Rejestracja klienta";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RejestracjaView_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

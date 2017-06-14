@@ -35,7 +35,7 @@ namespace BD.Controller
         /// <param name="login">Nazwa użytkownika pobrana z widoku</param>
         /// <param name="haslo">Hasło użytkownika pobrane z widoku.</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public bool SprawdzCzyIstnieje(string pesel)
+        public bool SprawdzCzyPeselIstnieje(string pesel)
         {
             var szukaj = (from klient in db.Klient
                           where klient.pesel.Equals(pesel)
