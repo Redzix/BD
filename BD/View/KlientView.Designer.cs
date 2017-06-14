@@ -51,12 +51,14 @@
             this.l_szukaj = new System.Windows.Forms.Label();
             this.b_szukaj = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wyświetlMojeRezerwacjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtb_wycieczka
             // 
-            this.rtb_wycieczka.Location = new System.Drawing.Point(613, 39);
+            this.rtb_wycieczka.Location = new System.Drawing.Point(613, 27);
             this.rtb_wycieczka.Name = "rtb_wycieczka";
             this.rtb_wycieczka.Size = new System.Drawing.Size(330, 232);
             this.rtb_wycieczka.TabIndex = 1;
@@ -65,7 +67,7 @@
             // b_katalog_rezerwuj
             // 
             this.b_katalog_rezerwuj.Enabled = false;
-            this.b_katalog_rezerwuj.Location = new System.Drawing.Point(868, 277);
+            this.b_katalog_rezerwuj.Location = new System.Drawing.Point(868, 263);
             this.b_katalog_rezerwuj.Name = "b_katalog_rezerwuj";
             this.b_katalog_rezerwuj.Size = new System.Drawing.Size(75, 23);
             this.b_katalog_rezerwuj.TabIndex = 2;
@@ -75,7 +77,7 @@
             // 
             // b_katalog_wyjdz
             // 
-            this.b_katalog_wyjdz.Location = new System.Drawing.Point(868, 335);
+            this.b_katalog_wyjdz.Location = new System.Drawing.Point(868, 343);
             this.b_katalog_wyjdz.Name = "b_katalog_wyjdz";
             this.b_katalog_wyjdz.Size = new System.Drawing.Size(75, 23);
             this.b_katalog_wyjdz.TabIndex = 3;
@@ -88,7 +90,9 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.wystawOpinięToolStripMenuItem,
             this.reklamujWycieczkęToolStripMenuItem,
-            this.rezygnacjaZWycieczkiToolStripMenuItem});
+            this.rezygnacjaZWycieczkiToolStripMenuItem,
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem,
+            this.wyświetlMojeRezerwacjeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(955, 24);
@@ -127,7 +131,7 @@
             // 
             // b_zaplac
             // 
-            this.b_zaplac.Location = new System.Drawing.Point(776, 277);
+            this.b_zaplac.Location = new System.Drawing.Point(776, 263);
             this.b_zaplac.Name = "b_zaplac";
             this.b_zaplac.Size = new System.Drawing.Size(75, 23);
             this.b_zaplac.TabIndex = 11;
@@ -198,7 +202,7 @@
             // 
             // tb_szukaj
             // 
-            this.tb_szukaj.Location = new System.Drawing.Point(613, 297);
+            this.tb_szukaj.Location = new System.Drawing.Point(613, 283);
             this.tb_szukaj.Name = "tb_szukaj";
             this.tb_szukaj.Size = new System.Drawing.Size(110, 20);
             this.tb_szukaj.TabIndex = 15;
@@ -212,7 +216,7 @@
             // l_szukaj
             // 
             this.l_szukaj.AutoSize = true;
-            this.l_szukaj.Location = new System.Drawing.Point(610, 281);
+            this.l_szukaj.Location = new System.Drawing.Point(610, 267);
             this.l_szukaj.Name = "l_szukaj";
             this.l_szukaj.Size = new System.Drawing.Size(103, 13);
             this.l_szukaj.TabIndex = 17;
@@ -221,7 +225,7 @@
             // b_szukaj
             // 
             this.b_szukaj.Enabled = false;
-            this.b_szukaj.Location = new System.Drawing.Point(613, 323);
+            this.b_szukaj.Location = new System.Drawing.Point(613, 309);
             this.b_szukaj.Name = "b_szukaj";
             this.b_szukaj.Size = new System.Drawing.Size(75, 23);
             this.b_szukaj.TabIndex = 18;
@@ -231,8 +235,22 @@
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // wyświetlWszystkieWycieczkiToolStripMenuItem
+            // 
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Name = "wyświetlWszystkieWycieczkiToolStripMenuItem";
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Text = "Wyświetl wszystkie wycieczki";
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Click += new System.EventHandler(this.wyświetlWszystkieWycieczkiToolStripMenuItem_Click);
+            // 
+            // wyświetlMojeRezerwacjeToolStripMenuItem
+            // 
+            this.wyświetlMojeRezerwacjeToolStripMenuItem.Name = "wyświetlMojeRezerwacjeToolStripMenuItem";
+            this.wyświetlMojeRezerwacjeToolStripMenuItem.Size = new System.Drawing.Size(154, 20);
+            this.wyświetlMojeRezerwacjeToolStripMenuItem.Text = "Wyświetl moje rezerwacje";
+            this.wyświetlMojeRezerwacjeToolStripMenuItem.Click += new System.EventHandler(this.wyświetlMojeRezerwacjeToolStripMenuItem_Click);
             // 
             // KlientView
             // 
@@ -289,6 +307,8 @@
         private System.Windows.Forms.Label l_szukaj;
         private System.Windows.Forms.Button b_szukaj;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem wyświetlWszystkieWycieczkiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wyświetlMojeRezerwacjeToolStripMenuItem;
     }
 }
 

@@ -32,6 +32,11 @@ namespace BD.View
         /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
         /// </summary>
         AktualizacjaController aktKlienta;
+
+        /// <summary>
+        /// Zmienna przechowująca aktualnie numer wybranego listview
+        /// </summary>
+        private int indeksListview= 0;
      
 
         /// <summary>
@@ -290,7 +295,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (aktKlienta.czyBylaAktualizacja())
+            if (aktKlienta.czyBylaAktualizacja() && (indeksListview == 0))
             {
                 controller.PobierzWycieczki();
             }
@@ -298,6 +303,46 @@ namespace BD.View
             {
                 return;
             }
+        }
+        
+        /// <summary>
+        /// Metoda odpowiadająca za pobranie i wyświetlenie wszystkich wycieczek oraz dodanie ich do listview
+        /// </summary>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void wyświetlWszystkieWycieczkiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            this.nazwaWycieczki.Text = "Nazwa wycieczki";
+            this.okresTrwania.Text = "Długość wycieczki";
+            this.promocja.Text = "Promocja";
+            this.cenaCalkowita.Text = "Cena całkowita";
+            this.lv_klient.Enabled = true;
+            this.tb_szukaj.Enabled = true;
+
+            indeksListview = 0;
+
+            controller.PobierzWycieczki();
+        }
+
+        /// <summary>
+        /// Metoda odpowiadająca za pobranie i wyświetlenie wszystkich rezerwacji oraz dodanie ich do listview
+        /// </summary>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void wyświetlMojeRezerwacjeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.nazwaWycieczki.Text = "Numer rezerwacji";
+            this.okresTrwania.Text = "Nazwa wycieczki";
+            this.promocja.Text = "Data powrotu";
+            this.cenaCalkowita.Text = "Zaliczka";
+            this.lv_klient.Enabled = false;
+            this.tb_szukaj.Enabled = false;
+            this.b_szukaj.Enabled = false;
+
+            indeksListview = 1;
+
+            controller.PobierzRezerwacje(_uzytkownik);
         }
     }
 }

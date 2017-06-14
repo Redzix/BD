@@ -108,17 +108,19 @@ namespace BD.View
         {
             int zapisz = controller.DodajRezerwacje(_idWycieczki,_uzytkownik);
 
+            
+
             switch (zapisz)
             {
-                case 1:
-                   MessageBox.Show("Dodano nową rezerwację .", "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                   this.Dispose();
-                   break;
                 case -1:
                     MessageBox.Show("Napotkano problem podczas dodawania nowej rezerwacji. Błąd konwersji.Upewnij się, ze wprowadziłeś poprawne dane.", "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
                 case 0:
                     MessageBox.Show("Napotkano problem podczas dodawania nowej rezerwacji. Błąd z zapisu do bazym danych.",  "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                default:
+                    MessageBox.Show("Dodano nową rezerwację o numerze: " + zapisz.ToString() + ".", "Dodawanie rezerwacji", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Dispose();
                     break;
             }        
         }

@@ -91,7 +91,8 @@ namespace BD.Controller
                                  dataPowrotu = katalog.Wycieczka.data_wyjazdu,
                                  opisWycieczki = katalog.Wycieczka.opis,
                                  miejsceDoceloweAdres = katalog.Miejsce1.adres,
-                                 miejsceDoceloweMiejscowosc = katalog.Miejsce1.miejscowosc
+                                 miejsceDoceloweMiejscowosc = katalog.Miejsce1.miejscowosc,
+                                 cena = katalog.cena
                              }).FirstOrDefault();
 
                 if (pobierz == null)
@@ -103,6 +104,7 @@ namespace BD.Controller
                     // Dodanie wartości parametrów do opisu znajdującego się w texboxie
                     _view.rtb_wycieczka.Text =
                         "Nazwa: " + pobierz.wycieczka +
+                        "\nCena: " + pobierz.cena +
                         "\nData wyjazdu: " + pobierz.dataOdjazdu +
                         "\nData powrotu: " + pobierz.dataPowrotu +
                         "\nOpis: " + pobierz.opisWycieczki +
@@ -159,6 +161,45 @@ namespace BD.Controller
                     klient.SubItems.Add(kli.wartoscPromocji.ToString());
                     klient.SubItems.Add(kli.cenaCalkowita.ToString());
                     _view.lv_klient.Items.Add(klient);
+                }
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Metoda pobierająca rezerwacje aktualnego użytkownika dodająca je do aktualnego widoku.
+        /// </summary>
+        /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        public bool PobierzRezerwacje(string pesel)
+        {
+            _view.lv_klient.Items.Clear();
+
+            var query = from rezerwacja in db.Rezerwacja
+                        where rezerwacja.Klient_pesel.Equals(pesel)
+                        select new
+                        {
+                            numer_rezerwacji = rezerwacja.numer_rezerwacji,
+                            nazwa = rezerwacja.Wycieczka.nazwa,
+                            dataWyjazdu = rezerwacja.Wycieczka.data_wyjazdu,
+                            dataPowrotu = rezerwacja.Wycieczka.data_powrotu,
+                            zaliczka = rezerwacja.zaliczka
+                        };
+
+            if (query == null)
+            {
+                _view.lv_klient.Items.Add("Rezerwacji");
+                return false;
+            }
+            else
+            {
+                foreach (var rez in query)
+                {
+                    ListViewItem rezerwacja = new ListViewItem(rez.numer_rezerwacji.ToString());
+                    rezerwacja.SubItems.Add(rez.nazwa);
+                    rezerwacja.SubItems.Add(rez.dataWyjazdu.ToString());
+                    rezerwacja.SubItems.Add(rez.dataPowrotu.ToString());
+                    rezerwacja.SubItems.Add(rez.zaliczka.ToString());
+                    _view.lv_klient.Items.Add(rezerwacja);
                 }
                 return true;
             }

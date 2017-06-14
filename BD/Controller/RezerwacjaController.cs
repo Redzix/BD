@@ -199,8 +199,8 @@ namespace BD.Controller
                 db.SaveChanges();
                 db.Dispose();
                 db = new bazaEntities();
-
-                return 1;
+                  
+                return nowaRezerwacja.numer_rezerwacji;
             }
             catch (FormatException exception)
             {
@@ -231,5 +231,6 @@ namespace BD.Controller
 
             return klient;
         }
+
     }
 }
