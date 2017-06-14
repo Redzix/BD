@@ -106,7 +106,7 @@ namespace BD.View
             {
                 case 1:
                     MessageBox.Show("Prawidłowo dodano reklamację.", "Dodano reklamację.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Dispose();
+                    this.b_zapisz.Enabled = false;
                     break;
                 case 0:
                     MessageBox.Show("Wprowadzono nieprawidłowy numer rezerwacji. Błedny format.", "Błąd podczas dodawania reklamacji", MessageBoxButtons.OK, MessageBoxIcon.Error);

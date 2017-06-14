@@ -54,12 +54,13 @@ namespace BD.View
 
             aktKlienta = new AktualizacjaController("wycieczka");
 
+            this.lv_klient.Columns.Remove(this.cenaDoZaplaty);
+
             timer1.Start();
         }
 
         /// <summary>
         /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu 
-        /// oraz tworzący połączenie z bazą danych.
         /// </summary>
         /// <param name="uzytkownik">Nazwa użytkownika</param>
         public KlientView(string uzytkownik)
@@ -74,6 +75,8 @@ namespace BD.View
             controller = new KlientController(this);
 
             aktKlienta = new AktualizacjaController("wycieczka promocja katalog");
+
+            this.lv_klient.Columns.Remove(this.cenaDoZaplaty);
 
             timer1.Start();
 
@@ -198,7 +201,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zaplac_Click(object sender, EventArgs e)
         {
-            RezerwacjaView rezerwacja = new RezerwacjaView();
+            RezerwacjaView rezerwacja = new RezerwacjaView(_uzytkownik);
             rezerwacja.ShowDialog();
         }
 
@@ -314,9 +317,13 @@ namespace BD.View
         {
             
             this.nazwaWycieczki.Text = "Nazwa wycieczki";
+            this.nazwaWycieczki.Width = 110;
             this.okresTrwania.Text = "Długość wycieczki";
+            this.dataWyjazdu.Text = "Data wyjazdu";
             this.promocja.Text = "Promocja";
             this.cenaCalkowita.Text = "Cena całkowita";
+            this.cenaCalkowita.Width = 110;
+            this.lv_klient.Columns.Remove(this.cenaDoZaplaty);
             this.lv_klient.Enabled = true;
             this.tb_szukaj.Enabled = true;
 
@@ -332,17 +339,37 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void wyświetlMojeRezerwacjeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.nazwaWycieczki.Text = "Numer rezerwacji";
+            this.nazwaWycieczki.Text = "Numer";
+            this.nazwaWycieczki.Width = 60;
             this.okresTrwania.Text = "Nazwa wycieczki";
+            this.dataWyjazdu.Text = "Data wyjazdu";
             this.promocja.Text = "Data powrotu";
             this.cenaCalkowita.Text = "Zaliczka";
+            this.cenaCalkowita.Width = 70;
+            this.lv_klient.Columns.Insert(5,this.cenaDoZaplaty);
+            this.cenaDoZaplaty.Width = 110;
             this.lv_klient.Enabled = false;
             this.tb_szukaj.Enabled = false;
             this.b_szukaj.Enabled = false;
 
             indeksListview = 1;
 
-            controller.PobierzRezerwacje(_uzytkownik);
+            int pobierz = controller.PobierzRezerwacje(_uzytkownik);
+
+            switch (pobierz)
+            {
+                case -2:
+                    this.b_zaplac.Enabled = false;
+                    break;
+                case -0:
+                    MessageBox.Show("Wszystkie rezerwacje zostały zapłacone.", "Niezapłacone rezerwacje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.b_zaplac.Enabled = false;
+                    break;
+                default:
+                    MessageBox.Show("Do zapłaty pozostało: " + pobierz.ToString() + " rezerwacji.","Niezapłacone rezerwacje",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    this.b_zaplac.Enabled = true;
+                    break;
+            }
         }
     }
 }

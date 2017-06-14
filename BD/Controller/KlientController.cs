@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BD.View;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace BD.Controller
 {
@@ -42,7 +43,7 @@ namespace BD.Controller
                         select new
                         {
                             wycieczkaId = katalog.id_wycieczki,
-                            wycieczka = katalog.Wycieczka.nazwa,
+                            wycieczka = katalog.Wycieczka,
                             okresTrwaniaWycieczki = katalog.okres_trwania_wycieczki,
                             dataOdjazdu = katalog.Wycieczka.data_wyjazdu,
                             wartoscPromocji = (katalog.Wycieczka.Promocja.cena != null) ? katalog.Wycieczka.Promocja.cena : 0,
@@ -58,8 +59,14 @@ namespace BD.Controller
             {
                 foreach (var kli in query)
                 {
-                    ListViewItem klient = new ListViewItem(kli.wycieczka);
+                    ListViewItem klient = new ListViewItem(kli.wycieczka.nazwa);
                     klient.Tag = kli.wycieczkaId;
+
+                    if (kli.wycieczka.WycieczkaOdbyta(DateTime.Now))
+                        klient.BackColor = Color.LightCoral;
+                    else if (kli.wycieczka.WycieczkaWTrakcie(DateTime.Now))
+                        klient.BackColor = Color.LightGreen;
+
                     klient.SubItems.Add(kli.okresTrwaniaWycieczki.ToString());
                     klient.SubItems.Add(kli.dataOdjazdu.ToString());
                     klient.SubItems.Add(kli.wartoscPromocji.ToString());
@@ -170,38 +177,44 @@ namespace BD.Controller
         /// Metoda pobierająca rezerwacje aktualnego użytkownika dodająca je do aktualnego widoku.
         /// </summary>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public bool PobierzRezerwacje(string pesel)
+        public int PobierzRezerwacje(string pesel)
         {
+            int doZaplaty = 0;
+
             _view.lv_klient.Items.Clear();
 
-            var query = from rezerwacja in db.Rezerwacja
-                        where rezerwacja.Klient_pesel.Equals(pesel)
+            var query = from uczestnictwo in db.Uczestnictwo
+                        where uczestnictwo.Rezerwacja.Klient_pesel.Equals(pesel)
                         select new
                         {
-                            numer_rezerwacji = rezerwacja.numer_rezerwacji,
-                            nazwa = rezerwacja.Wycieczka.nazwa,
-                            dataWyjazdu = rezerwacja.Wycieczka.data_wyjazdu,
-                            dataPowrotu = rezerwacja.Wycieczka.data_powrotu,
-                            zaliczka = rezerwacja.zaliczka
+                            rezerwacja = uczestnictwo.Rezerwacja,
+                            wycieczka = uczestnictwo.Rezerwacja.Wycieczka,
+                            cenaCalkowita = uczestnictwo.cena_rezerwacji
                         };
 
             if (query == null)
             {
-                _view.lv_klient.Items.Add("Rezerwacji");
-                return false;
+                _view.lv_klient.Items.Add("Brak ezerwacji");
+                return -1;
             }
             else
             {
-                foreach (var rez in query)
+                foreach (var ucz in query)
                 {
-                    ListViewItem rezerwacja = new ListViewItem(rez.numer_rezerwacji.ToString());
-                    rezerwacja.SubItems.Add(rez.nazwa);
-                    rezerwacja.SubItems.Add(rez.dataWyjazdu.ToString());
-                    rezerwacja.SubItems.Add(rez.dataPowrotu.ToString());
-                    rezerwacja.SubItems.Add(rez.zaliczka.ToString());
+                    ListViewItem rezerwacja = new ListViewItem(ucz.rezerwacja.numer_rezerwacji.ToString());
+
+                    rezerwacja.SubItems.Add(ucz.wycieczka.nazwa);
+                    rezerwacja.SubItems.Add(ucz.wycieczka.data_wyjazdu.ToString());
+                    rezerwacja.SubItems.Add(ucz.wycieczka.data_powrotu.ToString());
+
+                    if ((ucz.wycieczka.WycieczkaZaplanowana(DateTime.Now)) && (!bool.Parse(ucz.rezerwacja.stan.ToString())))
+                        doZaplaty++; 
+
+                    rezerwacja.SubItems.Add(ucz.rezerwacja.zaliczka.ToString());
+                    rezerwacja.SubItems.Add((ucz.cenaCalkowita - ucz.rezerwacja.zaliczka).ToString());
                     _view.lv_klient.Items.Add(rezerwacja);
                 }
-                return true;
+                return doZaplaty;
             }
         }
     }

@@ -30,29 +30,34 @@ namespace BD.View
         private Klient _uzytkownik;
 
         /// <summary>
-        /// Główny bezparametrowy konstruktor okna
+        /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu oraz
         /// </summary>
-        public RezerwacjaView()
+        /// <param name="uzytkownik">Aktualnie zalogowany użytkownik.</param>
+        public RezerwacjaView(string uzytkownik)
         {
             InitializeComponent();
             this.p_rezerwuj.Visible = false;
             this.p_zaplac.Visible = true;
             b_zapłaćRezerwacje.Enabled = false;
+
             controller = new RezerwacjaController(this);
+
+            _uzytkownik = controller.PobierzDaneKlienta(uzytkownik);
         }
 
         /// <summary>
-        /// Konstruktor z parametrem, otrzymuje jako parametr obiekt typu wyieczka, aby potem zapisac go do bazy
+        /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu oraz
+        /// aktualnie wybranej wycieczki
         /// </summary>
-        /// <param name="wycieczka"></param>
+        /// <param name="idWycieczki">Aktualnie wybrany id wycieczki.</param>
+        ///  <param name="uzytkownik">Aktualnie zalogowany użytkownik.</param>
         public RezerwacjaView(int idWycieczki,string uzytkownik)
         {
             _idWycieczki = idWycieczki;
             InitializeComponent();
             this.p_zaplac.Visible = false;
             this.p_rezerwuj.Visible = true;
-            b_zapłaćRezerwacje.Enabled = false;
-             
+            b_zapłaćRezerwacje.Enabled = false;          
 
             controller = new RezerwacjaController(this);
 
@@ -155,8 +160,8 @@ namespace BD.View
                     MessageBox.Show("Podano za wysoką kwotę.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
                 case -1:
-                    decimal zaplacono = decimal.Parse(tb_kwotaDoZaplaty.Text) + decimal.Parse(tb_kwotaZaplacona.Text);
-                    decimal doZaplaty = decimal.Parse(tb_kwotaCalkowita.Text) - zaplacono;
+                    decimal zaplacono = decimal.Parse(tb_kwotaZaplacona.Text);
+                    decimal doZaplaty = decimal.Parse(tb_kwotaDoZaplaty.Text) - zaplacono;
                     MessageBox.Show("Zapłacono: " + zaplacono.ToString() + 
                       "\nDo zapłaty pozostało: " + doZaplaty.ToString(),
                      "Do zapłaty", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -197,6 +202,10 @@ namespace BD.View
                     break;
                 case 0:
                     MessageBox.Show("Podano nieprawidłowy numer rezerwacji.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    b_zapłaćRezerwacje.Enabled = false;
+                    break;
+                case -2:
+                    MessageBox.Show("Rezerwacja została już całkowicie zapłacona.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     b_zapłaćRezerwacje.Enabled = false;
                     break;
                 default:

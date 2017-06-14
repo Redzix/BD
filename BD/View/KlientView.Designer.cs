@@ -36,6 +36,8 @@
             this.wystawOpinięToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reklamujWycieczkęToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rezygnacjaZWycieczkiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wyświetlMojeRezerwacjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.l_polaczenie = new System.Windows.Forms.Label();
             this.b_zaplac = new System.Windows.Forms.Button();
             this.l_uzytkownik = new System.Windows.Forms.Label();
@@ -51,8 +53,7 @@
             this.l_szukaj = new System.Windows.Forms.Label();
             this.b_szukaj = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.wyświetlWszystkieWycieczkiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wyświetlMojeRezerwacjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cenaDoZaplaty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,6 +121,20 @@
             this.rezygnacjaZWycieczkiToolStripMenuItem.Text = "Rezygnacja z wycieczki";
             this.rezygnacjaZWycieczkiToolStripMenuItem.Click += new System.EventHandler(this.rezygnacjaZWycieczkiToolStripMenuItem_Click);
             // 
+            // wyświetlWszystkieWycieczkiToolStripMenuItem
+            // 
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Name = "wyświetlWszystkieWycieczkiToolStripMenuItem";
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Text = "Wyświetl wszystkie wycieczki";
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Click += new System.EventHandler(this.wyświetlWszystkieWycieczkiToolStripMenuItem_Click);
+            // 
+            // wyświetlMojeRezerwacjeToolStripMenuItem
+            // 
+            this.wyświetlMojeRezerwacjeToolStripMenuItem.Name = "wyświetlMojeRezerwacjeToolStripMenuItem";
+            this.wyświetlMojeRezerwacjeToolStripMenuItem.Size = new System.Drawing.Size(154, 20);
+            this.wyświetlMojeRezerwacjeToolStripMenuItem.Text = "Wyświetl moje rezerwacje";
+            this.wyświetlMojeRezerwacjeToolStripMenuItem.Click += new System.EventHandler(this.wyświetlMojeRezerwacjeToolStripMenuItem_Click);
+            // 
             // l_polaczenie
             // 
             this.l_polaczenie.AutoSize = true;
@@ -164,7 +179,8 @@
             this.okresTrwania,
             this.dataWyjazdu,
             this.promocja,
-            this.cenaCalkowita});
+            this.cenaCalkowita,
+            this.cenaDoZaplaty});
             this.lv_klient.FullRowSelect = true;
             this.lv_klient.Location = new System.Drawing.Point(0, 27);
             this.lv_klient.Name = "lv_klient";
@@ -198,6 +214,11 @@
             // cenaCalkowita
             // 
             this.cenaCalkowita.Text = "Cena całkowita";
+            this.cenaCalkowita.Width = 110;
+            // 
+            // cenaDoZaplaty
+            // 
+            this.cenaDoZaplaty.Text = "Do zapłaty";
             this.cenaCalkowita.Width = 110;
             // 
             // tb_szukaj
@@ -237,20 +258,6 @@
             // 
             this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // wyświetlWszystkieWycieczkiToolStripMenuItem
-            // 
-            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Name = "wyświetlWszystkieWycieczkiToolStripMenuItem";
-            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
-            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Text = "Wyświetl wszystkie wycieczki";
-            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Click += new System.EventHandler(this.wyświetlWszystkieWycieczkiToolStripMenuItem_Click);
-            // 
-            // wyświetlMojeRezerwacjeToolStripMenuItem
-            // 
-            this.wyświetlMojeRezerwacjeToolStripMenuItem.Name = "wyświetlMojeRezerwacjeToolStripMenuItem";
-            this.wyświetlMojeRezerwacjeToolStripMenuItem.Size = new System.Drawing.Size(154, 20);
-            this.wyświetlMojeRezerwacjeToolStripMenuItem.Text = "Wyświetl moje rezerwacje";
-            this.wyświetlMojeRezerwacjeToolStripMenuItem.Click += new System.EventHandler(this.wyświetlMojeRezerwacjeToolStripMenuItem_Click);
             // 
             // KlientView
             // 
@@ -309,6 +316,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem wyświetlWszystkieWycieczkiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wyświetlMojeRezerwacjeToolStripMenuItem;
+        public System.Windows.Forms.ColumnHeader cenaDoZaplaty;
     }
 }
 

@@ -45,37 +45,45 @@ namespace BD.Controller
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int PobierzNazweWycieczki(string numerRezerwacji, string uzytkownik)
         {
-            try
-            {
-                int numer = int.Parse(numerRezerwacji);
-                sprawdzCzyTaSama = numer;
-
-                var rez = (from rezerwacja in db.Rezerwacja
-                           where rezerwacja.numer_rezerwacji == numer && rezerwacja.Klient_pesel.Equals(uzytkownik)
-                           select rezerwacja).FirstOrDefault();
-
-                var uczest = (from uczestnictwo in db.Uczestnictwo
-                              where uczestnictwo.numer_rezerwacji == numer
-                              select uczestnictwo).FirstOrDefault();
-
-                if (rez == null)
+            
+            
+                try
                 {
-                    return -1;
+                    int numer = int.Parse(numerRezerwacji);
+                    sprawdzCzyTaSama = numer;
+
+                    var rez = (from rezerwacja in db.Rezerwacja
+                               where rezerwacja.numer_rezerwacji == numer && rezerwacja.Klient_pesel.Equals(uzytkownik)
+                               select rezerwacja).FirstOrDefault();
+
+                if (!bool.Parse(rez.stan.ToString()))
+                {
+                    var uczest = (from uczestnictwo in db.Uczestnictwo
+                                  where uczestnictwo.numer_rezerwacji == numer
+                                  select uczestnictwo).FirstOrDefault();
+
+                    if (rez == null)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        _view.tb_nazwaWycieczkiZaplac.Text = rez.Wycieczka.nazwa;
+                        _view.tb_kwotaCalkowita.Text = (uczest.cena_rezerwacji).ToString();
+                        _view.tb_kwotaDoZaplaty.Text = (uczest.cena_rezerwacji - rez.zaliczka).ToString();
+
+                        return 1;
+                    }
                 }
                 else
                 {
-
-                    _view.tb_nazwaWycieczkiZaplac.Text = rez.Wycieczka.nazwa;
-                    _view.tb_kwotaCalkowita.Text = (uczest.cena_rezerwacji).ToString();
-                    _view.tb_kwotaDoZaplaty.Text = (uczest.cena_rezerwacji - rez.zaliczka).ToString();
-
-                    return 1;
+                    return -2;
                 }
             }
-            catch (FormatException exception)
-            {
-                return 0;
-            }
+                catch (FormatException exception)
+                {
+                    return 0;
+                }          
         }
 
         /// <summary>
@@ -156,7 +164,7 @@ namespace BD.Controller
 
             var cenaRezerwacji = (from katalog in db.Katalog
                                   where katalog.id_wycieczki == idWycieczki
-                                  select katalog.Cennik.cena).FirstOrDefault();
+                                  select katalog.cena).FirstOrDefault();
 
             try
             {
