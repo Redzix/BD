@@ -61,6 +61,7 @@
             // 
             this.rtb_wycieczka.Location = new System.Drawing.Point(613, 27);
             this.rtb_wycieczka.Name = "rtb_wycieczka";
+            this.rtb_wycieczka.ReadOnly = true;
             this.rtb_wycieczka.Size = new System.Drawing.Size(330, 232);
             this.rtb_wycieczka.TabIndex = 1;
             this.rtb_wycieczka.Text = "Nazwa\nData wyjazdu\nData powrotu\nOpis\n\nAdres miejsca\nMiejscowość";

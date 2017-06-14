@@ -28,7 +28,7 @@ namespace BD.View
         /// <summary>
         /// Zmienna przechowująca pesel aktualnie wybranej wycieczki
         /// </summary>
-        private string _uzytkownik;
+        private Pilot _uzytkownik;
 
         /// <summary>
         /// Główny bezparametrowy konstruktor okna,, tworzący okno oraz połączenie z bazą danych.
@@ -52,11 +52,11 @@ namespace BD.View
         /// oraz tworzący połączenie z bazą danych.
         /// </summary>
         /// <param name="uzytkownik">Nazwa użytkownika</param>
-        public PilotView(string uzytkownik)
+        public PilotView(Pilot uzytkownik)
         {
             InitializeComponent();
 
-            l_uzytkownik.Text = uzytkownik;
+            l_uzytkownik.Text = uzytkownik.DaneOsobowe();
             l_polaczenie.Text = "Połączony";
             _uzytkownik = uzytkownik;
             l_polaczenie.ForeColor = System.Drawing.Color.Green;         
@@ -128,7 +128,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void Pilot_Load(object sender, EventArgs e)
         {
-            if (!controller.PobierzWycieczki(_uzytkownik))
+            if (!controller.PobierzWycieczki(_uzytkownik.pesel))
             { 
                 MessageBox.Show("Wystąpił problem podczas pobierania danych z bazy.", "Błąd podczas pobierania.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -168,7 +168,7 @@ namespace BD.View
         {
             if (aktWycieczki.czyBylaAktualizacja())
             {
-                controller.PobierzWycieczki(_uzytkownik);
+                controller.PobierzWycieczki(_uzytkownik.pesel);
             }
             else
             {

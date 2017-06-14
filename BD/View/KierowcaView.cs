@@ -54,11 +54,11 @@ namespace BD.View
         /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu.
         /// </summary>
         /// <param name="uzytkownik">Nazwa użytkownika</param>
-        public KierowcaView(string uzytkownik)
+        public KierowcaView(Kierowca uzytkownik)
         {
             InitializeComponent();
 
-            l_uzytkownik.Text = uzytkownik;
+            l_uzytkownik.Text = uzytkownik.DaneOsobowe();
             l_polaczenie.Text = "Połączony";
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
 

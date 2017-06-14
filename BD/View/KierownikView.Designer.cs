@@ -274,41 +274,41 @@
             // 
             // tb_Rozstrzygajacy
             // 
-            this.tb_Rozstrzygajacy.Enabled = false;
             this.tb_Rozstrzygajacy.Location = new System.Drawing.Point(409, 84);
             this.tb_Rozstrzygajacy.Name = "tb_Rozstrzygajacy";
+            this.tb_Rozstrzygajacy.ReadOnly = true;
             this.tb_Rozstrzygajacy.Size = new System.Drawing.Size(162, 20);
             this.tb_Rozstrzygajacy.TabIndex = 17;
             // 
             // tb_Reklamujacy
             // 
-            this.tb_Reklamujacy.Enabled = false;
             this.tb_Reklamujacy.Location = new System.Drawing.Point(409, 58);
             this.tb_Reklamujacy.Name = "tb_Reklamujacy";
+            this.tb_Reklamujacy.ReadOnly = true;
             this.tb_Reklamujacy.Size = new System.Drawing.Size(162, 20);
             this.tb_Reklamujacy.TabIndex = 16;
             // 
             // tb_nazwa_wycieczki
             // 
-            this.tb_nazwa_wycieczki.Enabled = false;
             this.tb_nazwa_wycieczki.Location = new System.Drawing.Point(409, 6);
             this.tb_nazwa_wycieczki.Name = "tb_nazwa_wycieczki";
+            this.tb_nazwa_wycieczki.ReadOnly = true;
             this.tb_nazwa_wycieczki.Size = new System.Drawing.Size(162, 20);
             this.tb_nazwa_wycieczki.TabIndex = 15;
             // 
             // tb_okresTrwaniaWycieczki
             // 
-            this.tb_okresTrwaniaWycieczki.Enabled = false;
             this.tb_okresTrwaniaWycieczki.Location = new System.Drawing.Point(409, 32);
             this.tb_okresTrwaniaWycieczki.Name = "tb_okresTrwaniaWycieczki";
+            this.tb_okresTrwaniaWycieczki.ReadOnly = true;
             this.tb_okresTrwaniaWycieczki.Size = new System.Drawing.Size(162, 20);
             this.tb_okresTrwaniaWycieczki.TabIndex = 14;
             // 
             // rtb_opisReklamacji
             // 
-            this.rtb_opisReklamacji.Enabled = false;
             this.rtb_opisReklamacji.Location = new System.Drawing.Point(409, 110);
             this.rtb_opisReklamacji.Name = "rtb_opisReklamacji";
+            this.rtb_opisReklamacji.ReadOnly = true;
             this.rtb_opisReklamacji.Size = new System.Drawing.Size(312, 181);
             this.rtb_opisReklamacji.TabIndex = 13;
             this.rtb_opisReklamacji.Text = "";

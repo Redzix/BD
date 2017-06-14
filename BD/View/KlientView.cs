@@ -26,7 +26,7 @@ namespace BD.View
         /// <summary>
         /// Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
         /// </summary>
-        private string _uzytkownik;
+        private Klient _uzytkownik;
 
         /// <summary>
         /// Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
@@ -63,11 +63,11 @@ namespace BD.View
         /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu 
         /// </summary>
         /// <param name="uzytkownik">Nazwa użytkownika</param>
-        public KlientView(string uzytkownik)
+        public KlientView(Klient uzytkownik)
         {
             InitializeComponent();
 
-            l_uzytkownik.Text = uzytkownik;
+            l_uzytkownik.Text = uzytkownik.DaneOsobowe();
             l_polaczenie.Text = "Połączony";
             l_polaczenie.ForeColor = System.Drawing.Color.Green;
 
@@ -119,7 +119,7 @@ namespace BD.View
             }
             else
             {
-                RezerwacjaView rezerwacja = new RezerwacjaView(_idWycieczki, _uzytkownik);
+                RezerwacjaView rezerwacja = new RezerwacjaView(_idWycieczki, _uzytkownik.pesel);
                 rezerwacja.ShowDialog();
             }
         }
@@ -131,7 +131,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void wystawOpinięToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpiniaView opinia = new OpiniaView(_uzytkownik);
+            OpiniaView opinia = new OpiniaView(_uzytkownik.pesel);
             opinia.ShowDialog();
         }
 
@@ -142,7 +142,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void reklamujWycieczkęToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReklamacjaView reklamancja = new ReklamacjaView(_uzytkownik);
+            ReklamacjaView reklamancja = new ReklamacjaView(_uzytkownik.pesel);
             reklamancja.ShowDialog();
         }
 
@@ -153,7 +153,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void rezygnacjaZWycieczkiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RezygnacjaView rezygnacja = new RezygnacjaView(_uzytkownik);
+            RezygnacjaView rezygnacja = new RezygnacjaView(_uzytkownik.pesel);
             rezygnacja.ShowDialog();
         }
 
@@ -208,7 +208,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zaplac_Click(object sender, EventArgs e)
         {
-            RezerwacjaView rezerwacja = new RezerwacjaView(_uzytkownik);
+            RezerwacjaView rezerwacja = new RezerwacjaView(_uzytkownik.pesel);
             rezerwacja.ShowDialog();
         }
 
@@ -386,7 +386,7 @@ namespace BD.View
             this.rtb_wycieczka.Text = "Numer rezerwacji\nLiczba osób\nNazwa Wycieczki\nCena całkowita\nData wyjazdu\nData powrotu\nOpis wycieczki";
             indeksListview = 1;
 
-            int pobierz = controller.PobierzRezerwacje(_uzytkownik);
+            int pobierz = controller.PobierzRezerwacje(_uzytkownik.pesel);
 
             switch (pobierz)
             {
