@@ -185,19 +185,6 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Metoda odpowiadająca za udostepnianie edycji kontrolek po zmianie wyboru pojazdu
-        /// </summary>
-        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
-        /// <param name="e">Zdarzenia systemowe</param>
-        private void lv_pojazdy_SelectedIndexChanged(object sender, EventArgs e)
-        {
-                this.rb_awaria.Enabled = true;
-                this.rb_sprawny.Enabled = true;
-                this.b_kierowca_zapisz.Enabled = true;
-                numerRejestracyjny = ((ListView)sender).SelectedItems[0].Tag.ToString();
-        }
-
-        /// <summary>
         /// Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
         /// </summary>
         /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
@@ -237,6 +224,19 @@ namespace BD.View
             {
                 return;
             }       
-       }
+        }
+
+        /// <summary>
+        /// Metoda odpowiadająca za udostepnianie edycji kontrolek po zmianie wyboru pojazdu
+        /// </summary>
+        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
+        /// <param name="e">Zdarzenia systemowe</param>
+        private void lv_pojazdy_ItemActivate(object sender, EventArgs e)
+        {
+            this.rb_awaria.Enabled = true;
+            this.rb_sprawny.Enabled = true;
+            this.b_kierowca_zapisz.Enabled = true;
+            numerRejestracyjny = lv_pojazdy.SelectedItems[0].Tag.ToString();
+        }
     }
 }
