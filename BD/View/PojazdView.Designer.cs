@@ -86,6 +86,7 @@
             this.tb_pojemnosc.Name = "tb_pojemnosc";
             this.tb_pojemnosc.Size = new System.Drawing.Size(83, 20);
             this.tb_pojemnosc.TabIndex = 7;
+            this.tb_pojemnosc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_pojemnosc_KeyPress);
             // 
             // l_pojemnosc
             // 
@@ -120,7 +121,7 @@
             this.Controls.Add(this.b_zapisz);
             this.Controls.Add(this.l_nr_rejestracyjny);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Pojazd";
+            this.Name = "PojazdView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Pojazd";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Pojazd_FormClosing);
