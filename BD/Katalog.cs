@@ -22,7 +22,6 @@ namespace BD
         public Nullable<int> id_wycieczki { get; set; }
         public Nullable<decimal> cena { get; set; }
     
-        public virtual Cennik Cennik { get; set; }
         public virtual Miejsce Miejsce { get; set; }
         public virtual Miejsce Miejsce1 { get; set; }
         public virtual Wycieczka Wycieczka { get; set; }

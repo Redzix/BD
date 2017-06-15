@@ -125,6 +125,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lb_kolumny);
             this.Controls.Add(this.lv_Sortowanie);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "RaporterView";
             this.Text = "Generator Raportów";
             this.ResumeLayout(false);

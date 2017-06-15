@@ -51,6 +51,7 @@ namespace BD.View
             controller = new ReklamacjaController(this);
 
             aktReklamacji = new AktualizacjaController("Reklamacja");
+            controller.WypelnijRezerwacje(uzytkownik);
         }
 
         /// <summary>
@@ -100,7 +101,8 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            int zapisz = controller.DodajReklamacje(tb_numerRezerwacji.Text,_uzytkownik);
+            int numerRezerwacji = ((KeyValuePair<int, string>)cb_rezerwacje.SelectedItem).Key;
+            int zapisz = controller.DodajReklamacje(numerRezerwacji, _uzytkownik);
 
             switch (zapisz)
             {
@@ -176,7 +178,8 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_sprawdzPoprawnosc_Click(object sender, EventArgs e)
         {
-            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text, _uzytkownik);
+            int numerRezerwacji = ((KeyValuePair<int, string>)cb_rezerwacje.SelectedItem).Key;
+            int pobierz = controller.PobierzNazweWycieczki(numerRezerwacji, _uzytkownik);
 
             switch (pobierz)
             {
@@ -185,7 +188,6 @@ namespace BD.View
                     break;
                 case -1:
                     MessageBox.Show("Wprowadź prawidłowy numer rezerwacji. Taka rezerwacja nie istnieje.", "Błąd podczas pobierania danych", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    tb_nazwaWycieczki.Text = "Błędna rezerwacja";
                     b_zapisz.Enabled = false;
                     break;
                 case 0:

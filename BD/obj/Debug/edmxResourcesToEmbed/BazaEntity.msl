@@ -1,16 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="bazaModelStoreContainer" CdmEntityContainer="bazaEntities">
-    <EntitySetMapping Name="Cennik">
-      <EntityTypeMapping TypeName="bazaModel.Cennik">
-        <MappingFragment StoreEntitySet="Cennik">
-          <ScalarProperty Name="id_cennika" ColumnName="id_cennika" />
-          <ScalarProperty Name="cena" ColumnName="cena" />
-          <ScalarProperty Name="okres_od" ColumnName="okres_od" />
-          <ScalarProperty Name="okres_do" ColumnName="okres_do" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Kierowca">
       <EntityTypeMapping TypeName="bazaModel.Kierowca">
         <MappingFragment StoreEntitySet="Kierowca">

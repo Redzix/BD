@@ -25,7 +25,6 @@ namespace BD
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cennik> Cennik { get; set; }
         public virtual DbSet<Kierowca> Kierowca { get; set; }
         public virtual DbSet<Kierownik> Kierownik { get; set; }
         public virtual DbSet<Klient> Klient { get; set; }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BD.View;
+using System.Windows.Forms;
 
 namespace BD.Controller
 {
@@ -35,14 +36,12 @@ namespace BD.Controller
         /// <param name="numerRezerwacji">Numer rezerwacji, której dotyczy opinia.</param>
         /// <param name="uzytkownik">Pesel użytkownika, który zamawiał wycieczkę</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int Oblicz(string numerRezerwacji,string uzytkownik)
+        public int Oblicz(int numerRezerwacji,string uzytkownik)
         {
             try
             {
-                int numer = int.Parse(_view.tb_numerRezerwacji.Text);
-
                 var query = (from uczestnictwo in db.Uczestnictwo
-                             where uczestnictwo.numer_rezerwacji == numer && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
+                             where uczestnictwo.numer_rezerwacji == numerRezerwacji && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                              select new
                              {
                                  nazwa = uczestnictwo.Rezerwacja.Wycieczka.nazwa,
@@ -50,7 +49,6 @@ namespace BD.Controller
                                  liczbaOsob = uczestnictwo.liczba_osob
                              }).FirstOrDefault();
 
-                _view.tb_nazwaWycieczki.Text = query.nazwa;
                 _view.tb_liczbaOsob.Text = query.liczbaOsob.ToString();
 
                 if (query.liczbaOsob < int.Parse(_view.tb_liczbaRezygnujacychOsob.Text))
@@ -84,20 +82,18 @@ namespace BD.Controller
         /// <param name="numerRezerwacji">Numer rezerwacji, której dotyczy opinia.</param>
         /// <param name="uzytkownik">Pesel użytkownika, który zamawiał wycieczkę</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int Zapisz(string numerRezerwacji,string uzytkownik)
+        public int Zapisz(int numerRezerwacji,string uzytkownik)
         {
             try
             {
-                int numer = int.Parse(numerRezerwacji);
-                            
                 var uczestnictwo = (from uc in db.Uczestnictwo
-                                    where uc.numer_rezerwacji == numer && uc.Rezerwacja.Klient_pesel.Equals(uzytkownik)
+                                    where uc.numer_rezerwacji == numerRezerwacji && uc.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                                     select uc).FirstOrDefault();
 
                 if ((int.Parse(_view.tb_liczbaOsob.Text) - int.Parse(_view.tb_liczbaRezygnujacychOsob.Text)) == 0)
                 {
                     var usun = (from rezerw in db.Rezerwacja
-                                      where rezerw.numer_rezerwacji == numer && rezerw.Klient_pesel.Equals(uzytkownik)
+                                      where rezerw.numer_rezerwacji == numerRezerwacji && rezerw.Klient_pesel.Equals(uzytkownik)
                                 select rezerw).FirstOrDefault();
 
                     db.Rezerwacja.Remove(usun);
@@ -124,6 +120,40 @@ namespace BD.Controller
             {
                 return 0;
             }
+        }
+        /// <summary>
+        /// Metoda wypełniająca nazwę wycieczki dla dokonanych rezerwacji
+        /// </summary>
+        /// <returns>True jeśli się uda</returns>
+        public bool WypelnijRezerwacje(string pesel)
+        {
+            try
+            {
+                using (var db = new bazaEntities())
+                {
+                    Dictionary<int, string> values = new Dictionary<int, string>();
+                    var query = from rezerwacja in db.Rezerwacja
+                                where rezerwacja.Klient_pesel.Equals(pesel)
+                                select new
+                                {
+                                    rezerwacja,
+                                    rezerwacja.Wycieczka.nazwa
+                                };
+
+                    foreach (var row in query)
+                    {
+                        values.Add(row.rezerwacja.numer_rezerwacji, row.nazwa);
+                    }
+                    this._view.cb_rezerwacje.DataSource = new BindingSource(values, null);
+                    this._view.cb_rezerwacje.DisplayMember = "Value";
+                    this._view.cb_rezerwacje.ValueMember = "Key";
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

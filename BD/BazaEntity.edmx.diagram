@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="dc75a589123640cc86b8e3df344931c7" Name="Diagram1" ZoomLevel="95">
-        <EntityTypeShape EntityType="bazaModel.Cennik" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Kierowca" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Kierownik" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="bazaModel.Klient" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
@@ -34,7 +33,6 @@
         <EntityTypeShape EntityType="bazaModel.Promocja" Width="1.5" PointX="4.5" PointY="11.125" />
         <AssociationConnector Association="bazaModel.Promocja_Wycieczka_FK" />
         <EntityTypeShape EntityType="bazaModel.Katalog" Width="1.5" PointX="10.25" PointY="11.75" />
-        <AssociationConnector Association="bazaModel.Katalog_Cennik_FK" />
         <AssociationConnector Association="bazaModel.Katalog_Miejsce_FK" />
         <AssociationConnector Association="bazaModel.Katalog_Miejsce_FKv2" />
         <AssociationConnector Association="bazaModel.Katalog_Wycieczka_FK" />

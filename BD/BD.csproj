@@ -77,9 +77,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BazaEntity.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Cennik.cs">
-      <DependentUpon>BazaEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controller\KierowcaController.cs" />
     <Compile Include="Controller\KierownikController.cs" />
     <Compile Include="Controller\KlientController.cs" />

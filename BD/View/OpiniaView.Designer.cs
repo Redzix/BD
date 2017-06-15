@@ -31,19 +31,17 @@
             this.b_zapisz = new System.Windows.Forms.Button();
             this.b_anuluj = new System.Windows.Forms.Button();
             this.l_uwagi = new System.Windows.Forms.Label();
-            this.l_nazwa_wycieczki = new System.Windows.Forms.Label();
             this.tb_opinia = new System.Windows.Forms.TextBox();
             this.l_ocena = new System.Windows.Forms.Label();
             this.cb_ocena = new System.Windows.Forms.ComboBox();
             this.l_numerRezerwacji = new System.Windows.Forms.Label();
-            this.tb_numerRezerwacji = new System.Windows.Forms.TextBox();
-            this.tb_nazwaWycieczki = new System.Windows.Forms.TextBox();
+            this.cb_rezerwacje = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // b_zapisz
             // 
             this.b_zapisz.Enabled = false;
-            this.b_zapisz.Location = new System.Drawing.Point(103, 243);
+            this.b_zapisz.Location = new System.Drawing.Point(102, 173);
             this.b_zapisz.Name = "b_zapisz";
             this.b_zapisz.Size = new System.Drawing.Size(75, 23);
             this.b_zapisz.TabIndex = 21;
@@ -53,7 +51,7 @@
             // 
             // b_anuluj
             // 
-            this.b_anuluj.Location = new System.Drawing.Point(288, 243);
+            this.b_anuluj.Location = new System.Drawing.Point(287, 173);
             this.b_anuluj.Name = "b_anuluj";
             this.b_anuluj.Size = new System.Drawing.Size(75, 23);
             this.b_anuluj.TabIndex = 20;
@@ -64,24 +62,15 @@
             // l_uwagi
             // 
             this.l_uwagi.AutoSize = true;
-            this.l_uwagi.Location = new System.Drawing.Point(8, 119);
+            this.l_uwagi.Location = new System.Drawing.Point(10, 63);
             this.l_uwagi.Name = "l_uwagi";
             this.l_uwagi.Size = new System.Drawing.Size(37, 13);
             this.l_uwagi.TabIndex = 19;
             this.l_uwagi.Text = "Uwagi";
             // 
-            // l_nazwa_wycieczki
-            // 
-            this.l_nazwa_wycieczki.AutoSize = true;
-            this.l_nazwa_wycieczki.Location = new System.Drawing.Point(8, 45);
-            this.l_nazwa_wycieczki.Name = "l_nazwa_wycieczki";
-            this.l_nazwa_wycieczki.Size = new System.Drawing.Size(89, 13);
-            this.l_nazwa_wycieczki.TabIndex = 18;
-            this.l_nazwa_wycieczki.Text = "Nazwa wycieczki";
-            // 
             // tb_opinia
             // 
-            this.tb_opinia.Location = new System.Drawing.Point(103, 119);
+            this.tb_opinia.Location = new System.Drawing.Point(102, 60);
             this.tb_opinia.Multiline = true;
             this.tb_opinia.Name = "tb_opinia";
             this.tb_opinia.Size = new System.Drawing.Size(260, 107);
@@ -90,7 +79,7 @@
             // l_ocena
             // 
             this.l_ocena.AutoSize = true;
-            this.l_ocena.Location = new System.Drawing.Point(8, 82);
+            this.l_ocena.Location = new System.Drawing.Point(8, 36);
             this.l_ocena.Name = "l_ocena";
             this.l_ocena.Size = new System.Drawing.Size(39, 13);
             this.l_ocena.TabIndex = 23;
@@ -98,6 +87,7 @@
             // 
             // cb_ocena
             // 
+            this.cb_ocena.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_ocena.FormattingEnabled = true;
             this.cb_ocena.Items.AddRange(new object[] {
             "1",
@@ -106,7 +96,7 @@
             "4",
             "5",
             "6"});
-            this.cb_ocena.Location = new System.Drawing.Point(103, 79);
+            this.cb_ocena.Location = new System.Drawing.Point(102, 33);
             this.cb_ocena.Name = "cb_ocena";
             this.cb_ocena.Size = new System.Drawing.Size(37, 21);
             this.cb_ocena.TabIndex = 24;
@@ -116,41 +106,32 @@
             this.l_numerRezerwacji.AutoSize = true;
             this.l_numerRezerwacji.Location = new System.Drawing.Point(8, 9);
             this.l_numerRezerwacji.Name = "l_numerRezerwacji";
-            this.l_numerRezerwacji.Size = new System.Drawing.Size(88, 13);
+            this.l_numerRezerwacji.Size = new System.Drawing.Size(60, 13);
             this.l_numerRezerwacji.TabIndex = 25;
-            this.l_numerRezerwacji.Text = "Numer rezerwacji";
+            this.l_numerRezerwacji.Text = "Wycieczka";
             // 
-            // tb_numerRezerwacji
+            // cb_rezerwacje
             // 
-            this.tb_numerRezerwacji.Location = new System.Drawing.Point(103, 9);
-            this.tb_numerRezerwacji.Name = "tb_numerRezerwacji";
-            this.tb_numerRezerwacji.Size = new System.Drawing.Size(130, 20);
-            this.tb_numerRezerwacji.TabIndex = 26;
-            this.tb_numerRezerwacji.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_numerRezerwacji_KeyPress);
-            this.tb_numerRezerwacji.Leave += new System.EventHandler(this.tb_numerRezerwacji_Leave);
-            // 
-            // tb_nazwaWycieczki
-            // 
-            this.tb_nazwaWycieczki.Enabled = false;
-            this.tb_nazwaWycieczki.Location = new System.Drawing.Point(103, 42);
-            this.tb_nazwaWycieczki.Name = "tb_nazwaWycieczki";
-            this.tb_nazwaWycieczki.Size = new System.Drawing.Size(130, 20);
-            this.tb_nazwaWycieczki.TabIndex = 27;
+            this.cb_rezerwacje.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_rezerwacje.FormattingEnabled = true;
+            this.cb_rezerwacje.Location = new System.Drawing.Point(102, 6);
+            this.cb_rezerwacje.Name = "cb_rezerwacje";
+            this.cb_rezerwacje.Size = new System.Drawing.Size(131, 21);
+            this.cb_rezerwacje.TabIndex = 28;
+            this.cb_rezerwacje.SelectedIndexChanged += new System.EventHandler(this.tb_numerRezerwacji_Leave);
             // 
             // OpiniaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 272);
-            this.Controls.Add(this.tb_nazwaWycieczki);
-            this.Controls.Add(this.tb_numerRezerwacji);
+            this.ClientSize = new System.Drawing.Size(388, 208);
+            this.Controls.Add(this.cb_rezerwacje);
             this.Controls.Add(this.l_numerRezerwacji);
             this.Controls.Add(this.cb_ocena);
             this.Controls.Add(this.l_ocena);
             this.Controls.Add(this.b_zapisz);
             this.Controls.Add(this.b_anuluj);
             this.Controls.Add(this.l_uwagi);
-            this.Controls.Add(this.l_nazwa_wycieczki);
             this.Controls.Add(this.tb_opinia);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "OpiniaView";
@@ -167,12 +148,10 @@
         private System.Windows.Forms.Button b_zapisz;
         private System.Windows.Forms.Button b_anuluj;
         private System.Windows.Forms.Label l_uwagi;
-        private System.Windows.Forms.Label l_nazwa_wycieczki;
         public System.Windows.Forms.TextBox tb_opinia;
         private System.Windows.Forms.Label l_ocena;
         public System.Windows.Forms.ComboBox cb_ocena;
         private System.Windows.Forms.Label l_numerRezerwacji;
-        public System.Windows.Forms.TextBox tb_numerRezerwacji;
-        public System.Windows.Forms.TextBox tb_nazwaWycieczki;
+        public System.Windows.Forms.ComboBox cb_rezerwacje;
     }
 }

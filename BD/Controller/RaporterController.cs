@@ -58,7 +58,8 @@ namespace BD.Controller
                             pilot = c.Wycieczka.Pilot.imie + " " + c.Wycieczka.Pilot.nazwisko,
                             odjazd = c.Miejsce.miejscowosc + ", " + c.Miejsce.adres,
                             przyjazd = c.Miejsce1.miejscowosc + ", " + c.Miejsce1.adres,
-                            c.cena
+                            c.cena,
+                            cena_promocyjna = (c.Wycieczka.Promocja == null) ? "Brak promocji" : c.Wycieczka.Promocja.cena.ToString(),
                         };
 
                 if (kolumny)

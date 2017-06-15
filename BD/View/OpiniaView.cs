@@ -33,7 +33,6 @@ namespace BD.View
             cb_ocena.SelectedIndex = 0;
             controller = new OpiniaController(this);
         }
-
         /// <summary>
         /// Dodaje rezygnację dla zdefiniowanego wcześniej użytkownika
         /// </summary>
@@ -44,6 +43,7 @@ namespace BD.View
             cb_ocena.SelectedIndex = 0;
             _uzytkownik = uzytownik;
             controller = new OpiniaController(this);
+            controller.WypelnijRezerwacje(uzytownik);
         }
 
         /// <summary>
@@ -93,7 +93,8 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            int zapisz = controller.DodajOpinie(tb_numerRezerwacji.Text, cb_ocena.SelectedIndex + 1, tb_opinia.Text,_uzytkownik);
+            int numerRezerwacji = ((KeyValuePair<int, string>)cb_rezerwacje.SelectedItem).Key;
+            int zapisz = controller.DodajOpinie(numerRezerwacji, cb_ocena.SelectedIndex + 1, tb_opinia.Text,_uzytkownik);
 
             switch (zapisz)
             {
@@ -120,8 +121,8 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
         {
-
-            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text, _uzytkownik);
+            int numerRezerwacji = ((KeyValuePair<int, string>)cb_rezerwacje.SelectedItem).Key;
+            int pobierz = controller.PobierzNazweWycieczki(numerRezerwacji, _uzytkownik);
 
             switch (pobierz)
             {

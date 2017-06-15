@@ -30,6 +30,7 @@ namespace BD.View
             try
             {
                 pdf.createPDF(lv_Sortowanie);
+                MessageBox.Show("Raport został wygenerowany dla odpowiednich kolumn.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
             } catch
             {
                 MessageBox.Show("Najpierw musisz wypełnić pola dla raportu.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);

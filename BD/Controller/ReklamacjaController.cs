@@ -72,16 +72,14 @@ namespace BD.Controller
         /// <param name="numerRezerwacji">Numer rezerwacji, dla której pobierane sa informacje.</param>
         /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int PobierzNazweWycieczki(string numerRezerwacji, string uzytkownik)
+        public int PobierzNazweWycieczki(int numerRezerwacji, string uzytkownik)
         {
             try
             {
-                int numer = int.Parse(numerRezerwacji);
-
-                sprawdzCzyTaSama = numer;
+                sprawdzCzyTaSama = numerRezerwacji;
 
                 var query = (from uczestnictwo in db.Uczestnictwo
-                             where uczestnictwo.numer_rezerwacji == numer && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
+                             where uczestnictwo.numer_rezerwacji == numerRezerwacji && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                              select uczestnictwo.Rezerwacja.Wycieczka.nazwa).FirstOrDefault();
 
                 if (query == null)
@@ -90,7 +88,6 @@ namespace BD.Controller
                 }
                 else
                 {
-                    _view.tb_nazwaWycieczki.Text = query;
                     return 1;
                 }
             }
@@ -154,17 +151,15 @@ namespace BD.Controller
         /// <param name="numerRezerwacji">Nume rezerwacji, dla której dodawana jest reklamacja.</param>
         /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int DodajReklamacje(string numerRezerwacji, string uzytkownik)
+        public int DodajReklamacje(int numerRezerwacji, string uzytkownik)
         {
             try
             {
-                int numer = int.Parse(numerRezerwacji);
-
-                if (sprawdzCzyTaSama == numer)
+                if (sprawdzCzyTaSama == numerRezerwacji)
                 {
 
                     var uczestnictwo = (from uc in db.Uczestnictwo
-                                        where uc.numer_rezerwacji == numer && uc.Rezerwacja.Klient_pesel.Equals(uzytkownik)
+                                        where uc.numer_rezerwacji == numerRezerwacji && uc.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                                         select uc).FirstOrDefault();
 
                     var reklamacja = new Reklamacja
@@ -195,6 +190,41 @@ namespace BD.Controller
             {
                 return -1;
             }
+        }
+
+        /// <summary>
+        /// Metoda wypełniająca nazwę wycieczki dla dokonanych rezerwacji
+        /// </summary>
+        /// <returns>True jeśli się uda</returns>
+        public bool WypelnijRezerwacje(string pesel)
+        {
+            try
+            {
+                using (var db = new bazaEntities())
+                {
+                    Dictionary<int, string> values = new Dictionary<int, string>();
+                    var query = from rezerwacja in db.Rezerwacja
+                                where rezerwacja.Klient_pesel.Equals(pesel)
+                                select new
+                                {
+                                    rezerwacja,
+                                    rezerwacja.Wycieczka.nazwa
+                                };
+
+                    foreach (var row in query)
+                    {
+                        values.Add(row.rezerwacja.numer_rezerwacji, row.nazwa);
+                    }
+                    this._view.cb_rezerwacje.DataSource = new BindingSource(values, null);
+                    this._view.cb_rezerwacje.DisplayMember = "Value";
+                    this._view.cb_rezerwacje.ValueMember = "Key";
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

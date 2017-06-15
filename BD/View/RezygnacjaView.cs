@@ -32,7 +32,6 @@ namespace BD.View
             InitializeComponent();
             tb_cenaPoRezygnacji.Enabled = false;
             tb_liczbaOsob.Enabled = false;
-            tb_nazwaWycieczki.Enabled = false;
             controller = new RezygnacjaController(this);
         }
 
@@ -45,9 +44,9 @@ namespace BD.View
             InitializeComponent();
             tb_cenaPoRezygnacji.Enabled = false;
             tb_liczbaOsob.Enabled = false;
-            tb_nazwaWycieczki.Enabled = false;
             _uzytkownik = uzytkownik;
             controller = new RezygnacjaController(this);
+            controller.WypelnijRezerwacje(uzytkownik);
         }
 
         /// <summary>
@@ -97,7 +96,8 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_oblicz_Click(object sender, EventArgs e)
          {
-            int oblicz = controller.Oblicz(tb_numerRezerwacji.Text,_uzytkownik);
+            int numerRezerwacji = ((KeyValuePair<int, string>)cb_rezerwacje.SelectedItem).Key;
+            int oblicz = controller.Oblicz(numerRezerwacji, _uzytkownik);
 
             switch (oblicz)
             {
@@ -137,7 +137,8 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapisz_Click(object sender, EventArgs e)
         {
-            int zapisz = controller.Zapisz(tb_numerRezerwacji.Text, _uzytkownik);
+            int numerRezerwacji = ((KeyValuePair<int, string>)cb_rezerwacje.SelectedItem).Key;
+            int zapisz = controller.Zapisz(numerRezerwacji, _uzytkownik);
 
             switch (zapisz)
             {

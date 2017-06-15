@@ -31,10 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.tc_reklamacje = new System.Windows.Forms.TabControl();
             this.tp_dodaj_reklamacje = new System.Windows.Forms.TabPage();
-            this.b_sprawdzPoprawnosc = new System.Windows.Forms.Button();
-            this.tb_nazwaWycieczki = new System.Windows.Forms.TextBox();
-            this.tb_numerRezerwacji = new System.Windows.Forms.TextBox();
-            this.l_numerRezerwacji = new System.Windows.Forms.Label();
             this.b_zapisz = new System.Windows.Forms.Button();
             this.b_anuluj = new System.Windows.Forms.Button();
             this.l_opis_reklamacji = new System.Windows.Forms.Label();
@@ -45,6 +41,7 @@
             this.lv_reklamacje = new System.Windows.Forms.ListView();
             this.NumerReklamacji = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.cb_rezerwacje = new System.Windows.Forms.ComboBox();
             this.tc_reklamacje.SuspendLayout();
             this.tp_dodaj_reklamacje.SuspendLayout();
             this.tp_stan_reklamacji.SuspendLayout();
@@ -63,10 +60,7 @@
             // 
             // tp_dodaj_reklamacje
             // 
-            this.tp_dodaj_reklamacje.Controls.Add(this.b_sprawdzPoprawnosc);
-            this.tp_dodaj_reklamacje.Controls.Add(this.tb_nazwaWycieczki);
-            this.tp_dodaj_reklamacje.Controls.Add(this.tb_numerRezerwacji);
-            this.tp_dodaj_reklamacje.Controls.Add(this.l_numerRezerwacji);
+            this.tp_dodaj_reklamacje.Controls.Add(this.cb_rezerwacje);
             this.tp_dodaj_reklamacje.Controls.Add(this.b_zapisz);
             this.tp_dodaj_reklamacje.Controls.Add(this.b_anuluj);
             this.tp_dodaj_reklamacje.Controls.Add(this.l_opis_reklamacji);
@@ -80,45 +74,10 @@
             this.tp_dodaj_reklamacje.Text = "Dodaj reklamację";
             this.tp_dodaj_reklamacje.UseVisualStyleBackColor = true;
             // 
-            // b_sprawdzPoprawnosc
-            // 
-            this.b_sprawdzPoprawnosc.Location = new System.Drawing.Point(251, 6);
-            this.b_sprawdzPoprawnosc.Name = "b_sprawdzPoprawnosc";
-            this.b_sprawdzPoprawnosc.Size = new System.Drawing.Size(105, 46);
-            this.b_sprawdzPoprawnosc.TabIndex = 24;
-            this.b_sprawdzPoprawnosc.Text = "Sprawdź poprawność";
-            this.b_sprawdzPoprawnosc.UseVisualStyleBackColor = true;
-            this.b_sprawdzPoprawnosc.Click += new System.EventHandler(this.b_sprawdzPoprawnosc_Click);
-            // 
-            // tb_nazwaWycieczki
-            // 
-            this.tb_nazwaWycieczki.Enabled = false;
-            this.tb_nazwaWycieczki.Location = new System.Drawing.Point(124, 32);
-            this.tb_nazwaWycieczki.Name = "tb_nazwaWycieczki";
-            this.tb_nazwaWycieczki.Size = new System.Drawing.Size(121, 20);
-            this.tb_nazwaWycieczki.TabIndex = 23;
-            // 
-            // tb_numerRezerwacji
-            // 
-            this.tb_numerRezerwacji.Location = new System.Drawing.Point(124, 6);
-            this.tb_numerRezerwacji.Name = "tb_numerRezerwacji";
-            this.tb_numerRezerwacji.Size = new System.Drawing.Size(121, 20);
-            this.tb_numerRezerwacji.TabIndex = 22;
-            this.tb_numerRezerwacji.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_numerRezerwacji_KeyPress);
-            // 
-            // l_numerRezerwacji
-            // 
-            this.l_numerRezerwacji.AutoSize = true;
-            this.l_numerRezerwacji.Location = new System.Drawing.Point(5, 9);
-            this.l_numerRezerwacji.Name = "l_numerRezerwacji";
-            this.l_numerRezerwacji.Size = new System.Drawing.Size(88, 13);
-            this.l_numerRezerwacji.TabIndex = 21;
-            this.l_numerRezerwacji.Text = "Numer rezerwacji";
-            // 
             // b_zapisz
             // 
             this.b_zapisz.Enabled = false;
-            this.b_zapisz.Location = new System.Drawing.Point(124, 183);
+            this.b_zapisz.Location = new System.Drawing.Point(124, 154);
             this.b_zapisz.Name = "b_zapisz";
             this.b_zapisz.Size = new System.Drawing.Size(75, 23);
             this.b_zapisz.TabIndex = 17;
@@ -128,7 +87,7 @@
             // 
             // b_anuluj
             // 
-            this.b_anuluj.Location = new System.Drawing.Point(281, 183);
+            this.b_anuluj.Location = new System.Drawing.Point(281, 154);
             this.b_anuluj.Name = "b_anuluj";
             this.b_anuluj.Size = new System.Drawing.Size(75, 23);
             this.b_anuluj.TabIndex = 16;
@@ -139,7 +98,7 @@
             // l_opis_reklamacji
             // 
             this.l_opis_reklamacji.AutoSize = true;
-            this.l_opis_reklamacji.Location = new System.Drawing.Point(16, 62);
+            this.l_opis_reklamacji.Location = new System.Drawing.Point(16, 44);
             this.l_opis_reklamacji.Name = "l_opis_reklamacji";
             this.l_opis_reklamacji.Size = new System.Drawing.Size(78, 13);
             this.l_opis_reklamacji.TabIndex = 15;
@@ -148,7 +107,7 @@
             // l_nazwa_wycieczki
             // 
             this.l_nazwa_wycieczki.AutoSize = true;
-            this.l_nazwa_wycieczki.Location = new System.Drawing.Point(5, 36);
+            this.l_nazwa_wycieczki.Location = new System.Drawing.Point(5, 17);
             this.l_nazwa_wycieczki.Name = "l_nazwa_wycieczki";
             this.l_nazwa_wycieczki.Size = new System.Drawing.Size(89, 13);
             this.l_nazwa_wycieczki.TabIndex = 14;
@@ -156,7 +115,7 @@
             // 
             // tb_opis_reklamacji
             // 
-            this.tb_opis_reklamacji.Location = new System.Drawing.Point(124, 59);
+            this.tb_opis_reklamacji.Location = new System.Drawing.Point(124, 41);
             this.tb_opis_reklamacji.Multiline = true;
             this.tb_opis_reklamacji.Name = "tb_opis_reklamacji";
             this.tb_opis_reklamacji.Size = new System.Drawing.Size(232, 107);
@@ -178,6 +137,7 @@
             // 
             this.rtb_reklamacja.Location = new System.Drawing.Point(133, 6);
             this.rtb_reklamacja.Name = "rtb_reklamacja";
+            this.rtb_reklamacja.ReadOnly = true;
             this.rtb_reklamacja.Size = new System.Drawing.Size(223, 203);
             this.rtb_reklamacja.TabIndex = 1;
             this.rtb_reklamacja.Text = "Numer reklamacji:\nNazwa wycieczki:\nData wycieczki:\nOpis:\n\n\n\n";
@@ -202,8 +162,18 @@
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // cb_rezerwacje
+            // 
+            this.cb_rezerwacje.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_rezerwacje.FormattingEnabled = true;
+            this.cb_rezerwacje.Location = new System.Drawing.Point(124, 14);
+            this.cb_rezerwacje.Name = "cb_rezerwacje";
+            this.cb_rezerwacje.Size = new System.Drawing.Size(232, 21);
+            this.cb_rezerwacje.TabIndex = 18;
+            this.cb_rezerwacje.SelectedIndexChanged += new System.EventHandler(this.b_sprawdzPoprawnosc_Click);
             // 
             // ReklamacjaView
             // 
@@ -234,13 +204,10 @@
         private System.Windows.Forms.Label l_nazwa_wycieczki;
         public System.Windows.Forms.TextBox tb_opis_reklamacji;
         public System.Windows.Forms.TabPage tp_stan_reklamacji;
-        public System.Windows.Forms.TextBox tb_numerRezerwacji;
-        private System.Windows.Forms.Label l_numerRezerwacji;
         public System.Windows.Forms.ListView lv_reklamacje;
         public System.Windows.Forms.ColumnHeader NumerReklamacji;
         public System.Windows.Forms.RichTextBox rtb_reklamacja;
-        public System.Windows.Forms.TextBox tb_nazwaWycieczki;
-        private System.Windows.Forms.Button b_sprawdzPoprawnosc;
         private System.Windows.Forms.Timer timer1;
+        public System.Windows.Forms.ComboBox cb_rezerwacje;
     }
 }
