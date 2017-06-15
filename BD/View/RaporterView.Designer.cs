@@ -126,7 +126,7 @@
             this.Controls.Add(this.lb_kolumny);
             this.Controls.Add(this.lv_Sortowanie);
             this.Name = "RaporterView";
-            this.Text = "RaporterView";
+            this.Text = "Generator Raportów";
             this.ResumeLayout(false);
             this.PerformLayout();
 
