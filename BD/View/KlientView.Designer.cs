@@ -263,7 +263,7 @@
             // 
             // helpProvider
             // 
-            this.helpProvider.HelpNamespace = "C:\\Users\\karol\\Source\\Re\\BD\\BD\\Helper\\KlientHelper.chm";
+            this.helpProvider.HelpNamespace = "";
             // 
             // KlientView
             // 

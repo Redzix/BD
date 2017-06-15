@@ -77,7 +77,7 @@ namespace BD.View
             aktKatalog = new AktualizacjaController("wycieczka katalog");
             aktReklamacja = new AktualizacjaController("reklamacja");
             aktPojazd = new AktualizacjaController("pojazd");
-
+            this.helpProvider1.HelpNamespace = "Helper\\Kierownik.chm";
             timer1.Start();
         }
 

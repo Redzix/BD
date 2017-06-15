@@ -11,18 +11,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Katalog">
-      <EntityTypeMapping TypeName="bazaModel.Katalog">
-        <MappingFragment StoreEntitySet="Katalog">
-          <ScalarProperty Name="id_katalogu" ColumnName="id_katalogu" />
-          <ScalarProperty Name="okres_trwania_wycieczki" ColumnName="okres_trwania_wycieczki" />
-          <ScalarProperty Name="id_cennika" ColumnName="id_cennika" />
-          <ScalarProperty Name="id_miejsca_odjazdu" ColumnName="id_miejsca_odjazdu" />
-          <ScalarProperty Name="id_miejsca_przyjazdu" ColumnName="id_miejsca_przyjazdu" />
-          <ScalarProperty Name="id_wycieczki" ColumnName="id_wycieczki" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Kierowca">
       <EntityTypeMapping TypeName="bazaModel.Kierowca">
         <MappingFragment StoreEntitySet="Kierowca">
@@ -137,6 +125,7 @@
     <EntitySetMapping Name="Uczestnictwo">
       <EntityTypeMapping TypeName="bazaModel.Uczestnictwo">
         <MappingFragment StoreEntitySet="Uczestnictwo">
+          <ScalarProperty Name="cena_rezerwacji" ColumnName="cena_rezerwacji" />
           <ScalarProperty Name="id_uczestnictwo" ColumnName="id_uczestnictwo" />
           <ScalarProperty Name="liczba_osob" ColumnName="liczba_osob" />
           <ScalarProperty Name="numer_rezerwacji" ColumnName="numer_rezerwacji" />
@@ -162,6 +151,19 @@
         <MappingFragment StoreEntitySet="Promocja">
           <ScalarProperty Name="id_wycieczki" ColumnName="id_wycieczki" />
           <ScalarProperty Name="cena" ColumnName="cena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Katalog">
+      <EntityTypeMapping TypeName="bazaModel.Katalog">
+        <MappingFragment StoreEntitySet="Katalog">
+          <ScalarProperty Name="cena" ColumnName="cena" />
+          <ScalarProperty Name="id_wycieczki" ColumnName="id_wycieczki" />
+          <ScalarProperty Name="id_miejsca_przyjazdu" ColumnName="id_miejsca_przyjazdu" />
+          <ScalarProperty Name="id_miejsca_odjazdu" ColumnName="id_miejsca_odjazdu" />
+          <ScalarProperty Name="id_cennika" ColumnName="id_cennika" />
+          <ScalarProperty Name="okres_trwania_wycieczki" ColumnName="okres_trwania_wycieczki" />
+          <ScalarProperty Name="id_katalogu" ColumnName="id_katalogu" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

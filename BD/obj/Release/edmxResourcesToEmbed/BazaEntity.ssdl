@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="id_cennika" />
     </Key>
-    <Property Name="id_cennika" Type="int" Nullable="false" />
+    <Property Name="id_cennika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="cena" Type="decimal" Precision="10" Scale="2" />
     <Property Name="okres_od" Type="date" />
     <Property Name="okres_do" Type="date" />
@@ -13,12 +13,13 @@
     <Key>
       <PropertyRef Name="id_katalogu" />
     </Key>
-    <Property Name="id_katalogu" Type="int" Nullable="false" />
+    <Property Name="id_katalogu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="okres_trwania_wycieczki" Type="int" />
     <Property Name="id_cennika" Type="int" />
     <Property Name="id_miejsca_odjazdu" Type="int" />
     <Property Name="id_miejsca_przyjazdu" Type="int" />
     <Property Name="id_wycieczki" Type="int" />
+    <Property Name="cena" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="Kierowca">
     <Key>
@@ -54,7 +55,7 @@
     <Key>
       <PropertyRef Name="id_miejsca" />
     </Key>
-    <Property Name="id_miejsca" Type="int" Nullable="false" />
+    <Property Name="id_miejsca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="adres" Type="varchar" MaxLength="255" />
     <Property Name="miejscowosc" Type="varchar" MaxLength="64" />
   </EntityType>
@@ -62,7 +63,7 @@
     <Key>
       <PropertyRef Name="id_opini" />
     </Key>
-    <Property Name="id_opini" Type="int" Nullable="false" />
+    <Property Name="id_opini" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ocena" Type="int" />
     <Property Name="opis" Type="text" />
     <Property Name="id_uczestnictwo" Type="int" />
@@ -71,7 +72,7 @@
     <Key>
       <PropertyRef Name="id_panel" />
     </Key>
-    <Property Name="id_panel" Type="int" Nullable="false" />
+    <Property Name="id_panel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="login" Type="varchar" MaxLength="64" />
     <Property Name="haslo" Type="varchar" MaxLength="64" />
     <Property Name="stopien" Type="varchar" MaxLength="32" />
@@ -111,7 +112,7 @@
     <Key>
       <PropertyRef Name="numer_reklamacji" />
     </Key>
-    <Property Name="numer_reklamacji" Type="int" Nullable="false" />
+    <Property Name="numer_reklamacji" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="opis" Type="text" />
     <Property Name="stan" Type="bit" />
     <Property Name="Kierownik_pesel" Type="varchar" MaxLength="11" />
@@ -121,7 +122,7 @@
     <Key>
       <PropertyRef Name="numer_rezerwacji" />
     </Key>
-    <Property Name="numer_rezerwacji" Type="int" Nullable="false" />
+    <Property Name="numer_rezerwacji" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="liczba_osob" Type="int" />
     <Property Name="stan" Type="bit" />
     <Property Name="zaliczka" Type="decimal" Precision="10" Scale="2" />
@@ -132,25 +133,28 @@
     <Key>
       <PropertyRef Name="id_uczestnictwo" />
     </Key>
-    <Property Name="id_uczestnictwo" Type="int" Nullable="false" />
+    <Property Name="id_uczestnictwo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="liczba_osob" Type="int" />
     <Property Name="numer_rezerwacji" Type="int" />
+    <Property Name="cena_rezerwacji" Type="decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="Wycieczka">
     <Key>
       <PropertyRef Name="id_wycieczki" />
     </Key>
-    <Property Name="id_wycieczki" Type="int" Nullable="false" />
+    <Property Name="id_wycieczki" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nazwa" Type="varchar" MaxLength="128" />
-    <Property Name="data_wyjazdu" Type="date" />
-    <Property Name="data_powrotu" Type="date" />
+    <Property Name="data_wyjazdu" Type="datetime" />
+    <Property Name="data_powrotu" Type="datetime" />
     <Property Name="opis" Type="text" />
     <Property Name="Pilot_pesel" Type="varchar" MaxLength="11" />
     <Property Name="Pojazd_numer_rejestracyjny" Type="varchar" MaxLength="8" />
     <Property Name="Kierowca_pesel" Type="varchar" MaxLength="11" />
   </EntityType>
   <Association Name="Katalog_Cennik_FK">
-    <End Role="Cennik" Type="Self.Cennik" Multiplicity="0..1" />
+    <End Role="Cennik" Type="Self.Cennik" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Katalog" Type="Self.Katalog" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Cennik">
@@ -199,6 +203,48 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="Kierowca_Pesel_FK">
+    <End Role="Kierowca" Type="Self.Kierowca" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Panel_pracowniczy" Type="Self.Panel_pracowniczy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kierowca">
+        <PropertyRef Name="pesel" />
+      </Principal>
+      <Dependent Role="Panel_pracowniczy">
+        <PropertyRef Name="Kierowca_pesel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Kierownik_Pesel_FK">
+    <End Role="Kierownik" Type="Self.Kierownik" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Panel_pracowniczy" Type="Self.Panel_pracowniczy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kierownik">
+        <PropertyRef Name="pesel" />
+      </Principal>
+      <Dependent Role="Panel_pracowniczy">
+        <PropertyRef Name="Kierownik_pesel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Klient_Pesel_FK">
+    <End Role="Klient" Type="Self.Klient" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Panel_pracowniczy" Type="Self.Panel_pracowniczy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klient">
+        <PropertyRef Name="pesel" />
+      </Principal>
+      <Dependent Role="Panel_pracowniczy">
+        <PropertyRef Name="Klient_pesel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="Opinia_Uczestnictwo_FK">
     <End Role="Uczestnictwo" Type="Self.Uczestnictwo" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -213,49 +259,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Panel_pracowniczy_Kierowca_FK">
-    <End Role="Kierowca" Type="Self.Kierowca" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Panel_pracowniczy" Type="Self.Panel_pracowniczy" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Kierowca">
-        <PropertyRef Name="pesel" />
-      </Principal>
-      <Dependent Role="Panel_pracowniczy">
-        <PropertyRef Name="Kierowca_pesel" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Panel_pracowniczy_Kierownik_FK">
-    <End Role="Kierownik" Type="Self.Kierownik" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Panel_pracowniczy" Type="Self.Panel_pracowniczy" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Kierownik">
-        <PropertyRef Name="pesel" />
-      </Principal>
-      <Dependent Role="Panel_pracowniczy">
-        <PropertyRef Name="Kierownik_pesel" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Panel_pracowniczy_Klient_FK">
-    <End Role="Klient" Type="Self.Klient" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Panel_pracowniczy" Type="Self.Panel_pracowniczy" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Klient">
-        <PropertyRef Name="pesel" />
-      </Principal>
-      <Dependent Role="Panel_pracowniczy">
-        <PropertyRef Name="Klient_pesel" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Panel_pracowniczy_Pilot_FK">
+  <Association Name="Pilot_Pesel_FK">
     <End Role="Pilot" Type="Self.Pilot" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
     </End>
@@ -419,23 +423,23 @@
       <End Role="Wycieczka" EntitySet="Wycieczka" />
       <End Role="Katalog" EntitySet="Katalog" />
     </AssociationSet>
+    <AssociationSet Name="Kierowca_Pesel_FK" Association="Self.Kierowca_Pesel_FK">
+      <End Role="Kierowca" EntitySet="Kierowca" />
+      <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
+    </AssociationSet>
+    <AssociationSet Name="Kierownik_Pesel_FK" Association="Self.Kierownik_Pesel_FK">
+      <End Role="Kierownik" EntitySet="Kierownik" />
+      <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
+    </AssociationSet>
+    <AssociationSet Name="Klient_Pesel_FK" Association="Self.Klient_Pesel_FK">
+      <End Role="Klient" EntitySet="Klient" />
+      <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
+    </AssociationSet>
     <AssociationSet Name="Opinia_Uczestnictwo_FK" Association="Self.Opinia_Uczestnictwo_FK">
       <End Role="Uczestnictwo" EntitySet="Uczestnictwo" />
       <End Role="Opinia" EntitySet="Opinia" />
     </AssociationSet>
-    <AssociationSet Name="Panel_pracowniczy_Kierowca_FK" Association="Self.Panel_pracowniczy_Kierowca_FK">
-      <End Role="Kierowca" EntitySet="Kierowca" />
-      <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
-    </AssociationSet>
-    <AssociationSet Name="Panel_pracowniczy_Kierownik_FK" Association="Self.Panel_pracowniczy_Kierownik_FK">
-      <End Role="Kierownik" EntitySet="Kierownik" />
-      <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
-    </AssociationSet>
-    <AssociationSet Name="Panel_pracowniczy_Klient_FK" Association="Self.Panel_pracowniczy_Klient_FK">
-      <End Role="Klient" EntitySet="Klient" />
-      <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
-    </AssociationSet>
-    <AssociationSet Name="Panel_pracowniczy_Pilot_FK" Association="Self.Panel_pracowniczy_Pilot_FK">
+    <AssociationSet Name="Pilot_Pesel_FK" Association="Self.Pilot_Pesel_FK">
       <End Role="Pilot" EntitySet="Pilot" />
       <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
     </AssociationSet>

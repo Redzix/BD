@@ -31,25 +31,6 @@ namespace BD.View
         /// Zmienna przechowuje numer aktualnie wybranego pojazdu
         /// </summary>
         private string numerRejestracyjny;
-
-        /// <summary>
-        /// Główny bezparametrowy konstruktor okna
-        /// </summary>
-        public KierowcaView()
-        {
-            InitializeComponent();
-
-            l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
-            l_polaczenie.Text = "Połączony";
-            l_polaczenie.ForeColor = System.Drawing.Color.Green;
-
-            controller = new KierowcaController(this);
-
-            aktPojazdu = new AktualizacjaController("pojazd");
-
-            timer1.Start();
-        }
-
         /// <summary>
         /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu.
         /// </summary>
@@ -65,6 +46,8 @@ namespace BD.View
             controller = new KierowcaController(this);
 
             aktPojazdu = new AktualizacjaController("pojazd");
+
+            this.helpProvider.HelpNamespace = "Helper\\Kierowca.chm";
 
             timer1.Start();
 

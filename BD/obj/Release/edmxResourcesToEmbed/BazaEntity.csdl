@@ -4,26 +4,11 @@
     <Key>
       <PropertyRef Name="id_cennika" />
     </Key>
-    <Property Name="id_cennika" Type="Int32" Nullable="false" />
+    <Property Name="id_cennika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="cena" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="okres_od" Type="DateTime" Precision="0" />
     <Property Name="okres_do" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Katalog" Relationship="Self.Katalog_Cennik_FK" FromRole="Cennik" ToRole="Katalog" />
-  </EntityType>
-  <EntityType Name="Katalog">
-    <Key>
-      <PropertyRef Name="id_katalogu" />
-    </Key>
-    <Property Name="id_katalogu" Type="Int32" Nullable="false" />
-    <Property Name="okres_trwania_wycieczki" Type="Int32" />
-    <Property Name="id_cennika" Type="Int32" />
-    <Property Name="id_miejsca_odjazdu" Type="Int32" />
-    <Property Name="id_miejsca_przyjazdu" Type="Int32" />
-    <Property Name="id_wycieczki" Type="Int32" />
-    <NavigationProperty Name="Cennik" Relationship="Self.Katalog_Cennik_FK" FromRole="Katalog" ToRole="Cennik" />
-    <NavigationProperty Name="Miejsce" Relationship="Self.Katalog_Miejsce_FK" FromRole="Katalog" ToRole="Miejsce" />
-    <NavigationProperty Name="Miejsce1" Relationship="Self.Katalog_Miejsce_FKv2" FromRole="Katalog" ToRole="Miejsce" />
-    <NavigationProperty Name="Wycieczka" Relationship="Self.Katalog_Wycieczka_FK" FromRole="Katalog" ToRole="Wycieczka" />
+    <NavigationProperty Name="Katalog" Relationship="bazaModel.Katalog_Cennik_FK" FromRole="Cennik" ToRole="Katalog" />
   </EntityType>
   <EntityType Name="Kierowca">
     <Key>
@@ -65,17 +50,17 @@
     <Key>
       <PropertyRef Name="id_miejsca" />
     </Key>
-    <Property Name="id_miejsca" Type="Int32" Nullable="false" />
+    <Property Name="id_miejsca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="adres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="miejscowosc" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Katalog" Relationship="Self.Katalog_Miejsce_FK" FromRole="Miejsce" ToRole="Katalog" />
-    <NavigationProperty Name="Katalog1" Relationship="Self.Katalog_Miejsce_FKv2" FromRole="Miejsce" ToRole="Katalog" />
+    <NavigationProperty Name="Katalog" Relationship="bazaModel.Katalog_Miejsce_FK" FromRole="Miejsce" ToRole="Katalog" />
+    <NavigationProperty Name="Katalog1" Relationship="bazaModel.Katalog_Miejsce_FKv2" FromRole="Miejsce" ToRole="Katalog" />
   </EntityType>
   <EntityType Name="Opinia">
     <Key>
       <PropertyRef Name="id_opini" />
     </Key>
-    <Property Name="id_opini" Type="Int32" Nullable="false" />
+    <Property Name="id_opini" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ocena" Type="Int32" />
     <Property Name="opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="id_uczestnictwo" Type="Int32" />
@@ -85,7 +70,7 @@
     <Key>
       <PropertyRef Name="id_panel" />
     </Key>
-    <Property Name="id_panel" Type="Int32" Nullable="false" />
+    <Property Name="id_panel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="login" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="haslo" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
     <Property Name="stopien" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
@@ -137,7 +122,7 @@
     <Key>
       <PropertyRef Name="numer_rezerwacji" />
     </Key>
-    <Property Name="numer_rezerwacji" Type="Int32" Nullable="false" />
+    <Property Name="numer_rezerwacji" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="liczba_osob" Type="Int32" />
     <Property Name="stan" Type="Boolean" />
     <Property Name="zaliczka" Type="Decimal" Precision="10" Scale="2" />
@@ -151,82 +136,33 @@
     <Key>
       <PropertyRef Name="id_uczestnictwo" />
     </Key>
-    <Property Name="id_uczestnictwo" Type="Int32" Nullable="false" />
+    <Property Name="id_uczestnictwo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="liczba_osob" Type="Int32" />
     <Property Name="numer_rezerwacji" Type="Int32" />
     <NavigationProperty Name="Opinia" Relationship="Self.Opinia_Uczestnictwo_FK" FromRole="Uczestnictwo" ToRole="Opinia" />
     <NavigationProperty Name="Reklamacja" Relationship="Self.Reklamacja_Uczestnictwo_FK" FromRole="Uczestnictwo" ToRole="Reklamacja" />
     <NavigationProperty Name="Rezerwacja" Relationship="Self.Uczestnictwo_Rezerwacja_FK" FromRole="Uczestnictwo" ToRole="Rezerwacja" />
+    <Property Name="cena_rezerwacji" Type="Decimal" Precision="10" Scale="2" />
   </EntityType>
   <EntityType Name="Wycieczka">
     <Key>
       <PropertyRef Name="id_wycieczki" />
     </Key>
-    <Property Name="id_wycieczki" Type="Int32" Nullable="false" />
+    <Property Name="id_wycieczki" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nazwa" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-    <Property Name="data_wyjazdu" Type="DateTime" Precision="0" />
-    <Property Name="data_powrotu" Type="DateTime" Precision="0" />
+    <Property Name="data_wyjazdu" Type="DateTime" Precision="3" />
+    <Property Name="data_powrotu" Type="DateTime" Precision="3" />
     <Property Name="opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Pilot_pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
     <Property Name="Pojazd_numer_rejestracyjny" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
     <Property Name="Kierowca_pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Katalog" Relationship="Self.Katalog_Wycieczka_FK" FromRole="Wycieczka" ToRole="Katalog" />
     <NavigationProperty Name="Kierowca" Relationship="Self.Wycieczka_Kierowca_FK" FromRole="Wycieczka" ToRole="Kierowca" />
     <NavigationProperty Name="Pilot" Relationship="Self.Wycieczka_Pilot_FK" FromRole="Wycieczka" ToRole="Pilot" />
     <NavigationProperty Name="Pojazd" Relationship="Self.Wycieczka_Pojazd_FK" FromRole="Wycieczka" ToRole="Pojazd" />
     <NavigationProperty Name="Rezerwacja" Relationship="Self.Rezerwacja_Wycieczka_FK" FromRole="Wycieczka" ToRole="Rezerwacja" />
     <NavigationProperty Name="Promocja" Relationship="bazaModel.Promocja_Wycieczka_FK" FromRole="Wycieczka" ToRole="Promocja" />
+    <NavigationProperty Name="Katalog" Relationship="bazaModel.Katalog_Wycieczka_FK" FromRole="Wycieczka" ToRole="Katalog" />
   </EntityType>
-  <Association Name="Katalog_Cennik_FK">
-    <End Role="Cennik" Type="Self.Cennik" Multiplicity="0..1" />
-    <End Role="Katalog" Type="Self.Katalog" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cennik">
-        <PropertyRef Name="id_cennika" />
-      </Principal>
-      <Dependent Role="Katalog">
-        <PropertyRef Name="id_cennika" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Katalog_Miejsce_FK">
-    <End Role="Miejsce" Type="Self.Miejsce" Multiplicity="0..1" />
-    <End Role="Katalog" Type="Self.Katalog" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Miejsce">
-        <PropertyRef Name="id_miejsca" />
-      </Principal>
-      <Dependent Role="Katalog">
-        <PropertyRef Name="id_miejsca_przyjazdu" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Katalog_Miejsce_FKv2">
-    <End Role="Miejsce" Type="Self.Miejsce" Multiplicity="0..1" />
-    <End Role="Katalog" Type="Self.Katalog" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Miejsce">
-        <PropertyRef Name="id_miejsca" />
-      </Principal>
-      <Dependent Role="Katalog">
-        <PropertyRef Name="id_miejsca_odjazdu" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Katalog_Wycieczka_FK">
-    <End Role="Wycieczka" Type="Self.Wycieczka" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Katalog" Type="Self.Katalog" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Wycieczka">
-        <PropertyRef Name="id_wycieczki" />
-      </Principal>
-      <Dependent Role="Katalog">
-        <PropertyRef Name="id_wycieczki" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="Panel_pracowniczy_Kierowca_FK">
     <End Role="Kierowca" Type="Self.Kierowca" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -403,7 +339,6 @@
   </Association>
   <EntityContainer Name="bazaEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Cennik" EntityType="Self.Cennik" />
-    <EntitySet Name="Katalog" EntityType="Self.Katalog" />
     <EntitySet Name="Kierowca" EntityType="Self.Kierowca" />
     <EntitySet Name="Kierownik" EntityType="Self.Kierownik" />
     <EntitySet Name="Klient" EntityType="Self.Klient" />
@@ -416,22 +351,6 @@
     <EntitySet Name="Rezerwacja" EntityType="Self.Rezerwacja" />
     <EntitySet Name="Uczestnictwo" EntityType="Self.Uczestnictwo" />
     <EntitySet Name="Wycieczka" EntityType="Self.Wycieczka" />
-    <AssociationSet Name="Katalog_Cennik_FK" Association="Self.Katalog_Cennik_FK">
-      <End Role="Cennik" EntitySet="Cennik" />
-      <End Role="Katalog" EntitySet="Katalog" />
-    </AssociationSet>
-    <AssociationSet Name="Katalog_Miejsce_FK" Association="Self.Katalog_Miejsce_FK">
-      <End Role="Miejsce" EntitySet="Miejsce" />
-      <End Role="Katalog" EntitySet="Katalog" />
-    </AssociationSet>
-    <AssociationSet Name="Katalog_Miejsce_FKv2" Association="Self.Katalog_Miejsce_FKv2">
-      <End Role="Miejsce" EntitySet="Miejsce" />
-      <End Role="Katalog" EntitySet="Katalog" />
-    </AssociationSet>
-    <AssociationSet Name="Katalog_Wycieczka_FK" Association="Self.Katalog_Wycieczka_FK">
-      <End Role="Wycieczka" EntitySet="Wycieczka" />
-      <End Role="Katalog" EntitySet="Katalog" />
-    </AssociationSet>
     <AssociationSet Name="Panel_pracowniczy_Kierowca_FK" Association="Self.Panel_pracowniczy_Kierowca_FK">
       <End Role="Kierowca" EntitySet="Kierowca" />
       <End Role="Panel_pracowniczy" EntitySet="Panel_pracowniczy" />
@@ -489,6 +408,23 @@
       <End Role="Wycieczka" EntitySet="Wycieczka" />
       <End Role="Promocja" EntitySet="Promocja" />
     </AssociationSet>
+    <EntitySet Name="Katalog" EntityType="bazaModel.Katalog" />
+    <AssociationSet Name="Katalog_Cennik_FK" Association="bazaModel.Katalog_Cennik_FK">
+      <End Role="Cennik" EntitySet="Cennik" />
+      <End Role="Katalog" EntitySet="Katalog" />
+    </AssociationSet>
+    <AssociationSet Name="Katalog_Miejsce_FK" Association="bazaModel.Katalog_Miejsce_FK">
+      <End Role="Miejsce" EntitySet="Miejsce" />
+      <End Role="Katalog" EntitySet="Katalog" />
+    </AssociationSet>
+    <AssociationSet Name="Katalog_Miejsce_FKv2" Association="bazaModel.Katalog_Miejsce_FKv2">
+      <End Role="Miejsce" EntitySet="Miejsce" />
+      <End Role="Katalog" EntitySet="Katalog" />
+    </AssociationSet>
+    <AssociationSet Name="Katalog_Wycieczka_FK" Association="bazaModel.Katalog_Wycieczka_FK">
+      <End Role="Wycieczka" EntitySet="Wycieczka" />
+      <End Role="Katalog" EntitySet="Katalog" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Promocja">
     <Key>
@@ -508,6 +444,74 @@
         <PropertyRef Name="id_wycieczki" />
       </Principal>
       <Dependent Role="Promocja">
+        <PropertyRef Name="id_wycieczki" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Katalog">
+    <Key>
+      <PropertyRef Name="id_katalogu" />
+    </Key>
+    <Property Name="id_katalogu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="okres_trwania_wycieczki" Type="Int32" />
+    <Property Name="id_cennika" Type="Int32" />
+    <Property Name="id_miejsca_odjazdu" Type="Int32" />
+    <Property Name="id_miejsca_przyjazdu" Type="Int32" />
+    <Property Name="id_wycieczki" Type="Int32" />
+    <Property Name="cena" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="Cennik" Relationship="bazaModel.Katalog_Cennik_FK" FromRole="Katalog" ToRole="Cennik" />
+    <NavigationProperty Name="Miejsce" Relationship="bazaModel.Katalog_Miejsce_FK" FromRole="Katalog" ToRole="Miejsce" />
+    <NavigationProperty Name="Miejsce1" Relationship="bazaModel.Katalog_Miejsce_FKv2" FromRole="Katalog" ToRole="Miejsce" />
+    <NavigationProperty Name="Wycieczka" Relationship="bazaModel.Katalog_Wycieczka_FK" FromRole="Katalog" ToRole="Wycieczka" />
+  </EntityType>
+  <Association Name="Katalog_Cennik_FK">
+    <End Type="bazaModel.Cennik" Role="Cennik" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="bazaModel.Katalog" Role="Katalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cennik">
+        <PropertyRef Name="id_cennika" />
+      </Principal>
+      <Dependent Role="Katalog">
+        <PropertyRef Name="id_cennika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Katalog_Miejsce_FK">
+    <End Type="bazaModel.Miejsce" Role="Miejsce" Multiplicity="0..1" />
+    <End Type="bazaModel.Katalog" Role="Katalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Miejsce">
+        <PropertyRef Name="id_miejsca" />
+      </Principal>
+      <Dependent Role="Katalog">
+        <PropertyRef Name="id_miejsca_przyjazdu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Katalog_Miejsce_FKv2">
+    <End Type="bazaModel.Miejsce" Role="Miejsce" Multiplicity="0..1" />
+    <End Type="bazaModel.Katalog" Role="Katalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Miejsce">
+        <PropertyRef Name="id_miejsca" />
+      </Principal>
+      <Dependent Role="Katalog">
+        <PropertyRef Name="id_miejsca_odjazdu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Katalog_Wycieczka_FK">
+    <End Type="bazaModel.Wycieczka" Role="Wycieczka" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="bazaModel.Katalog" Role="Katalog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wycieczka">
+        <PropertyRef Name="id_wycieczki" />
+      </Principal>
+      <Dependent Role="Katalog">
         <PropertyRef Name="id_wycieczki" />
       </Dependent>
     </ReferentialConstraint>

@@ -37,27 +37,6 @@ namespace BD.View
         /// Zmienna przechowująca aktualnie numer wybranego listview
         /// </summary>
         private int indeksListview= 0;
-     
-
-        /// <summary>
-        /// Główny bezparametrowy konstruktor okna
-        /// </summary>
-        public KlientView()
-        {
-            InitializeComponent();
-
-            l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
-            l_polaczenie.Text = "Połączony";
-            l_polaczenie.ForeColor = System.Drawing.Color.Green;
-       
-            controller = new KlientController(this);
-
-            aktKlienta = new AktualizacjaController("wycieczka");
-
-            this.lv_klient.Columns.Remove(this.cenaDoZaplaty);
-
-            timer1.Start();
-        }
 
         /// <summary>
         /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu 
@@ -77,6 +56,8 @@ namespace BD.View
             aktKlienta = new AktualizacjaController("wycieczka promocja katalog");
 
             this.lv_klient.Columns.Remove(this.cenaDoZaplaty);
+
+            this.helpProvider.HelpNamespace = "Helper\\KlientHelper.chm";
 
             timer1.Start();
 

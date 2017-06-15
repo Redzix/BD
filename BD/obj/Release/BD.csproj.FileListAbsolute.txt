@@ -23,3 +23,10 @@ C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.exe
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.pdb
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.csprojResolveAssemblyReference.cache
 C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.KlientView.resources
+C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.PromocjaView.resources
+C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.RaporterView.resources
+C:\Users\preze\Source\Repos\BD\BD\obj\Release\BD.View.RejestracjaView.resources
+C:\Users\preze\Source\Repos\BD\BD\bin\Release\Helper\Kierowca.chm
+C:\Users\preze\Source\Repos\BD\BD\bin\Release\Helper\Kierownik.chm
+C:\Users\preze\Source\Repos\BD\BD\bin\Release\Helper\KlientHelper.chm
+C:\Users\preze\Source\Repos\BD\BD\bin\Release\Helper\Pilot.chm

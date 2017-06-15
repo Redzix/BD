@@ -31,23 +31,6 @@ namespace BD.View
         private Pilot _uzytkownik;
 
         /// <summary>
-        /// Główny bezparametrowy konstruktor okna,, tworzący okno oraz połączenie z bazą danych.
-        /// </summary>
-        public PilotView()
-        {
-            InitializeComponent();
-
-            l_uzytkownik.Text = "Niezidentyfikowany użytkownik";
-            l_polaczenie.Text = "Połączony";
-            l_polaczenie.ForeColor = System.Drawing.Color.Green;
-
-            controller = new PilotController(this);
-
-            aktWycieczki = new AktualizacjaController("wycieczka");
-
-        }
-
-        /// <summary>
         /// Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu
         /// oraz tworzący połączenie z bazą danych.
         /// </summary>
@@ -64,6 +47,8 @@ namespace BD.View
             controller = new PilotController(this);
 
             aktWycieczki = new AktualizacjaController("wycieczka");
+
+            this.helpProvider.HelpNamespace = "Helper\\Pilot.chm";
 
             timer1.Start();
         }
