@@ -102,6 +102,7 @@ namespace BD.View
             {
                 RezerwacjaView rezerwacja = new RezerwacjaView(_idWycieczki, _uzytkownik.pesel);
                 rezerwacja.ShowDialog();
+                this.b_katalog_rezerwuj.Enabled = false;
             }
         }
 
@@ -326,7 +327,7 @@ namespace BD.View
         /// </summary>
         /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
-        private void wyświetlWszystkieWycieczkiToolStripMenuItem_Click(object sender, EventArgs e)
+        private void wyswietlWszystkieWycieczkiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
             this.nazwaWycieczki.Text = "Nazwa wycieczki";
@@ -338,6 +339,7 @@ namespace BD.View
             this.cenaCalkowita.Width = 110;
             this.lv_klient.Columns.Remove(this.cenaDoZaplaty);
             this.tb_szukaj.Enabled = true;
+            this.b_katalog_rezerwuj.Enabled = false;
             this.rtb_wycieczka.Text = "Nazwa\nData wyjazdu\nData powrotu\nOpis\n\nAdres miejsca\nMiejscowość";
             this.b_zaplac.Enabled = false;
             indeksListview = 0;
@@ -350,7 +352,7 @@ namespace BD.View
         /// </summary>
         /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
         /// <param name="e">Zdarzenia systemowe</param>
-        private void wyświetlMojeRezerwacjeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void wyswietlMojeRezerwacjeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.nazwaWycieczki.Text = "Numer";
             this.nazwaWycieczki.Width = 60;
@@ -364,6 +366,7 @@ namespace BD.View
             this.cenaDoZaplaty.Width = 110;
             this.tb_szukaj.Enabled = false;
             this.b_szukaj.Enabled = false;
+            this.b_katalog_rezerwuj.Enabled = false;
             this.rtb_wycieczka.Text = "Numer rezerwacji\nLiczba osób\nNazwa Wycieczki\nCena całkowita\nData wyjazdu\nData powrotu\nOpis wycieczki";
             indeksListview = 1;
 

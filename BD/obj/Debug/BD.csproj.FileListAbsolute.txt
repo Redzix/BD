@@ -213,3 +213,8 @@ C:\Users\preze\Source\Repos\BD\BD\bin\Debug\Helper\Kierownik.chm
 C:\Users\preze\Source\Repos\BD\BD\bin\Debug\Helper\KlientHelper.chm
 C:\Users\preze\Source\Repos\BD\BD\bin\Debug\Helper\Pilot.chm
 C:\Users\preze\Source\Repos\BD\BD\obj\Debug\BD.csprojResolveAssemblyReference.cache
+C:\Users\karol\Source\Re\BD2\BD\bin\Debug\Helper\Kierowca.chm
+C:\Users\karol\Source\Re\BD2\BD\bin\Debug\Helper\Kierownik.chm
+C:\Users\karol\Source\Re\BD2\BD\bin\Debug\Helper\KlientHelper.chm
+C:\Users\karol\Source\Re\BD2\BD\bin\Debug\Helper\Pilot.chm
+C:\Users\karol\Source\Re\BD2\BD\obj\Debug\BD.View.RaporterView.resources

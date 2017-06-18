@@ -28,7 +28,6 @@ namespace BD.Controller
         public KlientController(KlientView view)
         {
             _view = (KlientView)view;
-            db = new bazaEntities();
         }
 
         /// <summary>
@@ -37,6 +36,8 @@ namespace BD.Controller
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public bool PobierzWycieczki()
         {
+            db = new bazaEntities();
+
             _view.lv_klient.Items.Clear();
 
             var query = from katalog in db.Katalog
@@ -79,6 +80,8 @@ namespace BD.Controller
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int PobierzDaneWycieczki(string _idWycieczki)
         {
+            db = new bazaEntities();
+
             try
             {
                 //Pobranie z tabeli oraz z bazy danych odpowiednich wartości do wyświetlenia.
@@ -96,7 +99,7 @@ namespace BD.Controller
                                  miejsceDoceloweMiejscowosc = katalog.Miejsce1.miejscowosc,
                                  cena = katalog.cena
                              }).FirstOrDefault();
-
+            
                 if (pobierz == null)
                 {
                     return -1;
@@ -134,6 +137,8 @@ namespace BD.Controller
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public bool SzukajWycieczki(string szukanaFraza)
         {
+            db = new bazaEntities();
+
             var szukaj = from katalog in db.Katalog
                          where (katalog.Wycieczka.nazwa + " " + katalog.Miejsce1.miejscowosc).Contains(szukanaFraza)
                          select new
@@ -174,6 +179,7 @@ namespace BD.Controller
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int PobierzRezerwacje(string pesel)
         {
+            db = new bazaEntities();
             int doZaplaty = 0;
 
             _view.lv_klient.Items.Clear();
@@ -204,7 +210,7 @@ namespace BD.Controller
                
                     if ((ucz.wycieczka.WycieczkaZaplanowana(DateTime.Now)) && (!bool.Parse(ucz.rezerwacja.stan.ToString())))
                     {
-                        rezerwacja.BackColor = Color.White;
+                        rezerwacja.BackColor = Color.Yellow;
                         doZaplaty++;
                     }
                     else if (ucz.wycieczka.WycieczkaOdbyta(DateTime.Now))
@@ -227,6 +233,8 @@ namespace BD.Controller
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int PobierzDaneRezerwacji(string numerRezerwacji)
         {
+            db = new bazaEntities();
+
             try
             {
                 //Pobranie z tabeli oraz z bazy danych odpowiednich wartości do wyświetlenia.
@@ -271,12 +279,14 @@ namespace BD.Controller
         }
 
         /// <summary>
-        /// Metoda sprawdza, czy wycieczka została już odbyta lub jest w rakcie
+        /// Metoda sprawdza, czy wycieczka została już odbyta lub jest w trakcie
         /// </summary>
         /// <param name="_idWycieczki">Numeraktualnie wybranej w listview wycieczki.</param>
         /// <returns>Zwraca  true jeśli wycieczka została odbyta, false jeśli jest zaplanowana.</returns>
         public bool SprawdzCzyOdbyta(int idWycieczki)
         {
+            db = new bazaEntities();
+
             var sprawdz = (from wycieczka in db.Wycieczka
                            where wycieczka.id_wycieczki == idWycieczki
                            select wycieczka).FirstOrDefault();

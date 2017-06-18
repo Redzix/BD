@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BD.View;
+using System.Windows.Forms;
 
 namespace BD.Controller
 {
@@ -18,13 +19,6 @@ namespace BD.Controller
         /// Model danych.
         /// </summary>
         private bazaEntities db;
-
-        /// <summary>
-        /// Zmienna przechowująca informacje o tym, czy użytkownik
-        /// chce zapisać zmiany dla pierwotnie wybranej rezerwacji, czy zmienił jej numer
-        /// </summary>
-        private int sprawdzCzyTaSama;
-
 
         /// <summary>
         /// Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
@@ -43,23 +37,20 @@ namespace BD.Controller
         /// <param name="numerRezerwacji">Numer rezerwacji, dla której pobierane sa informacje.</param>
         /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int PobierzNazweWycieczki(string numerRezerwacji, string uzytkownik)
-        {
-            
+        public int PobierzCeneWycieczki(int numerRezerwacji, string uzytkownik)
+        {       
             
                 try
                 {
-                    int numer = int.Parse(numerRezerwacji);
-                    sprawdzCzyTaSama = numer;
 
                     var rez = (from rezerwacja in db.Rezerwacja
-                               where rezerwacja.numer_rezerwacji == numer && rezerwacja.Klient_pesel.Equals(uzytkownik)
+                               where rezerwacja.numer_rezerwacji == numerRezerwacji && rezerwacja.Klient_pesel.Equals(uzytkownik)
                                select rezerwacja).FirstOrDefault();
 
                 if (!bool.Parse(rez.stan.ToString()))
                 {
                     var uczest = (from uczestnictwo in db.Uczestnictwo
-                                  where uczestnictwo.numer_rezerwacji == numer
+                                  where uczestnictwo.numer_rezerwacji == numerRezerwacji
                                   select uczestnictwo).FirstOrDefault();
 
                     if (rez == null)
@@ -68,7 +59,6 @@ namespace BD.Controller
                     }
                     else
                     {
-                        _view.tb_nazwaWycieczkiZaplac.Text = rez.Wycieczka.nazwa;
                         _view.tb_kwotaCalkowita.Text = (uczest.cena_rezerwacji).ToString();
                         _view.tb_kwotaDoZaplaty.Text = (uczest.cena_rezerwacji - rez.zaliczka).ToString();
 
@@ -92,21 +82,17 @@ namespace BD.Controller
         /// <param name="numerRezerwacji">Numer rezerwacji, dla której pobierane sa informacje.</param>
         /// <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
-        public int ZaplacRezerwacje(string numerRezerwacji, string uzytkownik)
+        public int ZaplacRezerwacje(int numerRezerwacji, string uzytkownik)
         {
             try
             {
-                int numer = int.Parse(_view.tb_numerRezerwacji.Text);
-
-                if (sprawdzCzyTaSama == numer)
-                {
                     var rez = (from rezerwacja in db.Rezerwacja
-                               where rezerwacja.numer_rezerwacji == numer
+                               where rezerwacja.numer_rezerwacji == numerRezerwacji
                                && rezerwacja.Klient_pesel.Equals(uzytkownik)
                                select rezerwacja).FirstOrDefault();
 
                     var uczest = (from uczestnictwo in db.Uczestnictwo
-                                  where uczestnictwo.numer_rezerwacji == numer
+                                  where uczestnictwo.numer_rezerwacji == numerRezerwacji
                                   && uczestnictwo.Rezerwacja.Klient_pesel.Equals(uzytkownik)
                                   select uczestnictwo).FirstOrDefault();
                     try
@@ -141,11 +127,6 @@ namespace BD.Controller
                     {
                         return -3;
                     }
-                }
-                else
-                {
-                    return -2;
-                }
             }
             catch (FormatException exception)
             {
@@ -239,6 +220,42 @@ namespace BD.Controller
 
             return klient;
         }
+
+        /// <summary>
+        /// Metoda wypełniająca nazwę wycieczki dla dokonanych rezerwacji
+        /// </summary>
+        /// <returns>True jeśli się uda</returns>
+        public bool WypelnijRezerwacje(string pesel)
+        {
+            try
+            {
+                using (var db = new bazaEntities())
+                {
+                    Dictionary<int, string> values = new Dictionary<int, string>();
+                    var query = from rezerwacja in db.Rezerwacja
+                                where rezerwacja.Klient_pesel.Equals(pesel) && rezerwacja.stan == false
+                                select new
+                                {
+                                    rezerwacja,
+                                    rezerwacja.Wycieczka.nazwa
+                                };
+
+                    foreach (var row in query)
+                    {
+                        values.Add(row.rezerwacja.numer_rezerwacji, row.nazwa);
+                    }
+                    this._view.cb_nazwaWycieczki.DataSource = new BindingSource(values, null);
+                    this._view.cb_nazwaWycieczki.DisplayMember = "Value";
+                    this._view.cb_nazwaWycieczki.ValueMember = "Key";
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+
 
     }
 }

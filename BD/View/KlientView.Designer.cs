@@ -128,14 +128,14 @@
             this.wyświetlWszystkieWycieczkiToolStripMenuItem.Name = "wyświetlWszystkieWycieczkiToolStripMenuItem";
             this.wyświetlWszystkieWycieczkiToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
             this.wyświetlWszystkieWycieczkiToolStripMenuItem.Text = "Wyświetl wszystkie wycieczki";
-            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Click += new System.EventHandler(this.wyświetlWszystkieWycieczkiToolStripMenuItem_Click);
+            this.wyświetlWszystkieWycieczkiToolStripMenuItem.Click += new System.EventHandler(this.wyswietlWszystkieWycieczkiToolStripMenuItem_Click);
             // 
             // wyświetlMojeRezerwacjeToolStripMenuItem
             // 
             this.wyświetlMojeRezerwacjeToolStripMenuItem.Name = "wyświetlMojeRezerwacjeToolStripMenuItem";
             this.wyświetlMojeRezerwacjeToolStripMenuItem.Size = new System.Drawing.Size(154, 20);
             this.wyświetlMojeRezerwacjeToolStripMenuItem.Text = "Wyświetl moje rezerwacje";
-            this.wyświetlMojeRezerwacjeToolStripMenuItem.Click += new System.EventHandler(this.wyświetlMojeRezerwacjeToolStripMenuItem_Click);
+            this.wyświetlMojeRezerwacjeToolStripMenuItem.Click += new System.EventHandler(this.wyswietlMojeRezerwacjeToolStripMenuItem_Click);
             // 
             // l_polaczenie
             // 

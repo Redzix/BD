@@ -36,13 +36,15 @@ namespace BD.View
         public RezerwacjaView(string uzytkownik)
         {
             InitializeComponent();
-            this.p_rezerwuj.Visible = false;
             this.p_zaplac.Visible = true;
-            b_zapłaćRezerwacje.Enabled = false;
+            this.p_rezerwuj.Visible = false;
+            b_zapłaćRezerwacje.Enabled = true;
 
             controller = new RezerwacjaController(this);
 
             _uzytkownik = controller.PobierzDaneKlienta(uzytkownik);
+
+            controller.WypelnijRezerwacje(uzytkownik);
         }
 
         /// <summary>
@@ -56,8 +58,7 @@ namespace BD.View
             _idWycieczki = idWycieczki;
             InitializeComponent();
             this.p_zaplac.Visible = false;
-            this.p_rezerwuj.Visible = true;
-            b_zapłaćRezerwacje.Enabled = false;          
+            this.p_rezerwuj.Visible = true;               
 
             controller = new RezerwacjaController(this);
 
@@ -111,9 +112,7 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_rezerwacja_zapisz_Click(object sender, EventArgs e)
         {
-            int zapisz = controller.DodajRezerwacje(_idWycieczki,_uzytkownik);
-
-            
+            int zapisz = controller.DodajRezerwacje(_idWycieczki,_uzytkownik);                      
 
             switch (zapisz)
             {
@@ -149,7 +148,8 @@ namespace BD.View
         /// <param name="e">Zdarzenia systemowe</param>
         private void b_zapłaćRezerwacje_Click(object sender, EventArgs e)
         {
-            int zaplac = controller.ZaplacRezerwacje(tb_numerRezerwacji.Text, _uzytkownik.pesel);
+            int numerRezerwacji = ((KeyValuePair<int, string>)cb_nazwaWycieczki.SelectedItem).Key;
+            int zaplac = controller.ZaplacRezerwacje(numerRezerwacji, _uzytkownik.pesel);
 
             switch(zaplac)
             {
@@ -182,38 +182,6 @@ namespace BD.View
         }
 
         /// <summary>
-        /// Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji 
-        /// pobierającej i wyswiętlającej informacje o rezerwacji i obsługe jej komunikatów
-        /// </summary>
-        /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
-        /// <param name="e">Zdarzenia systemowe</param>
-        private void tb_numerRezerwacji_Leave(object sender, EventArgs e)
-        {
-            int pobierz = controller.PobierzNazweWycieczki(tb_numerRezerwacji.Text,_uzytkownik.pesel);
-
-            switch(pobierz)
-            {
-                case -1:
-                    MessageBox.Show("Podano nieprawidłowy numer rezerwacji. Taka rezerwacja nie istnieje.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    b_zapłaćRezerwacje.Enabled = false;
-                    break;
-                case 1:
-                    b_zapłaćRezerwacje.Enabled = true;
-                    break;
-                case 0:
-                    MessageBox.Show("Podano nieprawidłowy numer rezerwacji.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    b_zapłaćRezerwacje.Enabled = false;
-                    break;
-                case -2:
-                    MessageBox.Show("Rezerwacja została już całkowicie zapłacona.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    b_zapłaćRezerwacje.Enabled = false;
-                    break;
-                default:
-                    break;
-            }      
-        }
-
-        /// <summary>
         /// Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_liczba_osob
         /// </summary>
         /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
@@ -237,6 +205,33 @@ namespace BD.View
             {
                 e.Handled = true;
             }
+        }
+
+        private void cb_nazwaWycieczki_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int numerRezerwacji = ((KeyValuePair<int, string>)cb_nazwaWycieczki.SelectedItem).Key;
+            int pobierz = controller.PobierzCeneWycieczki(numerRezerwacji, _uzytkownik.pesel);
+
+        switch (pobierz)
+        {
+            case -1:
+                MessageBox.Show("Podano nieprawidłowy numer rezerwacji. Taka rezerwacja nie istnieje.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                b_zapłaćRezerwacje.Enabled = false;
+                break;
+            case 1:
+                b_zapłaćRezerwacje.Enabled = true;
+                break;
+            case 0:
+                MessageBox.Show("Podano nieprawidłowy numer rezerwacji.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                b_zapłaćRezerwacje.Enabled = false;
+                break;
+            case -2:
+                MessageBox.Show("Rezerwacja została już całkowicie zapłacona.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                b_zapłaćRezerwacje.Enabled = false;
+                break;
+            default:
+                break;
+        }
         }
     }
 }
