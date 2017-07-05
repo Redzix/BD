@@ -59,7 +59,6 @@ namespace BD.View
                 MessageBox.Show("Dodano");
             else
                 MessageBox.Show("Nie dodano");
-            controller.LadujKatalog();
             this.Dispose();
         }
 
@@ -75,7 +74,6 @@ namespace BD.View
                 MessageBox.Show("Zmieniono promocję");
             else
                 MessageBox.Show("NIe zmieniono, bo coś się popsuło");
-            controller.LadujKatalog();
             this.Dispose();
         }
 

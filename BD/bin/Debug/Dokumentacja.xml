@@ -1,0 +1,1741 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BD</name>
+    </assembly>
+    <members>
+        <member name="F:BD.Controller.KierowcaController._view">
+            <summary>
+            Obiekt widoku.
+            </summary>
+        </member>
+        <member name="F:BD.Controller.KierowcaController.db">
+            <summary>
+            Model danych.
+            </summary>
+        </member>
+        <member name="M:BD.Controller.KierowcaController.#ctor(BD.View.KierowcaView)">
+            <summary>
+            Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+            </summary>
+            <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
+        </member>
+        <member name="M:BD.Controller.KierowcaController.PobierzPojazdy">
+            <summary>
+            Metoda pobierająca pojazdy z bazy danych oraz dodająca je do widoku.
+            </summary>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.KierowcaController.ZapiszZmiany(System.String)">
+            <summary>
+            Metoda zapisuuje do bazy danych zmiany dla wybranego wcześniej pojazdu.
+            </summary>
+            <param name="numerRejestracyjny">Numer rejestracyjny edytowanego pojazdu.</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="F:BD.Controller.KierownikController.view">
+            <summary>
+            Widok obsługiwan w danej instancji przez kontroler
+            </summary>
+        </member>
+        <member name="M:BD.Controller.KierownikController.#ctor(System.Object)">
+            <summary>
+            Konstruktor kontrolera
+            </summary>
+            <param name="view">Widok obsługiwany przez kontroler</param>
+        </member>
+        <member name="M:BD.Controller.KierownikController.LadujKatalog">
+            <summary>
+            Ładuje wszystkie wpisy katalogu do odpowiedniego listview. Ładuje tylko aktualne wyceiczki gdy checkbox nie jest aktywny na formatce.
+            </summary>
+            <returns>True, jeśli wszystko dobrze</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.DodajKatalog">
+            <summary>
+            Dodaje katalog do bazy danych
+            </summary>
+            <returns>True jeśli się powiodło, false jeśli nie</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.WypelnijKatalogBoxy">
+            <summary>
+            Metoda do wypełnienia wsyzstkich comboboxów
+            </summary>
+            <returns>True jeśli się powiodło</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.WypelnijKatalogDoEdycji(System.Int32)">
+            <summary>
+            Wypełnienie pól katalogu w celu jego edycji
+            </summary>
+            <param name="idKatalog">ID katalog edytowanego</param>
+            <returns>True jesli wypełnienie się uda</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.EdytujKatalog(System.Int32)">
+            <summary>
+            Metoda do edycji katalogu.
+            </summary>
+            <param name="idKatalog">ID katalogu edytowanego</param>
+            <returns>True jeśli modyfikacja się udała</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.UsunKatalog(System.Int32)">
+            <summary>
+            Metoda do usuwania katalogu razem z "braćmi"
+            </summary>
+            <param name="idKatalog">ID katalogu do usunięcia</param>
+            <returns>True jeśli się powiodło usunięcie</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.LadujReklamacje">
+            <summary>
+            Ładowanie reklamacji do listview w zależności od checkboxa na formie.
+            </summary>
+            <returns>True jeśli się powiodło</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.WypelnijReklamacjeDoRozpatrzenia(System.Int32)">
+            <summary>
+            Metoda ladująca odpowiednie pola służące do rozpatrzenia rekalamcji
+            </summary>
+            <param name="idReklamacji">ID reklamacji do rozpatrzenia</param>
+            <returns>True jeśli się powiodła zmiana</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.RozpatrzReklamacje(System.Int32,System.Boolean,System.String)">
+            <summary>
+            Metoda służaca do aktualizacji stanu reklamacji
+            </summary>
+            <param name="idReklamacji">ID reklamacji do rozpatrzenia</param>
+            <param name="stan">True jeśi pozytywnie</param>
+            <param name="peselKierownika">Pesel kierownika dokonującego rozpatrzenia</param>
+            <returns></returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.LadujPojazdy">
+            <summary>
+            Metoda służaca do ładowania wszystkich pojazdów do odpowiedniego listview
+            </summary>
+            <returns>True jeśli się powiodło</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.DodajPojazd">
+            <summary>
+            Metoda odpowiedzialna za dodawanie nowego pojazdu do bazy danych wraz z wszystimi informacjami o nim.
+            </summary>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.EdytujStanPojazdu(System.String,System.Boolean)">
+            <summary>
+            Metoda do zmiany stanu pojazdu
+            </summary>
+            <param name="pojazdRejestracja">Numer rejestracyjny pojazdu</param>
+            <param name="stan">True jeśli sprawny, false jesli niesprawny</param>
+            <returns>True jeśli się powiodła zmiana stanu</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.EdytujDostepnoscPojazdu(System.String,System.Boolean)">
+            <summary>
+            Metoda zmieniająca wartość dostepności danego pojazdu
+            </summary>
+            <param name="pojazdRejestracja">Numer rejestracyjny pojazdu edytowanego</param>
+            <param name="dostepny">Dostępność pojazdu</param>
+            <returns>True jeśli się powiodła zmiana</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.UsunPojazd(System.String)">
+            <summary>
+            Metoda do usuwania pojazdu
+            </summary>
+            <param name="pojazdRejestracja">NUmer rejestracyjny pojazdu usuwanego</param>
+            <returns>Zwraca true jeśli się powiodło</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.DodajPromocje(System.Int32)">
+            <summary>
+            Metoda służąca do dodania promocji
+            </summary>
+            <param name="idKatalog">ID katalogu do którego jest wycieczka na promocji</param>
+            <returns>True jeśli się uda</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.LadujPromocje(System.Int32)">
+            <summary>
+            Ładowanie ceny do textboxa z kwotą
+            </summary>
+            <param name="idKatalogu">Wiadomo</param>
+            <returns>True, jeśli załadowało. False jeśli promocja nie istnieje</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.EdytujPromocje(System.Int32)">
+            <summary>
+            Edycja promocji
+            </summary>
+            <param name="idKatalogu">ID katalogu, który zawiera promocję w wycieczce do edycji</param>
+            <returns>True, jeśli się uda. False jeśli nie</returns>
+        </member>
+        <member name="M:BD.Controller.KierownikController.UsunPromocje(System.Int32)">
+            <summary>
+            Metoda służąca do usunięcia promocji, jeśli jej wartość wynosi 0 lub jest pusta
+            </summary>
+            <param name="idKatalogu">Id katalogu, w którym jest wycieczka z daną promocją do usunięcia</param>
+            <returns>True jeśli usunięte, false jeśli nie</returns>
+        </member>
+        <member name="F:BD.Controller.KlientController._view">
+            <summary>
+            Obiekt widoku.
+            </summary>
+        </member>
+        <member name="F:BD.Controller.KlientController.db">
+            <summary>
+            Model danych.
+            </summary>
+        </member>
+        <member name="M:BD.Controller.KlientController.#ctor(BD.View.KlientView)">
+            <summary>
+            Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+            </summary>
+            <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
+        </member>
+        <member name="M:BD.Controller.KlientController.PobierzWycieczki">
+            <summary>
+            Metoda pobierająca wycieczki z bazy danych i dodająca je do aktualnego widoku.
+            </summary>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.KlientController.PobierzDaneWycieczki(System.String)">
+            <summary>
+            Metoda pobiera szczegółowe informacje o wybranej wycieczce i dodaje je do richtextboxa
+            </summary>
+            <param name="_idWycieczki">Id aktualnie wybranej w listview wycieczki.</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.KlientController.SzukajWycieczki(System.String)">
+            <summary>
+            Metoda pobiera wyszukująca wycieczki według nazwy i miejscowosci
+            </summary>
+            <param name="_idWycieczki">Id aktualnie wybranej w listview wycieczki.</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.KlientController.PobierzRezerwacje(System.String)">
+            <summary>
+            Metoda pobierająca rezerwacje aktualnego użytkownika dodająca je do aktualnego widoku.
+            </summary>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.KlientController.PobierzDaneRezerwacji(System.String)">
+            <summary>
+            Metoda pobiera szczegółowe informacje o wybranej rezerwacji i dodaje je do richtextboxa
+            </summary>
+            <param name="numerRezerwacji">Numeraktualnie wybranej w listview rezerwacji.</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.KlientController.SprawdzCzyOdbyta(System.Int32)">
+            <summary>
+            Metoda sprawdza, czy wycieczka została już odbyta lub jest w trakcie
+            </summary>
+            <param name="_idWycieczki">Numeraktualnie wybranej w listview wycieczki.</param>
+            <returns>Zwraca  true jeśli wycieczka została odbyta, false jeśli jest zaplanowana.</returns>
+        </member>
+        <member name="F:BD.Controller.OpiniaController._view">
+            <summary>
+            Obiekt widoku.
+            </summary>
+        </member>
+        <member name="F:BD.Controller.OpiniaController.db">
+            <summary>
+            Model danych.
+            </summary>
+        </member>
+        <member name="M:BD.Controller.OpiniaController.#ctor(BD.View.OpiniaView)">
+            <summary>
+            Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+            </summary>
+            <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
+        </member>
+        <member name="M:BD.Controller.OpiniaController.DodajOpinie(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Metoda odpowiedzialna za dodawanie opiniii do bazy dacych.
+            </summary>
+            <param name="numerRezerwacji">Numer rezerwacji, której dotyczy opinia.</param>
+            <param name="ocena">Ocena wycieczki</param>
+            <param name="opis">Opis wycieczki</param>
+            <param name="uzytkownik">Pesel użytkownika, który zamawiał wycieczkę</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.OpiniaController.PobierzNazweWycieczki(System.Int32,System.String)">
+            <summary>
+            Metoda odpowiedzialna pobieranie nazwy wycieczki w celu uzupełnienia formularza.
+            </summary>
+            <param name="numerRezerwacji">Numer rezerwacji, której dotyczy opinia.</param>
+            <param name="uzytkownik">Pesel użytkownika, który zamawiał wycieczkę</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.OpiniaController.WypelnijRezerwacje(System.String)">
+            <summary>
+            Metoda wypełniająca nazwę wycieczki dla dokonanych rezerwacji
+            </summary>
+            <returns>True jeśli się uda</returns>
+        </member>
+        <member name="F:BD.Controller.PanelPracowniczyController._view">
+            <summary>
+            Obiekt widoku. 
+            </summary>
+        </member>
+        <member name="F:BD.Controller.PanelPracowniczyController.db">
+            <summary>
+            Model danych.
+            </summary>
+        </member>
+        <member name="M:BD.Controller.PanelPracowniczyController.#ctor(BD.View.PanelPracowniczyView)">
+            <summary>
+            Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+            </summary>
+            <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
+        </member>
+        <member name="M:BD.Controller.PanelPracowniczyController.SprawdzDaneLogowania(System.String,System.String)">
+            <summary>
+            Metoda sprwdzająca poprawność wprowadzonych danych logowania, sprawdza uprawnienia i
+            tworzy odpowiednie widoki.
+            </summary>
+            <param name="login">Nazwa użytkownika pobrana z widoku</param>
+            <param name="haslo">Hasło użytkownika pobrane z widoku.</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="F:BD.Controller.PilotController._view">
+            <summary>
+            Obiekt widoku.
+            </summary>
+        </member>
+        <member name="F:BD.Controller.PilotController.db">
+            <summary>
+            Model danych.
+            </summary>
+        </member>
+        <member name="M:BD.Controller.PilotController.#ctor(BD.View.PilotView)">
+            <summary>
+            Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+            </summary>
+            <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
+        </member>
+        <member name="M:BD.Controller.PilotController.PobierzWycieczki(System.String)">
+            <summary>
+            Metoda pobierająca informacje o wycieczkach, które obsługuje aktualnie wybrany pilot.
+            </summary>
+            <param name="uzytkownik">Pesel aktualnie zalogowanego użytkownika.</param>
+            <returns>Zwraca informacje o poprawnym pobraniu wycieczek.</returns>
+        </member>
+        <member name="F:BD.Controller.RaporterController.view">
+            <summary>
+            Widok formatki raportu
+            </summary>
+        </member>
+        <member name="M:BD.Controller.RaporterController.#ctor(BD.View.RaporterView)">
+            <summary>
+            Konstruktor dla pre-generatora raportów
+            </summary>
+            <param name="view">Widok raportu</param>
+        </member>
+        <member name="M:BD.Controller.RaporterController.ZaladujKolumny(System.Int32)">
+            <summary>
+            Ładowanie kolumn do wyboru pól w listBox
+            </summary>
+            <param name="rodzaj">Jaki typ raportu należy wygenerować</param>
+        </member>
+        <member name="M:BD.Controller.RaporterController.WypelnijDlaWycieczek(System.Boolean)">
+            <summary>
+            Wypełnienie pól dla wycieczki
+            </summary>
+            <param name="kolumny">True jeśli mają zostać wypełnione pola do wyboru kolumn</param>
+        </member>
+        <member name="M:BD.Controller.RaporterController.WypelnijDlaReklamacji(System.Boolean)">
+            <summary>
+            Wypełnienie pól dla reklamacji
+            </summary>
+            <param name="kolumny">True jeśli mają zostać wypełnione pola do wyboru kolumn</param>
+        </member>
+        <member name="M:BD.Controller.RaporterController.WypelnijDlaPojazdow(System.Boolean)">
+            <summary>
+            Wypełnienie pól dla pojazdów
+            </summary>
+            <param name="kolumny">True jeśli mają zostać wypełnione pola do wyboru kolumn</param>
+        </member>
+        <member name="F:BD.Controller.RejestracjaController._view">
+            <summary>
+            Obiekt widoku. 
+            </summary>
+        </member>
+        <member name="F:BD.Controller.RejestracjaController.db">
+            <summary>
+            Model danych.
+            </summary>
+        </member>
+        <member name="M:BD.Controller.RejestracjaController.#ctor(BD.View.RejestracjaView)">
+            <summary>
+            Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+            </summary>
+            <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
+        </member>
+        <member name="M:BD.Controller.RejestracjaController.SprawdzCzyPeselIstnieje(System.String)">
+            <summary>
+            Metoda sprwdzająca czy klient o danym peselu juz istnieje w systemie.
+            </summary>
+            <param name="login">Nazwa użytkownika pobrana z widoku</param>
+            <param name="haslo">Hasło użytkownika pobrane z widoku.</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.RejestracjaController.SprawdzCzyLoginIstnieje(System.String)">
+            <summary>
+            Metoda sprwdzająca czy dany login juz istnieje w systemie.
+            </summary>
+            <param name="login">Nazwa użytkownika pobrana z widoku</param>
+            <param name="haslo">Hasło użytkownika pobrane z widoku.</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.RejestracjaController.UtworzNowegoUzytkownika">
+            <summary>
+            Metoda tworząca nowego użytkownika w systemie
+            </summary>
+            <param name="login">Nazwa użytkownika pobrana z widoku</param>
+            <param name="haslo">Hasło użytkownika pobrane z widoku.</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="F:BD.Controller.ReklamacjaController._view">
+            <summary>
+            Obiekt widoku.
+            </summary>
+        </member>
+        <member name="F:BD.Controller.ReklamacjaController.db">
+            <summary>
+            Model danych.
+            </summary>
+        </member>
+        <member name="F:BD.Controller.ReklamacjaController.sprawdzCzyTaSama">
+            <summary>
+            Zmienna przechowująca informacje o tym, czy użytkownik
+            chce zapisać zmiany dla pierwotnie wybranej rezerwacji, czy zmienił jej numer
+            </summary>
+        </member>
+        <member name="M:BD.Controller.ReklamacjaController.#ctor(BD.View.ReklamacjaView)">
+            <summary>
+            Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
+            </summary>
+            <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
+        </member>
+        <member name="M:BD.Controller.ReklamacjaController.PobierzReklamacje(System.String)">
+            <summary>
+            Metoda pobierajaca numery reklamacji dla aktualnego użytkownika i dodająca je do widoku
+            </summary>
+            <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.ReklamacjaController.PobierzNazweWycieczki(System.Int32,System.String)">
+            <summary>
+            Metoda odpowiedzialna za pobieranie informacji o wybranej rezerwacji i dodające je do widoku.
+            </summary>
+            <param name="numerRezerwacji">Numer rezerwacji, dla której pobierane sa informacje.</param>
+            <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.ReklamacjaController.PobierzInformacjeOReklamacji(System.String,System.String)">
+            <summary>
+            Metoda pobierająca informacje o aktualnie wybranej reklamacji i dodające je do widoku.
+            </summary>
+            <param name="numerReklamacji">Numer reklamacji, dla której są pobierane informacje.</param>
+            <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.ReklamacjaController.DodajReklamacje(System.Int32,System.String)">
+            <summary>
+            Metoda dodająca reklamację do bazy danych.
+            </summary>
+            <param name="numerRezerwacji">Nume rezerwacji, dla której dodawana jest reklamacja.</param>
+            <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.ReklamacjaController.WypelnijRezerwacje(System.String)">
+            <summary>
+            Metoda wypełniająca nazwę wycieczki dla dokonanych rezerwacji
+            </summary>
+            <returns>True jeśli się uda</returns>
+        </member>
+        <member name="F:BD.Controller.RezerwacjaController._view">
+            <summary>
+            Obiekt widoku.
+            </summary>
+        </member>
+        <member name="F:BD.Controller.RezerwacjaController.db">
+            <summary>
+            Model danych.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BD.Controller.RezerwacjaController.#ctor(BD.View.RezerwacjaView)" -->
+        <member name="M:BD.Controller.RezerwacjaController.PobierzCeneWycieczki(System.Int32,System.String)">
+            <summary>
+            Metoda pobierająca informacje o aktualnie wybranej rezerwacji, 
+            obliczająca kwotę do zapłąty po wprowadzonych zmianach i doajace te informacje do widoku
+            </summary>
+            <param name="numerRezerwacji">Numer rezerwacji, dla której pobierane sa informacje.</param>
+            <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.RezerwacjaController.ZaplacRezerwacje(System.Int32,System.String)">
+            <summary>
+            Metoda dodająca zmiany w rezerwacji do bazy danych.
+            </summary>
+            <param name="numerRezerwacji">Numer rezerwacji, dla której pobierane sa informacje.</param>
+            <param name="uzytkownik">Aktualnie zalogowany użytkownik</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.RezerwacjaController.DodajRezerwacje(System.Int32,BD.Klient)">
+            <summary>
+            Metoda dodająca nową rezerwację dla aktualnie wy ranej przez użytkownika wycieczki.
+            </summary>
+            <param name="idWycieczki">Aktualny numer wycieczki wybranej przez użytkownika.</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.RezerwacjaController.PobierzDaneKlienta(System.String)">
+            <summary>
+            Metoda pobierająca z bazy dane uzytkownika i ładująca je do textboxow
+            </summary>
+            <param name="idWycieczki">Aktualny numer wycieczki wybranej przez użytkownika.</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.RezerwacjaController.WypelnijRezerwacje(System.String)">
+            <summary>
+            Metoda wypełniająca nazwę wycieczki dla dokonanych rezerwacji
+            </summary>
+            <returns>True jeśli się uda</returns>
+        </member>
+        <member name="F:BD.Controller.RezygnacjaController._view">
+            <summary>
+            Obiekt widoku.
+            </summary>
+        </member>
+        <member name="F:BD.Controller.RezygnacjaController.db">
+            <summary>
+            Model danych.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BD.Controller.RezygnacjaController.#ctor(BD.View.RezygnacjaView)" -->
+        <member name="M:BD.Controller.RezygnacjaController.Oblicz(System.Int32,System.String)">
+            <summary>
+            Metoda obliczająca nową kwotę rezerwacji po wprowadzonych zmianach i sprwdzająca poprawność danych
+            </summary>
+            <param name="numerRezerwacji">Numer rezerwacji, której dotyczy opinia.</param>
+            <param name="uzytkownik">Pesel użytkownika, który zamawiał wycieczkę</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.RezygnacjaController.Zapisz(System.Int32,System.String)">
+            <summary>
+            Metoda zapisująca zmiany do bazy danych.
+            </summary>
+            <param name="numerRezerwacji">Numer rezerwacji, której dotyczy opinia.</param>
+            <param name="uzytkownik">Pesel użytkownika, który zamawiał wycieczkę</param>
+            <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
+        </member>
+        <member name="M:BD.Controller.RezygnacjaController.WypelnijRezerwacje(System.String)">
+            <summary>
+            Metoda wypełniająca nazwę wycieczki dla dokonanych rezerwacji
+            </summary>
+            <returns>True jeśli się uda</returns>
+        </member>
+        <member name="F:BD.Controller.PdfCreator.nazwaRaportu">
+            <summary>
+            Nazwa raportu który zostanie wygenerowany
+            </summary>
+        </member>
+        <member name="M:BD.Controller.PdfCreator.#ctor(System.String)">
+            <summary>
+            Konstruktor klasy
+            </summary>
+            <param name="nazwa">Nazwa raportu do wygenerowania</param>
+        </member>
+        <member name="M:BD.Controller.PdfCreator.createPDF(System.Windows.Forms.ListView)">
+            <summary>
+            Tworzy plik PDF o podanej nazwie w konstruktorze
+            </summary>
+            <param name="view">ListView z którego ma pobrać dane</param>
+        </member>
+        <member name="M:BD.Controller.PdfCreator.FormatujNazweKolumny(System.String)">
+            <summary>
+            Funkcja do edycji nazwy kolumny, usuwająca krawężniki oraz zamieniająca pierwszą literę na wielką.
+            </summary>
+            <param name="kolumna">Nazwa kolumny do edycji</param>
+            <returns></returns>
+        </member>
+        <member name="T:BD.View.KierowcaView">
+            <summary>
+            Klasa odpowiedzialna za obsługę zdarzeń wiodku udostępnianego kierowcy.
+            </summary>
+        </member>
+        <member name="F:BD.View.KierowcaView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <member name="F:BD.View.KierowcaView.aktPojazdu">
+            <summary>
+            Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+            </summary>
+        </member>
+        <member name="F:BD.View.KierowcaView.numerRejestracyjny">
+            <summary>
+            Zmienna przechowuje numer aktualnie wybranego pojazdu
+            </summary>
+        </member>
+        <member name="M:BD.View.KierowcaView.#ctor(BD.Kierowca)">
+            <summary>
+            Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu.
+            </summary>
+            <param name="uzytkownik">Nazwa użytkownika</param>
+        </member>
+        <member name="M:BD.View.KierowcaView.b_kierowca_wyjdz_Click(System.Object,System.EventArgs)">
+            <summary>
+            Zdarzenie obsługujące wylogowanie z systemu po wciśnięciu przycisku "Wyjdź", po kliknięciu program przechodzi do panelu logowania.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierowcaView.Kierowca_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Metoda obsługujące zdarzenie wyłączenia aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierowcaView.Kierowca_Load(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie ładowania widoku, wywołuje funkcję pobierającą
+            informacje o pojazdach i obsługuje komunikaty tej funkcji.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierowcaView.b_kierowca_zapisz_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługujące zdarzenie kliknięcia przycisku b_kierowca_zapisz, odpowiada za uruchomienie funkcji
+            zapisującej zmiany i obsługe jej komunikatów.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierowcaView.sortListViewByColumn(System.Object,System.Windows.Forms.ColumnClickEventArgs)">
+            <summary>
+            Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierowcaView.lv_pojazdy_ColumnClick(System.Object,System.Windows.Forms.ColumnClickEventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia na nagłówek kolumny, sortuje zawartość listview według danej kolumny
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierowcaView.timer1_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca kolejne ticki timera, co 5s uruchamia metode sprawdzającą, czy nastąpiła aktualizacja w bazie danych
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierowcaView.lv_pojazdy_ItemActivate(System.Object,System.EventArgs)">
+            <summary>
+            Metoda odpowiadająca za udostepnianie edycji kontrolek po zmianie wyboru pojazdu
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.KierowcaView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.KierowcaView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.KierowcaView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.KierownikView._uzytkownik">
+            <summary>
+            Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+            </summary>
+        </member>
+        <member name="F:BD.View.KierownikView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <member name="F:BD.View.KierownikView.aktKatalog">
+            <summary>
+            Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+            </summary>
+        </member>
+        <member name="F:BD.View.KierownikView.aktReklamacja">
+            <summary>
+            Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+            </summary>
+        </member>
+        <member name="F:BD.View.KierownikView.aktPojazd">
+            <summary>
+            Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+            </summary>
+        </member>
+        <member name="M:BD.View.KierownikView.#ctor">
+            <summary>
+            Główny bezparametrowy konstruktor okna, tworzący okno oraz połączenie z bazą danych.
+            </summary>
+        </member>
+        <member name="M:BD.View.KierownikView.#ctor(BD.Kierownik)">
+            <summary>
+            Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu 
+            oraz tworzący połączenie z bazą danych.
+            </summary>
+            <param name="uzytkownik">Nazwa użytkownika</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_dodaj_pojazd_Click(System.Object,System.EventArgs)">
+            <summary>
+            Zdarzenie otwiera okno dialogowe pozwalające wprowadzić do bazy nowy pojazd.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierownikView.Kierownik_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Zdarzenie obsługujące wyłączenie aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_wyjdz_Click(System.Object,System.EventArgs)">
+            <summary>
+            Zdarzenie obsługujące wylogowanie z systemu po wciśnięciu przycisku "Wyjdź", po kliknięciu program przechodzi do panelu logowania.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_dodaj_wycieczke_Click(System.Object,System.EventArgs)">
+            <summary>
+            Zdarzenie otwiera okno dialogowe pozwalające wprowadzić do bazy nową wycieczkę.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierownikView.tc_kierownik_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Akcja wywoływana podczas zmieniania tabów w aplikacji
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_usun_pojazd_Click(System.Object,System.EventArgs)">
+            <summary>
+            Akcja dla przycisku do usuwania pojazdu
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_edytuj_pojazd_Click(System.Object,System.EventArgs)">
+            <summary>
+            Akcja dla przycisku do edytowania pojazdów. Wyświetlają się messageboxy na które należy odpowiedzieć w celu edycji
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.lv_reklamacje_ItemActivate(System.Object,System.EventArgs)">
+            <summary>
+            Akcja na kliknięcie danego wiersza reklamacji. Wypełnia wszystkie pola dla wybranej reklamacji
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_rozpatrz_pozytywnie_Click(System.Object,System.EventArgs)">
+            <summary>
+            Akcja przycisku służaca do pozytywnego rozpatrzenia reklamacji
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_rozpatrz_negatywnie_Click(System.Object,System.EventArgs)">
+            <summary>
+            Akcja przycisku służąca do negatywnego rozpatrzenia reklamacji
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_edytuj_Click(System.Object,System.EventArgs)">
+            <summary>
+            Akcja przycisku do edycji wycieczki
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_usun_wycieczke_Click(System.Object,System.EventArgs)">
+            <summary>
+            Akcja przycisku do usunięcia wycieczki
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.sortListViewByColumn(System.Object,System.Windows.Forms.ColumnClickEventArgs)">
+            <summary>
+            Używana do sortowania po kolumnach dla obiektów typu ListView.
+            </summary>
+            <param name="sender">Obiekt wyzwalający event</param>
+            <param name="e">Arguemnty eventu</param>
+        </member>
+        <member name="M:BD.View.KierownikView.lv_pojazdy_ColumnClick(System.Object,System.Windows.Forms.ColumnClickEventArgs)">
+            <summary>
+            Akcja po kliknięciu nazwy kolumny w pojazdach. Służy do sortowania
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_promocja_Click(System.Object,System.EventArgs)">
+            <summary>
+            Akcja po kliknięciu przycisku dodania promocji dla danej wycieczki
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.lv_wycieczki_ColumnClick(System.Object,System.Windows.Forms.ColumnClickEventArgs)">
+            <summary>
+            Akcja po kliknięciu nazwy kolumny w wycieczkach. Służy do sortowania
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.timer1_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca kolejne ticki timera, co 5s uruchamia metode sprawdzającą, czy nastąpiła aktualizacja w bazie danych
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KierownikView.lv_reklamacje_ColumnClick(System.Object,System.Windows.Forms.ColumnClickEventArgs)">
+            <summary>
+            Akcja po kliknięciu nazwy kolumny w reklamacjach. Służy do sortowania
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.cBox_reklamacja_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Akcja dla zmiany wyświetlanych reklamacji w katalogu. Gdy zaznaczone, wyświetla wycieckzi które się odbyły.
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.cBox_wycieczki_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Akcja dla zmiany wyświetlanych wycieczek w katalogu. Gdy zaznaczone, wyświetla wycieckzi które się odbyły.
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_raport_pojazdy_Click(System.Object,System.EventArgs)">
+            <summary>
+            Akcja dla przycisku wywołującego możliwość generowania raportu dla pojazdów
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_raport_wycieczki_Click(System.Object,System.EventArgs)">
+            <summary>
+            Akcja dla przycisku wywołującego możliwość generowania raportu dla wycieczek
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="M:BD.View.KierownikView.b_raport_reklamacje_Click(System.Object,System.EventArgs)">
+            <summary>
+            Akcja dla przycisku wywołującego możliwość generowania raportu dla reklamacji
+            </summary>
+            <param name="sender">Obiekt który wywołał metodę</param>
+            <param name="e">Argumenty</param>
+        </member>
+        <member name="F:BD.View.KierownikView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.KierownikView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.KierownikView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.KlientView._idWycieczki">
+            <summary>
+            Zmienna przechowująca id aktualnie wybranej wycieczki
+            </summary>
+        </member>
+        <member name="F:BD.View.KlientView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <member name="F:BD.View.KlientView._uzytkownik">
+            <summary>
+            Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+            </summary>
+        </member>
+        <member name="F:BD.View.KlientView.aktKlienta">
+            <summary>
+            Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+            </summary>
+        </member>
+        <member name="F:BD.View.KlientView.indeksListview">
+            <summary>
+            Zmienna przechowująca aktualnie numer wybranego listview
+            </summary>
+        </member>
+        <member name="M:BD.View.KlientView.#ctor(BD.Klient)">
+            <summary>
+            Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu 
+            </summary>
+            <param name="uzytkownik">Nazwa użytkownika</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.b_katalog_wyjdz_Click(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.b_katalog_rezerwuj_Click(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.wystawOpinięToolStripMenuItem_Click(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.reklamujWycieczkęToolStripMenuItem_Click(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.rezygnacjaZWycieczkiToolStripMenuItem_Click(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.Klient_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.Klient_Load(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.b_zaplac_Click(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.sortListViewByColumn(System.Object,System.Windows.Forms.ColumnClickEventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.lv_klient_ColumnClick(System.Object,System.Windows.Forms.ColumnClickEventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.lv_klient_ItemActivate(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.b_szukaj_Click(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.KlientView.tb_szukaj_TextChanged(System.Object,System.EventArgs)" -->
+        <member name="M:BD.View.KlientView.timer1_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca kolejne ticki timera, co 5s uruchamia metode sprawdzającą, czy nastąpiła aktualizacja w bazie danych
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KlientView.wyswietlWszystkieWycieczkiToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda odpowiadająca za pobranie i wyświetlenie wszystkich wycieczek oraz dodanie ich do listview
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.KlientView.wyswietlMojeRezerwacjeToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda odpowiadająca za pobranie i wyświetlenie wszystkich rezerwacji oraz dodanie ich do listview
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.KlientView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.KlientView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.KlientView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.OpiniaView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <member name="F:BD.View.OpiniaView._uzytkownik">
+            <summary>
+            Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+            </summary>
+        </member>
+        <member name="M:BD.View.OpiniaView.#ctor">
+            <summary>
+            Główny bezparametrowy konstruktor okna
+            </summary>
+        </member>
+        <member name="M:BD.View.OpiniaView.#ctor(System.String)">
+            <summary>
+            Dodaje rezygnację dla zdefiniowanego wcześniej użytkownika
+            </summary>
+            <param name="uzytkownik">Aktualny użytkownik</param>
+        </member>
+        <member name="M:BD.View.OpiniaView.Opinia_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie  wyłączenia okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.OpiniaView.b_anuluj_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie wyłączenia okna po wciśnięciu przycisku "Anuluj".
+            Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.OpiniaView.b_zapisz_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie klikniecia b_zapisz, odpowiada za wywołanie funkcji zapisującej
+            opinie do bazy danych i obsługę jej komunikatów
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.OpiniaView.tb_numerRezerwacji_Leave(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie opuszczenie textboxa numeru rezerwacji, 
+            odpowiada za wywołanie funkcji pobierającej informacje o wycieczce i obsługe jej komunikatów.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.OpiniaView.tb_numerRezerwacji_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_numerRezerwacji
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.OpiniaView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.OpiniaView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.OpiniaView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.PanelPracowniczyView.controller">
+            <summary>
+            Obiekt przechowujący kontroler
+            </summary>
+        </member>
+        <member name="M:BD.View.PanelPracowniczyView.#ctor">
+            <summary>
+            Główny konstruktor okna.
+            </summary>
+        </member>
+        <member name="M:BD.View.PanelPracowniczyView.b_zakoncz_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie wyjście z aplikacji
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.PanelPracowniczyView.b_zaloguj_Click(System.Object,System.EventArgs)">
+            <summary>
+            Obsługuje wyszukiwanie w bazie loginu i hasła podanych przez użytkownika wraz z odpowiednimi prawami, 
+            następnie uruchamia odpowiedni panel
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.PanelPracowniczyView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.PanelPracowniczyView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.PanelPracowniczyView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.PilotView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <member name="F:BD.View.PilotView.aktWycieczki">
+            <summary>
+            Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+            </summary>
+        </member>
+        <member name="F:BD.View.PilotView._uzytkownik">
+            <summary>
+            Zmienna przechowująca pesel aktualnie wybranej wycieczki
+            </summary>
+        </member>
+        <member name="M:BD.View.PilotView.#ctor(BD.Pilot)">
+            <summary>
+            Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu
+            oraz tworzący połączenie z bazą danych.
+            </summary>
+            <param name="uzytkownik">Nazwa użytkownika</param>
+        </member>
+        <member name="M:BD.View.PilotView.b_wyjdz_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie wylogowania z systemu po wciśnięciu przycisku "Wyjdź", po kliknięciu program przechodzi do panelu logowania.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.PilotView.Pilot_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie wyłączenia aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.PilotView.Pilot_Load(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie ładowania widoku odpowiedzialne za wywołanie funkcji ładującej informacje
+            o wycieczkach do widoku i obsługujące jej komunikaty.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.PilotView.sortListViewByColumn(System.Object,System.Windows.Forms.ColumnClickEventArgs)">
+            <summary>
+            Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.PilotView.lv_pilot_ColumnClick(System.Object,System.Windows.Forms.ColumnClickEventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia na nagłówek kolumny, sortuje zawartość listview według danej kolumny
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.PilotView.timer1_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca kolejne ticki timera, co 5s uruchamia metode sprawdzającą, czy nastąpiła aktualizacja w bazie danych
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.PilotView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.PilotView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="dispsosing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.PilotView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.PojazdView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <member name="M:BD.View.PojazdView.#ctor">
+            <summary>
+            Główny bezparametrowy konstruktor okna
+            </summary>
+        </member>
+        <member name="M:BD.View.PojazdView.b_anuluj_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie wyłączenia okna po wciśnięciu przycisku "Anuluj".
+            Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.PojazdView.Pojazd_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie wyłączenia okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.PojazdView.b_zapisz_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca kliknięcie przycisku b_zapisz, odpowiada za wywołanie funkcji
+            dodającej pojazd do bazy i obsługe jej komunikatów.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.PojazdView.tb_pojemnosc_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_lpojemnosc
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.PojazdView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.PojazdView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.PojazdView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.PromocjaView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <member name="F:BD.View.PromocjaView.idKatalog">
+            <summary>
+            Id aktualnie wybranego katalogu
+            </summary>
+        </member>
+        <member name="M:BD.View.PromocjaView.#ctor">
+            <summary>
+            Główny bezparametrowy konstruktor okna
+            </summary>
+        </member>
+        <member name="M:BD.View.PromocjaView.#ctor(System.Int32)">
+            <summary>
+            Konstruktor pobierający inforamcje o aktualnie wybranym katalogu, wywołujący funkcję pobrania i zapisu informacji o
+            promocji do widoku.
+            </summary>
+            <param name="idKatalog">Aktualny katalog</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BD.View.PromocjaView.button1_Click(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:BD.View.PromocjaView.b_edytuj_Click(System.Object,System.EventArgs)" -->
+        <member name="M:BD.View.PromocjaView.tb_kwota_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_cena
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.PromocjaView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.PromocjaView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.PromocjaView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.RaporterView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.RaporterView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.RaporterView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.RejestracjaView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <member name="M:BD.View.RejestracjaView.RejestracjaView_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Metoda obsługujące zdarzenie wyłączenia aplikacji poprzez wciśnięcie "X", program całkowicie kończy swoją pracę
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RejestracjaView.b_anuluj_Click(System.Object,System.EventArgs)">
+            <summary>
+            Zdarzenie obsługujące wylogowanie z systemu po wciśnięciu przycisku "Wyjdź", po kliknięciu program przechodzi do panelu logowania.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RejestracjaView.b_zarejestruj_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda odpowiadajaca za wywołanie funkcji tworzących nowego użytkownika i sprawdzających poprawność wprowadzonych danych.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.RejestracjaView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.RejestracjaView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.RejestracjaView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.ReklamacjaView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <member name="F:BD.View.ReklamacjaView._uzytkownik">
+            <summary>
+            Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+            </summary>
+        </member>
+        <member name="F:BD.View.ReklamacjaView.aktReklamacji">
+            <summary>
+            Obiekt przechowujący klasę odpowiedzialną za sprawdzanie zmian w bazie.
+            </summary>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.#ctor">
+            <summary>
+            Główny bezparametrowy konstruktor okna
+            </summary>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.#ctor(System.String)">
+            <summary>
+            Dodaje reklamację dla zdefiniowanego wcześniej użytkownika
+            </summary>
+            <param name="uzytkownik">Aktualny użytkownik</param>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.b_anuluj_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie wyłączenia okna po wciśnięciu przycisku "Anuluj".
+            Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.Reklamacja_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie wyłączenia okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.b_zapisz_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji
+            dodającej nową reklamację do bazy i obsługe jej komunikatów.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.tc_reklamacje_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie zmiany zakładki, odpowiada za wywołanie funkcji pobierającej
+            numery reklamacji i obsługuje jej komunikaty
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.lv_reklamacje_ItemActivate(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia komórki w listview, odpowiada za wywołanie
+            funkcji pobierającej informacje o wybranej wycieczce i obsługuje jej komunikaty
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.b_sprawdzPoprawnosc_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca kliknięcie przycisku b_sprawdzPoprawnosc, odpowiada za wywołanie funkcji pobierającej
+            nazwę wycieczki w celu weryfikacji poprawnego numeru rezerwacji i obsługuje jej komunikaty
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.sortListViewByColumn(System.Object,System.Windows.Forms.ColumnClickEventArgs)">
+            <summary>
+            Metoda implementująca wywołanie funkcji sortującej wiersze w kolumnach
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.lv_reklamacje_ColumnClick(System.Object,System.Windows.Forms.ColumnClickEventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia na nagłówek kolumny, sortuje zawartość listview według danej kolumny
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.tb_numerRezerwacji_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_numerRezerwacji
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.timer1_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca kolejne ticki timera, co 5s uruchamia metode sprawdzającą, czy nastąpiła aktualizacja w bazie danych
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.ReklamacjaView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.ReklamacjaView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.RezerwacjaView._idWycieczki">
+            <summary>
+            Zmienna przechowująca id aktualnie wybranej wycieczki
+            </summary>
+        </member>
+        <member name="F:BD.View.RezerwacjaView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <member name="F:BD.View.RezerwacjaView._uzytkownik">
+            <summary>
+            Zmienna przechowująca obiekt aktualnie zalogowanego użytkownika
+            </summary>
+        </member>
+        <member name="M:BD.View.RezerwacjaView.#ctor(System.String)">
+            <summary>
+            Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu oraz
+            </summary>
+            <param name="uzytkownik">Aktualnie zalogowany użytkownik.</param>
+        </member>
+        <member name="M:BD.View.RezerwacjaView.#ctor(System.Int32,System.String)">
+            <summary>
+            Konstruktor okna z parametrem, pozwalający na przekazanie nazwy użytkownika zalogowanego do systemu oraz
+            aktualnie wybranej wycieczki
+            </summary>
+            <param name="idWycieczki">Aktualnie wybrany id wycieczki.</param>
+             <param name="uzytkownik">Aktualnie zalogowany użytkownik.</param>
+        </member>
+        <member name="M:BD.View.RezerwacjaView.b_rezerwacja_anuluj_Click(System.Object,System.EventArgs)">
+            <summary>
+            Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
+            Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RezerwacjaView.Rezerwacja_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Zdarzenie obsługujące wyłączenie okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RezerwacjaView.b_rezerwacja_zapisz_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji 
+            zapisującej nową rezerwację do bazy i obsługe jej komunikatów
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RezerwacjaView.b_anlujZaplate_Click(System.Object,System.EventArgs)">
+            <summary>
+            Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
+            Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RezerwacjaView.b_zapłaćRezerwacje_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia przycisku b_zapłaćRezerwacje, odpowiada za wywołanie funkcji 
+            zapisującej obliczone informacje do bazy i obsługe jej komunikatów
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RezerwacjaView.tb_liczba_osob_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_liczba_osob
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RezerwacjaView.tb_zaliczka_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_zaliczka
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.RezerwacjaView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.RezerwacjaView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.RezerwacjaView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:BD.View.RezygnacjaView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <member name="F:BD.View.RezygnacjaView._uzytkownik">
+            <summary>
+            Zmienna przechowująca pesel aktualnie zalogowanego użytkownika
+            </summary>
+        </member>
+        <member name="M:BD.View.RezygnacjaView.#ctor">
+            <summary>
+            Główny bezparametrowy konstruktor okna
+            </summary>
+        </member>
+        <member name="M:BD.View.RezygnacjaView.#ctor(System.String)">
+            <summary>
+            Dodaje rezygnację dla zdefiniowanego wcześniej użytkownika
+            </summary>
+            <param name="uzytkownik">Aktualny użytkownik</param>
+        </member>
+        <member name="M:BD.View.RezygnacjaView.b_anuluj_Click(System.Object,System.EventArgs)">
+            <summary>
+            Zdarzenie obsługujące wyłączenie okna po wciśnięciu przycisku "Anuluj".
+            Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RezygnacjaView.Rezygnacja_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Zdarzenie obsługujące wyłączenie okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RezygnacjaView.b_oblicz_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia przycisku b_oblicz, odpowiada za wywołanie funkcji 
+            sprawdzającej poprawnoość numeru rezerwacji oraz obliczajacej sugerowane koszty i obsługuje jej komunikat
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RezygnacjaView.b_zapisz_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia przycisku b_zapisz, odpowiada za wywołanie funkcji 
+            zapisującej obliczone informacje do bazy i obsługe jej komunikatów
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RezygnacjaView.tb_numerRezerwacji_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_numerRezerwacji
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.RezygnacjaView.tb_liczbaRezygnujacychOsob_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_liczbaRezygnujacychOsob
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.RezygnacjaView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.RezygnacjaView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.RezygnacjaView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:BD.View.WycieczkaView.idKatalog" -->
+        <member name="F:BD.View.WycieczkaView.controller">
+            <summary>
+            Obiekt przechowujący kontroler.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:BD.View.WycieczkaView._opcja" -->
+        <member name="M:BD.View.WycieczkaView.#ctor">
+            <summary>
+            Główny bezparametrowy konstruktor okna
+            </summary>
+        </member>
+        <member name="M:BD.View.WycieczkaView.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Konstruktor, który tworzy formę wyciećzki dostosowaną do wybranej opcji edycji bądź dodawania wycieczki
+            </summary>
+            <param name="opcja">Kiedy jeden dodaje wycieczke, kiedy zero usuwa.</param>
+        </member>
+        <member name="M:BD.View.WycieczkaView.b_anuluj_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie wyłączenia okna po wciśnięciu przycisku "Anuluj".
+            Usuwa utworzone dotąd w ramach swojego działania niezapisane obiekty.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.WycieczkaView.Wycieczka_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Zdarzenie obsługujące wyłączenie okna poprzez wciśnięcie "X", program wraca do głównego panelu danego użytkownika.
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="M:BD.View.WycieczkaView.tb_cena_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda zabezpieczająca przed wprowadzeniem znaków innych niż cyfry do tb_cena
+            </summary>
+            <param name="sender">Rozpoznanie obiektu wywołującego</param>
+            <param name="e">Zdarzenia systemowe</param>
+        </member>
+        <member name="F:BD.View.WycieczkaView.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BD.View.WycieczkaView.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BD.View.WycieczkaView.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:BD.Polacz_z_baza">
+            <summary>
+            Klasa odpowiedzialna za tworzenie połączenia z bazą danych, jegozamykanie i tworzenie zapytania.
+            </summary>
+        </member>
+        <member name="M:BD.Polacz_z_baza.PolaczZBaza">
+            <summary>
+            Funkcja otwierająca połączenie z bazą danych.
+            </summary>
+            <returns>Zwraca nowo utworzone połączenie.</returns>
+        </member>
+        <member name="M:BD.Polacz_z_baza.UtworzZapytanie(System.String)">
+            <summary>
+            Funkcja tworząca zapytanie do bazy danych.
+            </summary>
+            <param name="zapytanieSql">Parametr przekazujący ciąg znaków będący zapytaniem SQL do wykonania.</param>
+            <returns>Zwraca zapytanie do bazy danych.</returns>
+        </member>
+        <member name="M:BD.Polacz_z_baza.ZakonczPolaczenie">
+            <summary>
+            Funkcja zamykająca połączeni z bazą danych.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BD.Polacz_z_baza.PobierzDaneString(System.Data.SqlClient.SqlCommand)">
+            <summary>
+            Metoda, która umozliwia pobranie z bazy danych wyszukanej wartosci string
+            </summary>
+            <param name="zapytanie">Wykonywane zapytanie w języku SQL</param>
+            <returns>Zwaca wyszukaną wartosć string</returns>
+        </member>
+        <member name="M:BD.Polacz_z_baza.PobierzDaneDate(System.Data.SqlClient.SqlCommand)">
+            <summary>
+            Metoda, która umozliwia pobranie z bazy danych wyszukanej wartosci DateTime
+            </summary>
+            <param name="zapytanie">Wykonywane zapytanie w języku SQL</param>
+            <returns>Zwaca wyszukaną wartosć DateTime</returns>
+        </member>
+        <member name="M:BD.Polacz_z_baza.PobierzDaneInt(System.Data.SqlClient.SqlCommand)">
+            <summary>
+            Metoda, która umozliwia pobranie z bazy danych wyszukanej wartosci int
+            </summary>
+            <param name="zapytanie">Wykonywane zapytanie w języku SQL</param>
+            <returns>Zwaca wyszukaną wartosć int</returns>
+        </member>
+        <member name="M:BD.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:BD.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:BD.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:BD.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

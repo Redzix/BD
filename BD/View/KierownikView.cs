@@ -157,7 +157,11 @@ namespace BD.View
             wycieczka.ShowDialog();
             controller.LadujKatalog();
         }
-
+        /// <summary>
+        /// Akcja wywoływana podczas zmieniania tabów w aplikacji
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void tc_kierownik_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (tc_kierownik.SelectedIndex)
@@ -173,6 +177,11 @@ namespace BD.View
                     break;
             } 
         }
+        /// <summary>
+        /// Akcja dla przycisku do usuwania pojazdu
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void b_usun_pojazd_Click(object sender, EventArgs e)
         {
             //Pobranie wybranego numeru rejestracyjnego z listview
@@ -195,7 +204,11 @@ namespace BD.View
                 MessageBox.Show("Należy najpierw wybrać pojazd w celu jego usunięcia", "Usunięcie pojazdu", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        /// <summary>
+        /// Akcja dla przycisku do edytowania pojazdów. Wyświetlają się messageboxy na które należy odpowiedzieć w celu edycji
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void b_edytuj_pojazd_Click(object sender, EventArgs e)
         {
             //Pobranie wybranego numeru rejestracyjnego z listview
@@ -257,7 +270,11 @@ namespace BD.View
                 MessageBox.Show("Najpierw należy wybrać pojazd do edycji", "Brak zmian", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        /// <summary>
+        /// Akcja na kliknięcie danego wiersza reklamacji. Wypełnia wszystkie pola dla wybranej reklamacji
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void lv_reklamacje_ItemActivate(object sender, EventArgs e)
         {
             try
@@ -270,7 +287,11 @@ namespace BD.View
 
             }
         }
-
+        /// <summary>
+        /// Akcja przycisku służaca do pozytywnego rozpatrzenia reklamacji
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void b_rozpatrz_pozytywnie_Click(object sender, EventArgs e)
         {
             try
@@ -291,7 +312,11 @@ namespace BD.View
             controller.LadujReklamacje();
 
         }
-
+        /// <summary>
+        /// Akcja przycisku służąca do negatywnego rozpatrzenia reklamacji
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void b_rozpatrz_negatywnie_Click(object sender, EventArgs e)
         {
             try
@@ -313,7 +338,11 @@ namespace BD.View
             }
             
         }
-
+        /// <summary>
+        /// Akcja przycisku do edycji wycieczki
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void b_edytuj_Click(object sender, EventArgs e)
         {
             try
@@ -327,7 +356,11 @@ namespace BD.View
                 MessageBox.Show("Musisz najpierw wybrać wycieczkę do edycji", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        /// <summary>
+        /// Akcja przycisku do usunięcia wycieczki
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void b_usun_wycieczke_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz usunąć wycieczkę?","Usunięcie wycieczki.",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
@@ -371,12 +404,20 @@ namespace BD.View
             ((ListView)sender).Sort();
             ((ListView)sender).ListViewItemSorter = new ListViewItemComparer(e.Column, ((ListView)sender).Sorting);
         }
-        
+        /// <summary>
+        /// Akcja po kliknięciu nazwy kolumny w pojazdach. Służy do sortowania
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void lv_pojazdy_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender, e);
         }
-
+        /// <summary>
+        /// Akcja po kliknięciu przycisku dodania promocji dla danej wycieczki
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void b_promocja_Click(object sender, EventArgs e)
         {
             try
@@ -390,7 +431,11 @@ namespace BD.View
                 MessageBox.Show("Najpierw należy wybrać wycieczkę", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        /// <summary>
+        /// Akcja po kliknięciu nazwy kolumny w wycieczkach. Służy do sortowania
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void lv_wycieczki_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender, e);
@@ -419,34 +464,58 @@ namespace BD.View
                     break;
             }           
         }
-
+        /// <summary>
+        /// Akcja po kliknięciu nazwy kolumny w reklamacjach. Służy do sortowania
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void lv_reklamacje_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             sortListViewByColumn(sender, e);
         }
-
+        /// <summary>
+        /// Akcja dla zmiany wyświetlanych reklamacji w katalogu. Gdy zaznaczone, wyświetla wycieckzi które się odbyły.
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void cBox_reklamacja_CheckedChanged(object sender, EventArgs e)
         {
             controller.LadujReklamacje();
         }
-
+        /// <summary>
+        /// Akcja dla zmiany wyświetlanych wycieczek w katalogu. Gdy zaznaczone, wyświetla wycieckzi które się odbyły.
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void cBox_wycieczki_CheckedChanged(object sender, EventArgs e)
         {
             controller.LadujKatalog();
         }
-
+        /// <summary>
+        /// Akcja dla przycisku wywołującego możliwość generowania raportu dla pojazdów
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void b_raport_pojazdy_Click(object sender, EventArgs e)
         {
             RaporterView rView = new RaporterView(2);
             rView.ShowDialog();
         }
-
+        /// <summary>
+        /// Akcja dla przycisku wywołującego możliwość generowania raportu dla wycieczek
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void b_raport_wycieczki_Click(object sender, EventArgs e)
         {
             RaporterView rView = new RaporterView(0);
             rView.ShowDialog();
         }
-
+        /// <summary>
+        /// Akcja dla przycisku wywołującego możliwość generowania raportu dla reklamacji
+        /// </summary>
+        /// <param name="sender">Obiekt który wywołał metodę</param>
+        /// <param name="e">Argumenty</param>
         private void b_raport_reklamacje_Click(object sender, EventArgs e)
         {
             RaporterView rView = new RaporterView(1);
