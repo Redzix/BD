@@ -120,20 +120,20 @@ namespace BD.Controller
                 return 1;
 
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
                 return 0;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return -1;
             }
         }
 
         /// <summary>
-        /// Metoda pobiera wyszukująca wycieczki według nazwy i miejscowosci
+        /// Metoda  wyszukująca wycieczki według nazwy i miejscowosci
         /// </summary>
-        /// <param name="_idWycieczki">Id aktualnie wybranej w listview wycieczki.</param>
+        /// <param name="szukanaFraza">Szukany ciąg znaków</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public bool SzukajWycieczki(string szukanaFraza)
         {
@@ -268,11 +268,11 @@ namespace BD.Controller
                 return 1;
 
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
                 return 0;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return -1;
             }
@@ -281,7 +281,7 @@ namespace BD.Controller
         /// <summary>
         /// Metoda sprawdza, czy wycieczka została już odbyta lub jest w trakcie
         /// </summary>
-        /// <param name="_idWycieczki">Numeraktualnie wybranej w listview wycieczki.</param>
+        /// <param name="idWycieczki">Numer aktualnie wybranej w listview wycieczki.</param>
         /// <returns>Zwraca  true jeśli wycieczka została odbyta, false jeśli jest zaplanowana.</returns>
         public bool SprawdzCzyOdbyta(int idWycieczki)
         {

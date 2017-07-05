@@ -7,6 +7,9 @@ using BD.View;
 
 namespace BD.Controller
 {
+    /// <summary>
+    /// Kontroler rejestracji użytkownika
+    /// </summary>
     class RejestracjaController
     {
         /// <summary>
@@ -32,8 +35,7 @@ namespace BD.Controller
         /// <summary>
         /// Metoda sprwdzająca czy klient o danym peselu juz istnieje w systemie.
         /// </summary>
-        /// <param name="login">Nazwa użytkownika pobrana z widoku</param>
-        /// <param name="haslo">Hasło użytkownika pobrane z widoku.</param>
+        /// <param name="pesel">Pesel wprowadzony przy rejestracji</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public bool SprawdzCzyPeselIstnieje(string pesel)
         {
@@ -55,7 +57,6 @@ namespace BD.Controller
         /// Metoda sprwdzająca czy dany login juz istnieje w systemie.
         /// </summary>
         /// <param name="login">Nazwa użytkownika pobrana z widoku</param>
-        /// <param name="haslo">Hasło użytkownika pobrane z widoku.</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public bool SprawdzCzyLoginIstnieje(string login)
         {
@@ -76,8 +77,6 @@ namespace BD.Controller
         /// <summary>
         /// Metoda tworząca nowego użytkownika w systemie
         /// </summary>
-        /// <param name="login">Nazwa użytkownika pobrana z widoku</param>
-        /// <param name="haslo">Hasło użytkownika pobrane z widoku.</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public bool UtworzNowegoUzytkownika()
         {
@@ -106,7 +105,7 @@ namespace BD.Controller
                 db.SaveChanges();
                 return true;
             }
-            catch(Exception exception)
+            catch(Exception)
             {
                 return false;
             }

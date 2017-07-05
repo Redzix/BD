@@ -13,6 +13,9 @@ using System.Data.Entity;
 
 namespace BD.View
 {
+    /// <summary>
+    /// Widok kierownika po zalogowaniu do systemu
+    /// </summary>
     public partial class KierownikView : Form
     {
 

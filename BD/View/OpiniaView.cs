@@ -12,6 +12,9 @@ using BD.Controller;
 
 namespace BD.View
 {
+    /// <summary>
+    /// Widok okienka opinii
+    /// </summary>
     public partial class OpiniaView : Form
     {
         /// <summary>
@@ -37,13 +40,13 @@ namespace BD.View
         /// Dodaje rezygnację dla zdefiniowanego wcześniej użytkownika
         /// </summary>
         /// <param name="uzytkownik">Aktualny użytkownik</param>
-        public OpiniaView(string uzytownik)
+        public OpiniaView(string uzytkownik)
         {
             InitializeComponent();
             cb_ocena.SelectedIndex = 0;
-            _uzytkownik = uzytownik;
+            _uzytkownik = uzytkownik;
             controller = new OpiniaController(this);
-            controller.WypelnijRezerwacje(uzytownik);
+            controller.WypelnijRezerwacje(uzytkownik);
         }
 
         /// <summary>

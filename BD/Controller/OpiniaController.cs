@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace BD.Controller
 {
+    /// <summary>
+    /// Kontroler opinii
+    /// </summary>
     class OpiniaController
     {
         /// <summary>
@@ -60,11 +63,11 @@ namespace BD.Controller
                 db = new bazaEntities();
                 return 1;
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
                 return 0;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return -1;
             }
@@ -93,7 +96,7 @@ namespace BD.Controller
                     return 1;
                 }
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
                 return 0;
             }

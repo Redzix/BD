@@ -12,11 +12,14 @@ using BD.Controller;
 
 namespace BD.View
 {
+    /// <summary>
+    /// Widok odpowiedzialny za wyświetlenie forma do edycji wycieczki
+    /// </summary>
     public partial class WycieczkaView : Form
     {
         /// <summary>
         /// Zmienna przechowująca id aktualnie wybranego katalogu
-        /// </summary
+        /// </summary>
         private int idKatalog;
 
         /// <summary>
@@ -41,6 +44,7 @@ namespace BD.View
         /// Konstruktor, który tworzy formę wyciećzki dostosowaną do wybranej opcji edycji bądź dodawania wycieczki
         /// </summary>
         /// <param name="opcja">Kiedy jeden dodaje wycieczke, kiedy zero usuwa.</param>
+        /// <param name="idKatalog">ID katalogu z którego pobieramy informacje dotyczące wycieczki i ceny</param>
         public WycieczkaView(int opcja, int idKatalog)
         {
             InitializeComponent();

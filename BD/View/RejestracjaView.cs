@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using BD.Controller;
 namespace BD.View
 {
+    /// <summary>
+    /// Widok odpowiedzialny za wyświetlenie rejestracji nowego użyszkodnika
+    /// </summary>
     public partial class RejestracjaView : Form
     {
         /// <summary>
@@ -17,7 +20,9 @@ namespace BD.View
         /// </summary>
         private RejestracjaController controller;
 
-
+        /// <summary>
+        /// KOnstruktor tworzący formę dla rejestracji
+        /// </summary>
         public RejestracjaView()
         {
             InitializeComponent();

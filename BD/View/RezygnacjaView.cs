@@ -11,6 +11,9 @@ using BD.Controller;
 
 namespace BD.View
 {
+    /// <summary>
+    /// Widok okna rezygnacji z wycieczki
+    /// </summary>
     public partial class RezygnacjaView : Form
     {
 

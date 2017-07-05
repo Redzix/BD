@@ -13,6 +13,9 @@ using BD.Controller;
 
 namespace BD.View
 {
+    /// <summary>
+    /// Widok dostępny dla pilota
+    /// </summary>
     public partial class PilotView : Form
     {
         /// <summary>

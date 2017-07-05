@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace BD.Controller
 {
+    /// <summary>
+    /// Kontroler rezerwacji
+    /// </summary>
     class RezerwacjaController
     {
         /// <summary>
@@ -23,7 +26,7 @@ namespace BD.Controller
         /// <summary>
         /// Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
         /// </summary>
-        /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param
+        /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
         public RezerwacjaController(RezerwacjaView view)
         {
             _view = (RezerwacjaView)view;
@@ -70,7 +73,7 @@ namespace BD.Controller
                     return -2;
                 }
             }
-                catch (FormatException exception)
+                catch (FormatException)
                 {
                     return 0;
                 }          
@@ -123,12 +126,12 @@ namespace BD.Controller
                         }
                         return 2;
                     }
-                    catch (FormatException exception)
+                    catch (FormatException)
                     {
                         return -3;
                     }
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
                 return -4;
             }
@@ -138,6 +141,7 @@ namespace BD.Controller
         /// Metoda dodająca nową rezerwację dla aktualnie wy ranej przez użytkownika wycieczki.
         /// </summary>
         /// <param name="idWycieczki">Aktualny numer wycieczki wybranej przez użytkownika.</param>
+        /// <param name="uzytkownik">Obiekt klienta zalogowanego</param>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public int DodajRezerwacje(int idWycieczki, Klient uzytkownik)
         {
@@ -191,11 +195,11 @@ namespace BD.Controller
                   
                 return nowaRezerwacja.numer_rezerwacji;
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
                 return -1;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return 0;
             }
@@ -204,7 +208,7 @@ namespace BD.Controller
         /// <summary>
         /// Metoda pobierająca z bazy dane uzytkownika i ładująca je do textboxow
         /// </summary>
-        /// <param name="idWycieczki">Aktualny numer wycieczki wybranej przez użytkownika.</param>
+        /// <parm name="uzytkownik">Pesel użytkownika</parm>
         /// <returns>Zwraca odpowiednie informacje o powodzeniu operacji.</returns>
         public Klient PobierzDaneKlienta(string uzytkownik)
         {

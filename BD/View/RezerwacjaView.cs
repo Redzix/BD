@@ -12,6 +12,9 @@ using BD.Controller;
 
 namespace BD.View
 {
+    /// <summary>
+    /// Widok odpowiedzialny za rezerwacje wycieczki
+    /// </summary>
     public partial class RezerwacjaView : Form
     {
         /// <summary>
@@ -206,7 +209,11 @@ namespace BD.View
                 e.Handled = true;
             }
         }
-
+        /// <summary>
+        /// Wypełnienie fieldów z cenami po zmianie wycieczki do opłacenia
+        /// </summary>
+        /// <param name="sender">Obiekt wysyłający</param>
+        /// <param name="e">Argumenty</param>
         private void cb_nazwaWycieczki_SelectedIndexChanged(object sender, EventArgs e)
         {
             int numerRezerwacji = ((KeyValuePair<int, string>)cb_nazwaWycieczki.SelectedItem).Key;

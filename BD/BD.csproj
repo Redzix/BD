@@ -91,7 +91,6 @@
     <Compile Include="Controller\ReklamacjaController.cs" />
     <Compile Include="Controller\RezerwacjaController.cs" />
     <Compile Include="Controller\RezygnacjaController.cs" />
-    <Compile Include="Controller\WycieczkaController.cs" />
     <Compile Include="Katalog.cs">
       <DependentUpon>BazaEntity.tt</DependentUpon>
     </Compile>

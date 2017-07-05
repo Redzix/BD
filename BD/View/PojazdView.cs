@@ -11,6 +11,9 @@ using BD.Controller;
 
 namespace BD.View
 {
+    /// <summary>
+    /// Widok pojazdu
+    /// </summary>
     public partial class PojazdView : Form
     {
         /// <summary>

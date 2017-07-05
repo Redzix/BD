@@ -11,6 +11,9 @@ using BD.Controller;
 
 namespace BD.View
 {
+    /// <summary>
+    /// Widok służący do logowania się do systemu
+    /// </summary>
     public partial class PanelPracowniczyView : Form
     {
         /// <summary>

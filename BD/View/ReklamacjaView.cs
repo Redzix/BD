@@ -12,6 +12,9 @@ using BD.Controller;
 
 namespace BD.View
 {
+    /// <summary>
+    /// Widok odpowiedzialny za wyświetlenie forma do reklamacji wycieczek
+    /// </summary>
     public partial class ReklamacjaView : Form
     {
         /// <summary>

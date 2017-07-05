@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace BD.View
 {
+    /// <summary>
+    /// Widok dla dodania lub edycji promocji dla danej wycieczki
+    /// </summary>
     public partial class PromocjaView : Form
     {
         /// <summary>
@@ -52,7 +55,7 @@ namespace BD.View
         /// nowej promocji.
         /// </summary>
         /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
-        /// <param name="e">Zdarzenia systemowe</param
+        /// <param name="e">Zdarzenia systemowe</param>
         private void button1_Click(object sender, EventArgs e)
         {
             if (controller.DodajPromocje(this.idKatalog))
@@ -67,7 +70,7 @@ namespace BD.View
         /// promocji.
         /// </summary>
         /// <param name="sender">Rozpoznanie obiektu wywołującego</param>
-        /// <param name="e">Zdarzenia systemowe</param
+        /// <param name="e">Zdarzenia systemowe</param>
         private void b_edytuj_Click(object sender, EventArgs e)
         {
             if (controller.EdytujPromocje(this.idKatalog))

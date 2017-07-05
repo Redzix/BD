@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace BD.Controller
 {
+    /// <summary>
+    /// Kontroler kierowcy
+    /// </summary>
     class KierowcaController
 
     {   /// <summary>
@@ -64,7 +67,7 @@ namespace BD.Controller
                     return 1;
                 }
              
-            }catch(Exception exception)
+            }catch(Exception)
             {
                 return 0;
             }
@@ -102,7 +105,7 @@ namespace BD.Controller
                         db = new bazaEntities();
                         return 1;
                     }
-                    catch (Exception exception)
+                    catch (Exception)
                     {
                         return 0;
                     }
@@ -127,7 +130,7 @@ namespace BD.Controller
                         db.SaveChanges();
                         return 2;
                     }
-                    catch (Exception exception)
+                    catch (Exception)
                     {
                         return 0;
                     }                  

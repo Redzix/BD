@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace BD.Controller
 {
+    /// <summary>
+    /// Kontroler dla tworzenia raportów
+    /// </summary>
     class RaporterController
     {
         /// <summary>

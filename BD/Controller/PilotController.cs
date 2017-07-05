@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace BD.Controller
 {
+    /// <summary>
+    /// Kontroler pilota
+    /// </summary>
     class PilotController
     {
         /// <summary>

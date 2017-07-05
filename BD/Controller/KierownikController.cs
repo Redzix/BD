@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace BD.Controller
 {
+    /// <summary>
+    /// Kontroler kierownika
+    /// </summary>
     class KierownikController
     {
         /// <summary>
@@ -465,11 +468,11 @@ namespace BD.Controller
                     }
                 }
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
                 return 0;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return -1;
             }

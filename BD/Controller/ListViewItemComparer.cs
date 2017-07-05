@@ -8,21 +8,35 @@ using System.Windows.Forms;
 
 namespace BD.Controller
 {
+    /// <summary>
+    /// Kontroler do sortowania listview
+    /// </summary>
     class ListViewItemComparer : IComparer
     {
-
+        /// <summary>
+        /// Kolumna do sortowania
+        /// </summary>
         private int col;
+        /// <summary>
+        /// Rodzaj sortowania
+        /// </summary>
         private SortOrder order;
-        public ListViewItemComparer()
-        {
-            col = 0;
-            order = SortOrder.Ascending;
-        }
+        /// <summary>
+        /// Konstruktor dla porównywacza
+        /// </summary>
+        /// <param name="column">Numer kolumny sortowanej</param>
+        /// <param name="order">Rodzaj aktualnego sortowania</param>
         public ListViewItemComparer(int column, SortOrder order)
         {
             col = column;
             this.order = order;
         }
+        /// <summary>
+        /// Porównanie dwóch obiektów w listview
+        /// </summary>
+        /// <param name="x">Pierwszy ListViewItem</param>
+        /// <param name="y">Drugi ListViewItem</param>
+        /// <returns>Zwraca wartość, czy x jest większe/mniejsze/równe y</returns>
         public int Compare(object x, object y)
         {
             int returnVal = -1;

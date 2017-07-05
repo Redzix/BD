@@ -7,6 +7,9 @@ using BD.View;
 
 namespace BD.Controller
 {
+    /// <summary>
+    /// Kontroler logowania
+    /// </summary>
     class PanelPracowniczyController
     {
         /// <summary>
@@ -87,7 +90,7 @@ namespace BD.Controller
                         }
                         return 1;            
                 }
-            }catch(Exception exception)
+            }catch(Exception)
             {
                 return -2;
             }

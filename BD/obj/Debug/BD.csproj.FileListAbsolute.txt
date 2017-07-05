@@ -249,3 +249,4 @@ C:\Users\karol\Source\Re\BD3\BD\obj\Debug\BD.csproj.GenerateResource.Cache
 C:\Users\karol\Source\Re\BD3\BD\obj\Debug\BD.exe
 C:\Users\karol\Source\Re\BD3\BD\obj\Debug\BD.pdb
 C:\Users\preze\Source\Repos\BD\BD\bin\Debug\Dokumentacja.xml
+C:\Users\preze\Source\Repos\BD\BD\obj\Debug\BD.csprojResolveAssemblyReference.cache

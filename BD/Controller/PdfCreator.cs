@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace BD.Controller
 {
+    /// <summary>
+    /// Klasa do generowania PDF do pliku
+    /// </summary>
     class PdfCreator
     {
         /// <summary>
@@ -63,7 +66,7 @@ namespace BD.Controller
             {
                 //Strona tytułowa
                 PdfPTable frontPage = new PdfPTable(1);
-                DateTime dateTime = DateTime.Now;// .UtcNow;
+                DateTime dateTime = DateTime.Now;
                 frontPage.WidthPercentage = 100;
                 var tempCell = new PdfPCell(new Paragraph(String.Format("Wygenerowano dnia {0:dd/MM/yyyy} o godzinie {0:H:m:s}", dateTime), fontText));
                 tempCell.HorizontalAlignment = PdfPCell.ALIGN_RIGHT;
@@ -104,7 +107,7 @@ namespace BD.Controller
         /// Funkcja do edycji nazwy kolumny, usuwająca krawężniki oraz zamieniająca pierwszą literę na wielką.
         /// </summary>
         /// <param name="kolumna">Nazwa kolumny do edycji</param>
-        /// <returns></returns>
+        /// <returns>Nazwa kolumny ze spacjami</returns>
         private string FormatujNazweKolumny(string kolumna)
         {
             kolumna = kolumna.Replace("_", " ");

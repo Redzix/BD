@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace BD.Controller
 {
+    /// <summary>
+    /// Kontroler rezygnacji
+    /// </summary>
     class RezygnacjaController
     {
         /// <summary>
@@ -23,7 +26,7 @@ namespace BD.Controller
         /// <summary>
         /// Konstruktor tworzący obiekt pobranego widoku oraz nowy model danych.
         /// </summary>
-        /// <param name="view">Referencja do widoku, który controller ma obsługiwac</
+        /// <param name="view">Referencja do widoku, który controller ma obsługiwac</param>
         public RezygnacjaController(RezygnacjaView view)
         {
             _view = (RezygnacjaView)view;
@@ -66,11 +69,11 @@ namespace BD.Controller
                     return 1;
                 }
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
                 return -2;
             }
-            catch (Exception exc)
+            catch (Exception)
             {
                 return -3;
             }
@@ -111,12 +114,12 @@ namespace BD.Controller
                     db = new bazaEntities();
                     return 1;
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
                     return -1;
                 }
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
                 return 0;
             }
